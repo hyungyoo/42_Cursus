@@ -3,28 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 17:27:52 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/19 09:52:10 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 02:53:28 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:58:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
-** Description
-** Allocates (with malloc(3)) and returns a substring from the string ’s’.
-** The substring begins at index ’start’ and is of maximum size ’len’.
-**
-** Parameters
-** #1. The string from which to create the substring.
-** #2. The start index of the substring in the string ’s’.
-** #3. The maximum length of the substring.
-**
-** Return
-** The substring. NULL if the allocation fails.
-**
-** External functs.
-** malloc
-*/
+
+//
+// s문자열에서 start 인덱스부터 시작하는 len길이만큼 문자열을 "len + 1"길이만큼의
+// 새로운 메모리를 할당하여 복사해 반환
+// 인덱스의 위치가 strlen(s)보다 크거나, s가 널값일떄는 널문자 하나만 있는
+// 문자열을 반환
+//
 #include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

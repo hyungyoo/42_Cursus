@@ -3,29 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 17:48:57 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/17 19:11:36 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 02:59:00 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:59:39 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// Allocates (with malloc(3)) and returns a new string,
-// which is the result of the concatenation of ’s1’ and ’s2’.
-//
-// Parameter
-// #1. The prefix string.
-// #2. The suffix string.
-//
-// Return
-// The new string. NULL if the allocation fails.
-//
-// External functs.
-// Malloc
+// s1 과 s2를, 메모리를 할당한 문자열에 복사하여 반환
 //
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
