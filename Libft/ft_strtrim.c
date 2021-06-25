@@ -3,30 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/14 15:35:15 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/19 10:22:19 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 03:02:39 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 03:07:49 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// Allocates (with malloc(3)) and returns a copy of ’s1’
-// with the characters specified in ’set’ 
-// removed from the beginning and the end of the string.
-//
-// Parameters
-// #1. The string to be trimmed.
-// #2. The reference set of characters to trim.
-//
-// Return
-// The trimmed string. NULL if the allocation fails.
-//
-// External functs.
-// Malloc
+// s1 문자열의 앞과 뒤에서 set문자열을 제거한후
+// 동적 할당한 문자열에 복사하여 반환
 //
 #include "libft.h"
-#include <stdlib.h>
 
 unsigned int	ft_check_set(char const *s1, char c)
 {
@@ -61,13 +49,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		j--;
 	return (ft_substr(s1, i, j - i + 1));
 }
-//
-// Test
-//
-//int		main(void)
-//{
-//	char *s1 = "\t \n\n \t\t \n\n\nHello \t  Please\n Trim me !\n  \n \n \t\t\n";
-//
-//	printf("%s\n", ft_strtrim(s1, " \n\t"));
-//	return (0);
-//}

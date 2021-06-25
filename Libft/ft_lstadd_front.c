@@ -3,28 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 21:46:52 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/21 18:14:44 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 03:32:48 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 03:49:44 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// Adds the element ’new’ at the beginning of the list.
-//
-// Parameters
-// #1. The address of a pointer to the first link of a list.
-// #2. The address of a pointer to the element to be added to the list.
-//
-// Return
-// None
+// 연결리스트의 맨앞에 new를 추가
+// 그러므로 새로운 요소의 next 포인터가 원래 리스트의 첫 요소를
+// 가리키도록 해주며 리스트의 처음을 가리키는 포인터가
+// 새로운 요소를 가리키도록 함
 //
 #include "libft.h"
-#include <stdlib.h>
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
+	if (!lst || !new)
+		return ;
 	new->next = *lst;
 	*lst = new;
 }

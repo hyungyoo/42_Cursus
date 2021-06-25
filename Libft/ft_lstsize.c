@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 21:49:21 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/26 17:44:31 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 03:50:02 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 03:53:29 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// Returns the last element of the list.
-// 
-// Parameters
-// #1. The beginning of the list.
-//
-// Return
-// Last element of the list.
+// lst 연결리스트가 끝날때까지
+// 요소의 갯수를 구하여 반환
 //
 #include "libft.h"
-#include <stdlib.h>
 
-t_list	*ft_lstlast(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
+	int	res;
+
+	res = 0;
+	while (lst)
+	{
 		lst = lst->next;
-	return (lst);
+		res++;
+	}
+	return (res);
 }

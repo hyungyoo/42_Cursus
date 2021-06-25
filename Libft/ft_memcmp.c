@@ -3,25 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 14:06:06 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/17 15:40:01 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 03:17:33 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 03:18:42 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-//
-//The memcmp() function compares byte string s1 against byte string s2.
-// Both strings are assumed to be n bytes long.
-//
-// Return
-// The memcmp() function returns zero if the two strings are identical, 
-// otherwise returns the difference between the first two differing bytes
-// (treated as unsigned char values,
-// so that `\200' is greater than `\0', for example).
-// Zero-length strings are always identical.
-// This behavior is not required by C and portable code should
-// only depend on the sign of the returned value.
+// n만큼 (unsigned char*)로 캐스팅한 s1, s2를 비교하여
+// 다르다면, s1[i] - s2[i]의 값을 반환
+// 아니라면 널값을 반환
 //
 #include "libft.h"
 

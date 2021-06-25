@@ -3,25 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/10 22:58:09 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/16 20:32:00 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 03:15:12 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 03:15:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// Outputs the string ’s’ to the given file descriptor, followed by a newline.
-//
-// Parameters
-// #1. The string to output.
-// #2. The file descriptor on which to write.
-//
-// Return
-// None
+// 마지막에 개행문자를 넣어준다.
 //
 #include "libft.h"
-#include <unistd.h>
 
 void	ft_putendl_fd(char *s, int fd)
 {

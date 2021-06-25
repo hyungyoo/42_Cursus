@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/10 22:42:10 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/16 17:30:27 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 03:15:49 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 03:16:44 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// Outputs the integer ’n’ to the given file descriptor.
-//
-// Parameters
-// #1. The integer to output.
-// #2. The file descriptor on which to write.
-//
-// Return
-// None
+// fd가 가리키는 파일에 nbr을 쓰거나 출력
 //
 #include "libft.h"
 

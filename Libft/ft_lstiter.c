@@ -3,40 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/14 16:04:30 by keulee            #+#    #+#             */
-/*   Updated: 2020/01/03 16:15:56 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 04:12:36 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 04:14:43 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// Iterates the list ’lst’ and applies the function ’f’
-// to the content of each element.
-//
-// Parameters
-// #1. The adress of a pointer to an element.
-// #2. The adress of the function used to iterate on the list.
-//
-// Return
-// None
-//
-// External functs.
-// None
+// 모든 연결리스트에 인자로 들어온 함수를 적용
 //
 #include "libft.h"
-#include <stdlib.h>
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (lst == NULL || (*f) == NULL)
+	if (!lst || !f)
 		return ;
-	else
+	while (lst)
 	{
-		while (lst != NULL)
-		{
-			(*f)(lst->content);
-			lst = lst->next;
-		}
+		f(lst);
+		lst = lst->next;
 	}
 }

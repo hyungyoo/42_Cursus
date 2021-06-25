@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 01:42:38 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/06/24 02:23:15 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/06/25 04:23:05 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	*ft_memmove(void *s1, const void *s2, size_t size)
 		return (NULL);
 	if (dst < src)
 	{
-		while (i < len)
+		while (i < size)
 		{
 			dst[i] = src[i];
 			i++;
@@ -55,8 +55,8 @@ void	*ft_memmove(void *s1, const void *s2, size_t size)
 	}
 	else
 	{
-		while (0 < len--)
-			dst[len] = src[len];
+		while (0 < size--)
+			dst[size] = src[size];
 	}
 	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 02:53:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/06/25 02:58:28 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/06/25 04:24:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if ((unsigned int)ft_strlen(s) < start)
 		return (ft_strdup(""));
-	copy = (char *)ft_malloc(len + 1, sizeof(char));
+	copy = (char *)malloc(sizeof(char) * (len + 1));
 	if (!(copy))
 		return (NULL);
 	while (s[i] != '\0' && 0 < len)
