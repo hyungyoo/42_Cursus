@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 19:32:11 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/18 15:09:11 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 02:40:30 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:51:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Check if a is printable or not.
-// If it's true, it returns 1 or 0.
+// c에 해당하는 아스키코드값이 숫자면 1을, 아니면 0을 반환
 //
 #include "libft.h"
 
-int	ft_isprint(int a)
+int	ft_isdigit(int i)
 {
-	if (a > 31 && a < 127)
+	if (i > 47 && i < 58)
 		return (1);
 	else
 		return (0);

@@ -3,25 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/11 16:45:49 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/11 21:31:19 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 01:15:07 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 01:16:18 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// The strchr() function locates the first occurrence of c
-// (converted to a char) in the string pointed to by s.
-// The terminating null character is considered to be part of the string;
-// therefore if c is `\0', the functions locate the terminating `\0'.
-// The strrchr() function is identical to strchr(),
-// except it locates the last occurrence of c.
-//
-// Return
-// The functions strchr() and strrchr()
-// return a pointer to the located character, 
-// or NULL if the character does not appear in the string.
+// s는 문자열에서 c라는 문자를 검색하여,
+// s내에 c가 있다면, 그 인덱스의 주소를 반환하고,
+// 없다면 널 포인터를 반환한다.
 //
 #include "libft.h"
 

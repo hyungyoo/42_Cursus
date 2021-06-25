@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 19:25:54 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/18 15:04:17 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 02:39:43 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:50:47 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// ft_isalnum.c check if a is an alphabet or a number.
-// If it's true it returns 1 or 0.
+// c에 해당하는 아스키코드 값이 알파벳이면 1을, 아니면 0을 반환
 //
 #include "libft.h"
 
-int	ft_isalnum(int a)
+int	ft_isalpha(int c)
 {
-	if ((a > 47 && a < 58) || (a > 64 && a < 91) || (a > 96 && a < 123))
+	if ((c > 64 && c < 91) || (c > 96 && c < 123))
 		return (1);
 	else
 		return (0);

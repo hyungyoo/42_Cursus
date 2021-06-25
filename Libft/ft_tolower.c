@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 19:19:58 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/18 15:08:59 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 02:45:16 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:52:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Check if i is digit of not.
-// If it's true, it returns 1 or 0.
+// c에 해당하는 아스키코드값이 알파벳 대문자라면 소문자로변환
 //
 #include "libft.h"
 
-int	ft_isdigit(int i)
+int	ft_tolower(int i)
 {
-	if (i > 47 && i < 58)
-		return (1);
-	else
-		return (0);
+	if (i > 64 && i < 91)
+		i = i + 32;
+	return (i);
 }

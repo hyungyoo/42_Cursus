@@ -3,24 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/16 13:58:58 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/17 18:08:15 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 01:16:35 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 01:17:43 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// The strncmp() function compares not more than n characters.
-// Because strncmp() is designed for comparing strings rather than binary data,
-// characters that appear after a `\0' character are not compared.
-//
-// Return
-// The strcmp() and strncmp() functions return an integer
-// greater than, equal to, or less than 0, according as the string s1 is
-// greater than, equal to, or less than the string s2.
-// The comparison is done
-// using unsigned characters, so that `\200' is greater than `\0'.
+// s1과 s2의 문열을 n의 사이즈만큼 비교하여,
+// 같지않다면, s1[i] - s2[i]를 반환
+// 같다면 널을 반환
 //
 #include "libft.h"
 

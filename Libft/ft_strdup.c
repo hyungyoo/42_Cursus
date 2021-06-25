@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/16 14:14:10 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/17 19:09:28 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 02:48:13 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:49:50 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// The strdup() function allocates sufficient memory
-// for a copy of the string s1, does the copy, and returns a pointer to it.
-// The pointer may subsequently be used as an argument to the function free(3).
-// If insufficient memory is available,
-// NULL is returned and errno is set to ENOMEM.
+// "strlen(src) + 1"만큼의 메모리를 할당하여, 그안에
+// src를 복사 한후, 포인터를 반환
 //
 #include "libft.h"
 

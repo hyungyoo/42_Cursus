@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 14:08:07 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/18 14:24:26 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 02:46:38 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:47:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
-** The calloc() function contiguously allocates enough space for count objects
-** that are size bytes of 
-** memory each and returns a pointer to the allocated memory. 
-** The allocated memory is filled with bytes of value zero (0).
-*/
+
+//
+// size * count 크기의 메모리를 할당하고
+// bzero함수로 널값으로 초기화 하여 반환
+//
 #include "libft.h"
 
 void	*ft_calloc(size_t count, size_t size)

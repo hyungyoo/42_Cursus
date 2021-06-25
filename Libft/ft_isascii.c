@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 14:06:57 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/16 18:53:38 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 02:42:49 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:51:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// check if c is ascii code or not.
-// if it's true, it returns 1 or 0.
+// c값이 아스키코드값이라면 1을 아니면 0을 반환
 //
 #include "libft.h"
 

@@ -3,26 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/11 17:24:56 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/17 17:27:43 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 01:18:04 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 01:19:43 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 //
-// Description
-// The strrchr() function is identical to strchr(),
-// except it locates the last occurrence of c.
-// The terminating null character is considered to be part of the string;
-// therefore if c is `\0', the functions locate the terminating `\0'.
-//
-// Return
-// The functions strchr() and strrchr()
-// return a pointer to the located character,
-// or NULL if the character does not appear in the string.
+// strchr과 비슷하지만, 맨 뒤에있는 (char)c를 반환한다.
+// 없다면 strchr과 같이 널 포인터를 반환
 //
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strrchr(const char *s, int c)
 {

@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 14:07:27 by keulee            #+#    #+#             */
-/*   Updated: 2019/12/18 11:52:23 by keulee           ###   ########.fr       */
+/*   Created: 2021/06/25 01:26:07 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/06/25 02:39:23 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
-**
-** The atoi() function converts the initial portion of the string pointed to
-** by str to int representation.
-** It is equivalent to:(int)strtol(str, (char **)NULL, 10);
-** Diffrent from ft_atoi during la piscine.(you need to control the overflow
-** and underflow of int.)
-*/
+
+//
+// 문자열을 정수로 변환해주는 함수이다.
+//
 #include "libft.h"
 
 int	ft_atoi(const char *str)
