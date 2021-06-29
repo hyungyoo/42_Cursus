@@ -1,58 +1,49 @@
 #include <unistd.h>
 
-void    ft_putchar(char c)
+void	ft_putchar(char c)
 {
-    write(1, &c, 1);
+	write(1, &c, 1);
 }
 
-int     main(int ac, char **av)
+int		ft_strlen(char *str)
 {
-    int i;
-    int j;
+	int i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
-    if (ac == 3)
-    {
-        i = 0;
-        while(av[1][i])
-        {
-            j = 0;
-            while (j < i)
-            {
-                if (av[1][i] == av[1][j])
-                    break;
-                j++;
-            }
-            if (i == j)
-                ft_putchar(av[1][i]);
-            i++;
-        }
-        i = 0;
-        while(av[2][i])
-        {
-            j = 0;
-            while(av[1][j])
-            {
-                if (av[1][j] == av[2][i])
-                    break;
-                j++;
-            }
-            if (av[1][j] != '\0')
-            {
-                i++;
-                continue;
-            }
-            j = 0;
-            while (j < i)
-            {
-                if (av[2][i] == av[2][j])
-                    break;
-                j++;
-            }
-            if (i == j)
-                ft_putchar(av[2][i]);
-            i++;
-        }
-    }
-    ft_putchar('\n');
-    return (0);
+int		main(int argc, char **argv)
+{
+	int i = 0;
+	int	check[256];
+
+	while (i < 256)
+		check[i++] = 0;
+	if (argc == 3)
+	{
+		i = 0;
+		while (i < ft_strlen(argv[1]))
+		{
+			if (check[(int)argv[1][i]] == 0)
+			{
+				check[(int)argv[1][i]] = 1;
+				ft_putchar(argv[1][i]);
+			}
+			i++;
+		}
+		i = 0;
+		while (i < ft_strlen(argv[2]))
+		{
+			if (check[(int)argv[2][i]] == 0)
+			{
+				check[(int)argv[2][i]] = 1;
+				ft_putchar(argv[2][i]);
+			}
+			i++;
+		}
+	}
+	// print \n
+	ft_putchar('\n');
+	return (0);
 }
