@@ -13,4 +13,5 @@ int main(void)
 	}
 	printf("%s", line);
 	free(line);
+	return (0);
 }

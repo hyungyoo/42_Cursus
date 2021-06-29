@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 11:05:33 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/06/29 19:59:18 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/06/29 23:06:16 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,20 +159,19 @@ int					return_all(char **backup, char **line, int read_size)
 
 int					get_next_line(char **line)
 {
-	static char		*backup[OPEN_MAX];
+	static char		*backup;
 	char			buf[2];
 	int				read_size;
 	int				cut_idx;
-	int				fd = 0;
 
-	if ((fd < 0) || (line == 0))
+	if (line == 0)
 		return (-1);
-	while ((read_size = read(fd, buf, 1)) > 0)
+	while ((read_size = read(0, buf, 1)) > 0)
 	{
 		buf[read_size] = '\0';
-		backup[fd] = ft_strjoin(backup[fd], buf);
-		if ((cut_idx = is_newline(backup[fd])) >= 0)
-			return (split_line(&backup[fd], line, cut_idx));
+		backup = ft_strjoin(backup, buf);
+		if ((cut_idx = is_newline(backup)) >= 0)
+			return (split_line(&backup, line, cut_idx));
 	}
-	return (return_all(&backup[fd], line, read_size));
+	return (return_all(&backup, line, read_size));
 }
