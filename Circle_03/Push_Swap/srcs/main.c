@@ -1,23 +1,4 @@
 #include "../inc/push_swap.h"
-#include <stdio.h>
-
-void	ft_putstr(char *str);
-void	ft_print_error(void);
-int		ft_digit(char c);
-int		ft_verifier_argv(char *num);
-int		ft_verifier_split(char *num);
-void	ft_ajouter_node(t_stack **stack, t_stack *node);
-void	ft_ajouter_node_split(t_stack **stack, t_stack *node);
-int		ft_atoi(char *num);
-char	**ft_split(char *str);
-int		main(int argc, char **argv);
-
-char	**ft_split(char *str)
-{
-	char	**ret;
-
-	return (ret);
-}
 
 void	ft_putstr(char *str)
 {
@@ -107,7 +88,6 @@ t_stack	*ft_new_node(char *num)
 	int		nbr;
 
 	nbr = ft_atoi(num);
-	printf("%d\n", nbr);
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
 		return (0);
@@ -119,10 +99,31 @@ t_stack	*ft_new_node(char *num)
 
 void	ft_ajouter_node(t_stack **stack, t_stack *node)
 {
+	if (!stack || !node)
+		return ;
+	if (!*stack)
+		*stack = node;
+	else
+	{
+		(*stack)->prev->next = node;
+		node->prev = (*stack)->prev;
+		(*stack)->prev = node;
+		node->next = *stack;
+	}
+	/*
+	if (ft_check_duplicate(*stack))
+	{
+		ft_stack_free(*stack);
+		ft_print_error();
+	}
+	*/
 }
 
 void	ft_ajouter_node_split(t_stack **stack, t_stack *node)
 {
+	뭘로 리턴을할까
+		숫자로된 묶음?
+		리스트 전부?
 }
 
 int	main(int argc, char **argv)
@@ -141,7 +142,7 @@ int	main(int argc, char **argv)
 			if (ft_verifier_argv(argv[i]))
 				ft_print_error();
 			else if (ft_verifier_split(argv[i]))
-				ft_ajouter_node_split(&stack_a, ft_new_node(argv[i]));
+				ft_ajouter_node_split(&stack_a, ft_new_node_split(argv[i]));
 			else
 				ft_ajouter_node(&stack_a, ft_new_node(argv[i]));
 		}
