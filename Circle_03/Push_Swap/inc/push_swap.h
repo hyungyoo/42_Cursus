@@ -116,4 +116,10 @@ void		ft_print_all_node(t_stack *stack);
  */
 int			ft_size_node(t_stack *stack);
 
+/*
+ * main.c
+ */
+void		ft_init_stack(t_stack **stack_a, char **argv);
+int			main(int argc, char **argv);
+
 #endif

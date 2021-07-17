@@ -14,6 +14,7 @@ int	ft_max(t_stack *stack)
 		if (max < stack->num)
 			max = stack->num;
 		stack = stack->next;
+		i++;
 	}
 	return (max);
 }
@@ -32,6 +33,7 @@ int	ft_min(t_stack *stack)
 		if (min > stack->num)
 			min = stack->num;
 		stack = stack->next;
+		i++;
 	}
 	return (min);
 }
