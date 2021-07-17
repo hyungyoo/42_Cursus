@@ -13,6 +13,19 @@ typedef struct s_stack
 }				t_stack;
 
 /*
+ * ft_swap.c
+ */
+void		ft_sa(t_stack *stack_a);
+void		ft_sb(t_stack *stack_b);
+void		ft_ss(t_stack *stack_a, t_stack *stack_b);
+
+/*
+ * ft_pa_pb.c
+ */
+void		ft_pa(t_stack **stack_a, t_stack **b);
+void		ft_pb(t_stack **stack_b, t_stack **a);
+
+/*
  * ft_push_pop.c
  */
 t_stack		*ft_pop(t_stack **stack);

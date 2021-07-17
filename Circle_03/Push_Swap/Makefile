@@ -19,6 +19,8 @@ SRC			= main.c \
 			  ft_print_all_node.c \
 			  ft_size_node.c \
 			  ft_push_pop.c \
+			  ft_pa_pb.c \
+			  ft_swap.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))

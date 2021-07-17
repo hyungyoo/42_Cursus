@@ -21,10 +21,7 @@ int	main(int argc, char **argv)
 				ft_ajouter_node(&stack_a, ft_new_node(argv[i]));
 		}
 	}
-
-	/*
-	 * test
-	 */
+	
 	printf("stack_a\n");
 	ft_print_all_node(stack_a);
 	printf("size : %d\n\n\n", ft_size_node(stack_a));
@@ -33,24 +30,146 @@ int	main(int argc, char **argv)
 	ft_print_all_node(stack_b);
 	printf("size : %d\n\n\n", ft_size_node(stack_b));
 
-	printf("stack_a -> pop\n");
-	t_stack *pop = ft_pop(&stack_a);
-	ft_push(&stack_b, pop);
+
+	printf("=================================\n");
+	ft_pb(&stack_b, &stack_a);
+
 	printf("stack_a\n");
 	ft_print_all_node(stack_a);
 	printf("size : %d\n\n\n", ft_size_node(stack_a));
 
-	printf("stack_enleve : %d\n", pop->num);
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+	
+	printf("=================================\n");
+
+	ft_sa(stack_a);
+	ft_sb(stack_b);
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+
+	printf("=================================\n");
+	printf("pa\n");
+	ft_pa(&stack_a, &stack_b);
+
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+	printf("=================================\n");
+	ft_sa(stack_a);
+	ft_sb(stack_b);
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+
+
+	printf("=================================\n");
+	ft_pb(&stack_b, &stack_a);
+	ft_pb(&stack_b, &stack_a);
+	ft_pb(&stack_b, &stack_a);
+	ft_sa(stack_a);
+	ft_sb(stack_b);
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+
+
+	
+	
+
+	
+
+
+	/*
+	 * test pa pb
+	 
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+
+	printf("=================================\n");
+	printf("pa\n");
+	ft_pa(&stack_a, &stack_b);
+
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+
 
 	printf("=================================\n");
 
+	printf("pb\n");
+	ft_pb(&stack_b, &stack_a);
+
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+
+	printf("=================================\n");
+
+	printf("p\n");
+	ft_pb(&stack_b, &stack_a);
+
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
 
 	printf("stack_b\n");
 	ft_print_all_node(stack_b);
 	printf("size : %d\n\n\n", ft_size_node(stack_b));
 	
+	printf("=================================\n");
 
-	/*
+	printf("p\n");
+	ft_pa(&stack_a, &stack_b);
+
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+
 	 * test
 	 */
 	ft_stack_free(stack_a);
