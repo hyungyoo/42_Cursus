@@ -1,5 +1,13 @@
 #include "../inc/push_swap.h"
 
+void	ft_stack_2(t_stack **stack)
+{
+	if (ft_check_ascending(*stack, 2))
+		return ;
+	if ((*stack)->num > (*stack)->next->num)
+		ft_sa(*stack);
+}
+
 void	ft_stack_3(t_stack **stack)
 {
 	if (ft_check_ascending(*stack, 3))

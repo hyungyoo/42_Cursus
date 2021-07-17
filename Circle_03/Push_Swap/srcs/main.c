@@ -26,7 +26,9 @@ int	main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		ft_init_stack(&stack_a, argv);
-		if (ft_size_node(stack_a) == 3)
+		if (ft_size_node(stack_a) == 2)
+			ft_stack_2(&stack_a);
+		else if (ft_size_node(stack_a) == 3)
 			ft_stack_3(&stack_a);
 	}
 

@@ -21,6 +21,7 @@ int			ft_min(t_stack *stack);
 /*
  * ft_stack_3_5.c
  */
+void		ft_stack_2(t_stack **stack);
 void		ft_stack_3(t_stack **stack);
 
 /*
