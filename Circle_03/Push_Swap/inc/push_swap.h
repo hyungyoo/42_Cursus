@@ -13,6 +13,23 @@ typedef struct s_stack
 }				t_stack;
 
 /*
+ * ft_max_min.c
+ */
+int			ft_max(t_stack *stack);
+int			ft_min(t_stack *stack);
+
+/*
+ * ft_stack_3_5.c
+ */
+void		ft_stack_3(t_stack **stack);
+
+/*
+ * ft_asc_des.c
+ */
+int			ft_check_ascending(t_stack *stack, int size);
+int			ft_check_descending(t_stack *stack, int size);
+
+/*
  * ft_rra_rrb.c
  */
 void		ft_rra(t_stack **stack_a);

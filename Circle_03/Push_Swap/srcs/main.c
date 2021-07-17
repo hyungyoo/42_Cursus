@@ -2,11 +2,11 @@
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	int		i;
+	t_stack		*stack_a;
+	t_stack		*stack_b;
+	int			i;
 
-	stack_a	= NULL;
+	stack_a = NULL;
 	stack_b = NULL;
 	if (argc >= 2)
 	{
@@ -20,7 +20,22 @@ int	main(int argc, char **argv)
 			else
 				ft_ajouter_node(&stack_a, ft_new_node(argv[i]));
 		}
+		if (ft_size_node(stack_a) == 3)
+			ft_stack_3(&stack_a);
 	}
+
+	/*
+	 * test
+	 */
+
+	printf("=========stack_a============\n");
+	printf("stack_a size est %d\n", ft_size_node(stack_a));
+	ft_print_all_node(stack_a);
+
+	/*
+	 * test
+	 */
+
 	ft_stack_free(stack_a);
 	return (0);
 }

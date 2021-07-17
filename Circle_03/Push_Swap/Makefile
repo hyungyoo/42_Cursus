@@ -23,6 +23,9 @@ SRC			= main.c \
 			  ft_swap.c \
 			  ft_ra_rb.c \
 			  ft_rra_rrb.c \
+			  ft_asc_des.c \
+			  ft_stack_3_5.c \
+			  ft_max_min.c \
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
