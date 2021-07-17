@@ -13,6 +13,20 @@ typedef struct s_stack
 }				t_stack;
 
 /*
+ * ft_rra_rrb.c
+ */
+void		ft_rra(t_stack **stack_a);
+void		ft_rrb(t_stack **stack_b);
+void		ft_rrr(t_stack **stack_a, t_stack **stack_b);
+
+/*
+ * ft_ra_rb.c
+ */
+void		ft_ra(t_stack **stack_a);
+void		ft_rb(t_stack **stack_b);
+void		ft_rr(t_stack **stack_a, t_stack **stack_b);
+
+/*
  * ft_swap.c
  */
 void		ft_sa(t_stack *stack_a);
