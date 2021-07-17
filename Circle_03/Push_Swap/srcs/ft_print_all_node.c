@@ -1,6 +1,5 @@
 #include "../inc/push_swap.h"
 
-
 void	ft_putchar(char c)
 {
 	write (1, &c, 1);
@@ -24,8 +23,10 @@ void	ft_putnbr(int nb)
 void	ft_print_all_node(t_stack *stack)
 {
 	int		i;
-	t_stack *new;
+	t_stack	*new;
 
+	if (!stack)
+		return ;
 	new = stack->prev;
 	i = 1;
 	while (new != stack)

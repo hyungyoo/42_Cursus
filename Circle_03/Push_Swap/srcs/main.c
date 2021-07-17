@@ -25,8 +25,15 @@ int	main(int argc, char **argv)
 	/*
 	 * test
 	 */
+	printf("stack_a\n");
 	ft_print_all_node(stack_a);
-	printf("size : %d\n", ft_size_node(stack_a));
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+
+
 	/*
 	 * test
 	 */
