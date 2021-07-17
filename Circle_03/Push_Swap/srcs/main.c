@@ -30,15 +30,23 @@ int	main(int argc, char **argv)
 			ft_stack_2(&stack_a);
 		else if (ft_size_node(stack_a) == 3)
 			ft_stack_3(&stack_a);
+		else if (ft_size_node(stack_a) == 5)
+			ft_stack_5(&stack_a, &stack_b);
 	}
 
 	/*
 	 * test
 	 */
 
+	printf("\n\n result \n\n");
 	printf("=========stack_a============\n");
 	printf("stack_a size est %d\n", ft_size_node(stack_a));
 	ft_print_all_node(stack_a);
+
+	printf("=========stack_b============\n");
+	printf("stack_b size est %d\n", ft_size_node(stack_b));
+	ft_print_all_node(stack_b);
+
 
 	/*
 	 * test

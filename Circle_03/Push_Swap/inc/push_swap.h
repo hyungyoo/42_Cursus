@@ -23,6 +23,9 @@ int			ft_min(t_stack *stack);
  */
 void		ft_stack_2(t_stack **stack);
 void		ft_stack_3(t_stack **stack);
+int			ft_comparer(int num, int min, int max);
+void		ft_enlever_min_max(t_stack **stack_a, t_stack **stack_b);
+void		ft_stack_5(t_stack **stack_a, t_stack **stack_b);
 
 /*
  * ft_asc_des.c
