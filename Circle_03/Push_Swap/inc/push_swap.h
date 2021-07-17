@@ -21,6 +21,11 @@ t_stack		*ft_new_node(char *num);
 void		ft_ajouter_node(t_stack **stack, t_stack *node);
 
 /*
+ * ft_ajouter_node_split.c
+ */
+void		ft_ajouter_node_split(t_stack **stack, char *num);
+
+/*
  * ft_atoi.c
  */
 int			ft_atoi(char *num);
@@ -29,6 +34,7 @@ int			ft_atoi(char *num);
  * ft_free.c
  */
 void		ft_stack_free(t_stack *stack);
+void		ft_free_split(char **str);
 
 /*
  * ft_print.c

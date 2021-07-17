@@ -12,3 +12,18 @@ void	ft_stack_free(t_stack *stack)
 		stack = tmp;
 	}
 }
+
+void	ft_free_split(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		str[i] = NULL;
+		i++;
+	}
+	free(str);
+	str = NULL;
+}

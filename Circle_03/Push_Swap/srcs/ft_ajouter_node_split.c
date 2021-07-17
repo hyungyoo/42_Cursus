@@ -1,17 +1,17 @@
 #include "../inc/push_swap.h"
 
-/*
-int	*ft_new_node_split(char *num)
+void	ft_ajouter_node_split(t_stack **stack, char *num)
 {
-}
+	char	**num_split;
+	int		i;
 
-void	ft_ajouter_node_split(t_stack **stack, int *num)
-{
-	뭘로 리턴을할까
-		숫자로된 묶음?
-		리스트 전부?
-	1- avec funtion de split, on calcule combien de fois ' '
-	2- avec cela, on pourrais appeler boucle pour ft_ajouter_node
-
+	i = 0;
+	num_split = ft_split(num);
+	while (num_split[i])
+	{
+		ft_ajouter_node(stack, ft_new_node(num_split[i]));
+		i++;
+	}
+	ft_free_split(num_split);
+	num_split = NULL;
 }
-*/

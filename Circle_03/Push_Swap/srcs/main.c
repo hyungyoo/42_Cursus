@@ -15,8 +15,8 @@ int	main(int argc, char **argv)
 		{
 			if (ft_verifier_argv(argv[i]))
 				ft_print_error();
-			/*else if (ft_verifier_split(argv[i]))
-				ft_ajouter_node_split(&stack_a, ft_new_node_split(argv[i]));*/
+			else if (ft_verifier_split(argv[i]))
+				ft_ajouter_node_split(&stack_a, argv[i]);
 			else
 				ft_ajouter_node(&stack_a, ft_new_node(argv[i]));
 		}
