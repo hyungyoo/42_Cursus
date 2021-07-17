@@ -13,6 +13,12 @@ typedef struct s_stack
 }				t_stack;
 
 /*
+ * ft_push_pop.c
+ */
+t_stack		*ft_pop(t_stack **stack);
+void		ft_push(t_stack **stack, t_stack *node);
+
+/*
  * ft_ajouter_node.c
  */
 t_stack		*ft_new_node(char *num);

@@ -33,6 +33,22 @@ int	main(int argc, char **argv)
 	ft_print_all_node(stack_b);
 	printf("size : %d\n\n\n", ft_size_node(stack_b));
 
+	printf("stack_a -> pop\n");
+	t_stack *pop = ft_pop(&stack_a);
+	ft_push(&stack_b, pop);
+	printf("stack_a\n");
+	ft_print_all_node(stack_a);
+	printf("size : %d\n\n\n", ft_size_node(stack_a));
+
+	printf("stack_enleve : %d\n", pop->num);
+
+	printf("=================================\n");
+
+
+	printf("stack_b\n");
+	ft_print_all_node(stack_b);
+	printf("size : %d\n\n\n", ft_size_node(stack_b));
+	
 
 	/*
 	 * test
