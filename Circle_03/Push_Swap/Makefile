@@ -16,6 +16,8 @@ SRC			= main.c \
 			  ft_free.c \
 			  ft_print.c \
 			  ft_verifier.c \
+			  ft_print_all_node.c \
+			  ft_size_node.c \
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))

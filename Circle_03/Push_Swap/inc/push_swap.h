@@ -3,9 +3,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
-# define TRUE 1
-# define FALSE 0
+# include <stdio.h>
 
 typedef struct s_stack
 {
@@ -57,5 +55,15 @@ int			ft_digit(char c);
 int			ft_verifier_argv(char *num);
 int			ft_verifier_split(char *num);
 int			ft_check_duplicate(t_stack *stack);
+
+/*
+ * ft_print_all_node.c
+ */
+void		ft_print_all_node(t_stack *stack);
+
+/*
+ * ft_size_node.c
+ */
+int			ft_size_node(t_stack *stack);
 
 #endif
