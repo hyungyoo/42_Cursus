@@ -22,6 +22,8 @@ typedef struct s_stack
  */
 int			*ft_table(t_stack *stack, int size_table);
 int			ft_pivot(t_stack *stack);
+int			ft_small_pivot(t_stack *stack);
+int			ft_big_pivot(t_stack *stack);
 
 /*
  * ft_stack_all.c
