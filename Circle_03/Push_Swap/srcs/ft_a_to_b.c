@@ -112,6 +112,9 @@ void	ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 		return ;
 	pivot = ft_pivot(*stack_a, count);
 	big_pivot = ft_big_pivot(*stack_a, count);
+	printf("a to b, all stack_a \n");
+	ft_print_all_node(*stack_a);
+	printf("a to b, pivot = %d, big_pivot = %d, count = %d\n", pivot, big_pivot, count);
 	while (count--)
 	{
 		if ((*stack_a)->num >= big_pivot)
