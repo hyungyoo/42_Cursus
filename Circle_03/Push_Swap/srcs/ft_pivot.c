@@ -77,7 +77,7 @@ int	ft_big_pivot(t_stack *stack, int size_node)
 	free(table);
 	return (ret);
 }
-
+/*
 int	ft_pivot(t_stack *stack, int size_node)
 {
 	int	arr[size_node];
@@ -105,7 +105,8 @@ int	ft_pivot(t_stack *stack, int size_node)
 	}
 	return (arr[0]);
 }
-/*
+*/
+
 int	ft_pivot(t_stack *stack, int size_node)
 {
 	int	*table;
@@ -135,4 +136,3 @@ int	ft_pivot(t_stack *stack, int size_node)
 	free(table);
 	return (ret);
 }
-*/

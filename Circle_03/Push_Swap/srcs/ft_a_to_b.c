@@ -62,11 +62,12 @@ int	ft_return_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 		ft_stack_3(stack_a);
 	else if (count == 3)
 		ft_stack_3_a_to_b(stack_a, stack_b);
+	
 	if (ft_check_ascending(*stack_a, count))
 		return (1);
 	return (0);
 }
-
+/*
 void	ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 {
 	int			pivot;
@@ -94,7 +95,8 @@ void	ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 	ft_a_to_b(stack_a, stack_b, count_ra);
 	ft_b_to_a(stack_a, stack_b, count_pb);
 }
-/*
+*/
+
 void	ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 {
 	int	pivot;
@@ -114,23 +116,22 @@ void	ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 	{
 		if ((*stack_a)->num >= big_pivot)
 		{
-			ft_ra(stack_a);
 			count_ra++;
+			ft_ra(stack_a);
 		}
-		else
+		else if ((*stack_a)->num < big_pivot)
 		{
-			ft_pb(stack_b, stack_a);
 			count_pb++;
+			ft_pb(stack_b, stack_a);
 			if ((*stack_b)->num >= pivot)
 			{
-				ft_rb(stack_b);
 				count_rb++;
+				ft_rb(stack_b);
 			}
 		}
 	}
 	ft_rra_rrb(stack_a, stack_b, count_ra, count_rb);
 	ft_a_to_b(stack_a, stack_b, count_ra);
 	ft_b_to_a(stack_a, stack_b, count_rb);
-	ft_b_to_a(stack_a, stack_b, count_pb - count_rb);
+	ft_b_to_a(stack_a, stack_b, (count_pb - count_rb));
 }
-*/
