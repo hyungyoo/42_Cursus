@@ -37,35 +37,6 @@ int	main(int argc, char **argv)
 		else
 			ft_stack_all(&stack_a, &stack_b);
 	}
-
-	/*
-	 * test
-	 */
-
-	printf("%d est pivot\n", ft_pivot(stack_a));
-	printf("%d est small pivot\n", ft_small_pivot(stack_a));
-	printf("%d est big pivot\n", ft_big_pivot(stack_a));
-	/*
-	 * 혹시 pivot에 leaks 일어나는지 확인하기
-	 */
-
-	printf("\n\n result \n\n");
-	printf("=========stack_a============\n");
-	printf("stack_a size est %d\n", ft_size_node(stack_a));
-	ft_print_all_node(stack_a);
-
-	printf("=========stack_b============\n");
-	printf("stack_b size est %d\n", ft_size_node(stack_b));
-	ft_print_all_node(stack_b);
-
-	if (ft_check_ascending(stack_a, ft_size_node(stack_a)))
-		printf("sucess\n");
-	else
-		printf("fail\n");
-
-	/*
-	 * test
-	 */
 	ft_stack_free(stack_a);
 	return (0);
 }

@@ -22,7 +22,7 @@ int	ft_atoi(char *num)
 	}
 	if (sign == -1)
 		ret *= -1;
-	if (!(ret >= -2147483648 && ret <= 2147483647))
+	if (ret < -2147483648 || ret > 2147483647)
 		ft_print_error();
 	return ((int)ret);
 }

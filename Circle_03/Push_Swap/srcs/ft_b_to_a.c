@@ -50,12 +50,36 @@ int	ft_return_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 	return (0);
 }
 
+void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
+{
+	int	pivot;
+	int	count_rb;
+	int	count_pa;
+	int	i;
 
+	if (ft_return_b_to_a(stack_a, stack_b, count))
+		return ;
+	pivot = ft_pivot(*stack_b, count);
+	count_rb = 0;
+	count_pa = 0;
+	while (count--)
+	{
+		if ((*stack_b)->num >= pivot && ++count_pa)
+			ft_pa(stack_a, stack_b);
+		else if ((*stack_b)->num < pivot && ++count_rb)
+			ft_rb(stack_b);
+	}
+	i = 0;
+	while (i++ < count_rb)
+		ft_rrb(stack_b);
+	ft_a_to_b(stack_a, stack_b, count_pa);
+	ft_b_to_a(stack_a, stack_b, count_rb);
+}
+/*
 void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 {
 	int	pivot;
 	int	small_pivot;
-	int	i;
 	int	count_rb;
 	int	count_ra;
 	int	count_pa;
@@ -63,11 +87,10 @@ void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 	count_ra = 0;
 	count_rb = 0;
 	count_pa = 0;
-	i = 0;
 	if (ft_return_b_to_a(stack_a, stack_b, count))
 		return ;
-	pivot = ft_pivot(*stack_b);
-	small_pivot = ft_small_pivot(*stack_b);
+	pivot = ft_pivot(*stack_b, count);
+	small_pivot = ft_small_pivot(*stack_b, count);
 	while (count--)
 	{
 		if ((*stack_b)->num < small_pivot)
@@ -87,19 +110,8 @@ void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 		}
 	}
 	ft_a_to_b(stack_a, stack_b, count_pa - count_ra);
-	i = 0;
-	while (i < count_ra)
-	{
-
-		ft_rra(stack_a);
-		i++;
-	}
-	i = 0;
-	while (i < count_rb)
-	{
-		ft_rrb(stack_b);
-		i++;
-	}
+	ft_rra_rrb(stack_a, stack_b, count_ra, count_rb);
 	ft_a_to_b(stack_a, stack_b, count_ra);
 	ft_b_to_a(stack_a, stack_b, count_rb);
 }
+*/

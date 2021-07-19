@@ -16,16 +16,21 @@ typedef struct s_stack
  * ft_a_to_b.c 
  * ft_b_to_a.c
 */
+void		ft_rra_rrb(t_stack **stack_a, t_stack **stack_b, int rra, int rrb);
+void		ft_stack_3_a_to_b(t_stack **stack_a, t_stack **stack_b);
+int			ft_return_a_to_b(t_stack **stack_a, t_stack **stack_b, int count);
 void		ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count);
+void		ft_stack_3_b_to_a(t_stack **stack_a, t_stack **stack_b);
+int			ft_return_b_to_a(t_stack **stack_a, t_stack **stack_b, int count);
 void		ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count);
 
 /*
  * ft_pivot.c
  */
 int			*ft_table(t_stack *stack, int size_table);
-int			ft_pivot(t_stack *stack);
-int			ft_small_pivot(t_stack *stack);
-int			ft_big_pivot(t_stack *stack);
+int			ft_pivot(t_stack *stack, int size_node);
+int			ft_small_pivot(t_stack *stack, int size_node);
+int			ft_big_pivot(t_stack *stack, int size_node);
 
 /*
  * ft_stack_all.c
