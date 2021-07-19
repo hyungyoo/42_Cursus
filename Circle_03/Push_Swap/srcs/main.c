@@ -34,13 +34,17 @@ int	main(int argc, char **argv)
 			ft_stack_3(&stack_a);
 		else if (ft_size_node(stack_a) == 5)
 			ft_stack_5(&stack_a, &stack_b);
+		/*
 		else
 			ft_stack_all(&stack_a, &stack_b);
+		*/
 	}
 
 	/*
 	 * test
 	 */
+
+	printf("%d est pivot\n", ft_pivot(stack_a));
 
 	printf("\n\n result \n\n");
 	printf("=========stack_a============\n");

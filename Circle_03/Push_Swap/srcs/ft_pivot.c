@@ -8,7 +8,7 @@ int	*ft_table(t_stack *stack, int size_table)
 	i = 0;
 	table = (int *)malloc(sizeof(int) * size_table);
 	if (!table)
-		return ;
+		return (0);
 	while (i < size_table)
 	{
 		table[i] = stack->num;
@@ -28,6 +28,7 @@ int	ft_pivot(t_stack *stack)
 
 	size_node = ft_size_node(stack);
 	table = ft_table(stack, size_node);
+	i = 0;
 	while (i < size_node)
 	{
 		j = 0;
