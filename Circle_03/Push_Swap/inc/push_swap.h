@@ -15,7 +15,9 @@ typedef struct s_stack
 /*
  * ft_a_to_b.c 
  * ft_b_to_a.c
- */
+*/
+void		ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count);
+void		ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count);
 
 /*
  * ft_pivot.c

@@ -34,10 +34,8 @@ int	main(int argc, char **argv)
 			ft_stack_3(&stack_a);
 		else if (ft_size_node(stack_a) == 5)
 			ft_stack_5(&stack_a, &stack_b);
-		/*
 		else
 			ft_stack_all(&stack_a, &stack_b);
-		*/
 	}
 
 	/*
@@ -60,11 +58,14 @@ int	main(int argc, char **argv)
 	printf("stack_b size est %d\n", ft_size_node(stack_b));
 	ft_print_all_node(stack_b);
 
+	if (ft_check_ascending(stack_a, ft_size_node(stack_a)))
+		printf("sucess\n");
+	else
+		printf("fail\n");
 
 	/*
 	 * test
 	 */
-
 	ft_stack_free(stack_a);
 	return (0);
 }
