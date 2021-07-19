@@ -13,6 +13,20 @@ typedef struct s_stack
 }				t_stack;
 
 /*
+ * ft_a_to_b.c 
+ * ft_b_to_a.c
+ */
+
+/*
+ * ft_pivot.c
+ */
+
+/*
+ * ft_stack_all.c
+ */
+void		ft_stack_all(t_stack **stack_a, t_stack **stack_b);
+
+/*
  * ft_stack_4.c
  */
 void		ft_enlever_min(t_stack **stack_a, t_stack **stack_b);
