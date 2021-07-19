@@ -25,6 +25,7 @@ SRC			= main.c \
 			  ft_rra_rrb.c \
 			  ft_asc_des.c \
 			  ft_stack_3_5.c \
+			  ft_stack_4.c \
 			  ft_max_min.c \
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))

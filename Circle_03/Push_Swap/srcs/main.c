@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 		ft_init_stack(&stack_a, argv);
 		if (ft_size_node(stack_a) == 2)
 			ft_stack_2(&stack_a);
+		else if (ft_size_node(stack_a) == 4)
+			ft_stack_4(&stack_a, &stack_b);
 		else if (ft_size_node(stack_a) == 3)
 			ft_stack_3(&stack_a);
 		else if (ft_size_node(stack_a) == 5)

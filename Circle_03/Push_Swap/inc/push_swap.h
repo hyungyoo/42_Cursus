@@ -13,6 +13,12 @@ typedef struct s_stack
 }				t_stack;
 
 /*
+ * ft_stack_4.c
+ */
+void		ft_enlever_min(t_stack **stack_a, t_stack **stack_b);
+void		ft_stack_4(t_stack **stack_a, t_stack **stack_b);
+
+/*
  * ft_max_min.c
  */
 int			ft_max(t_stack *stack);
