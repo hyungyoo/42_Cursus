@@ -36,7 +36,7 @@ int	ft_small_pivot(t_stack *stack)
 		while (j < size_node)
 			if (table[i] > table[j++])
 				count++;
-		if (count == (int)(((double)size_node / 4) + 0.5))
+		if (count == (int)((size_node / 4) + 0.5))
 		{
 			free(table);
 			return (table[i]);
@@ -65,7 +65,7 @@ int	ft_big_pivot(t_stack *stack)
 		while (j < size_node)
 			if (table[i] > table[j++])
 				count++;
-		if (count == (int)(((double)size_node / 4 * 3) + 0.5))
+		if (count == (int)((size_node / 4 * 3) + 0.5))
 		{
 			free(table);
 			return (table[i]);

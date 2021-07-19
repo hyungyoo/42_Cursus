@@ -31,6 +31,7 @@ int			ft_big_pivot(t_stack *stack);
  * ft_stack_all.c
  */
 void		ft_stack_all(t_stack **stack_a, t_stack **stack_b);
+void		ft_des_to_asc(t_stack **stack_a, t_stack **stack_b);
 
 /*
  * ft_stack_4.c
