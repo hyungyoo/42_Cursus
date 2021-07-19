@@ -32,8 +32,8 @@ void	ft_stack_all(t_stack **stack_a, t_stack **stack_b)
 		return ;
 	else if (ft_check_descending(*stack_a, size_node))
 		ft_des_to_asc(stack_a, stack_b);
-	/*
-	else
-		ft_a_to_b(stack_a, stack_b, size_node);
-	*/
 }
+/*
+ * else
+ * ft_a_to_b(stack_a, stack_b, size_node);
+ */

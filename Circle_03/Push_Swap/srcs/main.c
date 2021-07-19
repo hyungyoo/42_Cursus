@@ -47,6 +47,9 @@ int	main(int argc, char **argv)
 	printf("%d est pivot\n", ft_pivot(stack_a));
 	printf("%d est small pivot\n", ft_small_pivot(stack_a));
 	printf("%d est big pivot\n", ft_big_pivot(stack_a));
+	/*
+	 * 혹시 pivot에 leaks 일어나는지 확인하기
+	 */
 
 	printf("\n\n result \n\n");
 	printf("=========stack_a============\n");
