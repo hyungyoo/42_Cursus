@@ -88,12 +88,17 @@ void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 	count_ra = 0;
 	count_rb = 0;
 	count_pa = 0;
+	printf("entre ft_b_to_a,\n");
 	if (ft_return_b_to_a(stack_a, stack_b, count))
 		return ;
 	pivot = ft_pivot(*stack_b, count);
 	small_pivot = ft_small_pivot(*stack_b, count);
+	printf("=================b to a, start==================\n");
+	printf("b to a, all stack_a\n");
+	ft_print_all_node(*stack_a);
 	printf("b to a, all stack_b\n");
 	ft_print_all_node(*stack_b);
+
 	printf("b to a, smaill_pivot = %d, pivot = %d, count = %d\n", small_pivot, pivot, count);
 	while (count--)
 	{
@@ -106,13 +111,19 @@ void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 		{
 			count_pa++;
 			ft_pa(stack_a, stack_b);
-			if ((*stack_b)->num < pivot)
+			if ((*stack_a)->num < pivot)
 			{
 				count_ra++;
 				ft_ra(stack_a);
 			}
 		}
 	}
+	printf("b to a finir\n");
+	printf("b to a, all stack_a\n");
+	ft_print_all_node(*stack_a);
+	printf("b to a, all stack_b\n");
+	ft_print_all_node(*stack_b);
+	printf("==============================================\n");
 	ft_a_to_b(stack_a, stack_b, (count_pa - count_ra));
 	ft_rra_rrb(stack_a, stack_b, count_ra, count_rb);
 	ft_a_to_b(stack_a, stack_b, count_ra);
