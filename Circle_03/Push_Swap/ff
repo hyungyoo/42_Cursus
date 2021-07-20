@@ -1,0 +1,946 @@
+pb
+pb
+pb
+pb
+pb
+pb
+ra
+pb
+pb
+pb
+pb
+rb
+pb
+pb
+ra
+pb
+rb
+ra
+ra
+ra
+pb
+rb
+ra
+ra
+pb
+rb
+ra
+rrr
+rrr
+rrr
+rrr
+rra
+rra
+rra
+rra
+pb
+pb
+pb
+rb
+ra
+pb
+ra
+pb
+rb
+pb
+rrr
+rrr
+sa
+pa
+pa
+entre ft_a_to_b,
+===============a to b start===================
+a to b, all stack_a 
+1 eme numero : 8
+2 eme numero : 1
+3 eme numero : 7
+4 eme numero : 4
+5 eme numero : 5
+6 eme numero : 2
+7 eme numero : 300
+8 eme numero : 6
+9 eme numero : 9
+10 eme numero : 10
+11 eme numero : 12
+12 eme numero : -11
+13 eme numero : -19
+14 eme numero : 3214
+15 eme numero : 121
+16 eme numero : 24432
+17 eme numero : 4341413
+18 eme numero : 2121
+19 eme numero : 42
+20 eme numero : 2321414
+21 eme numero : 22323
+22 eme numero : 211
+23 eme numero : 3322
+a to b, all stack_b 
+a to b, pivot = 12, big_pivot = 300, count = 23
+a to b finir
+a to b, all stack_a 
+1 eme numero : 300
+2 eme numero : 3214
+3 eme numero : 24432
+4 eme numero : 4341413
+5 eme numero : 2121
+6 eme numero : 2321414
+7 eme numero : 22323
+8 eme numero : 3322
+a to b, all stack_b 
+1 eme numero : -19
+2 eme numero : -11
+3 eme numero : 10
+4 eme numero : 9
+5 eme numero : 6
+6 eme numero : 2
+7 eme numero : 5
+8 eme numero : 4
+9 eme numero : 7
+10 eme numero : 1
+11 eme numero : 8
+12 eme numero : 12
+13 eme numero : 121
+14 eme numero : 42
+15 eme numero : 211
+===========================================
+count_ra : 8, count_rb = 4, count_pb = 15
+entre ft_a_to_b,
+===============a to b start===================
+a to b, all stack_a 
+1 eme numero : 300
+2 eme numero : 3214
+3 eme numero : 24432
+4 eme numero : 4341413
+5 eme numero : 2121
+6 eme numero : 2321414
+7 eme numero : 22323
+8 eme numero : 3322
+a to b, all stack_b 
+1 eme numero : 12
+2 eme numero : 121
+3 eme numero : 42
+4 eme numero : 211
+5 eme numero : -19
+6 eme numero : -11
+7 eme numero : 10
+8 eme numero : 9
+9 eme numero : 6
+10 eme numero : 2
+11 eme numero : 5
+12 eme numero : 4
+13 eme numero : 7
+14 eme numero : 1
+15 eme numero : 8
+a to b, pivot = 22323, big_pivot = 2321414, count = 8
+a to b finir
+a to b, all stack_a 
+1 eme numero : 4341413
+2 eme numero : 2321414
+a to b, all stack_b 
+1 eme numero : 3322
+2 eme numero : 2121
+3 eme numero : 3214
+4 eme numero : 300
+5 eme numero : 12
+6 eme numero : 121
+7 eme numero : 42
+8 eme numero : 211
+9 eme numero : -19
+10 eme numero : -11
+11 eme numero : 10
+12 eme numero : 9
+13 eme numero : 6
+14 eme numero : 2
+15 eme numero : 5
+16 eme numero : 4
+17 eme numero : 7
+18 eme numero : 1
+19 eme numero : 8
+20 eme numero : 24432
+21 eme numero : 22323
+===========================================
+count_ra : 2, count_rb = 2, count_pb = 6
+entre ft_a_to_b,
+===============a to b start avec return function===================
+a to b, all stack_a 
+1 eme numero : 2321414
+2 eme numero : 4341413
+a to b, all stack_b 
+1 eme numero : 24432
+2 eme numero : 22323
+3 eme numero : 3322
+4 eme numero : 2121
+5 eme numero : 3214
+6 eme numero : 300
+7 eme numero : 12
+8 eme numero : 121
+9 eme numero : 42
+10 eme numero : 211
+11 eme numero : -19
+12 eme numero : -11
+13 eme numero : 10
+14 eme numero : 9
+15 eme numero : 6
+16 eme numero : 2
+17 eme numero : 5
+18 eme numero : 4
+19 eme numero : 7
+20 eme numero : 1
+21 eme numero : 8
+===============a to b finir avec return function===================
+entre ft_b_to_a,
+=================b to a, start avec return function==================
+b to a, all stack_a
+1 eme numero : 22323
+2 eme numero : 24432
+3 eme numero : 2321414
+4 eme numero : 4341413
+b to a, all stack_b
+1 eme numero : 3322
+2 eme numero : 2121
+3 eme numero : 3214
+4 eme numero : 300
+5 eme numero : 12
+6 eme numero : 121
+7 eme numero : 42
+8 eme numero : 211
+9 eme numero : -19
+10 eme numero : -11
+11 eme numero : 10
+12 eme numero : 9
+13 eme numero : 6
+14 eme numero : 2
+15 eme numero : 5
+16 eme numero : 4
+17 eme numero : 7
+18 eme numero : 1
+19 eme numero : 8
+=================b to a, finir avec return function==================
+entre ft_b_to_a,
+=================b to a, start==================
+b to a, all stack_a
+1 eme numero : 22323
+2 eme numero : 24432
+3 eme numero : 2321414
+4 eme numero : 4341413
+b to a, all stack_b
+1 eme numero : 3322
+2 eme numero : 2121
+3 eme numero : 3214
+4 eme numero : 300
+5 eme numero : 12
+6 eme numero : 121
+7 eme numero : 42
+8 eme numero : 211
+9 eme numero : -19
+10 eme numero : -11
+11 eme numero : 10
+12 eme numero : 9
+13 eme numero : 6
+14 eme numpa
+pa
+ra
+pa
+rb
+rrr
+pa
+rb
+pa
+pa
+ra
+pa
+sa
+ero : 2
+15 eme numero : 5
+16 eme numero : 4
+17 eme numero : 7
+18 eme numero : 1
+19 eme numero : 8
+b to a, smaill_pivot = 2121, pivot = 3214, count = 4
+b to a finir
+b to a, all stack_a
+1 eme numero : 3214
+2 eme numero : 3322
+3 eme numero : 22323
+4 eme numero : 24432
+5 eme numero : 2321414
+6 eme numero : 4341413
+7 eme numero : 2121
+b to a, all stack_b
+1 eme numero : 12
+2 eme numero : 121
+3 eme numero : 42
+4 eme numero : 211
+5 eme numero : -19
+6 eme numero : -11
+7 eme numero : 10
+8 eme numero : 9
+9 eme numero : 6
+10 eme numero : 2
+11 eme numero : 5
+12 eme numero : 4
+13 eme numero : 7
+14 eme numero : 1
+15 eme numero : 8
+16 eme numero : 300
+==============================================
+entre ft_a_to_b,
+===============a to b start avec return function===================
+a to b, all stack_a 
+1 eme numero : 3214
+2 eme numero : 3322
+3 eme numero : 22323
+4 eme numero : 24432
+5 eme numero : 2321414
+6 eme numero : 4341413
+7 eme numero : 2121
+a to b, all stack_b 
+1 eme numero : 12
+2 eme numero : 121
+3 eme numero : 42
+4 eme numero : 211
+5 eme numero : -19
+6 eme numero : -11
+7 eme numero : 10
+8 eme numero : 9
+9 eme numero : 6
+10 eme numero : 2
+11 eme numero : 5
+12 eme numero : 4
+13 eme numero : 7
+14 eme numero : 1
+15 eme numero : 8
+16 eme numero : 300
+===============a to b finir avec return function===================
+entre ft_a_to_b,
+===============a to b start avec return function===================
+a to b, all stack_a 
+1 eme numero : 2121
+2 eme numero : 3214
+3 eme numero : 3322
+4 eme numero : 22323
+5 eme numero : 24432
+6 eme numero : 2321414
+7 eme numero : 4341413
+a to b, all stack_b 
+1 eme numero : 300
+2 eme numero : 12
+3 eme numero : 121
+4 eme numero : 42
+5 eme numero : 211
+6 eme numero : -19
+7 eme numero : -11
+8 eme numero : 10
+9 eme numero : 9
+10 eme numero : 6
+11 eme numero : 2
+12 eme numero : 5
+13 eme numero : 4
+14 eme numero : 7
+15 eme numero : 1
+16 eme numero : 8
+===============a to b finir avec return function===================
+entre ft_b_to_a,
+=================b to a, start avec return function==================
+b to a, all stack_a
+1 eme numero : 300
+2 eme numero : 2121
+3 eme numero : 3214
+4 eme numero : 3322
+5 eme numero : 22323
+6 eme numero : 24432
+7 eme numero : 2321414
+8 eme numero : 4341413
+b to a, all stack_b
+1 eme numero : 12
+2 eme numero : 121
+3 eme numero : 42
+4 eme numero : 211
+5 eme numero : -19
+6 eme numero : -11
+7 eme numero : 10
+8 eme numero : 9
+9 eme numero : 6
+10 eme numero : 2
+11 eme numero : 5
+12 eme numero : 4
+13 eme numero : 7
+14 eme numero : 1
+15 eme numero : 8
+=================b to a, finir avec return function==================
+entre ft_b_to_a,
+=================b to a, start==================
+b to a, all stack_a
+1 eme numero : 300
+2 eme numero : 2121
+3 eme numero : 3214
+4 eme numero : 3322
+5 eme numero : 22323
+6 eme numero : 24432
+7 eme numero : 2321414
+8 eme numero : 4341413
+b to a, all stack_b
+1 eme numero : 12
+2 eme numero : 121
+3 eme numero : 42
+4 eme numero : 211
+5 eme numero : -19
+6 eme numero : -11
+7 eme numero : 10
+8 eme numero : 9
+9 eme numero : 6
+10 eme numero : 2
+11 eme numero : 5
+12 eme numero : 4
+13 eme numero : 7
+14 eme numero : 1
+15 eme numero : 8
+b to a, smaill_pivot = 42, pivot = 121, count = 4
+b to a finir
+b to a, all stack_a
+1 eme numero : 211
+2 eme numero : 121
+3 eme numero : 300
+4 eme numero : 2121
+5 eme numero : 3214
+6 eme numero : 3322
+7 eme numero : 22323
+8 eme numero : 24432
+9 eme numero : 2321414
+10 eme numero : 4341413
+11 eme numero : 42
+b to a, all stack_b
+1 eme numero : -19
+2 eme numero : -11
+3 eme numero : 10
+4 eme numero : 9
+5 eme numero : 6
+6 eme numero : 2
+7 eme numero : 5
+8 eme numero : 4
+9 eme numero : 7
+10 eme numero : 1
+11 eme numero : 8
+12 eme numero : 12
+==============================================
+entre ft_a_to_b,
+===============a to b start avec return function===================
+a to b, all stack_a 
+1 eme numero : 121
+2 eme numero : 211
+3 eme numero : 300
+4 eme numero : 2121
+5 eme numero : 3214
+6 eme numero : 3322
+7 eme numero : 22323
+8 eme numero : 24432
+9 eme numero : 2321414
+10 eme numero : 4341413
+11 eme numero : 42
+a to b, all stack_b 
+1 eme numero :rrr
+pa
+rb
+rb
+pa
+pa
+pa
+pa
+ra
+pa
+pa
+ra
+pa
+pa
+ra
+pa
+ra
+pb
+pb
+pb
+ra
+ra
+rra
+rra
+rra
+ -19
+2 eme numero : -11
+3 eme numero : 10
+4 eme numero : 9
+5 eme numero : 6
+6 eme numero : 2
+7 eme numero : 5
+8 eme numero : 4
+9 eme numero : 7
+10 eme numero : 1
+11 eme numero : 8
+12 eme numero : 12
+===============a to b finir avec return function===================
+entre ft_a_to_b,
+===============a to b start avec return function===================
+a to b, all stack_a 
+1 eme numero : 42
+2 eme numero : 121
+3 eme numero : 211
+4 eme numero : 300
+5 eme numero : 2121
+6 eme numero : 3214
+7 eme numero : 3322
+8 eme numero : 22323
+9 eme numero : 24432
+10 eme numero : 2321414
+11 eme numero : 4341413
+a to b, all stack_b 
+1 eme numero : 12
+2 eme numero : -19
+3 eme numero : -11
+4 eme numero : 10
+5 eme numero : 9
+6 eme numero : 6
+7 eme numero : 2
+8 eme numero : 5
+9 eme numero : 4
+10 eme numero : 7
+11 eme numero : 1
+12 eme numero : 8
+===============a to b finir avec return function===================
+entre ft_b_to_a,
+=================b to a, start avec return function==================
+b to a, all stack_a
+1 eme numero : 12
+2 eme numero : 42
+3 eme numero : 121
+4 eme numero : 211
+5 eme numero : 300
+6 eme numero : 2121
+7 eme numero : 3214
+8 eme numero : 3322
+9 eme numero : 22323
+10 eme numero : 24432
+11 eme numero : 2321414
+12 eme numero : 4341413
+b to a, all stack_b
+1 eme numero : -19
+2 eme numero : -11
+3 eme numero : 10
+4 eme numero : 9
+5 eme numero : 6
+6 eme numero : 2
+7 eme numero : 5
+8 eme numero : 4
+9 eme numero : 7
+10 eme numero : 1
+11 eme numero : 8
+=================b to a, finir avec return function==================
+entre ft_b_to_a,
+=================b to a, start==================
+b to a, all stack_a
+1 eme numero : 12
+2 eme numero : 42
+3 eme numero : 121
+4 eme numero : 211
+5 eme numero : 300
+6 eme numero : 2121
+7 eme numero : 3214
+8 eme numero : 3322
+9 eme numero : 22323
+10 eme numero : 24432
+11 eme numero : 2321414
+12 eme numero : 4341413
+b to a, all stack_b
+1 eme numero : -19
+2 eme numero : -11
+3 eme numero : 10
+4 eme numero : 9
+5 eme numero : 6
+6 eme numero : 2
+7 eme numero : 5
+8 eme numero : 4
+9 eme numero : 7
+10 eme numero : 1
+11 eme numero : 8
+b to a, smaill_pivot = 1, pivot = 5, count = 11
+b to a finir
+b to a, all stack_a
+1 eme numero : 8
+2 eme numero : 7
+3 eme numero : 5
+4 eme numero : 6
+5 eme numero : 9
+6 eme numero : 10
+7 eme numero : 12
+8 eme numero : 42
+9 eme numero : 121
+10 eme numero : 211
+11 eme numero : 300
+12 eme numero : 2121
+13 eme numero : 3214
+14 eme numero : 3322
+15 eme numero : 22323
+16 eme numero : 24432
+17 eme numero : 2321414
+18 eme numero : 4341413
+19 eme numero : 2
+20 eme numero : 4
+21 eme numero : 1
+b to a, all stack_b
+1 eme numero : -19
+2 eme numero : -11
+==============================================
+entre ft_a_to_b,
+===============a to b start===================
+a to b, all stack_a 
+1 eme numero : 8
+2 eme numero : 7
+3 eme numero : 5
+4 eme numero : 6
+5 eme numero : 9
+6 eme numero : 10
+7 eme numero : 12
+8 eme numero : 42
+9 eme numero : 121
+10 eme numero : 211
+11 eme numero : 300
+12 eme numero : 2121
+13 eme numero : 3214
+14 eme numero : 3322
+15 eme numero : 22323
+16 eme numero : 24432
+17 eme numero : 2321414
+18 eme numero : 4341413
+19 eme numero : 2
+20 eme numero : 4
+21 eme numero : 1
+a to b, all stack_b 
+1 eme numero : -19
+2 eme numero : -11
+a to b, pivot = 8, big_pivot = 8, count = 6
+a to b finir
+a to b, all stack_a 
+1 eme numero : 12
+2 eme numero : 42
+3 eme numero : 121
+4 eme numero : 211
+5 eme numero : 300
+6 eme numero : 2121
+7 eme numero : 3214
+8 eme numero : 3322
+9 eme numero : 22323
+10 eme numero : 24432
+11 eme numero : 2321414
+12 eme numero : 4341413
+13 eme numero : 2
+14 eme numero : 4
+15 eme numero : 1
+16 eme numero : 8
+17 eme numero : 9
+18 eme numero : 10
+a to b, all stack_b 
+1 eme numero : 6
+2 eme numero : 5
+3 eme numero : 7
+4 eme numero : -19
+5 eme numero : -11
+===========================================
+count_ra : 3, count_rb = 0, count_pb = 3
+entre ft_a_to_b,
+===============a to b start avec return function===================
+a to b, all stack_a 
+1 eme numero : 8
+2 eme numero : 9
+3 eme numero : 10
+4 eme numero : 12
+5 eme numero : 42
+6 eme numero : 121
+7 eme numero : 211
+8 eme numero : pa
+pa
+pa
+ra
+rrr
+rrr
+rra
+pb
+sa
+ra
+pa
+rra
+ra
+ra
+pb
+rb
+rrr
+rra
+sa
+pa
+300
+9 eme numero : 2121
+10 eme numero : 3214
+11 eme numero : 3322
+12 eme numero : 22323
+13 eme numero : 24432
+14 eme numero : 2321414
+15 eme numero : 4341413
+16 eme numero : 2
+17 eme numero : 4
+18 eme numero : 1
+a to b, all stack_b 
+1 eme numero : 6
+2 eme numero : 5
+3 eme numero : 7
+4 eme numero : -19
+5 eme numero : -11
+===============a to b finir avec return function===================
+entre ft_b_to_a,
+=================b to a, start avec return function==================
+b to a, all stack_a
+1 eme numero : 8
+2 eme numero : 9
+3 eme numero : 10
+4 eme numero : 12
+5 eme numero : 42
+6 eme numero : 121
+7 eme numero : 211
+8 eme numero : 300
+9 eme numero : 2121
+10 eme numero : 3214
+11 eme numero : 3322
+12 eme numero : 22323
+13 eme numero : 24432
+14 eme numero : 2321414
+15 eme numero : 4341413
+16 eme numero : 2
+17 eme numero : 4
+18 eme numero : 1
+b to a, all stack_b
+1 eme numero : 6
+2 eme numero : 5
+3 eme numero : 7
+4 eme numero : -19
+5 eme numero : -11
+=================b to a, finir avec return function==================
+entre ft_b_to_a,
+j suis?-------------------==========================================b to a, start avec return function==================
+b to a, all stack_a
+1 eme numero : 5
+2 eme numero : 6
+3 eme numero : 8
+4 eme numero : 9
+5 eme numero : 10
+6 eme numero : 12
+7 eme numero : 42
+8 eme numero : 121
+9 eme numero : 211
+10 eme numero : 300
+11 eme numero : 2121
+12 eme numero : 3214
+13 eme numero : 3322
+14 eme numero : 22323
+15 eme numero : 24432
+16 eme numero : 2321414
+17 eme numero : 4341413
+18 eme numero : 2
+19 eme numero : 4
+20 eme numero : 1
+21 eme numero : 7
+b to a, all stack_b
+1 eme numero : -19
+2 eme numero : -11
+=================b to a, finir avec return function==================
+entre ft_a_to_b,
+===============a to b start===================
+a to b, all stack_a 
+1 eme numero : 7
+2 eme numero : 4
+3 eme numero : 1
+4 eme numero : 5
+5 eme numero : 6
+6 eme numero : 8
+7 eme numero : 9
+8 eme numero : 10
+9 eme numero : 12
+10 eme numero : 42
+11 eme numero : 121
+12 eme numero : 211
+13 eme numero : 300
+14 eme numero : 2121
+15 eme numero : 3214
+16 eme numero : 3322
+17 eme numero : 22323
+18 eme numero : 24432
+19 eme numero : 2321414
+20 eme numero : 4341413
+21 eme numero : 2
+a to b, all stack_b 
+1 eme numero : -19
+2 eme numero : -11
+a to b, pivot = 1, big_pivot = 4, count = 3
+a to b finir
+a to b, all stack_a 
+1 eme numero : 5
+2 eme numero : 6
+3 eme numero : 8
+4 eme numero : 9
+5 eme numero : 10
+6 eme numero : 12
+7 eme numero : 42
+8 eme numero : 121
+9 eme numero : 211
+10 eme numero : 300
+11 eme numero : 2121
+12 eme numero : 3214
+13 eme numero : 3322
+14 eme numero : 22323
+15 eme numero : 24432
+16 eme numero : 2321414
+17 eme numero : 4341413
+18 eme numero : 2
+19 eme numero : 7
+20 eme numero : 4
+a to b, all stack_b 
+1 eme numero : -19
+2 eme numero : -11
+3 eme numero : 1
+===========================================
+count_ra : 2, count_rb = 1, count_pb = 1
+entre ft_a_to_b,
+===============a to b start avec return function===================
+a to b, all stack_a 
+1 eme numero : 4
+2 eme numero : 7
+3 eme numero : 5
+4 eme numero : 6
+5 eme numero : 8
+6 eme numero : 9
+7 eme numero : 10
+8 eme numero : 12
+9 eme numero : 42
+10 eme numero : 121
+11 eme numero : 211
+12 eme numero : 300
+13 eme numero : 2121
+14 eme numero : 3214
+15 eme numero : 3322
+16 eme numero : 22323
+17 eme numero : 24432
+18 eme numero : 2321414
+19 eme numero : 4341413
+20 eme numero : 2
+a to b, all stack_b 
+1 eme numero : 1
+2 eme numero : -19
+3 eme numero : -11
+===============a to b finir avec return function===================
+entre ft_b_to_a,
+=================b to a, start avec return function==================
+b to a, all stack_a
+1 eme numero : 1
+2 eme numero : 4
+3 eme numero : 7
+4 eme numero : 5
+5 eme numero : 6
+6 eme numero : 8
+7 eme numero : 9
+8 eme numero : 10
+9 eme numero : 12
+10 eme numero : 42
+11 eme numero : 121
+12 eme numero : 211
+13 eme numero : 300
+14 eme numero : 2121
+15 eme numero : 3214
+16 eme numero : 3322
+17 eme numero : 22323
+18 eme numero : 24432
+19 eme numero : 2321414
+20 eme numero : 4341413
+21 eme numero : 2
+b to a, all stack_b
+1 eme numero : -19
+2 esb
+pa
+pa
+me numero : -11
+=================b to a, finir avec return function==================
+entre ft_b_to_a,
+=================b to a, start avec return function==================
+b to a, all stack_a
+1 eme numero : 1
+2 eme numero : 4
+3 eme numero : 7
+4 eme numero : 5
+5 eme numero : 6
+6 eme numero : 8
+7 eme numero : 9
+8 eme numero : 10
+9 eme numero : 12
+10 eme numero : 42
+11 eme numero : 121
+12 eme numero : 211
+13 eme numero : 300
+14 eme numero : 2121
+15 eme numero : 3214
+16 eme numero : 3322
+17 eme numero : 22323
+18 eme numero : 24432
+19 eme numero : 2321414
+20 eme numero : 4341413
+21 eme numero : 2
+b to a, all stack_b
+1 eme numero : -19
+2 eme numero : -11
+=================b to a, finir avec return function==================
+entre ft_b_to_a,
+=================b to a, start avec return function==================
+b to a, all stack_a
+1 eme numero : -19
+2 eme numero : -11
+3 eme numero : 1
+4 eme numero : 4
+5 eme numero : 7
+6 eme numero : 5
+7 eme numero : 6
+8 eme numero : 8
+9 eme numero : 9
+10 eme numero : 10
+11 eme numero : 12
+12 eme numero : 42
+13 eme numero : 121
+14 eme numero : 211
+15 eme numero : 300
+16 eme numero : 2121
+17 eme numero : 3214
+18 eme numero : 3322
+19 eme numero : 22323
+20 eme numero : 24432
+21 eme numero : 2321414
+22 eme numero : 4341413
+23 eme numero : 2
+b to a, all stack_b
+=================b to a, finir avec return function==================
+stack_a, 
+1 eme numero : -19
+2 eme numero : -11
+3 eme numero : 1
+4 eme numero : 4
+5 eme numero : 7
+6 eme numero : 5
+7 eme numero : 6
+8 eme numero : 8
+9 eme numero : 9
+10 eme numero : 10
+11 eme numero : 12
+12 eme numero : 42
+13 eme numero : 121
+14 eme numero : 211
+15 eme numero : 300
+16 eme numero : 2121
+17 eme numero : 3214
+18 eme numero : 3322
+19 eme numero : 22323
+20 eme numero : 24432
+21 eme numero : 2321414
+22 eme numero : 4341413
+23 eme numero : 2
+stack_b, 
+fail

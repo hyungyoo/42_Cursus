@@ -31,6 +31,7 @@ SRC			= main.c \
 			  ft_a_to_b.c \
 			  ft_b_to_a.c \
 			  ft_pivot.c \
+			  ft_stack_3_b_to_a.c \
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 OBJS		= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))

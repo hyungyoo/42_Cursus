@@ -38,8 +38,6 @@ int	main(int argc, char **argv)
 			ft_stack_all(&stack_a, &stack_b);
 	}
 	/*
-	 * test
-	*/ 
 	printf("stack_a, \n");
 	ft_print_all_node(stack_a);
 	printf("stack_b, \n");
@@ -49,9 +47,7 @@ int	main(int argc, char **argv)
 	else
 		printf("fail\n");
 
-	/*
-	 * test
-	 */
+	*/
 	ft_stack_free(stack_a);
 	return (0);
 }

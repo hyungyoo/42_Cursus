@@ -2,6 +2,7 @@
 
 void	ft_stack_3_b_to_a(t_stack **stack_a, t_stack **stack_b)
 {
+	/*
 	int	min;
 
 	min = ft_min(*stack_b);
@@ -25,12 +26,49 @@ void	ft_stack_3_b_to_a(t_stack **stack_a, t_stack **stack_b)
 		if ((*stack_a)->num != min)
 			ft_sa(*stack_a);
 	}
+	
+
+
+	ft_pa(stack_a, stack_b);
+	ft_pa(stack_a, stack_b);
+	ft_pa(stack_a, stack_b);
+	
+	if (ft_check_ascending(*stack_a, 3))
+		return ;
+	if ((*stack_a)->num == ft_min_size(*stack_a, 3))
+	{
+		ft_ra(stack_a);
+		ft_sa(*stack_a);
+		ft_rra(stack_a);
+	}
+	else if ((*stack_a)->num == ft_max_size(*stack_a, 3))
+	{
+		ft_ra(stack_a);
+		if ((*stack_a)->next->num == ft_min_size(*stack_a, 3))
+			ft_sa(*stack_a);
+	}
+	else
+	{
+		if ((*stack_a)->next->num == ft_min(*stack_a))
+			ft_sa(*stack_a);
+		else
+			ft_rra(stack_a);
+	}
+	*/
+
+	ft_pa(stack_a, stack_b);
+	ft_pa(stack_a, stack_b);
+	ft_pa(stack_a, stack_b);
+	ft_a_to_b(stack_a, stack_b, 3);
 }
 
 int	ft_return_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 {
 	if (count == 3)
 	{
+		/*
+		printf("j suis?-------------------=========================");
+		*/
 		ft_stack_3_b_to_a(stack_a, stack_b);
 		return (1);
 	}
@@ -88,11 +126,25 @@ void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 	count_ra = 0;
 	count_rb = 0;
 	count_pa = 0;
+	/*
 	printf("entre ft_b_to_a,\n");
+	*/
 	if (ft_return_b_to_a(stack_a, stack_b, count))
+	{
+		/*
+		printf("=================b to a, start avec return function==================\n");
+		printf("b to a, all stack_a\n");
+		ft_print_all_node(*stack_a);
+		printf("b to a, all stack_b\n");
+		ft_print_all_node(*stack_b);
+
+		printf("=================b to a, finir avec return function==================\n");
+		*/
 		return ;
+	}
 	pivot = ft_pivot(*stack_b, count);
 	small_pivot = ft_small_pivot(*stack_b, count);
+	/*
 	printf("=================b to a, start==================\n");
 	printf("b to a, all stack_a\n");
 	ft_print_all_node(*stack_a);
@@ -100,6 +152,7 @@ void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 	ft_print_all_node(*stack_b);
 
 	printf("b to a, smaill_pivot = %d, pivot = %d, count = %d\n", small_pivot, pivot, count);
+	*/
 	while (count--)
 	{
 		if ((*stack_b)->num < small_pivot)
@@ -118,12 +171,14 @@ void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 			}
 		}
 	}
+	/*
 	printf("b to a finir\n");
 	printf("b to a, all stack_a\n");
 	ft_print_all_node(*stack_a);
 	printf("b to a, all stack_b\n");
 	ft_print_all_node(*stack_b);
 	printf("==============================================\n");
+	*/
 	ft_a_to_b(stack_a, stack_b, (count_pa - count_ra));
 	ft_rra_rrb(stack_a, stack_b, count_ra, count_rb);
 	ft_a_to_b(stack_a, stack_b, count_ra);

@@ -13,6 +13,12 @@ typedef struct s_stack
 }				t_stack;
 
 /*
+ * ft_stack_3_b_to_a.c
+ */
+int			ft_min_size(t_stack *stack, int size);
+int			ft_max_size(t_stack *stack, int size);
+
+/*
  * ft_a_to_b.c 
  * ft_b_to_a.c
 */
