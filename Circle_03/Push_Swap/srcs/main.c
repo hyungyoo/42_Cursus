@@ -37,17 +37,6 @@ int	main(int argc, char **argv)
 		else
 			ft_stack_all(&stack_a, &stack_b);
 	}
-	/*
-	printf("stack_a, \n");
-	ft_print_all_node(stack_a);
-	printf("stack_b, \n");
-	ft_print_all_node(stack_b);
-	if (ft_check_ascending(stack_a, ft_size_node(stack_a)))
-		printf("sucess\n");
-	else
-		printf("fail\n");
-
-	*/
 	ft_stack_free(stack_a);
 	return (0);
 }
