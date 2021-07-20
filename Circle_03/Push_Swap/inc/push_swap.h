@@ -12,6 +12,15 @@ typedef struct s_stack
 	struct s_stack	*next;
 }				t_stack;
 
+typedef struct s_ab
+{
+	int	pivot;
+	int	big_pivot;
+	int	count_ra;
+	int	count_rb;
+	int	count_pb;
+}				t_ab;
+
 /*
  * ft_stack_3_b_to_a.c
  */
