@@ -20,4 +20,13 @@
 0 1 2 3
 일때, instruction 이 뜬다
 
-100 개 500 개일떄
+100 개 500 개일떄\
+
+해야할것
+1. push_swap 줄수 줄이기
+ (struct만들어서 줄이기)
+
+2. checker makefile만들기
+
+3. checker gnl 만들기
+
