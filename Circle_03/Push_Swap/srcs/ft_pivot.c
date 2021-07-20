@@ -30,8 +30,8 @@ int	ft_small_pivot(t_stack *stack, int size_node)
 	int	ret;
 
 	table = ft_table(stack, size_node);
-	i = 0;
-	while (i < size_node)
+	i = -1;
+	while (++i < size_node)
 	{
 		j = 0;
 		count = 0;
@@ -44,7 +44,6 @@ int	ft_small_pivot(t_stack *stack, int size_node)
 			free(table);
 			return (ret);
 		}
-		i++;
 	}
 	ret = table[0];
 	free(table);
@@ -60,8 +59,8 @@ int	ft_big_pivot(t_stack *stack, int size_node)
 	int	ret;
 
 	table = ft_table(stack, size_node);
-	i = 0;
-	while (i < size_node)
+	i = -1;
+	while (++i < size_node)
 	{
 		j = 0;
 		count = 0;
@@ -74,7 +73,6 @@ int	ft_big_pivot(t_stack *stack, int size_node)
 			free(table);
 			return (ret);
 		}
-		i++;
 	}
 	ret = table[0];
 	free(table);
@@ -90,8 +88,8 @@ int	ft_pivot(t_stack *stack, int size_node)
 	int	ret;
 
 	table = ft_table(stack, size_node);
-	i = 0;
-	while (i < size_node)
+	i = -1;
+	while (++i < size_node)
 	{
 		j = 0;
 		count = 0;
@@ -104,7 +102,6 @@ int	ft_pivot(t_stack *stack, int size_node)
 			free(table);
 			return (ret);
 		}
-		i++;
 	}
 	ret = table[0];
 	free(table);
