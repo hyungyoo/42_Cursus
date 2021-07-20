@@ -12,7 +12,7 @@ void	ft_enlever_min(t_stack **stack_a, t_stack **stack_b)
 
 void	ft_stack_4(t_stack **stack_a, t_stack **stack_b)
 {
-	if (ft_check_ascending(*stack_a, 5))
+	if (ft_check_ascending(*stack_a, 4))
 		return ;
 	ft_enlever_min(stack_a, stack_b);
 	ft_stack_3(stack_a);
