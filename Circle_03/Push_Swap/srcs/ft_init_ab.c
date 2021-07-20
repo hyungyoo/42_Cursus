@@ -20,7 +20,8 @@ void	ft_init_count_ba(int *ra, int *rb, int *pa)
 	*pa = 0;
 }
 
-void	ft_init_pivot_ba(t_stack **stack_b, int count, int *pivot, int *small_pivot)
+void	ft_init_pivot_ba(t_stack **stack_b, int count,
+			int *pivot, int *small_pivot)
 {
 	*pivot = ft_pivot(*stack_b, count);
 	*small_pivot = ft_small_pivot(*stack_b, count);
