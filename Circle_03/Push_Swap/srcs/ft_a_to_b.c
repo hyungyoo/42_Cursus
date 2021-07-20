@@ -67,10 +67,6 @@ int	ft_return_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 	return (0);
 }
 
-/*
- * while 부분 전부다 들어내서 다른함수에서 하도록하는데
- * 피봇이나 이런부분들은 전부다 struct만들어서 옮기기
- */
 void	ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 {
 	int	pivot;
@@ -79,29 +75,19 @@ void	ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 	int	count_rb;
 	int	count_pb;
 
-	count_ra = 0;
-	count_rb = 0;
-	count_pb = 0;
+	ft_init_count(&count_ra, &count_rb, &count_pb);
+	ft_init_pivot(stack_a, count, &pivot, &big_pivot);
 	if (ft_return_a_to_b(stack_a, stack_b, count))
 		return ;
-	pivot = ft_pivot(*stack_a, count);
-	big_pivot = ft_big_pivot(*stack_a, count);
 	while (count--)
 	{
-		if ((*stack_a)->num >= big_pivot)
-		{
-			count_ra++;
+		if ((*stack_a)->num >= big_pivot && ++count_ra)
 			ft_ra(stack_a);
-		}
-		else if ((*stack_a)->num < big_pivot)
+		else if ((*stack_a)->num < big_pivot && ++count_pb)
 		{
-			count_pb++;
 			ft_pb(stack_b, stack_a);
-			if ((*stack_b)->num >= pivot)
-			{
-				count_rb++;
+			if ((*stack_b)->num >= pivot && ++count_rb)
 				ft_rb(stack_b);
-			}
 		}
 	}
 	ft_rra_rrb(stack_a, stack_b, count_ra, count_rb);

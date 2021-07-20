@@ -22,6 +22,16 @@ typedef struct s_ab
 }				t_ab;
 
 /*
+ * ft_init_ab.c
+ */
+void		ft_init_count(int *ra, int *rb, int *pb);
+void		ft_init_pivot(t_stack **stack_a, int count,
+				int *pivot, int *big_pivot);
+void		ft_init_count_ba(int *ra, int *rb, int *pa);
+void		ft_init_pivot_ba(t_stack **stack_b, int count,
+				int *pivot, int *small_pivot);
+
+/*
  * ft_stack_3_b_to_a.c
  */
 int			ft_min_size(t_stack *stack, int size);

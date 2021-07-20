@@ -39,29 +39,19 @@ void	ft_b_to_a(t_stack **stack_a, t_stack **stack_b, int count)
 	int	count_ra;
 	int	count_pa;
 
-	count_ra = 0;
-	count_rb = 0;
-	count_pa = 0;
+	ft_init_count_ba(&count_ra, &count_rb, &count_pa);
+	ft_init_pivot_ba(stack_b, count, &pivot, &small_pivot);
 	if (ft_return_b_to_a(stack_a, stack_b, count))
 		return ;
-	pivot = ft_pivot(*stack_b, count);
-	small_pivot = ft_small_pivot(*stack_b, count);
 	while (count--)
 	{
-		if ((*stack_b)->num < small_pivot)
-		{
-			count_rb++;
+		if ((*stack_b)->num < small_pivot && ++count_rb)
 			ft_rb(stack_b);
-		}
-		else if ((*stack_b)->num >= small_pivot)
+		else if ((*stack_b)->num >= small_pivot && ++count_pa)
 		{
-			count_pa++;
 			ft_pa(stack_a, stack_b);
-			if ((*stack_a)->num < pivot)
-			{
-				count_ra++;
+			if ((*stack_a)->num < pivot && ++count_ra)
 				ft_ra(stack_a);
-			}
 		}
 	}
 	ft_a_to_b(stack_a, stack_b, (count_pa - count_ra));
