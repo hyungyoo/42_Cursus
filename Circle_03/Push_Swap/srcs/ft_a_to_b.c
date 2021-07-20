@@ -62,12 +62,15 @@ int	ft_return_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 		ft_stack_3(stack_a);
 	else if (count == 3)
 		ft_stack_3_a_to_b(stack_a, stack_b);
-	
 	if (ft_check_ascending(*stack_a, count))
 		return (1);
 	return (0);
 }
 
+/*
+ * while 부분 전부다 들어내서 다른함수에서 하도록하는데
+ * 피봇이나 이런부분들은 전부다 struct만들어서 옮기기
+ */
 void	ft_a_to_b(t_stack **stack_a, t_stack **stack_b, int count)
 {
 	int	pivot;

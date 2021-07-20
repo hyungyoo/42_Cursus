@@ -1,10 +1,10 @@
 #include "../inc/push_swap.h"
 
-int		ft_min_size(t_stack *stack, int size)
+int	ft_min_size(t_stack *stack, int size)
 {
 	int	i;
 	int	min;
-	
+
 	i = 0;
 	min = stack->num;
 	while (i < size)
@@ -17,11 +17,11 @@ int		ft_min_size(t_stack *stack, int size)
 	return (min);
 }
 
-int		ft_max_size(t_stack *stack, int size)
+int	ft_max_size(t_stack *stack, int size)
 {
 	int	i;
 	int	max;
-	
+
 	i = 0;
 	max = stack->num;
 	while (i < size)
@@ -33,5 +33,3 @@ int		ft_max_size(t_stack *stack, int size)
 	}
 	return (max);
 }
-
-
