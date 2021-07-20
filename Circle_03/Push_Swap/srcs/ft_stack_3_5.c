@@ -14,9 +14,8 @@ void	ft_stack_3(t_stack **stack)
 		return ;
 	if ((*stack)->num == ft_min(*stack))
 	{
-		ft_ra(stack);
-		ft_sa(*stack);
 		ft_rra(stack);
+		ft_sa(*stack);
 	}
 	else if ((*stack)->num == ft_max(*stack))
 	{
