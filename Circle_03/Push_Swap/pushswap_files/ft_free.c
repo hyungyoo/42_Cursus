@@ -3,6 +3,8 @@
 void	ft_stack_free(t_stack *stack)
 {
 	t_stack	*tmp;
+	if (!stack)
+		return ;
 
 	stack->prev->next = NULL;
 	while (stack)

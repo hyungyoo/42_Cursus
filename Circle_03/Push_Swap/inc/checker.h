@@ -78,9 +78,9 @@ int			ft_atoi_size(char *num);
 /*
  * ft_free.c
  */
-void		ft_stack_free(t_stack *stack);
+void		ft_stack_free_2(t_stack *stack_a, t_stack *stack_b);
 void		ft_free_split(char **str);
-
+void		ft_stack_free(t_stack *stack);
 /*
  * ft_print.c
  */
