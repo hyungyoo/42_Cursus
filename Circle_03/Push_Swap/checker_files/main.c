@@ -1,13 +1,23 @@
 #include "../inc/checker.h"
 
-int	main(void)
+int		main(void)
 {
+
+	char	*line;
+	int r;
+
+	while ((r = get_next_line(0, &line)) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	printf("%s\n", line);
+	free(line);
 	/*
 	int		r;
 	char	*operation;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-
 	if (argv < 2)
 		return (0);
 	 * stack을 먼저 만든다
@@ -28,7 +38,6 @@ int	main(void)
 	}
 	ft_verifer_operation(operation);
 	free(operation);
-
 	 * 작동이 끝난후, 함수로 ascending인지 학인후 ko ok출력
 	
 	*
@@ -40,6 +49,5 @@ int	main(void)
 	 *	printf("ko\n");
 	 
 	*/
-	printf("seucces comp\n");
 	return (0);
 }

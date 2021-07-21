@@ -12,8 +12,9 @@ GREEN=\033[0;32m
 CYAN=\033[0;36m
 NC=\033[0m # No Color
 
-SRC_CHECKER =	checker.c \
-
+SRC_CHECKER =	main.c \
+				get_next_line.c \
+				get_next_line_utils.c \
 
 SRC_PUSHSWAP =	main.c \
 			  	ft_split.c \
