@@ -137,7 +137,7 @@ void		ft_ajouter_node_split(t_stack **stack, char *num);
 /*
  * ft_atoi.c
  */
-int			ft_atoi(char *num);
+int			ft_atoi_size(char *num);
 
 /*
  * ft_free.c
