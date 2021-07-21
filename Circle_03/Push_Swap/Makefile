@@ -5,8 +5,6 @@ CHECKER_SRCDIR = checker_files
 CHECKER_OBJDIR = .obj-checker
 PUSHSWAP_SRCDIR = pushswap_files
 PUSHSWAP_OBJDIR = .obj-pushswap
-SHARED_SRCDIR = shared_files
-SHARED_OBJDIR = .obj-shared
 EXEDIR = ./
 
 RED=\033[0;31m
@@ -43,29 +41,22 @@ SRC_PUSHSWAP =	main.c \
 			  	ft_stack_3_b_to_a.c \
 			  	ft_init_ab.c \
 
-SRC_SHARED =	
 
 OBJ_CHECKER = $(SRC_CHECKER:%.c=$(CHECKER_OBJDIR)/%.o)
 OBJ_PUSHSWAP = $(SRC_PUSHSWAP:%.c=$(PUSHSWAP_OBJDIR)/%.o)
-OBJ_SHARED = $(SRC_SHARED:%.c=$(SHARED_OBJDIR)/%.o)
 
 
 all: $(EXEDIR)$(NAME_CHECKER) $(EXEDIR)$(NAME_PUSHSWAP)
 
-$(EXEDIR)$(NAME_CHECKER): $(OBJ_CHECKER) $(OBJ_SHARED) $(LIBFT)
+$(EXEDIR)$(NAME_CHECKER): $(OBJ_CHECKER)
 	@echo "${GREEN} [ + ] ${NC}Creating checker object files"
-	@echo "${GREEN} [ + ] ${NC}Creating shared object files"
 	@echo "${GREEN} [ + ] ${NC}Creating checker executable"
-	@$(CC) $(FLAGS) $(OBJ_CHECKER) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_CHECKER) \
+	@$(CC) $(FLAGS) $(OBJ_CHECKER)  -o $(EXEDIR)$(NAME_CHECKER) \
 
-$(EXEDIR)$(NAME_PUSHSWAP): $(OBJ_PUSHSWAP) $(OBJ_SHARED) $(LIBFT)
+$(EXEDIR)$(NAME_PUSHSWAP): $(OBJ_PUSHSWAP)
 	@echo "${GREEN} [ + ] ${NC}Creating push_swap object files"
 	@echo "${GREEN} [ + ] ${NC}Creating push_swap executable"
-	@$(CC) $(FLAGS) $(OBJ_PUSHSWAP) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_PUSHSWAP) \
-
-$(SHARED_OBJDIR)/%.o: $(SHARED_SRCDIR)/%.c
-	@mkdir -p $(SHARED_OBJDIR)
-	@$(CC) $(FLAGS) -c -o $@ $<
+	@$(CC) $(FLAGS) $(OBJ_PUSHSWAP)  -o $(EXEDIR)$(NAME_PUSHSWAP) \
 
 $(CHECKER_OBJDIR)/%.o: $(CHECKER_SRCDIR)/%.c
 	@mkdir -p $(CHECKER_OBJDIR)
@@ -82,8 +73,6 @@ clean:
 	@rm -rf $(CHECKER_OBJDIR)
 	@echo "${RED} [ - ] ${NC}Deleting push_swap object files"
 	@rm -rf $(PUSHSWAP_OBJDIR)
-	@echo "${RED} [ - ] ${NC}Deleting shared object files"
-	@rm -rf $(SHARED_OBJDIR)
 
 fclean: clean
 	@echo "${RED} [ - ] ${NC}Deleting checker executable"
