@@ -37,9 +37,9 @@ int	main(int argc, char **argv)
 		}
 		free(line);
 		if (ft_check_ascending(stack_a, ft_size_node(stack_a)) && !stack_b)
-			ft_putstr("ok\n");
+			ft_putstr("OK\n");
 		else
-			ft_putstr("ko\n");
+			ft_putstr("KO\n");
 		ft_stack_free_2(stack_a, stack_b);
 	}
 	return (0);
