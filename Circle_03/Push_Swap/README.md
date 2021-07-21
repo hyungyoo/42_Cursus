@@ -21,12 +21,17 @@
 
 8. checker double linked list
 
-해야할것
 
-1. gnl로 들어온 인자 instruction인지 확인하는 함수
+9. gnl로 들어온 인자 instruction인지 확인하는 함수
 
-2. 확인했다면, 작동하는함수
+10. 확인했다면, 작동하는함수
 
-3. 끝났을때, ascending인지 확인하는함수
+11. 끝났을때, ascending인지 확인하는함수
 
-4. 결과 출력
+12.  결과 출력 -> KO or OK
+
+13. protection (ft_free.c) 
+	stack이 비어있음에도 while에 들어가기때문에 seg fault가 있었다.
+
+14. checker에서 stack_a 에서 stack_b로 pb를 해도 stack_a는 ascending이기 때문에 꼭 stack_b가 비어있는지 확인해야한다.
+
