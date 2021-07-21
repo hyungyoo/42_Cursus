@@ -15,6 +15,14 @@ NC=\033[0m # No Color
 SRC_CHECKER =	main.c \
 				get_next_line.c \
 				get_next_line_utils.c \
+				ft_ajouter_node.c \
+				ft_ajouter_node_split.c \
+				ft_asc_des.c \
+				ft_atoi.c \
+				ft_free.c \
+				ft_print.c \
+				ft_split.c \
+				ft_verifier.c \
 
 SRC_PUSHSWAP =	main.c \
 			  	ft_split.c \

@@ -1,43 +1,49 @@
 #include "../inc/checker.h"
 
-int		main(void)
+void	ft_init_stack(t_stack **stack_a, char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[++i])
+	{
+		if (ft_verifier_argv(argv[i]))
+			ft_print_error();
+		else if (ft_verifier_split(argv[i]))
+			ft_ajouter_node_split(stack_a, argv[i]);
+		else
+			ft_ajouter_node(stack_a, ft_new_node(argv[i]));
+	}
+}
+
+int		main(int argc, char **argv)
 {
 
 	char	*line;
-	int r;
+	int		r;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
-	while ((r = get_next_line(0, &line)) > 0)
+	stack_a = NULL;
+	stack_b = NULL;
+	if (argc >= 2)
 	{
+		ft_init_stack(&stack_a, argv);
+		r = get_next_line(0, &line);
+		while (r > 0)
+		{
+			printf("%s\n", line);
+			/*
+			 *if ( ft_verifier_operaion(line))
+				ft_operation(stack_a, stack_b);
+			 */
+			free(line);
+			r = get_next_line(0, &line);
+		}
 		printf("%s\n", line);
 		free(line);
 	}
-	printf("%s\n", line);
-	free(line);
 	/*
-	int		r;
-	char	*operation;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	if (argv < 2)
-		return (0);
-	 * stack을 먼저 만든다
-	
-	ft_init_stack(&stack_a, argv);
-	
-	 * ft_verifier_operation 함수
-	 * 만들어진 stack_a 리스트를 이용하여
-	 * gnl로 받아진 모든 파라미터들을 operation으로
-	 * 받아 작동을 실행한다.
-	 */
-	/*
-	operation = NULL;
-	while (r = get_next_line(&operation) > 0)
-	{
-		ft_verifier_operation(operation);
-		free(operation);
-	}
-	ft_verifer_operation(operation);
-	free(operation);
 	 * 작동이 끝난후, 함수로 ascending인지 학인후 ko ok출력
 	
 	*
