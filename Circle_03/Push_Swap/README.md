@@ -13,20 +13,20 @@
 
 4. 숫자가 6개 이상일 경우 구현
 
+5. push_swap 최적화
 
+6. checker makefile 만들기
 
-오류
+7. checker gnl 만들기
 
-0 1 2 3
-일때, instruction 이 뜬다
-
-100 개 500 개일떄\
+8. checker double linked list
 
 해야할것
-1. push_swap 줄수 줄이기
- (struct만들어서 줄이기)
 
-2. checker makefile만들기
+1. gnl로 들어온 인자 instruction인지 확인하는 함수
 
-3. checker gnl 만들기
+2. 확인했다면, 작동하는함수
 
+3. 끝났을때, ascending인지 확인하는함수
+
+4. 결과 출력
