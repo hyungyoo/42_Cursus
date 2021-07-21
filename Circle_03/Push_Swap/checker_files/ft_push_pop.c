@@ -1,4 +1,4 @@
-#include "../inc/push_swap.h"
+#include "../inc/checker.h"
 
 /*
  * pop

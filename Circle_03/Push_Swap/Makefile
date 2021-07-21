@@ -7,22 +7,24 @@ PUSHSWAP_SRCDIR = pushswap_files
 PUSHSWAP_OBJDIR = .obj-pushswap
 EXEDIR = ./
 
-RED=\033[0;31m
-GREEN=\033[0;32m
-CYAN=\033[0;36m
-NC=\033[0m # No Color
-
 SRC_CHECKER =	main.c \
 				get_next_line.c \
 				get_next_line_utils.c \
 				ft_ajouter_node.c \
 				ft_ajouter_node_split.c \
-				ft_asc_des.c \
 				ft_atoi.c \
 				ft_free.c \
 				ft_print.c \
 				ft_split.c \
 				ft_verifier.c \
+				ft_verifier_operation.c \
+				ft_push_pop.c \
+				ft_swap.c \
+				ft_pa_pb.c \
+				ft_ra_rb.c \
+				ft_rra_rrb.c \
+				ft_asc_des.c \
+				ft_size_node.c \
 
 SRC_PUSHSWAP =	main.c \
 			  	ft_split.c \
@@ -55,16 +57,14 @@ OBJ_CHECKER = $(SRC_CHECKER:%.c=$(CHECKER_OBJDIR)/%.o)
 OBJ_PUSHSWAP = $(SRC_PUSHSWAP:%.c=$(PUSHSWAP_OBJDIR)/%.o)
 
 
-all: $(EXEDIR)$(NAME_CHECKER) $(EXEDIR)$(NAME_PUSHSWAP)
+all: $(EXEDIR)$(NAME_PUSHSWAP)
+
+bonus: re $(EXEDIR)$(NAME_CHECKER)
 
 $(EXEDIR)$(NAME_CHECKER): $(OBJ_CHECKER)
-	@echo "${GREEN} [ + ] ${NC}Creating checker object files"
-	@echo "${GREEN} [ + ] ${NC}Creating checker executable"
 	@$(CC) $(FLAGS) $(OBJ_CHECKER)  -o $(EXEDIR)$(NAME_CHECKER) \
 
 $(EXEDIR)$(NAME_PUSHSWAP): $(OBJ_PUSHSWAP)
-	@echo "${GREEN} [ + ] ${NC}Creating push_swap object files"
-	@echo "${GREEN} [ + ] ${NC}Creating push_swap executable"
 	@$(CC) $(FLAGS) $(OBJ_PUSHSWAP)  -o $(EXEDIR)$(NAME_PUSHSWAP) \
 
 $(CHECKER_OBJDIR)/%.o: $(CHECKER_SRCDIR)/%.c
@@ -75,21 +75,16 @@ $(PUSHSWAP_OBJDIR)/%.o: $(PUSHSWAP_SRCDIR)/%.c
 	@mkdir -p $(PUSHSWAP_OBJDIR)
 	@$(CC) $(FLAGS) -c -o $@ $<
 
-.PHONY: clean
 
 clean:
-	@echo "${RED} [ - ] ${NC}Deleting checker object files"
 	@rm -rf $(CHECKER_OBJDIR)
-	@echo "${RED} [ - ] ${NC}Deleting push_swap object files"
 	@rm -rf $(PUSHSWAP_OBJDIR)
 
 fclean: clean
-	@echo "${RED} [ - ] ${NC}Deleting checker executable"
 	@rm -f $(EXEDIR)$(NAME_CHECKER)
-	@echo "${RED} [ - ] ${NC}Deleting push_swap executable"
 	@rm -f $(EXEDIR)$(NAME_PUSHSWAP)
 
 re: fclean all
 
-norm:
-	norminette -R CheckForbiddenSourceHeader  $(SRC)/*
+
+.PHONY: clean fclean re all bonus

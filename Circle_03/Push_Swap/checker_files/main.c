@@ -16,9 +16,8 @@ void	ft_init_stack(t_stack **stack_a, char **argv)
 	}
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-
 	char	*line;
 	int		r;
 	t_stack	*stack_a;
@@ -32,28 +31,15 @@ int		main(int argc, char **argv)
 		r = get_next_line(0, &line);
 		while (r > 0)
 		{
-			printf("%s\n", line);
-			/*
-			 *if ( ft_verifier_operaion(line))
-				ft_operation(stack_a, stack_b);
-			 */
+			ft_operation(&stack_a, &stack_b, line);
 			free(line);
 			r = get_next_line(0, &line);
 		}
-		printf("%s\n", line);
-		free(line);
 	}
-	/*
-	 * 작동이 끝난후, 함수로 ascending인지 학인후 ko ok출력
-	
-	*
-	 * if (!ft_check_vide(stack_b))
-	 *	printf("ko\n or error\n");
-	 * if (ft_check_ascending(&stack_a, ft_size_node(stack_a))
-	 *  printf("ok\n");
-	 * else
-	 *	printf("ko\n");
-	 
-	*/
+	if (ft_check_ascending(stack_a, ft_size_node(stack_a)))
+		ft_putstr("ok\n");
+	else
+		ft_putstr("ko\n");
+	ft_stack_free(stack_a);
 	return (0);
 }

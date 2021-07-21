@@ -1,4 +1,4 @@
-#ifndef	CHECKER_H
+#ifndef CHECKER_H
 # define CHECKER_H
 
 # include <stdio.h>
@@ -7,6 +7,8 @@
 # include <fcntl.h>
 # include <string.h>
 
+# define BUFFER_SIZE 1
+
 typedef struct s_stack
 {
 	int				num;
@@ -14,8 +16,37 @@ typedef struct s_stack
 	struct s_stack	*next;
 }				t_stack;
 
-#define  BUFFER_SIZE 1
+int			ft_size_node(t_stack *stack);
+/*
+ * instruction
+ */
+void		ft_sa(t_stack *stack_a);
+void		ft_sb(t_stack *stack_b);
+void		ft_ss(t_stack *stack_a, t_stack *stack_b);
+void		ft_pa(t_stack **stack_a, t_stack **stack_b);
+void		ft_pb(t_stack **stack_a, t_stack **stack_b);
+void		ft_ra(t_stack **stack_a);
+void		ft_rb(t_stack **stack_b);
+void		ft_rr(t_stack **stack_a, t_stack **stack_b);
+void		ft_rra(t_stack **stack_a);
+void		ft_rrb(t_stack **stack_b);
+void		ft_rrr(t_stack **stack_a, t_stack **stack_b);
 
+/*
+ * ft_push_pop.c
+ */
+t_stack		*ft_pop(t_stack **stack);
+void		ft_push(t_stack **stack, t_stack *node);
+
+/*
+ * ft_verifier_operation.c
+ */
+int			ft_strcmp(char *s1, char *s2);
+void		ft_operation(t_stack **stack_a, t_stack **stack_b, char *operation);
+
+/*
+ * get_next_line.c
+ */
 int			get_next_line(int fd, char **line);
 size_t		ft_strlen(const char *str);
 char		*ft_strdup(const char *src);
@@ -27,7 +58,6 @@ char		*ft_substr(const char *str, unsigned int start, size_t len);
  * ft_asc_des.c
  */
 int			ft_check_ascending(t_stack *stack, int size);
-int			ft_check_descending(t_stack *stack, int size);
 
 /*
  * ft_ajouter_node.c
