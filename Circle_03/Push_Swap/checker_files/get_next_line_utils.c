@@ -60,10 +60,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 int	ft_strchr(const char *s, int c)
 {
 	char	*ptr;
-	char	needle;
 	int		i;
 
-	needle = c;
 	ptr = (char *)s;
 	i = 0;
 	while (ptr[i] != '\0')
