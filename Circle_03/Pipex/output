@@ -1,1 +1,7 @@
-6
+/usr/local/bin/wc
+parsing cmd : wc
+parsing cmd : -l
+/usr/bin/wc
+parsing cmd : wc
+parsing cmd : -l
+       0

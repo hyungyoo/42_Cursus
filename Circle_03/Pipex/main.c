@@ -1,17 +1,13 @@
 #include "pipex.h"
 
-void	ft_print_error(char *str);
-int		*ft_pipe_fd(int *pipe_fd);
-void	ft_init(t_info *info, int argc, char **argv);
-
 /*
  * print error + exit()
  */
 void	ft_print_error(char *str)
 {
 	while (*str)
-		write(1, str++, 1);
-	exit(1);
+		write(2, str++, 1);
+	exit(0);
 }
 
 void	ft_free_parsing(char **cmd)
@@ -89,6 +85,42 @@ int	ft_size_parsing(char **str)
 	return (i);
 }
 
+int		ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int		s1_size;
+	int		s2_size;
+	char	*ret;
+	int		i;
+
+	i = 0;
+	s1_size = ft_strlen(s1);
+	s2_size = ft_strlen(s2);
+	ret = (char *)malloc(sizeof(char) * (s1_size + s2_size) + 1);
+	if (!ret)
+		return (NULL);
+	while (*s1)
+	{
+		ret[i++] = *s1;
+		s1++;
+	}
+	while (*s2)
+	{
+		ret[i++] = *s2;
+		s2++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
 /*
  * ft_execuve -> path + cmd + envp
  * 1. 인자로 들어온 envp를 돌아보며,  PATH가 있는지확인
@@ -105,16 +137,49 @@ void	ft_execve(char *cmd, char **cmd_parsing, char **envp)
 {
 	char	**path_parsing;
 	int		size_path_parsing;
+	int		i;
+	char	*path_br;
+	char	*path_br_cmd;
 
-	cmd = NULL;
-	cmd_parsing = NULL;
-
+	i = 0;
 	path_parsing = ft_path_parsing(envp);
 	size_path_parsing = ft_size_parsing(path_parsing);
-	/*
-	 *	1. access함수로 경로확인. 넣을때는 strdup으로 합쳐서 하나씩 명령어랑 합쳐야함
-	 *	2. 실행가능하다면 실행!
-	 */
+	while (i < size_path_parsing)
+	{
+		path_br = ft_strjoin(path_parsing[i], "/");
+		path_br_cmd = ft_strjoin(path_br, cmd);
+		
+		/*
+		 * test
+		 */
+		printf("%s\n", path_br_cmd);
+		int	j = 0;
+		while (cmd_parsing[j])
+			printf("parsing cmd : %s\n", cmd_parsing[j++]);
+		/*
+		 * test
+		 */
+		if (execve(path_br_cmd, cmd_parsing, envp) != -1)
+		{
+			/*
+			 * test								여기 들어오지를 못하는것같음!!!!!!!!!!!!!!!!!!!!!!!!
+			 *									access함수로 바꿔야하나 
+			 */
+			printf("i am in execve\n");
+			/*
+			 * test
+			 */
+			free(path_br);
+			free(path_br_cmd);
+			break ;
+		}
+		free(path_br);
+		free(path_br_cmd);
+		i++;
+	}
+	free(path_parsing);
+	if (i == size_path_parsing)
+		ft_print_error("No sush command found\n");
 }
 
 void	ft_pipe_out_parent(t_info *info, char *cmd2, char **envp)
@@ -139,7 +204,7 @@ void	ft_pipe_out_parent(t_info *info, char *cmd2, char **envp)
 			ft_print_error("commande nor found\n");
 	}
 	else
-		ft_execve(cmd2, cmd_parsing, envp);
+		ft_execve(cmd_parsing[0], cmd_parsing, envp);
 	ft_free_parsing(cmd_parsing);
 	close(info->pipe_fd[0]);
 	close(info->out_file);
@@ -172,7 +237,7 @@ void	ft_pipe_in_child(t_info *info, char *cmd1, char **envp)
 			ft_print_error("commande not found\n");
 	}		
 	else
-		ft_execve(cmd1, cmd_parsing, envp);
+		ft_execve(cmd_parsing[0], cmd_parsing, envp);
 	ft_free_parsing(cmd_parsing);
 	close(info->pipe_fd[1]);
 	close(info->in_file);
