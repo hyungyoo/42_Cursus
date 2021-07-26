@@ -1,7 +1,6 @@
-/usr/local/bin/wc
-parsing cmd : wc
-parsing cmd : -l
-/usr/bin/wc
-parsing cmd : wc
-parsing cmd : -l
-       0
+/usr/local/bin/grep
+parsing cmd : grep
+parsing cmd : z
+/usr/bin/grep
+parsing cmd : grep
+parsing cmd : z
