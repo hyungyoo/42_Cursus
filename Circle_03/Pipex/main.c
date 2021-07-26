@@ -48,12 +48,24 @@ void	ft_init(t_info *info, int argc, char **argv)
 	if ((info->out_file) == -1)
 		ft_print_error("failed to open the output file\n");
 }
+
 /*
+ * ft_execuve -> path + cmd + envp
+ * 1. 인자로 들어온 envp를 돌아보며,  PATH가 있는지확인
+ * 2. 찾았다면, 그 PATH= 까지는 날려버리고, ':'를 기준으로 parsing
+ *
+ * 1 과 2는
+ * char		**ft_path 함수로, parsing한 PATH를 반환
+ *
+ * 3. access 함수로, 실제로 가능한 실행파일 경로인지를 확인 후
+ * 4. execve 함수 실행
+ * 없다면 command not found!
+ */
 void	ft_execve(char *cmd, char **cmd_parsing, char **envp)
 {
 	
 }
-*/
+
 void	ft_pipe_out_parent(t_info *info, char *cmd2, char **envp)
 {
 	char	**cmd_parsing;
@@ -76,10 +88,8 @@ void	ft_pipe_out_parent(t_info *info, char *cmd2, char **envp)
 		if (execve(cmd_parsing[0], cmd_parsing, envp) == -1)
 			ft_print_error("commande nor found\n");
 	}
-	/*
 	else
 		ft_execve(cmd, cmd_parsing, envp);
-	*/
 	ft_free_parsing(cmd_parsing);
 	close(info->pipe_fd[0]);
 	close(info->out_file);
@@ -112,10 +122,7 @@ void	ft_pipe_in_child(t_info *info, char *cmd1, char **envp)
 			ft_print_error("commande not found\n");
 	}		
 	else
-		printf("출력");
-	/*
 		ft_execve(cmd, cmd_parsing, envp);
-		*/
 	ft_free_parsing(cmd_parsing);
 	close(info->pipe_fd[1]);
 	close(info->in_file);
