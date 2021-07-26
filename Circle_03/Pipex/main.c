@@ -49,6 +49,46 @@ void	ft_init(t_info *info, int argc, char **argv)
 		ft_print_error("failed to open the output file\n");
 }
 
+int	ft_strncmp(char *s1, char *s2, int	size)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && i < size)
+	{
+		if (s1[i] != s2[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	**ft_path_parsing(char **envp)
+{
+	int		i;
+	char	**path_parsing;
+	
+	i = 0;
+	while (envp[i])
+	{
+		if (!(ft_strncmp(envp[i], "PATH=", 5)))
+			break;
+		i++;
+	}
+	path_parsing = ft_split(&envp[i][5]);
+	return (path_parsing);
+}
+
+int	ft_size_parsing(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 /*
  * ft_execuve -> path + cmd + envp
  * 1. 인자로 들어온 envp를 돌아보며,  PATH가 있는지확인
@@ -63,13 +103,23 @@ void	ft_init(t_info *info, int argc, char **argv)
  */
 void	ft_execve(char *cmd, char **cmd_parsing, char **envp)
 {
-	
+	char	**path_parsing;
+	int		size_path_parsing;
+
+	cmd = NULL;
+	cmd_parsing = NULL;
+
+	path_parsing = ft_path_parsing(envp);
+	size_path_parsing = ft_size_parsing(path_parsing);
+	/*
+	 *	1. access함수로 경로확인. 넣을때는 strdup으로 합쳐서 하나씩 명령어랑 합쳐야함
+	 *	2. 실행가능하다면 실행!
+	 */
 }
 
 void	ft_pipe_out_parent(t_info *info, char *cmd2, char **envp)
 {
 	char	**cmd_parsing;
-
 	/*
 	 * test
 	 */
@@ -89,7 +139,7 @@ void	ft_pipe_out_parent(t_info *info, char *cmd2, char **envp)
 			ft_print_error("commande nor found\n");
 	}
 	else
-		ft_execve(cmd, cmd_parsing, envp);
+		ft_execve(cmd2, cmd_parsing, envp);
 	ft_free_parsing(cmd_parsing);
 	close(info->pipe_fd[0]);
 	close(info->out_file);
@@ -122,7 +172,7 @@ void	ft_pipe_in_child(t_info *info, char *cmd1, char **envp)
 			ft_print_error("commande not found\n");
 	}		
 	else
-		ft_execve(cmd, cmd_parsing, envp);
+		ft_execve(cmd1, cmd_parsing, envp);
 	ft_free_parsing(cmd_parsing);
 	close(info->pipe_fd[1]);
 	close(info->in_file);
@@ -136,7 +186,6 @@ int	main(int argc, char **argv, char **envp)
 
 	pid = fork();
 	ft_init(&info, argc, argv);
-	printf("%d\n", pid);
 	if (pid > 0)
 	{
 		/*
