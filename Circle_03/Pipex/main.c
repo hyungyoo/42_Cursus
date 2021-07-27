@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 14:17:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/27 14:17:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/27 14:19:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ int	main(int argc, char **argv, char **envp)
 		ft_print_error("failed to open pipe\n");
 	in_file = open(argv[1], O_RDONLY);
 	out_file = open(argv[4], O_WRONLY);
-	if ((in_file) == -1 | (out_file) == -1)
-		ft_print_error("failed to open file\n");
+	if ((in_file) == -1)
+		ft_print_error("failed to open in_file\n");
+	else if ((out_file) == -1)
+		ft_print_error("failed to open out_file\n");
 	pid = fork();
 	if (pid > 0)
 	{
