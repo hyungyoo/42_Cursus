@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/27 14:17:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/27 14:29:39 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/07/27 16:19:45 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/07/27 16:20:22 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ void	ft_init(int argc, int	**pipe_fd)
 		ft_print_error("error malloc\n");
 }
 
+int	ft_open_file(char *file_name, int mode)
+{
+	int	fd;
+
+	if (mode == 1)
+		fd = open(file_name, O_RDONLY);
+	else
+		fd = open(file_name, O_CREAT | O_WRONLY
+				| O_TRUNC | S_IRUSR | S_IWUSR | S_IWGRP | S_IROTH);
+	return (fd);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	pid_t	pid;
@@ -79,15 +91,18 @@ int	main(int argc, char **argv, char **envp)
 	ft_init(argc, &pipe_fd);
 	if (pipe(pipe_fd) == -1)
 		ft_print_error("failed to open pipe\n");
-	in_file = open(argv[1], O_RDONLY);
-	out_file = open(argv[4], O_WRONLY);
+	in_file = ft_open_file(argv[1], 1);
+	out_file = ft_open_file(argv[4], 0);
 	if ((in_file) == -1)
 		ft_print_error("failed to open in_file\n");
 	else if ((out_file) == -1)
 		ft_print_error("failed to open out_file\n");
 	pid = fork();
 	if (pid > 0)
+	{
 		ft_pipe_out_parent(pipe_fd, out_file, argv[3], envp);
+		waitpid(pid, NULL, 0);
+	}
 	else if (pid == 0)
 		ft_pipe_in_child(pipe_fd, in_file, argv[2], envp);
 	else
