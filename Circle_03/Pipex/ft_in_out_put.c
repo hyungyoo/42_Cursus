@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 14:16:52 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/27 14:16:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/27 14:29:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_pipe_out_parent(int *pipe_fd, int out_file, char *cmd2, char **envp)
 {
 	char	**cmd_parsing;
 
+	wait(NULL);
 	close(pipe_fd[1]);
 	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
 		ft_print_error("failed to connect\n");
