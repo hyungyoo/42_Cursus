@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 16:19:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/27 16:20:22 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/27 16:39:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_open_file(char *file_name, int mode)
 		fd = open(file_name, O_RDONLY);
 	else
 		fd = open(file_name, O_CREAT | O_WRONLY
-				| O_TRUNC | S_IRUSR | S_IWUSR | S_IWGRP | S_IROTH);
+				| O_TRUNC | S_IRUSR | S_IWGRP | S_IROTH);
 	return (fd);
 }
 
