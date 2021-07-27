@@ -216,11 +216,11 @@ void	ft_pipe_in_child(int *pipe_fd, int in_file, char *cmd1, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	pid_t	pid;
-	int	in_file;
-	int	out_file;
-	int	*pipe_fd;
 	int		status;
+	pid_t	pid;
+	int		in_file;
+	int		out_file;
+	int		*pipe_fd;
 
 	if (argc < 5)
 		ft_print_error("to use : ./pipex file1 cmd1 cmd2 fil2\n");
