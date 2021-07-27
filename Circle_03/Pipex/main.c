@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 16:19:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/27 16:39:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/27 23:48:58 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,18 @@ int	main(int argc, char **argv, char **envp)
 	if (pipe(pipe_fd) == -1)
 		ft_print_error("failed to open pipe\n");
 	in_file = ft_open_file(argv[1], 1);
-	out_file = ft_open_file(argv[4], 0);
 	if ((in_file) == -1)
 		ft_print_error("failed to open in_file\n");
-	else if ((out_file) == -1)
+	out_file = ft_open_file(argv[4], 0);
+	if ((out_file) == -1)
 		ft_print_error("failed to open out_file\n");
 	pid = fork();
 	if (pid > 0)
-	{
 		ft_pipe_out_parent(pipe_fd, out_file, argv[3], envp);
-		waitpid(pid, NULL, 0);
-	}
 	else if (pid == 0)
 		ft_pipe_in_child(pipe_fd, in_file, argv[2], envp);
 	else
 		ft_print_error("failed to fork the process\n");
+	free(pipe_fd);
 	return (0);
 }
