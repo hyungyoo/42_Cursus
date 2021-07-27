@@ -9,13 +9,18 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-typedef struct s_info
-{
-	int		in_file;
-	int		out_file;
-	int		*pipe_fd;
-}				t_info;
-
+void			ft_execve(char *cmd, char **cmd_parsing, char **envp);
 char			**ft_split(char *str);
+char			*ft_strjoin(char *s1, char *s2);
+int				ft_strlen(char *str);
+int				ft_strncmp(char *s1, char *s2, int	size);
+void			ft_print_error(char *str);
+int				ft_size_parsing(char **str);
+char			**ft_path_parsing(char **envp);
+void			ft_free_parsing(char **cmd);
+void			ft_pipe_in_child(int *pipe_fd,
+					int in_file, char *cmd1, char **envp);
+void			ft_pipe_out_parent(int *pipe_fd,
+					int out_file, char *cmd2, char **envp);
 
 #endif
