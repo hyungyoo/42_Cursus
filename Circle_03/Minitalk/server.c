@@ -31,13 +31,13 @@ void	ft_signal_handler(int signal)
 	}
 }
 
-int		main(void)
+int	main(void)
 {
 	char	*pid;
 	int		get_pid;
 
 	get_pid = getpid();
-	if (!(100 <  get_pid && get_pid < 100000))
+	if (!(100 < get_pid && get_pid < 100000))
 		perror("pid out of range");
 	pid = ft_itoa(get_pid);
 	ft_putstr(pid);

@@ -6,13 +6,13 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 04:22:12 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 04:25:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 04:43:01 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int				ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
 	int					sign;
 	long long			num;
@@ -39,7 +39,7 @@ int				ft_atoi(char *str)
 	return (num * sign);
 }
 
-static int		get_len(long long n)
+static int	get_len(long long n)
 {
 	int		len;
 
@@ -59,7 +59,7 @@ static int		get_len(long long n)
 	return (len);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	long long	num;
 	char		*str;
@@ -67,7 +67,8 @@ char			*ft_itoa(int n)
 
 	num = n;
 	len = get_len(num);
-	if (!(str = (char *)malloc(len + 1)))
+	str = (char *)malloc(len + 1);
+	if (!str)
 		return (0);
 	if (num == 0)
 		str[0] = '0';
@@ -85,7 +86,7 @@ char			*ft_itoa(int n)
 	return (str);
 }
 
-size_t			ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t		i;
 
