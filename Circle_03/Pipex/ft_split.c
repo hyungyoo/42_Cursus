@@ -5,75 +5,97 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/27 14:17:06 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/27 14:17:07 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/07/29 01:49:32 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/07/29 02:14:07 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	ft_isspace(char c)
+static void	ft_bzero(void *s, size_t n)
 {
-	return (c == ' ' || c == ':' || c == '\t');
+	char	*ptr;
+	size_t	i;
+
+	if (!n)
+		return ;
+	ptr = s;
+	i = 0;
+	while (i < n)
+		*(ptr + i++) = 0;
 }
 
-int	count_words(char *str)
+static char	*ft_strnew(size_t size)
+{
+	char	*str;
+
+	str = (char *)malloc(sizeof(char) * size + 1);
+	if (!str)
+		return (NULL);
+	ft_bzero(str, size + 1);
+	return (str);
+}
+
+static int	ft_countwords(char const *str, char c)
 {
 	int	count;
+	int	i;
 
+	i = 0;
 	count = 0;
-	while (*str)
+	while (str[i])
 	{
-		while (*str && ft_isspace(*str))
-			str++;
-		if (*str && !ft_isspace(*str))
-		{
+		while (str[i] == c)
+			i++;
+		if (str[i] != c && str[i] != '\0')
 			count++;
-			while (*str && !ft_isspace(*str))
-				str++;
-		}
+		while (str[i] != c && str[i] != '\0')
+			i++;
 	}
 	return (count);
 }
 
-char	*malloc_word(char *str)
+static int	get_word_len(char const *str, char c)
 {
-	char	*word;
-	int		i;
+	int	i;
+	int	len;
 
 	i = 0;
-	while (str[i] && !ft_isspace(str[i]))
+	len = 0;
+	while (str[i] == c)
 		i++;
-	word = (char *)malloc(sizeof(char) * (i + 1));
-	i = 0;
-	while (str[i] && !ft_isspace(str[i]))
+	while (str[i] != c && str[i] != '\0')
 	{
-		word[i] = str[i];
 		i++;
+		len++;
 	}
-	word[i] = '\0';
-	return (word);
+	return (len);
 }
 
-char	**ft_split(char *str)
+char	**ft_split(char const *s, char c)
 {
-	char	**arr;
 	int		i;
+	int		j;
+	int		k;
+	char	**str2;
 
-	arr = (char **)malloc(sizeof(char *) * (count_words(str) + 1));
-	i = 0;
-	while (*str)
+	str2 = (char **)malloc(sizeof(*str2) * (ft_countwords(s, c) + 1));
+	if (!s || !str2)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (++i < ft_countwords(s, c))
 	{
-		while (*str && ft_isspace(*str))
-			str++;
-		if (*str && !ft_isspace(*str))
-		{
-			arr[i] = malloc_word(str);
-			i++;
-			while (*str && !ft_isspace(*str))
-				str++;
-		}
+		k = 0;
+		str2[i] = ft_strnew(get_word_len(&s[j], c) + 1);
+		if (!str2)
+			str2[i] = NULL;
+		while (s[j] == c)
+			j++;
+		while (s[j] != c && s[j])
+			str2[i][k++] = s[j++];
+		str2[i][k] = '\0';
 	}
-	arr[i] = NULL;
-	return (arr);
+	str2[i] = 0;
+	return (str2);
 }

@@ -1,10 +1,10 @@
 NAME = pipex
 
 SRCS = main.c \
-	   ft_split.c \
 	   ft_in_out_put.c \
-	   ft_parsing.c \
+	   ft_libft.c  \
 	   ft_utils.c \
+	   ft_split.c \
 
 OBJS = ${SRCS:.c=.o}
 CC = gcc
