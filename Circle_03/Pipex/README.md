@@ -68,3 +68,10 @@ int	main(void)
 # 구현 순서
 
 1. fork함수로 pid를 받아, 부모프로세스 , 자식프로세스 만들
+2. pipe_fd 로 두개의 스트림 디스크립터를 받아 연결!
+3. 명령어가 /로 시작할때, 아닐때 구분 (주소를 가지고있는지)
+4. envp에서 주소를 가져온후에, :로 parsing후에, 명령어와 strjoin 후에, access함수확인
+5. 있다면, execve 함수로, 아니면 error 출력
+
+# Tester Pipex
+https://github.com/vfurmane/pipex-tester.git
