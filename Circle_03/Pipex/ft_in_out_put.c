@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 02:38:49 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 02:38:50 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 03:45:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	ft_pipex(t_info *info)
 	if (pid == 0)
 		ft_execute_parent(info);
 	close(info->pipe_fd[0]);
-	waitpid(info->pipe_fd[0], &(info->fd_status), 0);
-	waitpid(info->pipe_fd[1], &(info->fd_status), 0);
+	waitpid(info->pipe_fd[0], &(info->fd_status), WNOHANG);
+	waitpid(info->pipe_fd[1], &(info->fd_status), WNOHANG);
 }
