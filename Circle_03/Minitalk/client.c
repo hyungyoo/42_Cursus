@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 07:35:54 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 07:35:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 07:42:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ft_envoyer_message(int server_pid, char *message)
 {
 	int	i;
 
-	i = -1;
-	while (message[++i])
-		ft_traitement_char(server_pid, message[i]);
+	i = 0;
+	while (message[i])
+		ft_traitement_char(server_pid, message[i++]);
 }
 
 int	main(int argc, char **argv)
