@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 02:39:27 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 17:14:04 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 18:05:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 void	ft_check_pipex_error(t_info **info)
 {
 	if ((*info)->fd_input < 0)
-		ft_print_error(strerror(errno), 0, *info);
+	{
+		free(*info);
+		ft_put_error_str(strerror(errno), 0);
+	}
 	if ((*info)->fd_output < 0)
-		ft_print_error(strerror(errno), 0, *info);
+	{
+		free(*info);
+		ft_put_error_str(strerror(errno), 0);
+	}
 	(*info)->cmd1_parsing = ft_split((*info)->cmd1, ' ');
 	ft_cmd_path(info, 1);
 	(*info)->cmd2_parsing = ft_split((*info)->cmd2, ' ');
@@ -26,12 +32,12 @@ void	ft_check_pipex_error(t_info **info)
 
 void	ft_double_free(char **split)
 {
-		int	i;
+	int	i;
 
-		i = 0;
-		while (split[i])
-				free(split[i++]);
-		free(split);
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
 }
 
 void	ft_malloc_free(t_info *info)
@@ -40,7 +46,6 @@ void	ft_malloc_free(t_info *info)
 	ft_double_free(info->cmd2_parsing);
 	free(info->cmd1);
 	free(info->cmd2);
-	close(info->pipe_fd[0]);
 	close(info->pipe_fd[1]);
 	close(info->fd_input);
 	close(info->fd_output);
@@ -55,11 +60,10 @@ void	ft_put_error_str(char *str, int err)
 	exit(err);
 }
 
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	*info;
-	int	status;
+	int		status;
 
 	info = NULL;
 	if (argc != 5)

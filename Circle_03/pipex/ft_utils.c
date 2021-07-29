@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/29 02:39:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 17:52:10 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/07/29 18:00:19 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/07/29 18:00:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ int	ft_verifier_paths(char *path, char **cmd, char *path_parsing)
 
 void	ft_cmd_path_print_error(t_info **info, int cmd_n)
 {
-		ft_double_free((*info)->cmd1_parsing);
-		if  (cmd_n == 2)
-		{
-			free((*info)->cmd1);
-			ft_double_free((*info)->cmd2_parsing);
-		}
-		free((*info));
-		ft_put_error_str("Command not found.", 127);
+	ft_double_free((*info)->cmd1_parsing);
+	if (cmd_n == 2)
+	{
+		free((*info)->cmd1);
+		ft_double_free((*info)->cmd2_parsing);
+	}
+	free((*info));
+	ft_put_error_str("Command not found.", 127);
 }
 
 void	ft_cmd_path(t_info **info, int cmd_n)
