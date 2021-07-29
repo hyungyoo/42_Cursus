@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 04:22:12 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 04:22:13 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 04:25:24 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int				ft_atoi(char *str)
 	while (*str)
 	{
 		if (!(*str >= '0' && *str <= '9'))
-			ft_error("It's not integer");
+			exit(1);
 		num *= 10;
 		num += (*(str++) - '0');
 	}
 	if (num * sign > 2147483647)
-		ft_error("Integer out of range");
+		exit(1);
 	if (num * sign < -2147483648)
-		ft_error("Integer out of range");
+		exit(1);
 	return (num * sign);
 }
 

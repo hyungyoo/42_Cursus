@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 03:18:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 04:20:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 04:33:01 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_traitement_char(int server_pid, char c)
 	int	count;
 
 	count = 8;
-	while (--count)
+	while (count--)
 	{
 		if((c >> count & 1) == 0)
 			kill(server_pid, SIGUSR1);

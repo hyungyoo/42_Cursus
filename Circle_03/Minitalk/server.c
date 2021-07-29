@@ -11,7 +11,7 @@ void	ft_putstr(char *str)
 
 	i = 0;
 	while (str[i])
-		ft_putchar(str[i]);
+		ft_putchar(str[i++]);
 }
 
 void	ft_signal_handler(int signal)
@@ -21,7 +21,7 @@ void	ft_signal_handler(int signal)
 
 	count += 1;
 	c = c << 1;
-	if (signal == SIGUSR1)
+	if (signal == SIGUSR2)
 		c += 1;
 	if (count == 8)
 	{
@@ -43,12 +43,12 @@ int		main(void)
 	ft_putstr(pid);
 	ft_putchar('\n');
 	free(pid);
-	signal(SIGUSR1, (ft_signal_handler));
+	signal(SIGUSR1, ft_signal_handler);
 	/*
 	if (signal_1 == -1)
 		perror("SIGSR1 error");
 	*/
-	signal(SIGUSR2, (ft_signal_handler));
+	signal(SIGUSR2, ft_signal_handler);
 	/*
 	if (signal_1 == -1)
 		perror("SIGSR2 error");
