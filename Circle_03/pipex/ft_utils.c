@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 18:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 20:57:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 23:55:10 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ void	ft_cmd_path_print_error(t_info **info, int cmd_n)
 		free((*info)->cmd1);
 		ft_double_free((*info)->cmd2_parsing);
 		free(*info);
-		ft_put_error_str("Command not found cmd2.", 1);
+		ft_put_error_str("Command not found cmd.", 1);
 	}
 	else if (cmd_n == 1)
 	{
 		free(*info);
-		ft_put_error_str("Command not found cmd1.", 1);
+		ft_put_error_str("Command not found cmd.", 1);
 	}
 }
 
