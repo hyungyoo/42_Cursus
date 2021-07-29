@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/29 07:36:00 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/07/29 07:36:01 by hyungyoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 void	ft_putchar(char c)
@@ -43,17 +55,11 @@ int	main(void)
 	ft_putstr(pid);
 	ft_putchar('\n');
 	free(pid);
-	signal(SIGUSR1, ft_signal_handler);
-	/*
-	if (signal_1 == -1)
-		perror("SIGSR1 error");
-	*/
-	signal(SIGUSR2, ft_signal_handler);
-	/*
-	if (signal_1 == -1)
-		perror("SIGSR2 error");
-	*/
 	while (42)
+	{
+		signal(SIGUSR1, ft_signal_handler);
+		signal(SIGUSR2, ft_signal_handler);
 		pause();
+	}
 	return (0);
 }
