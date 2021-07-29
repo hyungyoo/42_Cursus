@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 18:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 18:00:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 20:20:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,29 @@ int	ft_verifier_paths(char *path, char **cmd, char *path_parsing)
 	return (0);
 }
 
+int	ft_return_path(t_info **info)
+{
+	int		i;
+	char	*path;
+	char	**path_parsing;
+	int		ret;
+
+	path = ft_get_path((*info)->envp);
+	path_parsing = ft_split(path, ':');
+	i = -1;
+	while (path_parsing[++i] && !ret)
+	{
+		ret = ft_verifier_paths(path_parsing[i], &(*info)->cmd2,
+			(*info)->cmd2_parsing[0]);
+	}
+	free(path);
+	i = 0;
+	while (path_parsing[i])
+		free(path_parsing[i++]);
+	free(path_parsing);
+	return (ret);
+}
+
 void	ft_cmd_path_print_error(t_info **info, int cmd_n)
 {
 	ft_double_free((*info)->cmd1_parsing);
@@ -57,9 +80,15 @@ void	ft_cmd_path_print_error(t_info **info, int cmd_n)
 	{
 		free((*info)->cmd1);
 		ft_double_free((*info)->cmd2_parsing);
+		ft_put_error_str("Command not found cmd2.", 1);
 	}
-	free((*info));
-	ft_put_error_str("Command not found.", 127);
+	else if (cmd_n == 1)
+	{
+		if (!ft_return_path(info))
+			ft_put_error_str("Command not found cmd2.", 1);
+		ft_put_error_str("Command not found cmd1.", 1);
+	}
+	free(*info);
 }
 
 void	ft_cmd_path(t_info **info, int cmd_n)
