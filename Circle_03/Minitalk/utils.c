@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jiwchoi <jiwchoi@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 15:36:34 by jiwchoi           #+#    #+#             */
-/*   Updated: 2021/06/23 20:21:04 by jiwchoi          ###   ########.fr       */
+/*   Created: 2021/07/29 04:22:12 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/07/29 04:22:13 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
-void			ft_error(char *errstr)
-{
-	write(1, "Error : ", 8);
-	write(1, errstr, ft_strlen(errstr));
-	write(1, "\n", 1);
-	exit(1);
-}
 
 int				ft_atoi(char *str)
 {
