@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 02:39:27 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/07/29 18:05:41 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/07/29 21:42:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	ft_put_error_str(char *str, int err)
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	*info;
-	int		status;
 
 	info = NULL;
 	if (argc != 5)
@@ -78,9 +77,6 @@ int	main(int argc, char **argv, char **envp)
 	info->cmd2 = argv[3];
 	ft_check_pipex_error(&info);
 	ft_pipex(info);
-	status = info->fd_status;
 	ft_malloc_free(info);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
 	return (0);
 }
