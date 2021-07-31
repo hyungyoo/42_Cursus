@@ -73,9 +73,10 @@ int	main(void)
 	img.img = mlx_xpm_file_to_image(mlx.mlx, "./img/test.xpm", &img_width, &img_height);
 	if (img.img == NULL)
 		printf("faile\n");
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 0, 0);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 100, 400);
 
 	mlx_loop(mlx.mlx);
 	printf("haha\n");
+	printf("w: %d, h: %d\n", img_width, img_height);
 	return (0);
 }
