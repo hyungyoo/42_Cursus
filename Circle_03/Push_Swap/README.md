@@ -1,4 +1,7 @@
 # push_swap
+	1. stack_a, stack_b
+	2. instruction : sa, sb, ra, rb, pa, pb, rra, rrb, ss, rr, rrr
+
 # 구현 과정
 	1. argv로 들어온 인자들을 구분
 		동시에 인자들이 숫자 또는 ' '인지 확인, 아닐시 exit();
