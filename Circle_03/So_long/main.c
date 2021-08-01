@@ -37,10 +37,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 int	main(void)
 {
 	t_mlx	mlx;
-	t_data	data;
+	//t_data	data;
 	t_data	img;
+	t_data	deux;
 
-	int	i = 0;
+	//int	i = 0;
 	mlx.count = 0;
 	int	img_width;
 	int img_height;
@@ -49,17 +50,17 @@ int	main(void)
 	mlx.mlx_win = mlx_new_window(mlx.mlx, 500, 500, "test"); // window_ptr
 	
 	// for pixel, initialize img, addr etc
-	data.img = mlx_new_image(mlx.mlx, 500, 500); // create image
-	data.addr = mlx_get_data_addr(data.img, &data.bit_per_pixel, &data.line_length, &data.endian);
+	//data.img = mlx_new_image(mlx.mlx, 500, 500); // create image
+	//data.addr = mlx_get_data_addr(data.img, &data.bit_per_pixel, &data.line_length, &data.endian);
 
 	// draw with funtion "my_mlx_pixel_put"
-	while (i < 500)
-	{
-		my_mlx_pixel_put(&data, i, i, 0x00FF0000);
-		i++;
-	}
+	//while (i < 500)
+	//{
+	//	my_mlx_pixel_put(&data, i, i, 0x00FF0000);
+	//	i++;
+	//}
 	// put image to window
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, data.img, 0, 0);
+	//mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, data.img, 0, 0);
 
 	// key event + X11 event types , + keymask
 	mlx_hook(mlx.mlx_win, 2, 1L<<0, &keypress_event, &mlx);
@@ -73,8 +74,16 @@ int	main(void)
 	img.img = mlx_xpm_file_to_image(mlx.mlx, "./img/test.xpm", &img_width, &img_height);
 	if (img.img == NULL)
 		printf("faile\n");
+	deux.img = mlx_xpm_file_to_image(mlx.mlx, "./img/sol.xpm", &img_width, &img_height);
+	if (deux.img == NULL)
+		printf("faile\n");
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 100, 400);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 300, 300);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, deux.img, 300, 300);
 
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, deux.img, 400, 400);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 400, 400);
+	
 	mlx_loop(mlx.mlx);
 	printf("haha\n");
 	printf("w: %d, h: %d\n", img_width, img_height);
