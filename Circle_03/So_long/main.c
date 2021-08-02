@@ -14,6 +14,9 @@ typedef struct	s_mlx
 	void	*mlx;
 	void	*mlx_win;
 	int		count;
+	int		px;
+	int		py;
+	t_data k;
 }				t_mlx;
 
 int	keypress_event(int keycode, t_mlx *mlx)
@@ -23,149 +26,102 @@ int	keypress_event(int keycode, t_mlx *mlx)
 	printf("keycode : %d\n", keycode);
 	if (keycode == 65307)
 		exit(0);
+	else if (keycode == 97)
+	{
+		mlx->px += 32;
+		printf("%d\n", mlx->py);
+	}
+	else if (keycode == 100)
+	{
+		mlx->px -= 32;
+		printf("%d\n", mlx->px);
+	}
+
 	return (0);
 }
-/*
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char *dst;
 
-	dst = data->addr + (y *data->line_length + x * (data->bit_per_pixel / 8));
-	*(unsigned int*)dst = color;
+int	ft(t_mlx *mlx)
+{// ici
+	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->k.img, mlx->px, mlx->py);
+	return (0);
 }
-*/
+
+
 int	main(void)
 {
 	t_mlx	mlx;
-	//t_data	data;
 	t_data	deux;
-	t_data	k;
+	//t_data	k;
 
+	mlx.px = 100;
+	mlx.py = 100;
 	int	i = 0;
+	int	j;
 	mlx.count = 0;
 	int	img_width;
 	int img_height;
 
+	printf("avant mlx\n");
+
 	mlx.mlx = mlx_init();	// mlx_void ptr
 	mlx.mlx_win = mlx_new_window(mlx.mlx, 1000, 1000, "test"); // window_ptr
-	k.img = mlx_new_image(mlx.mlx, 50, 50);
+	
+	printf("mlx_xpm_to_file\n");
+
 	deux.img = mlx_xpm_file_to_image(mlx.mlx, "./img/sol.xpm", &img_width, &img_height);
 	if (deux.img == NULL)
 		printf("faile\n");
 
-	k.img = mlx_xpm_file_to_image(mlx.mlx, "./img/k.xpm", &img_width, &img_height);
-	if (k.img == NULL)
+	mlx.k.img = mlx_xpm_file_to_image(mlx.mlx, "./img/k.xpm", &img_width, &img_height);
+	if (mlx.k.img == NULL)
 		printf("faile\n");
 	
 	deux.addr = (int*)mlx_get_data_addr(deux.img, &deux.bit_per_pixel, &deux.line_length, &deux.endian);
-	k.addr = (int*)mlx_get_data_addr(k.img, &k.bit_per_pixel, &k.line_length, &k.endian);
-	int j = 0;
+	mlx.k.addr = (int*)mlx_get_data_addr(mlx.k.img, &mlx.k.bit_per_pixel, &mlx.k.line_length, &mlx.k.endian);
+	
+
 	i = 0;
-
-	printf("%d\n", k.line_length);
-	while (i < img_width)
-	{
-		j = 0;
-		while (j < img_height)
-		{
-			printf("%d, i = %d, j = %d, total : %d\n", k.addr[i * k.line_length + j], i, j, (i * k.line_length + j));
-			j++;
-		}
-		i++;
-	}
-
-
-	
-	i = 0;
-	j = 0;
-
-	int b = k.addr[i * k.line_length + j];
-	while (i < img_width)
-	{
-		j = 0;
-		while (j < img_height)
-		{
-			if (k.addr[i * img_width + j] == b)
-				k.addr[i * img_width + j] = deux.addr[i * img_width + j];
-			j++;
-		}
-		i++;
-	}
-	
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, deux.img, 0, 0);
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, k.img, 0, 0);
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, deux.img, 60, 60);
-	/*
-	// for pixel, initialize img, addr etc
-	//k.img = mlx_new_image(mlx.mlx, 32, 32); // create image
-	//k.addr = mlx_get_data_addr(k.img, &k.bit_per_pixel, &k.line_length, &k.endian);
-
-	// draw with funtion "my_mlx_pixel_put"
-	//while (i < 500)
-	//{
-	//	my_mlx_pixel_put(&data, i, i, 0x00FF0000);
-	//	i++;
-	//}
-	// put image to window
-	//mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, data.img, 0, 0);
-
-	// key event + X11 event types , + keymask
-	mlx_hook(mlx.mlx_win, 2, 1L<<0, &keypress_event, &mlx);
-
-
-*	c'est a dire, pour afficher "sprite", 
-*	mlx_xpm_file_to_image--> return img ptr,
-*	avec img_ptr, mlx_put_image_to_window
-
-	// images, xpm files
-	k.img = mlx_xpm_file_to_image(mlx.mlx, "./img/k.xpm", &img_width, &img_height);
-	if (k.img == NULL)
-		printf("faile\n");
-	
-	deux.img = mlx_xpm_file_to_image(mlx.mlx, "./img/sol.xpm", &img_width, &img_height);
-	if (deux.img == NULL)
-		printf("faile\n");
-
-	
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, k.img, 300, 300);
-	k.addr = (int*)mlx_get_data_addr(k.img, &k.bit_per_pixel, &k.line_length, &k.endian);
-	i = 0;
-	int j;
-
-	while (i < img_width)
-	{
-		j = 0;
-		while (j < img_height)
-		{
-			if (k.addr[i * k.line_length + j] == 0)
-				k.addr[i * k.line_length  + j] = 0xFFFFFF;
-			j++;
-		}
-		i++;
-	}
-
-
-	
-	int h = 0;
-	//int j;
-
-	while (h < 600)
+	while (i < 600)
 	{
 		j = 0;
 		while (j < 600)
 		{
-			if (!(j == 64 && h == 64))
-				mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, deux.img, h, j);
+			mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, deux.img, i, j);
 			j += 32;
 		}
-		h += 32;
+		i += 32;
 	}
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, k.img, 400, 400);
-	*/
-	mlx_loop(mlx.mlx);
 
-	printf("haha\n");
-	printf("w: %d, h: %d\n", img_width, img_height);
+	printf("addr chage\n");
+
+	i = 0;
+	j = 0;
+	int b = mlx.k.addr[0];
+	while (i < img_width)
+	{
+		j = 0;
+		while (j < img_height)
+		{
+			if (mlx.k.addr[i * img_width + j] == b)
+				mlx.k.addr[i * img_width + j] = deux.addr[i * img_width + j];
+			j++;
+		}
+		i++;
+	}
 	
+	printf("mlx_hook\n");
+
+
+	printf("put image\n");
+	
+	//mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, k.img, mlx.px, mlx.py);
+	
+	//ft(t_mlx *mlx)
+	printf("loop\n");
+
+	mlx_hook(mlx.mlx_win, 2, 1L>>0, &keypress_event, &mlx);
+
+	mlx_loop_hook(mlx.mlx, &ft, &mlx);
+	mlx_loop(mlx.mlx);
 	return (0);
 }
