@@ -48,7 +48,54 @@ int	main(void)
 
 	mlx.mlx = mlx_init();	// mlx_void ptr
 	mlx.mlx_win = mlx_new_window(mlx.mlx, 1000, 1000, "test"); // window_ptr
+	k.img = mlx_new_image(mlx.mlx, 50, 50);
+	deux.img = mlx_xpm_file_to_image(mlx.mlx, "./img/sol.xpm", &img_width, &img_height);
+	if (deux.img == NULL)
+		printf("faile\n");
+
+	k.img = mlx_xpm_file_to_image(mlx.mlx, "./img/k.xpm", &img_width, &img_height);
+	if (k.img == NULL)
+		printf("faile\n");
 	
+	deux.addr = (int*)mlx_get_data_addr(deux.img, &deux.bit_per_pixel, &deux.line_length, &deux.endian);
+	k.addr = (int*)mlx_get_data_addr(k.img, &k.bit_per_pixel, &k.line_length, &k.endian);
+	int j = 0;
+	i = 0;
+
+	printf("%d\n", k.line_length);
+	while (i < img_width)
+	{
+		j = 0;
+		while (j < img_height)
+		{
+			printf("%d, i = %d, j = %d, total : %d\n", k.addr[i * k.line_length + j], i, j, (i * k.line_length + j));
+			j++;
+		}
+		i++;
+	}
+
+
+	
+	i = 0;
+	j = 0;
+
+	int b = k.addr[i * k.line_length + j];
+	while (i < img_width)
+	{
+		j = 0;
+		while (j < img_height)
+		{
+			if (k.addr[i * img_width + j] == b)
+				k.addr[i * img_width + j] = deux.addr[i * img_width + j];
+			j++;
+		}
+		i++;
+	}
+	
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, deux.img, 0, 0);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, k.img, 0, 0);
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, deux.img, 60, 60);
+	/*
 	// for pixel, initialize img, addr etc
 	//k.img = mlx_new_image(mlx.mlx, 32, 32); // create image
 	//k.addr = mlx_get_data_addr(k.img, &k.bit_per_pixel, &k.line_length, &k.endian);
@@ -65,11 +112,11 @@ int	main(void)
 	// key event + X11 event types , + keymask
 	mlx_hook(mlx.mlx_win, 2, 1L<<0, &keypress_event, &mlx);
 
-/*
+
 *	c'est a dire, pour afficher "sprite", 
 *	mlx_xpm_file_to_image--> return img ptr,
 *	avec img_ptr, mlx_put_image_to_window
-*/
+
 	// images, xpm files
 	k.img = mlx_xpm_file_to_image(mlx.mlx, "./img/k.xpm", &img_width, &img_height);
 	if (k.img == NULL)
@@ -114,10 +161,11 @@ int	main(void)
 		h += 32;
 	}
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, k.img, 400, 400);
-	
+	*/
 	mlx_loop(mlx.mlx);
 
 	printf("haha\n");
 	printf("w: %d, h: %d\n", img_width, img_height);
+	
 	return (0);
 }
