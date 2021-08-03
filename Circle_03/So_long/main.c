@@ -1,8 +1,9 @@
-#include "so_long.h"
+#include "so_long.h"	
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	// argv == 2??
+	if (!(argc == 2 && ft_file_name(argv[1], ".ber")))
+		ft_print_error("to use :./so_long maps/*.ber");
 	// file_name == *.ber ?
 
 	// file open
