@@ -72,9 +72,9 @@ int	main(void)
 	//t_data	deux;
 	//t_data	k;
 
+	int	i = 0;
 	mlx.px = 0;
 	mlx.py = 0;
-	int	i = 0;
 	int	j;
 	mlx.count = 0;
 	int	img_width;
@@ -142,5 +142,7 @@ int	main(void)
 	
 	mlx_loop_hook(mlx.mlx, &ft, &mlx);
 	mlx_loop(mlx.mlx);
+	mlx_destroy_image(mlx.mlx, mlx.deux.img);
+	mlx_destroy_image(mlx.mlx, mlx.k.img);
 	return (0);
 }
