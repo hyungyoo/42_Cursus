@@ -41,16 +41,22 @@ typedef struct	s_info
 {
 	t_mlx	mlx;
 	t_map	map;
-	t_xpm	*wall;
-	t_xpm	*empty_space;
-	t_xpm	*player;
-	t_xpm	*collectible;
-	t_xpm	*exit;
+	t_xpm	wall;
+	t_xpm	empty_space;
+	t_xpm	player;
+	t_xpm	collectible;
+	t_xpm	exit;
 	int		count_mouvement;
 	int		positon_x;
 	int		position_y;
-	int		count_collectible;
 }				t_info;
+
+/*
+* ft_map2.c
+*/
+void		ft_map_wall(t_info *all);
+int			ft_str_wall_col(t_info *all, int index);
+int			ft_str_wall_row(char *str, int c);
 
 /*
 * ft_free.c
