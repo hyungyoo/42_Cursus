@@ -6,13 +6,15 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 19:18:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/03 14:14:33 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/08/03 17:15:29 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	./src/get_next_line.c \
 		./src/get_next_line_utils.c \
 		./src/ft_print_error.c \
+		./src/ft_map.c \
+		./src/ft_free.c \
 
 SRCS_BONUS = \
 

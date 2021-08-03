@@ -2,6 +2,7 @@
 # define SO_LONG_H
 
 #define BUFFER_SIZE 1
+#define TILE_SIZE 32
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +11,57 @@
 #include <string.h>
 #include "mlx/mlx.h"
 
+typedef struct	s_mlx
+{
+	void	*mlx;
+	void	*win_mlx;
+	int		window_width;
+	int		window_height;
+}				t_mlx;
+
+typedef struct	s_xpm
+{
+	void	*img;
+	int		*addr;
+	int		bit_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_xpm;
+
+typedef struct	s_map
+{
+	int		fd;
+	int		fd2;
+	char	**map_array;
+	int		num_rows;
+	int		num_cols;
+}				t_map;
+
+typedef struct	s_info
+{
+	t_mlx	mlx;
+	t_map	map;
+	t_xpm	*wall;
+	t_xpm	*empty_space;
+	t_xpm	*player;
+	t_xpm	*collectible;
+	t_xpm	*exit;
+	int		count_mouvement;
+	int		positon_x;
+	int		position_y;
+	int		count_collectible;
+}				t_info;
+
+/*
+* ft_free.c
+*/
+void		ft_free(t_info *all);
+
+/*
+* ft_map.c
+*/
+void		ft_map(char *file_path, t_info *all);
+//int			ft_row_col(t_info *all);
 /*
 * get_next_line.c
 */
