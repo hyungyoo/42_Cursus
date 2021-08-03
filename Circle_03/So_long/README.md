@@ -7,7 +7,7 @@
 	- 간단한 윈도우 인터페이스 라이브러리
 	- 이벤트 관리 기능
 	
-	2. <void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title);>
+	2. <void	*mlx_new_window(vo(id *mlx_ptr, int size_x, int size_y, char *title);>
 	- mlx_ptr은 <mlx_init>으로 받은 반환값을 넣어주면된다!
 	- 성공시, 리턴값은 새로운 윈도우 식별자 ptr;
 	- 실패시 NULL반환;
@@ -40,5 +40,19 @@
 	- param은 함수가 호출될때 마다, 함수에 전달되고 저장하기 위해 사용됨.
 	
 # 함수 사용법
-
-
+	1. <char *mlx_get_data_addr(void *imp_ptr, int *bits_per_pixel, int *size_line, int *endian);>
+	- 나는 32x32 픽셀의 플레이어 png파일을 사용하였다. 이 파일을 그냥썼을때, png파일부분에서 플레이어를 제외한 배경부분이 검은색으로 나타남.
+	- 검은색 부분을 배경화면으로 채우기위해서, 모든 부분의 픽셀의 색을 확인하며, 만약에 그 픽셀의 색이 검정색이라면, 그 부분은 배경의 색으로 대체함
+	- 코드부분, addr가 반환하는 타입은, (char *)값이지만, (int *)으로 casting하여, 구조체에 저장! (rgb를 표현하는데, 4바이트를 쓰기때문에, int *값으로 받으면, 바로 비교가 가능함. 
+	- 그렇게 받은 배경 bg.addr와 player.addr를 i와 j를 이용한 이중 루프로 확인하여, 검정색일 경우에, 배경의 색으로 바꿔준다!!!
+	
+	2. 루프를 돌리기위해서는
+	- mlx_hook 함수, 하나는 key, 하나는 mouse
+	- main_loop함수를 돌리기위한 mlx_loop_hook함수
+	- mlx_loop 함수!
+	
+	3. main_loop함수 
+	- main_loop함수에, 렌더할 이미지를 출력하는 함수들을 위치시키는데, 덮어쓰기 방식으로한다면, 플레이어가 깜빡거림 (배경과 플레이어가 번갈아나타남)
+	- 또는 main_loop함수에, 플레이어 이미지를 출력하는 함수만 넣는다면, 플레이어의 이동경로가 다 남음.
+	- 그렇기떄문에, 각 픽셀마다, 하나만을 위치시켜야함 (5개 이미지중에서)
+	
