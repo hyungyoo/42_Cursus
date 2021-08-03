@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/03 18:31:19 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/03 18:38:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ void	ft_map_array(t_info *all)
 	free(line);
 }
 
+void	ft_map_element(t_info *all)
+{
+	// only 1 0 e p c
+	// at least 1 of 5 element
+}
+
 /* //////ft_map/////////
 * file_open , fd  ok
 * check_map and parsing 
@@ -86,5 +92,5 @@ void	ft_map(char *file_path, t_info *all)
 		ft_print_error("Error: map is not rectangular");
 	ft_map_array(all);
 	ft_map_wall(all);
-	// check 5 element
+	ft_map_element(all);
 }
