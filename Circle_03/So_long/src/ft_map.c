@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/03 18:38:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/03 18:43:54 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_map_array(t_info *all)
 
 	i = 0;
 	num_rows = all->map.num_rows;
-	all->map.map_array = (char **)malloc(sizeof(char *) * num_rows + 1);
+	all->map.map_array = (char **)malloc(sizeof(char *) * (num_rows + 1));
 	if (!all->map.map_array)
 		return ;
 	all->map.map_array[num_rows] = '\0';
@@ -69,11 +69,11 @@ void	ft_map_array(t_info *all)
 	free(line);
 }
 
-void	ft_map_element(t_info *all)
-{
+//void	ft_map_element(t_info *all)
+//{
 	// only 1 0 e p c
 	// at least 1 of 5 element
-}
+//}
 
 /* //////ft_map/////////
 * file_open , fd  ok
@@ -92,5 +92,5 @@ void	ft_map(char *file_path, t_info *all)
 		ft_print_error("Error: map is not rectangular");
 	ft_map_array(all);
 	ft_map_wall(all);
-	ft_map_element(all);
+	//ft_map_element(all);
 }
