@@ -20,6 +20,11 @@ typedef struct	s_mlx
 	t_data deux;
 }				t_mlx;
 
+int	keypress(void)
+{
+	exit(1);
+}
+
 int	keypress_event(int keycode, t_mlx *mlx)
 {
 	mlx->count += 1;
@@ -138,7 +143,11 @@ int	main(void)
 	
 	//ft(t_mlx *mlx)
 
+	//key
 	mlx_hook(mlx.mlx_win, 2, 1L<<0, &keypress_event, &mlx);
+	
+	// mouse
+	mlx_hook(mlx.mlx_win, 17, 0, &keypress, 0);
 	
 	mlx_loop_hook(mlx.mlx, &ft, &mlx);
 	mlx_loop(mlx.mlx);
