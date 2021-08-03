@@ -30,7 +30,7 @@ int	keypress_event(int keycode, t_mlx *mlx)
 	else if (keycode == 97)
 	{
 		mlx->px -= 32;
-		printf("%d\n", mlx->py);
+		printf("%d\n", mlx->px);
 	}
 	else if (keycode == 100)
 	{
@@ -41,22 +41,27 @@ int	keypress_event(int keycode, t_mlx *mlx)
 	return (0);
 }
 
+
 int	ft(t_mlx *mlx)
-{// ici
+{
+	// ici
 
 	int i = 0;
 	int j;
+
 	while (i < 600)
 	{
 		j = 0;
 		while (j < 600)
 		{
-			mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->deux.img, i, j);
+			if (i == mlx->px && j == mlx->py)
+				mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->k.img, i, j);
+			else
+				mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->deux.img, i, j);
 			j += 32;
 		}
 		i += 32;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->k.img, mlx->px, mlx->py);
 	return (0);
 }
 
@@ -67,26 +72,27 @@ int	main(void)
 	//t_data	deux;
 	//t_data	k;
 
-	mlx.px = 100;
-	mlx.py = 100;
+	mlx.px = 0;
+	mlx.py = 0;
 	int	i = 0;
 	int	j;
 	mlx.count = 0;
 	int	img_width;
 	int img_height;
+	int	img_width1;
+	int img_height1;
 
 	printf("avant mlx\n");
 
 	mlx.mlx = mlx_init();	// mlx_void ptr
 	mlx.mlx_win = mlx_new_window(mlx.mlx, 1000, 1000, "test"); // window_ptr
-	
 	printf("mlx_xpm_to_file\n");
 
 	mlx.deux.img = mlx_xpm_file_to_image(mlx.mlx, "./img/sol.xpm", &img_width, &img_height);
 	if (mlx.deux.img == NULL)
 		printf("faile\n");
 
-	mlx.k.img = mlx_xpm_file_to_image(mlx.mlx, "./img/k.xpm", &img_width, &img_height);
+	mlx.k.img = mlx_xpm_file_to_image(mlx.mlx, "./img/k.xpm", &img_width1, &img_height1);
 	if (mlx.k.img == NULL)
 		printf("faile\n");
 	
@@ -132,7 +138,7 @@ int	main(void)
 	
 	//ft(t_mlx *mlx)
 
-	mlx_hook(mlx.mlx_win, 2, 1L>>0, &keypress_event, &mlx);
+	mlx_hook(mlx.mlx_win, 2, 1L<<0, &keypress_event, &mlx);
 	
 	mlx_loop_hook(mlx.mlx, &ft, &mlx);
 	mlx_loop(mlx.mlx);
