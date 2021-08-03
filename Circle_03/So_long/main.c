@@ -2,6 +2,9 @@
 
 int	main(void)
 {
+	// argv == 2??
+	// file_name == *.ber ?
+
 	// file open
 
 	// check map and parsing
