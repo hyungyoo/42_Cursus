@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/03 18:43:54 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/03 22:10:52 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,49 @@ void	ft_map_array(t_info *all)
 	free(line);
 }
 
-//void	ft_map_element(t_info *all)
-//{
-	// only 1 0 e p c
-	// at least 1 of 5 element
-//}
+void	ft_map_init(t_map *map, char c)
+{
+	if (c == 'P')
+		map->num_player += 1;
+	else if (c == 'C')
+		map->num_collectible += 1;
+	else if (c == 'E')
+		map->num_exit += 1;
+	else if (c == 'k')
+	{
+		if (map->num_collectible == 0)
+			ft_print_error("Error: No collectible");
+		else if (map->num_player != 1)
+			ft_print_error("Error: Player must be one");
+		else if (map->num_exit == 0)
+			ft_print_error("Error: No Exit");
+	}
+}
+
+
+void	ft_map_element(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	map->num_player = 0;
+	map->num_collectible = 0;
+	map->num_exit = 0;
+	while (map->map_array[i])
+	{
+		j = 0;
+		while (map->map_array[i][j])
+		{
+			if (!ft_strchr("10PCE", map->map_array[i][j]))
+				ft_print_error("Error: pas de 10EPC");
+			ft_map_init(map, map->map_array[i][j]);
+			j++;
+		}
+		i++;
+	}
+	ft_map_init(map, 'k');
+}
 
 /* //////ft_map/////////
 * file_open , fd  ok
@@ -92,5 +130,5 @@ void	ft_map(char *file_path, t_info *all)
 		ft_print_error("Error: map is not rectangular");
 	ft_map_array(all);
 	ft_map_wall(all);
-	//ft_map_element(all);
+	ft_map_element(&(all->map));
 }

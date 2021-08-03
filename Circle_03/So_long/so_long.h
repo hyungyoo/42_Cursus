@@ -35,6 +35,9 @@ typedef struct	s_map
 	char	**map_array;
 	int		num_rows;
 	int		num_cols;
+	int		num_player;
+	int		num_collectible;
+	int		num_exit;
 }				t_map;
 
 typedef struct	s_info
