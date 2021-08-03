@@ -6,11 +6,12 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 19:18:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/03 04:43:38 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/08/03 13:13:35 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =	\
+SRCS =	./src/get_next_line.c \
+		./src/get_next_line_utils.c \
 
 SRCS_BONUS = \
 
