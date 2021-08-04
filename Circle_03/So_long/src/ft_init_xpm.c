@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:00:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/04 16:14:55 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/04 16:34:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_get_data_addr(t_info *all)
 {
 	all->player.addr = (int *)mlx_get_data_addr(all->player.img, &(all->player.bit_per_pixel), &(all->player.line_length), &(all->player.endian));
 	all->collectible.addr = (int *)mlx_get_data_addr(all->collectible.img, &(all->collectible.bit_per_pixel), &(all->collectible.line_length), &(all->collectible.endian));
+	all->floor.addr = (int *)mlx_get_data_addr(all->floor.img, &(all->floor.bit_per_pixel), &(all->floor.line_length), &(all->floor.endian));
 }
 
 /*
@@ -98,7 +99,7 @@ void	ft_init_xpm(t_info *all)
 	int	img_height;
 
 	ft_mlx_xpm_to_image(all, &img_width, &img_height);
-	//ft_get_data_addr(all);
-	//ft_change_addr_player(all);
-	//ft_change_addr_collectible(all, img_width, img_height);
+	ft_get_data_addr(all);
+	ft_change_addr_player(all, img_width, img_height);
+	ft_change_addr_collectible(all, img_width, img_height);
 }
