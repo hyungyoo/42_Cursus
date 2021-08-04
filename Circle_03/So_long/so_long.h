@@ -52,6 +52,7 @@ typedef struct	s_info
 	int		count_mouvement;
 	int		positon_x;
 	int		position_y;
+	int		exit_flag;
 }				t_info;
 
 /*

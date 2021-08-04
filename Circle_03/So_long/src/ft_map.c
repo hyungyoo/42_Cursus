@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/04 06:47:55 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/04 07:56:08 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,6 @@ void	ft_map(char *file_path, t_info *all)
 	ft_map_array(all);
 	ft_map_wall(all);
 	ft_map_element(&(all->map));
+	all->mlx.window_width = all->map.num_cols * TILE_SIZE;
+	all->mlx.window_height = all->map.num_rows * TILE_SIZE;
 }

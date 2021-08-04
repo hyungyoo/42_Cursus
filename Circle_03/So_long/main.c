@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/03 17:17:42 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/04 07:59:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,8 @@ int	main(int argc, char **argv)
 	if (!(argc == 2 && ft_file_name(argv[1], ".ber")))
 		ft_print_error("to use :./so_long maps/*.ber");
 	ft_map(argv[1], &all);
-////////ft_map//////////////////////////////
-	// file open
-	// check map and parsing
-	// for check- rect, wall, 5 elements
-
-	// return double array map;
-////////////////////////////////////////////
-
+	all.mlx.mlx = mlx_init();
+	all.mlx.win_mlx = mlx_new_window(all.mlx.mlx, all.mlx.window_width, all.mlx.window_height, "So_Long");
 
 	// create ptr_mlx and win (with pixel_size * rows and cols of map)
 
@@ -51,7 +45,7 @@ int	main(int argc, char **argv)
 	* update
 	*/
 
-	// loop
+	mlx_loop(all.mlx.mlx);
 	ft_free(&all);
 	return (0);
 }
