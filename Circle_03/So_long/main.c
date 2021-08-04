@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/04 08:22:31 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/04 16:17:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@ int	main(int argc, char **argv)
 	ft_map(argv[1], &all);
 	all.mlx.mlx = mlx_init();
 	all.mlx.win_mlx = mlx_new_window(all.mlx.mlx, all.mlx.window_width, all.mlx.window_height, "So_Long");
-	
+	ft_init_xpm(&all);
 	//////mlx_xpm_file_to_imgae, mlx_get_data_addr/////
 	//ft_xpm_to_image(&(all.mlx));
 	///////////////////////////////////////////////////
 
+	mlx_put_image_to_window(all.mlx.mlx, all.mlx.win_mlx, all.player.img, 10, 10);
+	mlx_put_image_to_window(all.mlx.mlx, all.mlx.win_mlx, all.floor.img, 50, 50);
+	mlx_put_image_to_window(all.mlx.mlx, all.mlx.win_mlx, all.collectible.img, 1000, 100);
+	mlx_put_image_to_window(all.mlx.mlx, all.mlx.win_mlx, all.wall.img, 150, 150);
+	mlx_put_image_to_window(all.mlx.mlx, all.mlx.win_mlx, all.exit.img, 200, 200);
 	// create ptr_mlx and win (with pixel_size * rows and cols of map)
 
 

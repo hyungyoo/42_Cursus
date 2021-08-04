@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 19:18:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/03 22:13:14 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/08/04 16:10:44 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS =	./src/get_next_line.c \
 		./src/ft_map.c \
 		./src/ft_map2.c \
 		./src/ft_free.c \
+		./src/ft_init_xpm.c \
 
 SRCS_BONUS = \
 

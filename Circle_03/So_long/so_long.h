@@ -45,7 +45,7 @@ typedef struct	s_info
 	t_mlx	mlx;
 	t_map	map;
 	t_xpm	wall;
-	t_xpm	empty_space;
+	t_xpm	floor;
 	t_xpm	player;
 	t_xpm	collectible;
 	t_xpm	exit;
@@ -54,6 +54,11 @@ typedef struct	s_info
 	int		position_y;
 	int		exit_flag;
 }				t_info;
+
+/*
+* ft_init_xpm.c
+*/
+void		ft_init_xpm(t_info *all);
 
 /*
 * ft_map2.c
