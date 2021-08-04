@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 19:18:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/04 16:10:44 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/08/04 16:45:20 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ OBJS_M		= ${SRCS_MANDATORY:.c=.o}
 UNAME		:= $(shell uname)
 
 PATH_MLX	= mlx
-CC			= gcc -g -fsanitize=address
-CCG			= gcc
+CCG			= gcc -g -fsanitize=address
+CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -f
 NAME		= so_long

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/04 16:34:35 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/04 16:55:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,21 @@ int	main(int argc, char **argv)
 	all.mlx.mlx = mlx_init();
 	all.mlx.win_mlx = mlx_new_window(all.mlx.mlx, all.mlx.window_width, all.mlx.window_height, "So_Long");
 	ft_init_xpm(&all);
-	//////mlx_xpm_file_to_imgae, mlx_get_data_addr/////
-	//ft_xpm_to_image(&(all.mlx));
-	///////////////////////////////////////////////////
-
-	// create ptr_mlx and win (with pixel_size * rows and cols of map)
-
-
-	// create image of xpm
-
-	// change xpm of p, c, e
-
-	// main_loop
-	/*
-	* render 1, 0, e, p, c ->each put xpm
-	*/
-	
 
 	// key and mouse event
-	/*
-	* key event
-	* update
-	*/
+	//// mouvement -> 
+	//player x , y -> swap with wall
+	//option ///////
+	// si c est pas mur
+	// s il gagne collectible, enlever collectible et num_collectible--
+
+
+
+	// loop -> funtion appler main_loop
+	/////////////main_loop//////
+	//update
+	//setup
+	////////////////////////////
 
 	mlx_loop(all.mlx.mlx);
 	ft_free(&all);
