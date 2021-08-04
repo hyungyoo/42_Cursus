@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/03 22:10:52 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/04 06:47:55 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	ft_map_init(t_map *map, char c)
 			ft_print_error("Error: No Exit");
 	}
 }
-
 
 void	ft_map_element(t_map *map)
 {

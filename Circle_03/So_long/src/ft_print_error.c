@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:17 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/03 14:32:18 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/04 06:48:22 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_print_error(char *str)
 * file_name: *.ber
 * return : 1 / T,     0 / F 
 */
-int		ft_file_name(char *file_name, char *cmp)
+int	ft_file_name(char *file_name, char *cmp)
 {
 	int		name_point;
 	int		i;
@@ -54,5 +54,4 @@ int		ft_file_name(char *file_name, char *cmp)
 		i++;
 	}
 	return (1);
-	
 }
