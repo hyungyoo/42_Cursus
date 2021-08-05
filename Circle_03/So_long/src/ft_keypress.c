@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 14:14:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/05 14:41:35 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/05 15:46:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,14 @@ int	keypress_event(int keycode, t_info *all)
 	if (keycode == 65307)
 		exit(0);
 	/*
-	if (keycode == -> && ft_non_wall)
-		ft_mouvement_player
-	else if (...
+	else if (keycode == 119)
+	up
+	else if (keycode == 115)
+	down
+	else if (keycode == 97)
+	left
+	else if (keycode == 100)
+	right
 	*/
 	return (0);
 }
