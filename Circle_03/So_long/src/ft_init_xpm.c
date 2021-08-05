@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:00:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/05 13:46:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/05 14:22:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_change_addr_player(t_info *all, int img_width, int img_height)
 	w = img_width;
 	i = 0;
 	c = all->player.addr[0];
-	while (i < w)
+	while (i < img_width)
 	{
 		j = 0;
 		while (j < img_height)
@@ -88,12 +88,12 @@ void	ft_change_addr_collectible(t_info *all, int img_width, int img_height)
 	int	i;
 	int	j;
 	int	c;
-	int	width;
+	int	w;
 
-	width = img_width;
+	w = img_width;
 	i = 0;
 	c = all->collectible.addr[0];
-	while (i < w)
+	while (i < img_width)
 	{
 		j = 0;
 		while (j < img_height)

@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 19:18:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/04 16:45:20 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/08/05 15:03:40 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS =	./src/get_next_line.c \
 		./src/ft_map2.c \
 		./src/ft_free.c \
 		./src/ft_init_xpm.c \
+		./src/ft_keypress.c \
 
 SRCS_BONUS = \
 
@@ -29,8 +30,8 @@ OBJS_M		= ${SRCS_MANDATORY:.c=.o}
 UNAME		:= $(shell uname)
 
 PATH_MLX	= mlx
-CCG			= gcc -g -fsanitize=address
-CC			= gcc
+CC			= gcc -g -fsanitize=address
+CCG			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -f
 NAME		= so_long

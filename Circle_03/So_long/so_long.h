@@ -56,6 +56,12 @@ typedef struct	s_info
 }				t_info;
 
 /*
+* ft_keypress.c
+*/
+int			keypress_event(int keycode, t_info *all);
+int			keypress(void);
+
+/*
 * ft_init_xpm.c
 */
 void		ft_init_xpm(t_info *all);
