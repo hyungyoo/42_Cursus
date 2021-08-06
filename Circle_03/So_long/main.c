@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:01:32 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 18:06:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int	main(int argc, char **argv)
 	mlx_hook(all.mlx.win_mlx, 17, 0, &keypress, 0);
 	mlx_loop_hook(all.mlx.mlx, &ft_loop, &all);
 	mlx_loop(all.mlx.mlx);
-	//ft_free(&all);
+	ft_free(&all);
 	return (0);
 }
