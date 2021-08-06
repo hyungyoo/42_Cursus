@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:00:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 20:54:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 22:57:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_mlx_xpm_to_image2(t_info *all, int *img_width, int *img_height)
 			"./img/enemy3.xpm", img_width, img_height);
 	if (all->enemy3.img == NULL)
 		ft_print_error("Error: Not enemy image");
-	}
+}
 
 /*
 * ft_get_data_addr.c
@@ -53,6 +53,4 @@ void	ft_get_data_addr2(t_info *all)
 	all->enemy3.addr = (int *)mlx_get_data_addr(all->enemy3.img,
 			&(all->enemy3.bit_per_pixel), &(all->enemy3.line_length),
 			&(all->enemy3.endian));
-
-
 }
