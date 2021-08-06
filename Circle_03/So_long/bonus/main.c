@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 19:55:30 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 20:04:26 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	ft_setup_1(t_info *all)
 					all->wall.img, i * TILE_SIZE, j * TILE_SIZE);
 				ft_put_string(all);
 			}
-			else if (all->map.map_array[j][i] == '0')
-				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
-					all->floor.img, i * TILE_SIZE, j * TILE_SIZE);
 			else if (all->map.map_array[j][i] == 'P' && all->map.flag_exit)
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->player_exit.img, i * TILE_SIZE, j * TILE_SIZE);
+			else if (all->map.map_array[j][i] == 'P')
+				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
+					all->player.img, i * TILE_SIZE, j * TILE_SIZE);
 		}
 	}
 }
@@ -62,15 +62,15 @@ void	ft_setup_2(t_info *all)
 		j = 0;
 		while (j < all->map.num_rows)
 		{
-			if (all->map.map_array[j][i] == 'E')
+			if (all->map.map_array[j][i] == '0')
+				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
+					all->floor.img, i * TILE_SIZE, j * TILE_SIZE);
+			else if (all->map.map_array[j][i] == 'E')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->exit.img, i * TILE_SIZE, j * TILE_SIZE);
 			else if (all->map.map_array[j][i] == 'C')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->collectible.img, i * TILE_SIZE, j * TILE_SIZE);
-			else if (all->map.map_array[j][i] == 'P')
-				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
-					all->player.img, i * TILE_SIZE, j * TILE_SIZE);
 			j++;
 		}
 		i++;
