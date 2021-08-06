@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/04 07:56:08 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 17:20:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ void	ft_map_array(t_info *all)
 	free(line);
 }
 
-void	ft_map_init(t_map *map, char c)
+void	ft_map_init(t_map *map, char c, int i, int j)
 {
 	if (c == 'P')
+	{
+		map->p_x = i;
+		map->p_y = j;
 		map->num_player += 1;
+	}
 	else if (c == 'C')
 		map->num_collectible += 1;
 	else if (c == 'E')
@@ -104,12 +108,12 @@ void	ft_map_element(t_map *map)
 		{
 			if (!ft_strchr("10PCE", map->map_array[i][j]))
 				ft_print_error("Error: pas de 10EPC");
-			ft_map_init(map, map->map_array[i][j]);
+			ft_map_init(map, map->map_array[i][j], i, j);
 			j++;
 		}
 		i++;
 	}
-	ft_map_init(map, 'k');
+	ft_map_init(map, 'k', i, j);
 }
 
 /* //////ft_map/////////
@@ -121,10 +125,10 @@ void	ft_map(char *file_path, t_info *all)
 {
 	all->map.fd = open(file_path, O_RDONLY);
 	if (all->map.fd == -1)
-		ft_print_error("Error: file error.");
+		ft_print_error("Error: file open error.");
 	all->map.fd2 = open(file_path, O_RDONLY);
 	if (all->map.fd2 == -1)
-		ft_print_error("Error: file error.");
+		ft_print_error("Error: file open error.");
 	if (!ft_row_col(all))
 		ft_print_error("Error: map is not rectangular");
 	ft_map_array(all);

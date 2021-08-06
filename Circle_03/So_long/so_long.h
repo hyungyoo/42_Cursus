@@ -38,6 +38,8 @@ typedef struct	s_map
 	int		num_player;
 	int		num_collectible;
 	int		num_exit;
+	int		p_x;
+	int		p_y;
 }				t_map;
 
 typedef struct	s_info
@@ -51,9 +53,6 @@ typedef struct	s_info
 	t_xpm	exit;
 	t_xpm	player_exit;
 	int		count_mouvement;
-	int		positon_x;
-	int		position_y;
-	int		exit_flag;
 }				t_info;
 
 /*
@@ -83,7 +82,7 @@ void		ft_free(t_info *all);
 * ft_map.c
 */
 void		ft_map(char *file_path, t_info *all);
-//int			ft_row_col(t_info *all);
+
 /*
 * get_next_line.c
 */
