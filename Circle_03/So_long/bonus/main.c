@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:39:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 19:38:44 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	ft_setup_1(t_info *all)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*num;
 
 	i = 0;
 	while (i < all->map.num_cols)
@@ -24,8 +25,14 @@ void	ft_setup_1(t_info *all)
 		while (j < all->map.num_rows)
 		{
 			if (all->map.map_array[j][i] == '1')
+			{
+				num = ft_itoa(all->count_mouvement);
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->wall.img, i * TILE_SIZE, j * TILE_SIZE);
+				mlx_string_put(all->mlx.mlx, all->mlx.win_mlx, 10, 10, 0xFFFFFF, "count : ");
+				mlx_string_put(all->mlx.mlx, all->mlx.win_mlx, 70, 10, 0xFFFFFF, num);
+				free(num);
+			}
 			else if (all->map.map_array[j][i] == '0')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->floor.img, i * TILE_SIZE, j * TILE_SIZE);
@@ -43,6 +50,7 @@ void	ft_setup_1(t_info *all)
 
 void	ft_setup_2(t_info *all)
 {
+	
 	int	i;
 	int	j;
 
@@ -82,6 +90,7 @@ int	main(int argc, char **argv)
 	if (!(argc == 2 && ft_file_name(argv[1], ".ber")))
 		ft_print_error("to use :./so_long maps/*.ber");
 	ft_map(argv[1], &all);
+	all.count_mouvement = 0;
 	all.mlx.mlx = mlx_init();
 	all.mlx.win_mlx = mlx_new_window(all.mlx.mlx, all.mlx.window_width,
 			all.mlx.window_height, "So_Long");

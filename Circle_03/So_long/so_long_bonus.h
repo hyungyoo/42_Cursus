@@ -57,6 +57,11 @@ typedef struct s_info
 }				t_info;
 
 /*
+* ft_itoa.c
+*/
+char		*ft_itoa(int n);
+
+/*
 * ft_addr.c
 */
 void		ft_change_addr_player(t_info *all, int img_width, int img_height);

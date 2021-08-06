@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 19:18:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/06 18:58:45 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/08/06 19:27:38 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS_BONUS = 	./bonus/get_next_line.c \
 				./bonus/ft_keypress2.c \
 				./bonus/ft_addr.c \
 				./bonus/main.c \
+				./bonus/ft_itoa.c \
 
 OBJS 		= ${SRCS:.c=.o}
 OBJS_B		= ${SRCS_BONUS:.c=.o}
