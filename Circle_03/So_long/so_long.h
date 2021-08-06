@@ -40,6 +40,7 @@ typedef struct	s_map
 	int		num_exit;
 	int		p_x;
 	int		p_y;
+	int		flag_exit;
 }				t_map;
 
 typedef struct	s_info

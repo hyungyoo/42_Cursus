@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 16:56:40 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 18:01:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	ft_setup_1(t_info *all)
 			else if (all->map.map_array[j][i] == '0')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->floor.img, i * TILE_SIZE, j * TILE_SIZE);
+			else if (all->map.map_array[j][i] == 'P' && all->map.flag_exit)
+				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
+					all->player_exit.img, i * TILE_SIZE, j * TILE_SIZE);
 			else if (all->map.map_array[j][i] == 'P')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->player.img, i * TILE_SIZE, j * TILE_SIZE);

@@ -6,36 +6,69 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 14:14:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 17:21:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 18:04:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//ft_mouvement_player
-	// ft_mouvement_player(all, keycode)
-	// 1) on a gange collectible -> chagment floor + player, collectible--;
-	// si collectible == 0, flag_exit = 1;
-	// -> (C -> P)
+void	ft_swap(t_map *map, int	ex_x, int ex_y)
+{
+	if (map->flag_exit == 0)
+		map->map_array[map->p_x][map->p_y] = '0';
+	else
+		map->map_array[map->p_x][map->p_y] = 'E';
+	map->map_array[ex_x][ex_y] = 'P';
+	map->p_x = ex_x;
+	map->p_y = ex_y;
+	map->flag_exit = 0;
+}
 
-	// 2) encore collectible, exit != 1;
-	// -> E -> P+E  ou bien exit(0);
-	
-	// 3) floor,
-	// -> (P -> 0), (0 -> F) swap
+void	ft_exit_player(t_info *all, int ex_x, int ex_y)
+{
+	if (all->map.num_collectible == 0)
+	{
+		printf("count = %d\n", all->count_mouvement);
+		ft_free(all);
+		exit(0);
+	}
+	ft_swap(&(all->map), ex_x, ex_y);
+	all->map.flag_exit = 1;
+}
 
-	// 
+void	ft_collecte(t_info *all, int ex_x, int ex_y)
+{
+	ft_swap(&(all->map), ex_x, ex_y);
+	all->map.num_collectible -= 1;
+}
+
+void	ft_move(t_info *all, int i, int j)
+{
+	int	ex_x;
+	int	ex_y;
+
+	ex_x = all->map.p_x + i;
+	ex_y = all->map.p_y + j;
+	if (all->map.map_array[ex_x][ex_y] == '0')
+		ft_swap(&(all->map),ex_x, ex_y);
+	else if (all->map.map_array[ex_x][ex_y] == '1')
+		all->count_mouvement--;
+	else if (all->map.map_array[ex_x][ex_y] == 'E')
+		ft_exit_player(all, ex_x, ex_y);
+	else if (all->map.map_array[ex_x][ex_y] == 'C')
+		ft_collecte(all, ex_x, ex_y);
+}
+
 void	ft_player_move(t_info *all, char c)
 {
-	printf("x = %d, y = %d\n", all->map.p_x, all->map.p_y);
 	if (c == 'U')
-		printf("up\n");
+		ft_move(all, -1, 0);
 	else if (c == 'D')
-		printf("down\n");
+		ft_move(all, 1, 0);
 	else if (c == 'L')
-		printf("left\n");
+		ft_move(all, 0, -1);
 	else if (c == 'R')
-		printf("right\n");
+		ft_move(all, 0, 1);
 }
 
 int	keypress_event(int keycode, t_info *all)
@@ -46,8 +79,6 @@ int	keypress_event(int keycode, t_info *all)
 		all->count_mouvement = 0;
 	flag++;
 	all->count_mouvement += 1;
-	printf("count = %d\n", all->count_mouvement);
-	printf("keycode : %d\n", keycode);
 	if (keycode == 65307)
 		exit(0);
 	else if (keycode == 119)
@@ -58,6 +89,8 @@ int	keypress_event(int keycode, t_info *all)
 		ft_player_move(all, 'L');
 	else if (keycode == 100)
 		ft_player_move(all, 'R');
+	printf("count = %d\n", all->count_mouvement);
+	printf("count_collectible = %d\n", all->map.num_collectible);
 	return (0);
 }
 
