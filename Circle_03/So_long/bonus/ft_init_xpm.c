@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 15:00:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:39:51 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 21:00:14 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ void	ft_init_xpm(t_info *all)
 	int	img_height;
 
 	ft_mlx_xpm_to_image(all, &img_width, &img_height);
+	ft_mlx_xpm_to_image2(all, &img_width, &img_height);
 	ft_get_data_addr(all);
+	ft_get_data_addr2(all);
 	ft_change_addr_player(all, img_width, img_height);
 	ft_change_addr_collectible(all, img_width, img_height);
 	ft_change_addr_pl_ex(all, img_width, img_height);
+	ft_change_addr_enemy(all, img_width, img_height);
 }

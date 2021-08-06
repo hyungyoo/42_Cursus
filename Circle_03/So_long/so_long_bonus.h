@@ -53,9 +53,22 @@ typedef struct s_info
 	t_xpm	collectible;
 	t_xpm	exit;
 	t_xpm	player_exit;
+	t_xpm	enemy0;
+	t_xpm	enemy1;
+	t_xpm	enemy2;
+	t_xpm	enemy3;
 	int		count_mouvement;
 }				t_info;
 
+/*
+* ft_init_xpm for bonus
+*/
+void		ft_mlx_xpm_to_image2(t_info *all, int *img_width, int *img_height);
+void		ft_get_data_addr2(t_info *all);
+void		ft_change_addr_enemy(t_info *all, int img_width, int img_height);
+void		ft_setup_bonus(t_info *all);
+void		ft_exit_enemy(t_info *all, int ex_x, int ex_y);
+void		ft_swap(t_map *map, int ex_x, int ex_y);
 /*
 * ft_itoa.c
 */

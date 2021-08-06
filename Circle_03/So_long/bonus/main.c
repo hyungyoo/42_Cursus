@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 20:04:26 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 21:19:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,11 @@ void	ft_setup_2(t_info *all)
 
 int	ft_loop(t_info *all)
 {
+	ft_setup_bonus(all);
 	ft_setup_1(all);
+	ft_setup_bonus(all);
 	ft_setup_2(all);
+	ft_setup_bonus(all);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:40:18 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 21:08:59 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void	ft_map_element(t_map *map)
 		j = 0;
 		while (map->map_array[i][j])
 		{
-			if (!ft_strchr("10PCE", map->map_array[i][j]))
-				ft_print_error("Error: pas de 10EPC");
+			if (!ft_strchr("10PCEN", map->map_array[i][j]))
+				ft_print_error("Error: pas de 10EPCN");
 			ft_map_init(map, map->map_array[i][j], i, j);
 			j++;
 		}
