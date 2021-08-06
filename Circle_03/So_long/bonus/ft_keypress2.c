@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 18:12:11 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 21:14:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 22:29:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	keypress(void)
 void	ft_exit_enemy(t_info *all, int ex_x, int ex_y)
 {
 	
-	ft_free(all);
 	ft_swap(&(all->map), ex_x, ex_y);
+	ft_free(all);
 	exit(0);
 }

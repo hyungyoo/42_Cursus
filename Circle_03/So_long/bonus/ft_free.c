@@ -16,4 +16,11 @@ void	ft_free(t_info *all)
 	mlx_destroy_image(all->mlx.mlx, all->collectible.img);
 	mlx_destroy_image(all->mlx.mlx, all->player_exit.img);
 	mlx_destroy_window(all->mlx.mlx, all->mlx.win_mlx);
+	if (all->enemy0.img)
+	{
+		mlx_destroy_image(all->mlx.mlx, all->enemy0.img);
+		mlx_destroy_image(all->mlx.mlx, all->enemy1.img);
+		mlx_destroy_image(all->mlx.mlx, all->enemy2.img);
+		mlx_destroy_image(all->mlx.mlx, all->enemy3.img);
+	}
 }
