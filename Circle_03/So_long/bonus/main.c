@@ -6,32 +6,40 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 19:38:44 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 19:55:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"	
 
+void	ft_put_string(t_info *all)
+{
+	char	*num;
+
+	num = ft_itoa(all->count_mouvement);
+	mlx_string_put(all->mlx.mlx, all->mlx.win_mlx,
+		10, 10, 0xFFFFFF, "count : ");
+	mlx_string_put(all->mlx.mlx, all->mlx.win_mlx, 70,
+		10, 0xFFFFFF, num);
+	free(num);
+}
+
 void	ft_setup_1(t_info *all)
 {
 	int		i;
 	int		j;
-	char	*num;
 
-	i = 0;
-	while (i < all->map.num_cols)
+	i = -1;
+	while (++i < all->map.num_cols)
 	{
-		j = 0;
-		while (j < all->map.num_rows)
+		j = -1;
+		while (++j < all->map.num_rows)
 		{
 			if (all->map.map_array[j][i] == '1')
 			{
-				num = ft_itoa(all->count_mouvement);
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->wall.img, i * TILE_SIZE, j * TILE_SIZE);
-				mlx_string_put(all->mlx.mlx, all->mlx.win_mlx, 10, 10, 0xFFFFFF, "count : ");
-				mlx_string_put(all->mlx.mlx, all->mlx.win_mlx, 70, 10, 0xFFFFFF, num);
-				free(num);
+				ft_put_string(all);
 			}
 			else if (all->map.map_array[j][i] == '0')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
@@ -39,18 +47,12 @@ void	ft_setup_1(t_info *all)
 			else if (all->map.map_array[j][i] == 'P' && all->map.flag_exit)
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->player_exit.img, i * TILE_SIZE, j * TILE_SIZE);
-			else if (all->map.map_array[j][i] == 'P')
-				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
-					all->player.img, i * TILE_SIZE, j * TILE_SIZE);
-			j++;
 		}
-		i++;
 	}
 }
 
 void	ft_setup_2(t_info *all)
 {
-	
 	int	i;
 	int	j;
 
@@ -66,6 +68,9 @@ void	ft_setup_2(t_info *all)
 			else if (all->map.map_array[j][i] == 'C')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->collectible.img, i * TILE_SIZE, j * TILE_SIZE);
+			else if (all->map.map_array[j][i] == 'P')
+				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
+					all->player.img, i * TILE_SIZE, j * TILE_SIZE);
 			j++;
 		}
 		i++;
