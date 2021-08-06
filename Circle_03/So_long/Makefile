@@ -6,9 +6,13 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 19:18:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/06 18:38:26 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/08/06 18:58:45 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME	= so_long
+
+SO_BONUS	= so_long_bonus
 
 SRCS =	./src/get_next_line.c \
 		./src/get_next_line_utils.c \
@@ -37,8 +41,6 @@ SRCS_BONUS = 	./bonus/get_next_line.c \
 OBJS 		= ${SRCS:.c=.o}
 OBJS_B		= ${SRCS_BONUS:.c=.o}
 
-UNAME		:= $(shell uname)
-
 PATH_MLX	= mlx
 CCG			= gcc -g -fsanitize=address
 CC			= gcc
@@ -56,17 +58,21 @@ $(NAME): 	$(OBJS)
 			make -C $(PATH_MLX)
 			${CC} $(CFLAGS) -o $(NAME) $(OBJS) $(FLAGS)
 
-bonus:		${OBJS} ${OBJS_B}
+$(SO_BONUS):${OBJS_B}
 			make -C $(PATH_MLX)
-			${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${OBJS_B} $(FLAGS)
+			${CC} ${CFLAGS} -o ${SO_BONUS} ${OBJS_B} $(FLAGS)
+
+bonus:		re $(SO_BONUS)
 
 clean:
 			make -C $(PATH_MLX) clean
-			${RM} ${OBJS}  ${OBJS_B}
+			${RM} ${OBJS}  
+			${RM} ${OBJS_B}
 
 fclean: 	clean
 			make -C $(PATH_MLX) clean
 			${RM} ${NAME}
+			${RM} ${SO_BONUS}
 
 re: 		fclean all
 
