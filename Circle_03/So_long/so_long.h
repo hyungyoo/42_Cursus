@@ -1,17 +1,17 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#define BUFFER_SIZE 1
-#define TILE_SIZE 32
+# define BUFFER_SIZE 1
+# define TILE_SIZE 32
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include "mlx/mlx.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <string.h>
+# include "mlx/mlx.h"
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win_mlx;
@@ -19,7 +19,7 @@ typedef struct	s_mlx
 	int		window_height;
 }				t_mlx;
 
-typedef struct	s_xpm
+typedef struct s_xpm
 {
 	void	*img;
 	int		*addr;
@@ -28,7 +28,7 @@ typedef struct	s_xpm
 	int		endian;
 }				t_xpm;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int		fd;
 	int		fd2;
@@ -43,7 +43,7 @@ typedef struct	s_map
 	int		flag_exit;
 }				t_map;
 
-typedef struct	s_info
+typedef struct s_info
 {
 	t_mlx	mlx;
 	t_map	map;
@@ -60,7 +60,8 @@ typedef struct	s_info
 * ft_addr.c
 */
 void		ft_change_addr_player(t_info *all, int img_width, int img_height);
-void		ft_change_addr_collectible(t_info *all, int img_width, int img_height);
+void		ft_change_addr_collectible(t_info *all, int img_width,
+				int img_height);
 void		ft_change_addr_pl_ex(t_info *all, int img_width, int img_height);
 
 /*
