@@ -49,6 +49,7 @@ typedef struct	s_info
 	t_xpm	player;
 	t_xpm	collectible;
 	t_xpm	exit;
+	t_xpm	player_exit;
 	int		count_mouvement;
 	int		positon_x;
 	int		position_y;
