@@ -6,11 +6,11 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:06:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/06 18:26:11 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"	
+#include "../so_long.h"	
 
 void	ft_setup_1(t_info *all)
 {
