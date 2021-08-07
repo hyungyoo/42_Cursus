@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 21:03:08 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 21:45:24 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_setup_2(t_info *all)
 			else if (all->map.map_array[j][i] == 'E')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->exit.img, i * TILE_SIZE, j * TILE_SIZE);
-			else if (all->map.map_array[j][i] == 'C')
+			else if (all->map.map_array[j][i] == 'N')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->collectible.img, i * TILE_SIZE, j * TILE_SIZE);
 			j++;
