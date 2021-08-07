@@ -87,3 +87,14 @@
 	- 화면에 count를 출력하는건, mlx_string_put 함수를 사용함. 나는 벽위에 출력하도록 하였는데, 벽이랑 string이랑 교차 출력이되어서, 벽을 출력할떄, 벽 출력후에, string이 출력되도록함.
 	- enemy == exit
 
+# 배운것
+	1. leak --> still reachable
+	보동 신경쓰지않는 부분이지만, 이번 projet에서 leak이 발생한 경우는
+	첫번째, GNL을 중간에서 끊었을때, --> 그래서 모든 라인을 다 읽은후 flag로 결과값을 받음
+	두번째, exit함수로 종료했을때, --> free함수를 집어넣음
+	세번째, destroy함수를 써야한다.
+
+	2. segmentation fault
+	첫번째, 무한 루프
+	두번째, free된 메모리에 접근
+	세번째, 초기화시켜놓지않은 변수에 접근
