@@ -19,7 +19,24 @@
 	- 매개변수로 받은 win_ptr로 윈도우를 destroy함
 	
 	4. <char	*mlx_get_data_adr(void *img_ptr, int *bits_per_pixel, int *size_line, int *endian);>
-	- 무슨함수인지 설명을 하나도 못알아 듣겠음
+	- 메모리에 이미지를 만든후, img를 조작할수있는 주소를 얻을수있다.
+	- 예)
+	- mlx_new_image 함수로 두개의 이미지를 만든다.
+	- 하나는 player, 다른 하나는 floor
+	- 왜? player만 화면에 출력하면, 플레이어를 제외한 TILE_SIZE(즉, pixel)에서 남는 부분들이 검은색으로 출력됨.
+	- 그렇다고, 배경위에 player를 덮어씌우면, 플레이어가 배경이랑(floor) 교차되며 깜빡거리게됨.
+	- 그렇다면, 플레이어의 xpm파일에서, 플레이어를 제외한 검은색(픽셀이없는부분)을 배경으로 채워줘야함. 그떄 이 함수를 쓴다!
+	- 플레이어의 모든 픽셀을 돌면서, 검은색부분은 배경의 부분으로 교체
+
+		while (i < tile_size)
+		{
+			whle (i < tile_size)
+			{
+				if (player.addr == 검은색)
+					player.addr = floor.addr;
+			}
+		}
+
 	
 	5. <void	*mlx_new_image(void *mlx_ptr, int width, int height);>
 	- 메모리에 이미지를 새로만든다.
@@ -56,3 +73,17 @@
 	- 또는 main_loop함수에, 플레이어 이미지를 출력하는 함수만 넣는다면, 플레이어의 이동경로가 다 남음.
 	- 그렇기떄문에, 각 픽셀마다, 하나만을 위치시켜야함 (5개 이미지중에서)
 	
+# 구현 방법
+	1. map parsing!
+
+	2. map check!
+
+	3. map의 2중 배열을 가지고, 이미지를 출력
+
+	4. 루프를 돌리기전에, 받은 키값으로 update
+
+	5. 보너스
+	- 이미지가 움직이는건, 그냥 다른 이미지 4 가지정도를 받아서 순서대로 출력함
+	- 화면에 count를 출력하는건, mlx_string_put 함수를 사용함. 나는 벽위에 출력하도록 하였는데, 벽이랑 string이랑 교차 출력이되어서, 벽을 출력할떄, 벽 출력후에, string이 출력되도록함.
+	- enemy == exit
+
