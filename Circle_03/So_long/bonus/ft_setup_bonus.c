@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:02:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 21:45:33 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 22:38:18 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_setup_bonus(t_info *all)
 		j = -1;
 		while (++j < all->map.num_rows)
 		{
-			if (all->map.map_array[j][i] == 'C')
+			if (all->map.map_array[j][i] == 'N')
 			{
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->enemy0.img, i * TILE_SIZE, j * TILE_SIZE);
