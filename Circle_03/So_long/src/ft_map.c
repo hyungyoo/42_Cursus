@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 16:27:26 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 20:53:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,24 @@ int	ft_row_col(t_info *all)
 	char	*line;
 	int		r;
 	int		count;
+	int		flag;
 
+	flag = 0;
 	count = 0;
 	r = get_next_line(all->map.fd, &line);
 	all->map.num_cols = (int)ft_strlen(line);
 	while (r > 0)
 	{
 		if (all->map.num_cols != (int)ft_strlen(line))
-		{
-			free(line);
-			return (0);
-		}
+			flag = 1;
 		free(line);
 		r = get_next_line(all->map.fd, &line);
 		count++;
 	}
 	free(line);
 	all->map.num_rows = count;
+	if (flag == 1)
+		return (0);
 	return (1);
 }
 
@@ -84,11 +85,11 @@ void	ft_map_init(t_map *map, char c, int i, int j)
 	else if (c == 'k')
 	{
 		if (map->num_collectible == 0)
-			ft_print_error("Error: No collectible");
+			ft_print_error2("Error: No collectible", map);
 		else if (map->num_player != 1)
-			ft_print_error("Error: Player must be one");
+			ft_print_error2("Error: Player must be one", map);
 		else if (map->num_exit == 0)
-			ft_print_error("Error: No Exit");
+			ft_print_error2("Error: No Exit", map);
 	}
 }
 
@@ -108,7 +109,7 @@ void	ft_map_element(t_map *map)
 		while (map->map_array[i][j])
 		{
 			if (!ft_strchr("10PCE", map->map_array[i][j]))
-				ft_print_error("Error: pas de 10EPC");
+				ft_print_error2("Error: pas de 10EPC", map);
 			ft_map_init(map, map->map_array[i][j], i, j);
 			j++;
 		}

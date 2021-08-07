@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:17 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/04 06:48:22 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 20:05:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ void	ft_print_error(char *str)
 	ft_putstr(str);
 	ft_putchar('\n');
 	exit(1);
+}
+
+void	ft_print_error2(char *str, t_map *map)
+{
+	ft_putstr(str);
+	ft_putchar('\n');
+	ft_map_free(map);
+	exit(0);
 }
 
 /*

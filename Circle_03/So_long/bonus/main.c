@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 16:53:36 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 21:03:08 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_setup_1(t_info *all)
 			else if (all->map.map_array[j][i] == 'P')
 				mlx_put_image_to_window(all->mlx.mlx, all->mlx.win_mlx,
 					all->player.img, i * TILE_SIZE, j * TILE_SIZE);
+			ft_put_string(all);
 		}
 	}
 }
@@ -97,6 +98,7 @@ int	main(int argc, char **argv)
 
 	if (!(argc == 2 && ft_file_name(argv[1], ".ber")))
 		ft_print_error("to use :./so_long maps/*.ber");
+	ft_init(&all);
 	ft_map(argv[1], &all);
 	all.count_mouvement = 0;
 	all.mlx.mlx = mlx_init();

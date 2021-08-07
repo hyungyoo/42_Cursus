@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:26:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 19:52:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int argc, char **argv)
 
 	if (!(argc == 2 && ft_file_name(argv[1], ".ber")))
 		ft_print_error("to use :./so_long maps/*.ber");
+	ft_init(&all);
 	ft_map(argv[1], &all);
 	all.mlx.mlx = mlx_init();
 	all.mlx.win_mlx = mlx_new_window(all.mlx.mlx, all.mlx.window_width,

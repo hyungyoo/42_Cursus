@@ -61,6 +61,11 @@ typedef struct s_info
 }				t_info;
 
 /*
+* etc
+*/
+void		ft_init(t_info *all);
+void		ft_print_error2(char *str, t_map *map);
+/*
 * ft_init_xpm for bonus
 */
 void		ft_mlx_xpm_to_image2(t_info *all, int *img_width, int *img_height);

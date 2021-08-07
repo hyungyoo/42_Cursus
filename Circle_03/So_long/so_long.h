@@ -63,7 +63,10 @@ void		ft_change_addr_player(t_info *all, int img_width, int img_height);
 void		ft_change_addr_collectible(t_info *all, int img_width,
 				int img_height);
 void		ft_change_addr_pl_ex(t_info *all, int img_width, int img_height);
-
+void		ft_init(t_info *all);
+void		ft_map_free(t_map *map);
+void		ft_destroy(t_info *all);
+void		ft_print_error2(char *str, t_map *map);
 /*
 * ft_keypress2.c
 */

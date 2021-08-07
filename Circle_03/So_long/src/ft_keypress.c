@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 14:14:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 16:30:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 20:07:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_exit_player(t_info *all, int ex_x, int ex_y)
 {
 	if (all->map.num_collectible == 0)
 	{
-		printf("count = %d\n", all->count_mouvement);
+		printf("count = %d\n", ++all->count_mouvement);
+		ft_destroy(all);
 		ft_free(all);
 		exit(0);
 	}

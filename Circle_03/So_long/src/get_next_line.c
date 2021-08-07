@@ -32,6 +32,7 @@ char	*ft_rest(char *str)
 	char	*tmp;
 
 	i = 0;
+	tmp = NULL;
 	str_len = ft_strlen(str);
 	if (str != NULL)
 	{
@@ -43,6 +44,7 @@ char	*ft_rest(char *str)
 		tmp = str;
 		str = ft_substr(str, i + 1, str_len - i - 1);
 		free(tmp);
+		tmp = NULL;
 	}
 	return (str);
 }
