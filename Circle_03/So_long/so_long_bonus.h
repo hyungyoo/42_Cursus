@@ -73,7 +73,7 @@ void		ft_swap(t_map *map, int ex_x, int ex_y);
 * ft_itoa.c
 */
 char		*ft_itoa(int n);
-
+void		ft_bzero(void *dest, size_t n);
 /*
 * ft_addr.c
 */

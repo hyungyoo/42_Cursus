@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 14:14:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:13:31 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:30:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,22 @@ void	ft_move(t_info *all, int i, int j)
 	ex_x = all->map.p_x + i;
 	ex_y = all->map.p_y + j;
 	if (all->map.map_array[ex_x][ex_y] == '0')
+	{
 		ft_swap(&(all->map), ex_x, ex_y);
+		printf("count = %d\n", ++all->count_mouvement);
+	}
 	else if (all->map.map_array[ex_x][ex_y] == '1')
-		all->count_mouvement--;
+		return ;
 	else if (all->map.map_array[ex_x][ex_y] == 'E')
+	{
 		ft_exit_player(all, ex_x, ex_y);
+		printf("count = %d\n", ++all->count_mouvement);
+	}
 	else if (all->map.map_array[ex_x][ex_y] == 'C')
+	{
 		ft_collecte(all, ex_x, ex_y);
+		printf("count = %d\n", ++all->count_mouvement);
+	}
 }
 
 void	ft_player_move(t_info *all, char c)

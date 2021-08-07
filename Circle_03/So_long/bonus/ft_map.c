@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 22:26:39 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:36:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	ft_map_element(t_map *map)
 	map->num_player = 0;
 	map->num_collectible = 0;
 	map->num_exit = 0;
+	map->flag_exit = 0;
 	while (map->map_array[i])
 	{
 		j = 0;

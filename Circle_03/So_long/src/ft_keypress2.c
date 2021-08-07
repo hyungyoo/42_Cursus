@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 18:12:11 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:56:47 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:28:22 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	keypress_event(int keycode, t_info *all)
 	if (flag == 0)
 		all->count_mouvement = 0;
 	flag++;
-	all->count_mouvement += 1;
 	if (keycode == 65307)
 		exit(0);
 	else if (keycode == 119)
@@ -30,7 +29,6 @@ int	keypress_event(int keycode, t_info *all)
 		ft_player_move(all, 'L');
 	else if (keycode == 100)
 		ft_player_move(all, 'R');
-	printf("count = %d\n", all->count_mouvement);
 	return (0);
 }
 

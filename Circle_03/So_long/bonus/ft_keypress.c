@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 14:14:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 21:19:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 16:37:03 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,17 @@ void	ft_move(t_info *all, int i, int j)
 
 void	ft_player_move(t_info *all, char c)
 {
-	if (c == 'U')
-		ft_move(all, -1, 0);
-	else if (c == 'D')
-		ft_move(all, 1, 0);
-	else if (c == 'L')
-		ft_move(all, 0, -1);
-	else if (c == 'R')
-		ft_move(all, 0, 1);
+	if (c == 'U' || c == 'D'
+		|| c == 'L' || c == 'R')
+	{
+		all->count_mouvement++;
+		if (c == 'U')
+			ft_move(all, -1, 0);
+		else if (c == 'D')
+			ft_move(all, 1, 0);
+		else if (c == 'L')
+			ft_move(all, 0, -1);
+		else if (c == 'R')
+			ft_move(all, 0, 1);
+	}
 }
