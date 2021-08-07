@@ -24,7 +24,6 @@ void	ft_destroy(t_info *all)
 		mlx_destroy_image(all->mlx.mlx, all->exit.img);
 	if (all->player_exit.img)
 		mlx_destroy_image(all->mlx.mlx, all->player_exit.img);
-
 	if (all->mlx.win_mlx)
 		mlx_destroy_window(all->mlx.mlx, all->mlx.win_mlx);
 	if (all->mlx.mlx)

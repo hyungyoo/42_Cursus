@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 19:22:40 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 19:28:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/07 21:06:03 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,3 @@ void	ft_init(t_info *all)
 	all->player_exit.img = 0;
 	all->map.map_array = NULL;
 }
-
-
-
