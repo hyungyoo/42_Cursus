@@ -41,6 +41,8 @@ typedef struct s_map
 	int		p_x;
 	int		p_y;
 	int		flag_exit;
+	int		n_x;
+	int		n_y;
 }				t_map;
 
 typedef struct s_info
@@ -59,6 +61,11 @@ typedef struct s_info
 	t_xpm	enemy3;
 	int		count_mouvement;
 }				t_info;
+
+/*
+* ft_init_n.c
+*/
+void		ft_init_n(t_map *map);
 
 /*
 * etc

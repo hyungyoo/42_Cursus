@@ -6,13 +6,13 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:02:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 22:38:18 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/09 20:51:01 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"	
 
-void	ft_setup_bonus(t_info *all)
+void	ft_setup_b(t_info *all)
 {
 	int		i;
 	int		j;
@@ -36,4 +36,14 @@ void	ft_setup_bonus(t_info *all)
 			}
 		}
 	}
+}
+
+
+void	ft_setup_bonus(t_info *all)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < 10)
+		ft_setup_b(all);
 }

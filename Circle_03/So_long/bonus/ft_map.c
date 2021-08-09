@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:32:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 22:07:52 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/09 20:54:05 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	ft_map_element(t_map *map)
 		j = 0;
 		while (map->map_array[i][j])
 		{
-			if (!ft_strchr("10PCEN", map->map_array[i][j]))
+			if (!ft_strchr("10PCE", map->map_array[i][j]))
 				ft_print_error2("Error: pas de 10EPC", map);
 			ft_map_init(map, map->map_array[i][j], i, j);
 			j++;
@@ -138,4 +138,5 @@ void	ft_map(char *file_path, t_info *all)
 	ft_map_element(&(all->map));
 	all->mlx.window_width = all->map.num_cols * TILE_SIZE;
 	all->mlx.window_height = all->map.num_rows * TILE_SIZE;
+	ft_init_n(&(all->map));
 }
