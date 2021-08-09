@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 18:31:29 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/06 18:40:31 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/09 21:26:44 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	ft_map_wall(t_info *all)
 	num_cols = all->map.num_cols - 1;
 	if (!ft_str_wall_row(all->map.map_array[0], '1'))
 		flag++;
-	else if (!ft_str_wall_row(all->map.map_array[num_rows], '1'))
+	if (!ft_str_wall_row(all->map.map_array[num_rows], '1'))
 		flag++;
-	else if (!ft_str_wall_col(all, 0))
+	if (!ft_str_wall_col(all, 0))
 		flag++;
-	else if (!ft_str_wall_col(all, num_cols))
+	if (!ft_str_wall_col(all, num_cols))
 		flag++;
 	if (flag != 0)
 	{

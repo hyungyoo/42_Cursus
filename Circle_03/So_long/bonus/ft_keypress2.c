@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 18:12:11 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 16:32:58 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/09 21:38:26 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int	keypress_event(int keycode, t_info *all)
 	return (0);
 }
 
-int	keypress(void)
+int	keypress(t_info *all)
 {
+	ft_free(all);
 	exit(0);
 }
 

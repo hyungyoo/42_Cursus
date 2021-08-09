@@ -103,7 +103,7 @@ void		ft_player_move(t_info *all, char c);
 * ft_keypress.c
 */
 int			keypress_event(int keycode, t_info *all);
-int			keypress(void);
+int			keypress(t_info *all);
 
 /*
 * ft_init_xpm.c

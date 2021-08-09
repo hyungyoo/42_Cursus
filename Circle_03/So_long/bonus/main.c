@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/09 20:49:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/09 21:39:11 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	main(int argc, char **argv)
 			all.mlx.window_height, "So_Long");
 	ft_init_xpm(&all);
 	mlx_hook(all.mlx.win_mlx, 2, 1L << 0, &keypress_event, &all);
-	mlx_hook(all.mlx.win_mlx, 17, 0, &keypress, 0);
+	mlx_hook(all.mlx.win_mlx, 17, 0, &keypress, &all);
 	mlx_loop_hook(all.mlx.mlx, &ft_loop, &all);
 	mlx_loop(all.mlx.mlx);
 	ft_free(&all);
