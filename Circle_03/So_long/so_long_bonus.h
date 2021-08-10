@@ -66,7 +66,7 @@ typedef struct s_info
 * ft_init_n.c
 */
 void		ft_init_n(t_map *map);
-
+void		ft_enemy(t_map *map);
 /*
 * etc
 */

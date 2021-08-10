@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 14:31:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/09 21:39:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/10 16:48:19 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,14 @@ void	ft_setup_2(t_info *all)
 
 int	ft_loop(t_info *all)
 {
+	static int	flag;
+
+	flag++;
+	if (flag % 50 == 0)
+	{
+		ft_enemy(&(all->map));
+		flag = 0;
+	}
 	ft_setup_bonus(all);
 	ft_setup_1(all);
 	ft_setup_2(all);
