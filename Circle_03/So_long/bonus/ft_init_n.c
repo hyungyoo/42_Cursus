@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 20:45:01 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/10 16:55:08 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/10 17:06:07 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	ft_wall_left(t_map *map, int i, int j)
 		map->n_y = ny;
 		map->n_x = nx;
 	}
-	else 
-		if (map->map_array[map->n_x - 1][map->n_y] == '0') 
+	else
+	{
+		if (map->map_array[map->n_x - 1][map->n_y] == '0')
 			ft_wall_left(map, -1, 0);
+	}
 }
 
 int	ft_enemy_left(t_map *map)
@@ -40,8 +42,8 @@ int	ft_enemy_left(t_map *map)
 		ft_wall_left(map, 0, -1);
 		return (1);
 	}
-
 }
+
 void	ft_wall_right(t_map *map, int i, int j)
 {
 	int	nx;
@@ -57,8 +59,10 @@ void	ft_wall_right(t_map *map, int i, int j)
 		map->n_x = nx;
 	}
 	else
-		if (map->map_array[map->n_x + 1][map->n_y] == '0') 
+	{
+		if (map->map_array[map->n_x + 1][map->n_y] == '0')
 			ft_wall_right(map, 1, 0);
+	}
 }
 
 int	ft_enemy_right(t_map *map)
@@ -79,29 +83,4 @@ void	ft_enemy(t_map *map)
 	if (flag == 0)
 		while (map->n_y != 1 && map->n_x != 1)
 			ft_enemy_left(map);
-}
-
-void	ft_init_n(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map->map_array[i])
-	{
-		j = 0;
-		while (map->map_array[i][j])
-		{
-			if (map->map_array[i][j] == '0')
-			{
-				map->n_x = i;
-				map->n_y = j;
-				map->map_array[i][j] = 'N';
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
-	ft_print_error2("Error: pas de place pour enemy", map);
 }

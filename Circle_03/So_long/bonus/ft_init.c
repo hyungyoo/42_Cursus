@@ -6,11 +6,36 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 19:22:40 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/07 21:06:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/10 17:05:51 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
+
+void	ft_init_n(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map_array[i])
+	{
+		j = 0;
+		while (map->map_array[i][j])
+		{
+			if (map->map_array[i][j] == '0')
+			{
+				map->n_x = i;
+				map->n_y = j;
+				map->map_array[i][j] = 'N';
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+	ft_print_error2("Error: pas de place pour enemy", map);
+}
 
 void	ft_init(t_info *all)
 {

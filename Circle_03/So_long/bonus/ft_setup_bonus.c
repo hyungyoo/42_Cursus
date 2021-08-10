@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 21:02:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/09 20:51:01 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/09 21:15:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_setup_b(t_info *all)
 		}
 	}
 }
-
 
 void	ft_setup_bonus(t_info *all)
 {
