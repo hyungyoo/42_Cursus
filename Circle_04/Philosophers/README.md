@@ -25,34 +25,14 @@
 	 context는 process가 가용되고 있는 상태를 뜻한다! 이건 PCB(process control block)에 저장되어있다.
 	 interrupt가 일어났을 때, running process의 CONTEXT + PC(programme count)를 저장해놓고, ready queue에 있다가 restore한다.
 	 즉, 현재 프로세스의 context state를 저장하고, cpu를 다시 점유할 프로세스를  restore함! 
-	 "Process Scheduling"
-
-	 P0 --------executing----------|---------------------idle--------------------|----------executing--------
-								save P0										save P1
-								reload P1									reload P0
-	 P1--------idle----------------|------------------executing------------------|------------idle-----------
-
 
 	2. Multi Process : 하나의 프로그램을 여러개의 프로세스로 구성하여, 각 프로세스가 
 	 하나의 작업처럼 처리를 하는것!, 하나의 프로세스가 잘못되어도 프로그램을 작동한다는 장점이 있는반면
 	 context switching의 비용이 발생한다.
 	 time sharing --> scheduling Queues (FIFO) --> ready queue
 	 running상태에서는 ready queue로 돌아가거나, waiting상태로 가던가(i/o event)
-	 
-	"Queueing Diagram"
 
-	-- ready queue --------------------------------> cpu 점령 ---->>>----------->>>
-   /|\																			|	
-	|-------- I / O <<--------- I / O queue << ----------- I / O Request -------|
-	|																			|
-	|----------------------------------------------------time slice expired-----|
-	|																			|
-	|-----------------------child executes  <<------------fork a child----------|
-	|																			|
-	------------------------interrupt occurs <<-----------wait for an inerrupt---
-
-
-	 3. Multi thread : 프로그램의 여러개의 쓰레드로 구성하고, 각 쓰레드가 작업을 처리하는것
+	3. Multi thread : 프로그램의 여러개의 쓰레드로 구성하고, 각 쓰레드가 작업을 처리하는것
 	처리 비용의 감소, 쓰레드간의 공유영역이 생기지만, 반대로 동기화 이슈 또는 하나의 쓰레드오류가 
 	전체 프로세스의 문제발생으로 이어질수있다.
 	
