@@ -33,11 +33,37 @@
 	3. Multi thread : 프로그램의 여러개의 쓰레드로 구성하고, 각 쓰레드가 작업을 처리하는것
 	처리 비용의 감소, 쓰레드간의 공유영역이 생기지만, 반대로 동기화 이슈 또는 하나의 쓰레드오류가 
 	전체 프로세스의 문제발생으로 이어질수있다.
+	 스레드는 lightweight process이다. 또한 가장 기본적인 cpu점유단위!
+	 실제로는 cpu를 점유하는것은 pid가 아닌 tid이다!
+	 스레드가 공유하는것 : code, data, files
+	 공유하지 않는것 : registers, pc, stack
+	 responsivensess : may allow continued execution
+	 resource sharing : threads share resources of process
+	 economy : cheaper than process creation! thread switching lower overhand than context switching
+	 scalability : process can take advantage of multiprocessor architectures
+	 
 	
 	4. Thread Safe : 여러 thread가 동시에 사용되어도 안전하다는것을 뜻함.
 	예로는 동기화, Mutext, Semaphore, synchronized가 있다.
 
-### 3. 
-
-
-
+### 3.  프로세스 동기화
+	1. critical section.
+	 임계영역! --> n개의 프로세스가있을때, 어떠한 segment of code 를 critical section이라고한다.
+	 하나의 프로세스가 임계영역을 점유하고있다면, 다른 프로세스들은 접근할수없도록 해야한다.
+	 entry-section
+	 critical-section -> 도중에 코드가 끝나지않도록 해야한다. race condition 발생
+	 exit-section
+	 remainder-section
+	 
+	 while (true)
+	 	entre section
+			critical section
+		exit section
+			remainder section
+	
+	2. solution
+	- 1. mutual exclusion (상호 배제): if process P1 is executing in its critical section,
+	then no other processes can be executing in their critical section.
+	- 2. Deadlock : 대기하는 다른 프로세스들이 critical section에 진입하지 못함
+	- 3. Starvation : 프로세스들이 기다리는 시간을 한정시켜야한다. 그냥 순서대로 진입하게되면,
+	 마지막에 있는 프로세스는 진입하지못함.
