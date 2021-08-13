@@ -1,3 +1,29 @@
+# Inter Process Communication
+	1. 프로세스간의 통신문제!
+	Cooperating processes require an IPC mechanism
+	- that will allow them to exchange data
+	- that is, send data to and receive data from each other
+	
+	2. 두가지 방법
+	- shared memory
+	  to allow producer and consomer to run concurrently, 
+	  let a "buffer" of items be available
+	  a shared memory is a region of memory(by OS),  
+	  that is shared by the producer(fill the buffer)
+	  and consummer(empty the buffer) processes. 
+	- message passing
+	  send, receive message
+	  
+	 3. IPC의 예
+	 - shared memory = POSIX Shared memory
+	 POSIX : Portable Operating System Interface (for Unix)
+	 memory-mapped file을 이용함 --> fd를 할당받아, 한곳에서는 보내고
+	 한곳에서는 받는다.
+	 - Pipe
+	 unidirection!!!  
+	 그리고 프로세스는 parent-child 관계이다. 
+	 
+	 
 # 함수 설명
 
 	1. access
@@ -35,7 +61,26 @@
 		그렇기 떄문에, 자식 프로세스를 만든다.
 		자식 프로세스는 부모프로세스의 모든 환경변수를 복제해서 만들어진다 (즉, 같은 환경으로 시작)
 		반환 PID (pid_t형) 으로 자식인지(0), 부모인지 ( > 0) 또는 실패인지 ( < 0) 알수있다.
-	
+		
+		예) fork()를 사용했을때, 부모함수가 wait()함수를 사용하는것과같음.
+		 =====예==== 그러나 Multi process는 다른 프로세스의 변수나 자료구조에 접근못함
+		 int j = 0;
+
+		 int main(void)
+		 {
+		   pid_t pid = fork();
+		   if (pid > 0)
+		   {
+			wait();
+			return (0);
+		   }
+		   else if (pid == 0)
+			j += 15;
+		   printf("%d\n", j);
+		   return (0);
+		 }
+		 결과값 ==>>> 0;
+
 	16. perror
 		원래는 erron 번호를 부여받고, stderr함수를 쓰려고했는데,
 		perror는 그 둘을 한번에 사용할수있는 함수!
