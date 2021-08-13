@@ -16,9 +16,7 @@
 	스레드는 프로세스 내에서 각각 stack만 따로 할당받고, code, data, heap영역은 공유한다.
 	즉 각각의 스레드는 별도의 레지스터와 스택을 갖고있지만, 힙 메모리는 서로 읽고 쓸수있다.
 
-###	2. Context Switching, Multi Process, Multi Thread, Tread Safe
-
-
+### 2. Context Switching, Multi Process, Multi Thread, Tread Safe
 	1. Context Switching : CPU에서 여러 프로세스를 돌아가면서 작업을 처리하는 과정을 뜻함.
 	 동작중인 프로세스가 대기를 하면서, 해당 프로세스의 상태(context)를 보관하고 있다가 
 	 다시 실행시 복구하는 비용을 말함.
@@ -31,7 +29,7 @@
 	 context switching의 비용이 발생한다.
 	 time sharing --> scheduling Queues (FIFO) --> ready queue
 	 running상태에서는 ready queue로 돌아가거나, waiting상태로 가던가(i/o event)
-
+	
 	3. Multi thread : 프로그램의 여러개의 쓰레드로 구성하고, 각 쓰레드가 작업을 처리하는것
 	처리 비용의 감소, 쓰레드간의 공유영역이 생기지만, 반대로 동기화 이슈 또는 하나의 쓰레드오류가 
 	전체 프로세스의 문제발생으로 이어질수있다.
