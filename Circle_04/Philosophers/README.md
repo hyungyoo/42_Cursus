@@ -154,8 +154,40 @@
 		 }
 		 
 		 * 어떤 프로세스가 CS에 들어가기위해서, 무한루프속에서 기다려야한다.
-		 그것이 busy waiting! multi programming 시스템에서는 큰 문제를 야기한다.
-		 cpu 사이클을 쓸데없이 소모하여, 다른 프로세스들이 생산적으로 점유하지못한다.
-		 그렇기에 mutex에서 busy waiting이 가장 큰 문제!(spinglock)
+		 그것이 busy waiting! 
+		 
+		 코드 예제)
+		 
+		 int	sum = 0; //a shared variable
+		 pthread_mutex_t mutex;
+		 
+		 void	*counter(void *param)
+		 {
+		 	int	k;
+			for (k = 0; k < 10000; k++)
+			{
+				/* entry section */
+				pthread_mutex_lock(&mutex);
+		 		/* critical section */
+				sum++;
+				/*exit section */
+				pthread_mutex_unlock(&mutex);
+			}
+			pthread_exit(0);
+		}
+		
+		 int	main(void)
+		 {
+		 	pthread_t tid1, tid2;
+			pthread_mutex_init(&mutex, NULL);
+			pthread_create(&tid1, NULL, counter, NULL);
+			pthread_create(&tid2, NULL, counter, NULL);
+			pthread_join(tid1, NULL);
+			pthread_join(tid2, NULL);
+			printf("sum = %d\n", sum);
+			return (0);
+		}
+		 
+		 하지만, 이 코드로는 아직까지 Deadlock, Starvation의 위험성이 남아있음.
 		 
 	- semaphore : more robust, convenient, and effective tool.
