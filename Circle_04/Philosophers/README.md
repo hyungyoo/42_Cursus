@@ -69,7 +69,7 @@
 	- 3. Starvation : 프로세스들이 기다리는 시간을 한정시켜야한다. 그냥 순서대로 진입하게되면,
 	 마지막에 있는 프로세스는 진입하지못함.
 	 
-	3. Peterson's solution
+	3. Peterson's solution --> but no guarantees (entry section에서 context switching)
 	int	turn;
 	int	flag[2];
 	
@@ -126,3 +126,36 @@
 		return (0);
 	}
 	
+	4. Higher-level software tools to solve the CSP
+	- mutex(MUTual EXclusion) locks : the simplest tools for synchronization.
+		to protect critical section and prevent race condition.
+		a process must acquire the lock before entrering a critical section.
+		releases the lock when it exits the critical section.
+		 예)
+		 
+		 acquire()
+		 {
+		 	while (!available)
+				busy waiting;
+			available = false;
+		 }
+		 
+		 release ()
+		 {
+		 	available = true;
+		 }
+		 
+		 while (true)
+		 {
+		 	acquire lock
+				critical section
+			release lock
+				remainder section
+		 }
+		 
+		 * 어떤 프로세스가 CS에 들어가기위해서, 무한루프속에서 기다려야한다.
+		 그것이 busy waiting! multi programming 시스템에서는 큰 문제를 야기한다.
+		 cpu 사이클을 쓸데없이 소모하여, 다른 프로세스들이 생산적으로 점유하지못한다.
+		 그렇기에 mutex에서 busy waiting이 가장 큰 문제!(spinglock)
+		 
+	- semaphore : more robust, convenient, and effective tool.
