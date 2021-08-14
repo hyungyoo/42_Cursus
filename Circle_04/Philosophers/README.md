@@ -154,7 +154,11 @@
 		 }
 		 
 		 * 어떤 프로세스가 CS에 들어가기위해서, 무한루프속에서 기다려야한다.
-		 그것이 busy waiting! 
+		 그것이 busy waiting! 원하는 자원을 얻기위해서 기다리는것이아니라,
+		 권한을 얻을 때까지 확인하는것을 의미한다. 그러나 권한의 획득을 위하여,
+		 많은 cpu의 낭비가 예상되므로, sleeping이라는 방법을 사용하기도한다.
+		 기다리는 시간이 예측불가능할 경우에, 사용하지만, wait queue에 넣는 비용과
+		 context switching의 비용이 드는 단점이있다.
 		 
 		 코드 예제)
 		 
@@ -191,3 +195,4 @@
 		 하지만, 이 코드로는 아직까지 Deadlock, Starvation의 위험성이 남아있음.
 		 
 	- semaphore : more robust, convenient, and effective tool.
+		
