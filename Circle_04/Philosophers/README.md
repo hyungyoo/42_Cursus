@@ -21,7 +21,8 @@
 	 동작중인 프로세스가 대기를 하면서, 해당 프로세스의 상태(context)를 보관하고 있다가 
 	 다시 실행시 복구하는 비용을 말함.
 	 context는 process가 가용되고 있는 상태를 뜻한다! 이건 PCB(process control block)에 저장되어있다.
-	 interrupt가 일어났을 때, running process의 CONTEXT + PC(programme count)를 저장해놓고, ready queue에 있다가 restore한다.
+	 interrupt가 일어났을 때, running process의 CONTEXT + PC(programme count)를 저장해놓고, 
+	 ready queue에 있다가 restore한다.
 	 즉, 현재 프로세스의 context state를 저장하고, cpu를 다시 점유할 프로세스를  restore함! 
 
 	2. Multi Process : 하나의 프로그램을 여러개의 프로세스로 구성하여, 각 프로세스가 
@@ -61,9 +62,67 @@
 		exit section
 			remainder section
 	
-	2. solution
+	2. 3 solutions for critical section
 	- 1. mutual exclusion (상호 배제): if process P1 is executing in its critical section,
 	then no other processes can be executing in their critical section.
 	- 2. Deadlock : 대기하는 다른 프로세스들이 critical section에 진입하지 못함
 	- 3. Starvation : 프로세스들이 기다리는 시간을 한정시켜야한다. 그냥 순서대로 진입하게되면,
 	 마지막에 있는 프로세스는 진입하지못함.
+	 
+	3. Peterson's solution
+	int	turn;
+	int	flag[2];
+	
+	void	*producer(void *param)
+	{
+		int	k;
+		for (k = 0; k < 10000; k++)
+		{
+			/*entry section */
+			flag[0] = true;
+			turn = 1;
+			while (flag[1] && turn == 1)
+				;
+			/* critical section */
+			sum++;
+			
+			/*exit section */
+			flag[0] = false;
+			
+			/* remainder section*/
+		}
+		pthread_exit(0);
+	}
+	
+	void	*consumer(void *param)
+	{
+		int	k;
+		for (k = 0; k < 10000; k++)
+		{
+			/*entry section */
+			flag[1] = true;
+			turn = 0;
+			while (flag[0] && turn == 0)
+				;
+			/* critical section */
+			sum++;
+			
+			/*exit section */
+			flag[1] = false;
+			
+			/* remainder section*/
+		}
+		pthread_exit(0);
+	}
+	
+	int	main(void)
+	{
+		pthread_t tid1, tid2;
+		pthread_create(&tid1, NULL, producer, NULL);
+		pthread_create(&tid2, NULL, consumer, NULL);
+		pthread_join(tid1, NULL);
+		pthread_join(tid2, NULL);
+		printf("sum = %d\n, sum)l
+		return (0);
+	}
+	
