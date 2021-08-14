@@ -283,10 +283,57 @@
 			int	main(void)
 			{
 				pthread_t tid1, tid2;
-				sem_init(&sem, 0, 1);
+				sem_init(&sem, 0, 1); // 3번째 인자는 자원의 갯수! 1은 Mutex 와 같다!
 				pthread_create(&tid1, NULL, counter, NULL);
 				pthread_create(&tid2, NULL, counter, NULL);
 				phtread_join(tid1, NULL);
 				pthread_join(tid2, NULL);
 				printf("SUM = %d\n", sum);
 			}
+			
+			// 아니면 여러개의 자원과 여러개의 스레드는!
+			
+			int	main(void)
+			{
+				pthread_t 	tid[5];
+				int		i;
+				
+				sem_init(&sem, 0 5);
+				for (i = 0; i < 5; i++)
+					pthread_create(&tid[i], NULL, counter, NULL);
+				for (i = 0; i < 5; i++)
+					pthread_join(tid[i], NULL);
+			}
+			//  는 안된다! 여러개의 자원을 동시에 점유하면, race condition 문제 발생
+			// 이렇게 하려면 int sum[5]일 경우에 가능하다.
+			// sum 이라는 하나의 인자에는 한개의 자리만이 있어야한다!
+
+### 4. 철학자들
+	1. several resources among several processes
+		- mutex
+		 예)
+			semaphore fork[num_philos];
+			
+			while (true)
+			{
+				waite(fork[i]);
+				waite(fork[i + 1] % num_philos];
+				
+				/* eat for a while*/ --> 임계영역!
+				
+				signal(fork[i]);
+				signal(fork[i + 1] % num_philos);
+				
+				/* think for a while */
+			}
+			
+		- deadlock
+			- deadlock?
+				suppose that all philosophers become hungry at the same time
+				and each grabs left fork, tring to grab right fork
+				here comes a deadlock situation!
+			- possible remedies to the deadlock problem
+				1) allow a philosopher to pick up fork only if both fork are avaliable
+				or 2) asymmetric solution : add-numbered philosopher picks up first left fork
+				and even-numbered philosopher picks up right fork and the left fork
+				
