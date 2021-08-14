@@ -126,7 +126,15 @@
 		return (0);
 	}
 	
-	4. Higher-level software tools to solve the CSP
+	4. Atomicity operation : 원자성 (context switching으로 인한 오류를 제거)
+		 -compare and swap
+		 	value를 expected와 new_value로 변환하는 방법!
+			
+		 -test and modify
+		 	상호배제에서 발생할수있는, 인터럽트에 의한 오류를 교정하기위한방법!
+		 	한라인으로 lock을 구현하면, 인터럽트가 발생할수있는 공간이없어진다!
+	
+	5. Higher-level software tools to solve the CSP
 	- mutex(MUTual EXclusion) locks : the simplest tools for synchronization.
 		to protect critical section and prevent race condition.
 		a process must acquire the lock before entrering a critical section.
@@ -195,4 +203,90 @@
 		 하지만, 이 코드로는 아직까지 Deadlock, Starvation의 위험성이 남아있음.
 		 
 	- semaphore : more robust, convenient, and effective tool.
-		
+		wait() and signal()
+		binary and counting semaphores!
+			-range only between 0 and 1: similar to "Mutex lock"
+		counting semaphore!
+			- range over an unrestricted domain
+			- can be used to resources with a finite number of instances
+		Using the counting semaphore:
+			- initialize a semaphore to the number of ressources available
+			- when a process uses a resource : wait() on the semaphore (deccrements the count)
+			- when a process release a resource: signal() on the semaphore (increment the count)
+			- when the count goes to "0" : all resources are being used
+				then, processes that wish to use a resource will block
+				until the count becomes greater than "0"
+		using the semaphore to solve synchronization problem
+			- consider two processes p1 and p2 running concurrently, p1 with a statement s1, and
+			  p2 with a statement s2/
+			- suppose that s2 should be executed only after s1 has completed, let p1 and p2 share a
+			  semaphore "synch", initialized to "0"
+			 s1;
+			 signal(synch); // waiting processes can be restarted and placed into the "ready queue"
+			 
+			 waite(synch); //waiting queue
+			 s2
+			 
+			 코드예)
+			 
+			 typedef struct		s_semaphore
+			 {
+			 	int	value;
+				struct process	*list;
+			 }			t_semaphore;
+			 
+			 void	wait(t_semaphore *s)
+			 {
+			 	s->value--;
+				if (s->value < 0)
+				{
+					add this process to s->list
+					sleep();
+				}
+			}
+			
+			void	signal(t_semaphore *s)
+			{
+				s->value++;
+				if (s->value <= 0)
+				{
+					remove a process P form S->list;
+					wakeup(P);
+				}
+			}
+			
+			s->list의 int value값은 waiting processes 의 수!
+			
+			==============================================
+			
+			int	sum = 0; // a shared variable;
+			
+			sem_t 	sem;
+			
+			void	*counter(void *param)
+			{
+				int	k;
+				
+				for (k = 0; k < 10000; k++)
+				{
+					/* entry section */
+					sem_wait(&sem);
+					/* critical section */
+					sum++;
+					/* exit section*/
+					sem_post(&sem);
+					/*remainder section*/
+				}
+				pthread_exit(0);
+			}
+			
+			int	main(void)
+			{
+				pthread_t tid1, tid2;
+				sem_init(&sem, 0, 1);
+				pthread_create(&tid1, NULL, counter, NULL);
+				pthread_create(&tid2, NULL, counter, NULL);
+				phtread_join(tid1, NULL);
+				pthread_join(tid2, NULL);
+				printf("SUM = %d\n", sum);
+			}
