@@ -13,18 +13,17 @@ void	*ft_u(void	*data)
 	int	i = 0;
 
 		// critical section
+		// entry section
+	pthread_mutex_lock(&mutex_lock);
 	while (i++ < 100000)
 	{
 
-		// entry section
-		pthread_mutex_lock(&mutex_lock);
 
 		g_count++;
 		//printf("%s COUNT %d\n", thread_name, g_count);
-		// exit section
-		pthread_mutex_unlock(&mutex_lock);
 	}
 		// remainder section
+	pthread_mutex_unlock(&mutex_lock);
 	pthread_exit(0);
 	return (NULL);
 }
@@ -34,16 +33,13 @@ void	*ft_d(void	*data)
 	char	*thread_name = (char *)data;
 	int	i = 0;
 		// critical section
+	pthread_mutex_lock(&mutex_lock);
 	while (i++ < 100000)
 	{
-		// entry section
-		pthread_mutex_lock(&mutex_lock);
-		
 		g_count--;
 		//printf("%s COUNT %d\n", thread_name, g_count);
-		// exit section
-		pthread_mutex_unlock(&mutex_lock);
 	}	
+	pthread_mutex_unlock(&mutex_lock);
 		// remainder section
 	pthread_exit(0);
 	return (NULL);
@@ -63,9 +59,9 @@ int	main(void)
 	sleep(2);
 	pthread_join(p_thread1, (void*)&status);
 	pthread_join(p_thread2, (void*)&status);
+
 	sleep(2);
 	pthread_mutex_destroy(&mutex_lock);
-
 	printf("==========resultat : %d\n", g_count);
 	return (0);
 }
