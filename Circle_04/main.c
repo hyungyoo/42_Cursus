@@ -13,7 +13,7 @@ void	*ft_u(void	*data)
 	int	i = 0;
 
 		// critical section
-	while (i++ < 100000)
+	while (i++ < 10000)
 	{
 
 		// entry section
@@ -21,7 +21,7 @@ void	*ft_u(void	*data)
 
 		g_count++;
 		printf("%s COUNT %d\n", thread_name, g_count);
-		usleep(10);
+		usleep(1000);
 		// exit section
 		pthread_mutex_unlock(&mutex_lock);
 	}
@@ -35,14 +35,14 @@ void	*ft_d(void	*data)
 	char	*thread_name = (char *)data;
 	int	i = 0;
 		// critical section
-	while (i++ < 100000)
+	while (i++ < 10000)
 	{
 		// entry section
 		pthread_mutex_lock(&mutex_lock);
 		
 		g_count--;
 		printf("%s COUNT %d\n", thread_name, g_count);
-		usleep(10);
+		usleep(1000);
 		// exit section
 		pthread_mutex_unlock(&mutex_lock);
 	}	
