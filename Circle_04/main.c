@@ -20,8 +20,6 @@ void	*ft_u(void	*data)
 		pthread_mutex_lock(&mutex_lock);
 
 		g_count++;
-		printf("%s COUNT %d\n", thread_name, g_count);
-		usleep(1000);
 		// exit section
 		pthread_mutex_unlock(&mutex_lock);
 	}
@@ -41,9 +39,6 @@ void	*ft_d(void	*data)
 		pthread_mutex_lock(&mutex_lock);
 		
 		g_count--;
-		printf("%s COUNT %d\n", thread_name, g_count);
-		usleep(1000);
-		// exit section
 		pthread_mutex_unlock(&mutex_lock);
 	}	
 		// remainder section
@@ -62,8 +57,8 @@ int	main(void)
 	pthread_create(&p_thread1, NULL, ft_u, (void*)"Thread1");
 	pthread_create(&p_thread2, NULL, ft_d, (void*)"Thread2");
 
-	pthread_join(p_thread1, (void*)&status);
-	pthread_join(p_thread2, (void*)&status);
+	pthread_join(p_thread1, NULL);
+	pthread_join(p_thread2, NULL);
 	pthread_mutex_destroy(&mutex_lock);
 
 	printf("==========resultat : %d\n", g_count);
