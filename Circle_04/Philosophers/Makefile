@@ -1,0 +1,41 @@
+NAME	= philo
+
+PHI_BONUS	= philo_bonus
+
+SRCS = main.c \
+
+SRCS_BONUS = 	
+
+OBJS 		= ${SRCS:.c=.o}
+OBJS_B		= ${SRCS_BONUS:.c=.o}
+
+CCG			= gcc -g -fsanitize=address
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+RM			= rm -f
+NAME		= philo
+
+all: 		${NAME}
+
+.c.o:
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
+$(NAME): 	$(OBJS)
+			${CC} $(CFLAGS) -o $(NAME) $(OBJS)
+
+$(philo_BONUS):${OBJS_B}
+			${CC} ${CFLAGS} -o ${PHI_BONUS} ${OBJS_B}
+
+bonus:		re $(PHI_BONUS)
+
+clean:
+			${RM} ${OBJS}  
+			${RM} ${OBJS_B}
+
+fclean: 	clean
+			${RM} ${NAME}
+			${RM} ${PHI_BONUS}
+
+re: 		fclean all
+
+.PHONY:		bonus all clean fclean re
