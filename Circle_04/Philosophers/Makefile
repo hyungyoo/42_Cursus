@@ -6,6 +6,7 @@ SRCS = ./src/main.c \
 	   ./src/display.c \
 	   ./src/init.c \
 	   ./src/util.c \
+	   ./src/sleep.c \
 
 SRCS_BONUS = 	
 

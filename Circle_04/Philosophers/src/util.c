@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 15:31:42 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 15:34:45 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 17:33:43 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_atoi(char *nbr)
 	}
 	while (*nbr)
 	{
-		res = res  * 10 + (*nbr - '0');
+		res = res * 10 + (*nbr - '0');
 		nbr++;
 	}
 	return (res * neg);

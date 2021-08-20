@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:43:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 17:00:27 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 17:31:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct	s_info
 	long long			time_start;
 	t_philo				*philo;
 	pthread_mutex_t		*fork;
-	pthread_mutex_t		*msg;
+	pthread_mutex_t		msg;
 }				t_info;
 
 /*
@@ -62,4 +62,8 @@ void	ft_print_error(char *str);
  */
 int		ft_atoi(char *nbr);
 
+/*
+ * sleep.c
+ */
+long long	ft_get_time(void);
 #endif

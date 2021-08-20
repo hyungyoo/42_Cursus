@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 14:57:17 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 17:11:54 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 17:35:00 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,16 @@ void	ft_arg(int argc, char **argv)
 void	ft_init_all(int argc, char **argv, t_info *all)
 {
 	if (argc == 6)
+	{
 		if (ft_atoi(argv[5]) > 0)
 			all->limit_eat = ft_atoi(argv[5]);
 		else
 			ft_print_error("Error value of limit_eat");
+	}
 	else
 		all->limit_eat = -1;
 	if (ft_atoi(argv[1]) > 0)
-			all->num_philo = ft_atoi(argv[1]);
+		all->num_philo = ft_atoi(argv[1]);
 	else
 		ft_print_error("Error value of number of Philosophers");
 	if (ft_atoi(argv[2]) > 0)
@@ -67,9 +69,16 @@ void	ft_init_all(int argc, char **argv, t_info *all)
 	else
 		ft_print_error("Error value of time_eat");
 	if (ft_atoi(argv[4]) > 0)
-			all->time_sleep = ft_atoi(argv[4]);
+		all->time_sleep = ft_atoi(argv[4]);
 	else
 		ft_print_error("Error value of time_sleep");
+}
+
+void	ft_init_info(t_info *all)
+{
+	all->flag_all_ate = 0;
+	all->flag_die = 0;
+	all->time_start = ft_get_time();
 	all->philo = NULL;
 }
 
@@ -80,7 +89,7 @@ void	ft_init_philo(t_info *all)
 	i = 0;
 	all->philo = (t_philo *)malloc(sizeof(t_philo) * (all->num_philo));
 	if (!(all->philo))
-		return ;
+		ft_print_error("Error malloc");
 	while (i < all->num_philo)
 	{
 		all->philo[i].id = i;
@@ -93,9 +102,30 @@ void	ft_init_philo(t_info *all)
 	}
 }
 
+void	ft_init_mutex(t_info *all)
+{
+	int	i;
+
+	i = 0;
+	all->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* all->num_philo);
+	if (!(all->fork))
+		return ;
+	while (i < all->num_philo)
+	{
+		if (pthread_mutex_init(&(all->fork[i]), NULL))
+			ft_print_error("Error initialize mutex");
+		i++;
+	}
+	if (pthread_mutex_init(&(all->msg), NULL))
+		ft_print_error("Error initialize mutex");
+}
+
 void	ft_init(int argc, char **argv, t_info *all)
 {
 	ft_arg(argc, argv);
 	ft_init_all(argc, argv, all);
+	ft_init_info(all);
 	ft_init_philo(all);
+	ft_init_mutex(all);
 }
