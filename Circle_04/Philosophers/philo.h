@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:43:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 20:05:17 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 23:42:38 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 struct	s_info;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				id;
 	int				count_eat;
@@ -33,7 +33,7 @@ typedef struct	s_philo
 	struct s_info	*all;
 }				t_philo;
 
-typedef struct	s_info
+typedef struct s_info
 {
 	int					limit_eat;
 	int					num_philo;
@@ -52,22 +52,25 @@ typedef struct	s_info
 /*
  * thread.c
  */
-void	ft_thread(t_info *all);
-
+void		ft_thread(t_info *all);
+void		ft_eat(t_philo *philo);
+void		ft_sleep_think(t_philo *philo);
+void		*ft_philo(void	*philo_ptr);
 /*
  * init.c
  */
-void	ft_init(int argc, char **argv, t_info *all);
-
+void		ft_init(int argc, char **argv, t_info *all);
+int			ft_digit(char c);
+void		ft_arg(int argc, char **argv);
 /*
  * display.c
  */
-void	ft_print_error(char *str);
-void	ft_display(int id, char *str, t_info *all);
+void		ft_print_error(char *str);
+void		ft_display(int id, char *str, t_info *all);
 /*
  * util.c
  */
-int		ft_atoi(char *nbr);
+int			ft_atoi(char *nbr);
 
 /*
  * sleep.c

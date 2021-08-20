@@ -5,9 +5,11 @@ PHI_BONUS	= philo_bonus
 SRCS = ./src/main.c \
 	   ./src/display.c \
 	   ./src/init.c \
+	   ./src/init2.c \
 	   ./src/util.c \
 	   ./src/sleep.c \
 	   ./src/thread.c \
+	   ./src/thread2.c \
 
 SRCS_BONUS = 	
 
@@ -16,7 +18,7 @@ OBJS_B		= ${SRCS_BONUS:.c=.o}
 
 CCG			= gcc -g -fsanitize=address
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -pthread
 RM			= rm -f
 NAME		= philo
 
