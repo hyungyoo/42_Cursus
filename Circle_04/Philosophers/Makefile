@@ -3,6 +3,9 @@ NAME	= philo
 PHI_BONUS	= philo_bonus
 
 SRCS = ./src/main.c \
+	   ./src/display.c \
+	   ./src/init.c \
+	   ./src/util.c \
 
 SRCS_BONUS = 	
 

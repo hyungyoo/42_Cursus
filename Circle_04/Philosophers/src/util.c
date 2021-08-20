@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 15:42:05 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 14:57:12 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/08/20 15:31:42 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/08/20 15:34:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	main(int argc, char **argv)
+int	ft_atoi(char *nbr)
 {
-	t_info all;
-	
-	ft_init(argc, argv, &all);
-	return (0);
-}
+	int	neg;
+	int	res;
 
+	neg = 1;
+	res = 0;
+	if (*nbr == '-' || *nbr == '+')
+	{
+		if (*nbr == '-')
+			neg = -1;
+		nbr++;
+	}
+	while (*nbr)
+	{
+		res = res  * 10 + (*nbr - '0');
+		nbr++;
+	}
+	return (res * neg);
+}

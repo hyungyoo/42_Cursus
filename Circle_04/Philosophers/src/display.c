@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 15:42:05 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 14:57:12 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/08/20 15:04:04 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/08/20 15:52:23 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	main(int argc, char **argv)
+void	ft_putchar(char c)
 {
-	t_info all;
-	
-	ft_init(argc, argv, &all);
-	return (0);
+	write(1, &c, 1);
 }
 
+void	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
+}
+
+void	ft_print_error(char *str)
+{
+	ft_putstr(str);
+	ft_putchar('\n');
+	exit(1);
+	//free
+}
