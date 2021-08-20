@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/18 15:43:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 02:29:31 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/08/18 15:42:05 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/08/20 01:48:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../philo.h"
 
-# include <string.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/time.h>
-# include <pthread.h>
-
-typedef struct	s_philo
+int	main(int argc, char **argv)
 {
-	int		id;
-	int		count_eat;
-	int		r_fork;
-	int		l_fork;
-	struct s_info	*info;
-}				t_philo;
+	t_info all;
+	ft_init(&all);
+	return (0);
+}
 
-typedef struct	s_info
-{
-	int				num_eat;
-	t_philo	*philo;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	*msg;
-}				t_info;
-
-#endif

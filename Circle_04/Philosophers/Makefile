@@ -2,7 +2,7 @@ NAME	= philo
 
 PHI_BONUS	= philo_bonus
 
-SRCS = main.c \
+SRCS = ./src/main.c \
 
 SRCS_BONUS = 	
 
