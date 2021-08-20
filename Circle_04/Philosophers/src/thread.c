@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:48:18 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 20:06:08 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 22:55:38 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&(all->fork[philo->l_fork]));
 	ft_display(philo->id, "has taken a fork", all);
 	pthread_mutex_lock(&(all->fork[philo->r_fork]));
-	pthread_mutex_lock(&(all->checker));
 	ft_display(philo->id, "has taken a fork", all);
+	pthread_mutex_lock(&(all->checker));
 	ft_display(philo->id, "is eating", all);
 	philo->last_eat = ft_get_time();
+	pthread_mutex_unlock(&(all->checker));
 	philo->count_eat += 1;
 	ft_sleep(all->time_eat);
-	pthread_mutex_unlock(&(all->checker));
 	pthread_mutex_unlock(&(all->fork[philo->l_fork]));
 	pthread_mutex_unlock(&(all->fork[philo->r_fork]));
 }
@@ -78,7 +78,7 @@ void	ft_loop_checker(t_info *all)
 				all->flag_die = 1;
 			}
 			pthread_mutex_unlock(&(all->checker));
-			ft_sleep(100);
+			//ft_sleep(100);
 		}
 		i = -1;
 		if (all->flag_die == 1)
