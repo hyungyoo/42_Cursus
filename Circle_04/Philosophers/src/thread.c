@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:48:18 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 23:41:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/21 00:08:07 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	ft_create_thread(t_info *all)
 		all->philo[i].last_eat = ft_get_time();
 		i++;
 	}
-	ft_loop_checker(all);
 }
 
 void	ft_free_thread(t_info *all)

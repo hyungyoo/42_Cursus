@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:48:18 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 23:38:00 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/21 00:11:54 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	ft_eat(t_philo *philo)
 	all = philo->all;
 	pthread_mutex_lock(&(all->fork[philo->l_fork]));
 	ft_display(philo->id, "has taken a fork", all);
+	if (philo->l_fork == philo->r_fork)
+	{
+		ft_sleep(all->time_death * 2);
+		return ;
+	}
 	pthread_mutex_lock(&(all->fork[philo->r_fork]));
 	ft_display(philo->id, "has taken a fork", all);
 	pthread_mutex_lock(&(all->checker));
