@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:25:34 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 17:35:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 19:47:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ long long	ft_get_time(void)
 
 void	ft_sleep(int time)
 {
-	int	time_cmp;
+	long long	time_cmp;
 
-	time_cmp = (int)ft_get_time();
+	time_cmp = ft_get_time();
 	while ((ft_get_time() - time_cmp) < time)
 		usleep(time / 10);
 }

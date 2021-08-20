@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:42:05 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 19:29:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 19:39:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int	main(int argc, char **argv)
 
 	ft_init(argc, argv, &all);
 	ft_thread(&all);
+	free(all.fork);
 	return (0);
 }

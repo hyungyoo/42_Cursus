@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:48:18 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 19:36:51 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 19:45:23 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	*ft_philo(void *philo_ptr)
 	philo = (t_philo *)philo_ptr;
 	all = philo->all;
 	if (philo->id % 2)
-		ft_sleep(all->time_eat * 2);
+		usleep(15000);
 	while (!(all->flag_die))
 	{
 		ft_eat(philo);
 		if (all->flag_eat == 1 || all->flag_die == 1)
-			return (NULL);
+			break ;
 		ft_sleep_think(philo);
 	}
 	return (NULL);
