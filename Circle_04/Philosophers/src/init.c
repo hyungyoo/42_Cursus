@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 14:57:17 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 19:27:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:02:57 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_init_info(t_info *all)
 {
 	all->flag_eat = 0;
 	all->flag_die = 0;
-	all->time_start = ft_get_time();
+	all->time_start = 0;
 	all->philo = NULL;
 	all->fork = NULL;
 }

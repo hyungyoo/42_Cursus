@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:25:34 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 19:47:30 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:04:44 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long long	ft_get_time(void)
 	return ((now.tv_sec * 1000) + (now.tv_usec / 1000));
 }
 
-void	ft_sleep(int time)
+void	ft_sleep(long long time)
 {
 	long long	time_cmp;
 

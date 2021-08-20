@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:43:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 19:32:45 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:05:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ int		ft_atoi(char *nbr);
  * sleep.c
  */
 long long	ft_get_time(void);
-void		ft_sleep(int time);
+void		ft_sleep(long long time);
 #endif
