@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:48:18 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 22:55:38 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 23:07:16 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_eat(t_philo *philo)
 {
-	t_info *all;
+	t_info	*all;
 
 	all = philo->all;
 	pthread_mutex_lock(&(all->fork[philo->l_fork]));
@@ -33,7 +33,7 @@ void	ft_eat(t_philo *philo)
 
 void	ft_sleep_think(t_philo *philo)
 {
-	t_info *all;
+	t_info	*all;
 
 	all = philo->all;
 	ft_display(philo->id, "is sleeping", all);
@@ -49,7 +49,7 @@ void	*ft_philo(void *philo_ptr)
 	philo = (t_philo *)philo_ptr;
 	all = philo->all;
 	if (philo->id % 2)
-		usleep(all->time_eat * 5);
+		usleep(all->time_eat * 2);
 	while (!(all->flag_die))
 	{
 		ft_eat(philo);
@@ -58,6 +58,20 @@ void	*ft_philo(void *philo_ptr)
 		ft_sleep_think(philo);
 	}
 	return (NULL);
+}
+
+void	ft_all_eat_checker(t_info *all, int *num_eat)
+{
+	int	i;
+
+	i = -1;
+	while (all->limit_eat != -1 && ++i < all->num_philo)
+	{
+		if (all->philo[i].count_eat >= all->limit_eat)
+			(*num_eat) += 1;
+	}
+	if (*num_eat == all->num_philo)
+		all->flag_eat = 1;
 }
 
 void	ft_loop_checker(t_info *all)
@@ -78,18 +92,10 @@ void	ft_loop_checker(t_info *all)
 				all->flag_die = 1;
 			}
 			pthread_mutex_unlock(&(all->checker));
-			//ft_sleep(100);
 		}
-		i = -1;
 		if (all->flag_die == 1)
 			break ;
-		while (all->limit_eat != -1 && ++i < all->num_philo)
-		{
-			if (all->philo[i].count_eat >= all->limit_eat)
-				num_eat++;
-		}
-		if (num_eat == all->num_philo)
-			all->flag_eat = 1;
+		ft_all_eat_checker(all, &num_eat);
 	}
 }
 
@@ -101,7 +107,8 @@ void	ft_create_thread(t_info *all)
 	all->time_start = ft_get_time();
 	while (i < all->num_philo)
 	{
-		if (pthread_create(&(all->philo[i].thread_id), NULL, &ft_philo, (void*)&(all->philo[i])))
+		if (pthread_create(&(all->philo[i].thread_id), NULL,
+				&ft_philo, (void*)&(all->philo[i])))
 			ft_print_error("Error create thread");
 		all->philo[i].last_eat = ft_get_time();
 		i++;
