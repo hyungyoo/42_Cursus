@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 15:43:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/20 15:35:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/20 17:00:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+
+struct	s_info;
 
 typedef struct	s_philo
 {
