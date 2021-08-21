@@ -338,4 +338,14 @@
 				1) allow a philosopher to pick up fork only if both fork are avaliable
 				or 2) asymmetric solution : add-numbered philosopher picks up first left fork
 				and even-numbered philosopher picks up right fork and the left fork
-				
+	
+
+### 5. 구현 순서
+	1. 우선, initialize!
+	2. fork 와 philo malloc, 나머지 스레드 생성 및 뮤텍스 init
+	3. 스레드는 create함수 호출과 동시에, 포인터함수로이동후에, 모두다 먹거나 누가 죽기전까지
+	반복문을 돈다!
+	4. 스레드 생성후, 바로 반복문을 만들어서 checker생성! mutex_checker는 동시에 사용!
+	5. usleep으로, 데드록 제어!
+	6. sleep함수는 따로 만들기!
+	7. norminette, -pthread 추가
