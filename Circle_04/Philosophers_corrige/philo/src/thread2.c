@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:31:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/21 20:54:07 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/21 22:36:09 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_eat_1(t_philo *philo)
 	all = philo->all;
 	pthread_mutex_lock(&(all->fork[philo->l_fork]));
 	ft_display(philo->id, "has taken a fork", all);
-	if (all->num_philo == 1 && philo->l_fork == philo->r_fork)
+	if (philo->l_fork == philo->r_fork)
 	{
 		ft_sleep(all->time_death * 2);
 		return ;
@@ -42,6 +42,7 @@ void	ft_eat_2(t_philo *philo)
 	int		flag;
 
 	all = philo->all;
+	flag = 0;
 	if ((philo->id) % 2 == 1)
 		flag = 1;
 	if (flag)
@@ -49,7 +50,7 @@ void	ft_eat_2(t_philo *philo)
 	else
 		pthread_mutex_lock(&(all->fork[philo->r_fork]));
 	ft_display(philo->id, "has taken a fork", all);
-	if (all->num_philo == 1 && philo->l_fork == philo->r_fork)
+	if (philo->l_fork == philo->r_fork)
 	{
 		ft_sleep(all->time_death * 2);
 		return ;
@@ -87,7 +88,7 @@ void	*ft_philo(void *philo_ptr)
 	philo = (t_philo *)philo_ptr;
 	all = philo->all;
 	if (philo->id % 2)
-		usleep(all->time_eat / 20);
+		usleep(15000);
 	while (!(all->flag_die))
 	{
 		if (all->num_philo % 2 == 1)
