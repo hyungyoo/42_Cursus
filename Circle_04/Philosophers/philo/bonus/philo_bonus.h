@@ -13,7 +13,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 
-struct s_rules;
+struct	s_rules;
 
 typedef struct s_philosopher
 {
