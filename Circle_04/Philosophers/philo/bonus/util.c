@@ -1,6 +1,6 @@
 #include "philo_bonus.h"
 
-int			ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long int	n;
 	int			sign;
@@ -36,9 +36,9 @@ long long	ft_time_diff(long long past, long long pres)
 	return (pres - past);
 }
 
-void		ft_smart_sleep(long long time, t_rules *rules)
+void	ft_smart_sleep(long long time, t_rules *rules)
 {
-	long long i;
+	long long	i;
 
 	i = ft_timestamp();
 	while (!(rules->dieded))
@@ -49,7 +49,7 @@ void		ft_smart_sleep(long long time, t_rules *rules)
 	}
 }
 
-void		ft_action_print(t_rules *rules, int id, char *string)
+void	ft_action_print(t_rules *rules, int id, char *string)
 {
 	sem_wait(rules->writing);
 	if (!(rules->dieded))

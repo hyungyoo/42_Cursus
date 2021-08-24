@@ -2,7 +2,7 @@
 
 int	ft_write_error(char *str)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (str[len])

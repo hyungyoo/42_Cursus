@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:31:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/21 22:36:09 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:25:47 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,9 @@ void	ft_eat_1(t_philo *philo)
 void	ft_eat_2(t_philo *philo)
 {
 	t_info	*all;
-	int		flag;
 
 	all = philo->all;
-	flag = 0;
 	if ((philo->id) % 2 == 1)
-		flag = 1;
-	if (flag)
 		pthread_mutex_lock(&(all->fork[philo->l_fork]));
 	else
 		pthread_mutex_lock(&(all->fork[philo->r_fork]));
@@ -55,11 +51,18 @@ void	ft_eat_2(t_philo *philo)
 		ft_sleep(all->time_death * 2);
 		return ;
 	}
-	if (flag)
+	if ((philo->id) % 2 == 1)
 		pthread_mutex_lock(&(all->fork[philo->r_fork]));
 	else
 		pthread_mutex_lock(&(all->fork[philo->l_fork]));
 	ft_display(philo->id, "has taken a fork", all);
+}
+
+void	ft_eat_3(t_philo *philo)
+{
+	t_info	*all;
+
+	all = philo->all;
 	pthread_mutex_lock(&(all->checker));
 	ft_display(philo->id, "is eating", all);
 	philo->last_eat = ft_get_time();
@@ -94,7 +97,10 @@ void	*ft_philo(void *philo_ptr)
 		if (all->num_philo % 2 == 1)
 			ft_eat_1(philo);
 		else
+		{
 			ft_eat_2(philo);
+			ft_eat_3(philo);
+		}
 		if (all->flag_eat == 1)
 			break ;
 		ft_sleep_think(philo);

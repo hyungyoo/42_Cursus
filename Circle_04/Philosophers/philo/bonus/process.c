@@ -2,7 +2,7 @@
 
 void	ft_philo_eats(t_philosopher *philo)
 {
-	t_rules *rules;
+	t_rules	*rules;
 
 	rules = philo->rules;
 	sem_wait(rules->forks);
@@ -98,7 +98,7 @@ void	ft_exit_launcher(t_rules *rules)
 	sem_unlink("/philo_mealcheck");
 }
 
-int		ft_launcher(t_rules *rules)
+int	ft_launcher(t_rules *rules)
 {
 	int				i;
 	t_philosopher	*phi;

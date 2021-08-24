@@ -13,7 +13,7 @@ int	ft_init_semaphore(t_rules *rules)
 
 int	ft_init_philosophers(t_rules *rules)
 {
-	int i;
+	int	i;
 
 	i = rules->nb_philo;
 	while (--i >= 0)

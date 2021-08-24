@@ -1,5 +1,5 @@
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <sys/time.h>
 # include <sys/wait.h>
@@ -15,7 +15,7 @@
 
 struct s_rules;
 
-typedef	struct			s_philosopher
+typedef struct s_philosopher
 {
 	int					id;
 	int					x_ate;
@@ -27,7 +27,7 @@ typedef	struct			s_philosopher
 	pid_t				proc_id;
 }						t_philosopher;
 
-typedef struct			s_rules
+typedef struct s_rules
 {
 	int					nb_philo;
 	int					time_death;
@@ -45,7 +45,6 @@ typedef struct			s_rules
 /*
 ** ----- error_manager.c -----
 */
-
 int						ft_write_error(char *str);
 int						ft_error_manager(int error);
 
