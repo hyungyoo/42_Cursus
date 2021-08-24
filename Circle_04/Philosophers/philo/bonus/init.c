@@ -1,53 +1,53 @@
 #include "philo_bonus.h"
 
-int	ft_init_semaphore(t_rules *rules)
+int	ft_init_semaphore(t_info *all)
 {
 	sem_unlink("/philo_forks");
 	sem_unlink("/philo_write");
 	sem_unlink("/philo_mealcheck");
-	rules->forks = sem_open("/philo_forks", O_CREAT, S_IRWXU, rules->nb_philo);
-	rules->writing = sem_open("/philo_write", O_CREAT, S_IRWXU, 1);
-	rules->meal_check = sem_open("/philo_mealcheck", O_CREAT, S_IRWXU, 1);
+	all->forks = sem_open("/philo_forks", O_CREAT, S_IRWXU, all->nb_philo);
+	all->writing = sem_open("/philo_write", O_CREAT, S_IRWXU, 1);
+	all->meal_check = sem_open("/philo_mealcheck", O_CREAT, S_IRWXU, 1);
 	return (0);
 }
 
-int	ft_init_philosophers(t_rules *rules)
+int	ft_init_philosophers(t_info *all)
 {
 	int	i;
 
-	i = rules->nb_philo;
+	i = all->nb_philo;
 	while (--i >= 0)
 	{
-		rules->philosophers[i].id = i;
-		rules->philosophers[i].x_ate = 0;
-		rules->philosophers[i].t_last_meal = 0;
-		rules->philosophers[i].rules = rules;
+		all->philosophers[i].id = i;
+		all->philosophers[i].x_ate = 0;
+		all->philosophers[i].t_last_meal = 0;
+		all->philosophers[i].all = all;
 	}
 	return (0);
 }
 
-int	ft_init_all(t_rules *rules, char **argv)
+int	ft_init_all(t_info *all, char **argv)
 {
-	rules->nb_philo = ft_atoi(argv[1]);
-	rules->time_death = ft_atoi(argv[2]);
-	rules->time_eat = ft_atoi(argv[3]);
-	rules->time_sleep = ft_atoi(argv[4]);
-	rules->dieded = 0;
-	if (rules->nb_philo < 1 || rules->time_death < 0 || rules->time_eat < 0
-		|| rules->time_sleep < 0 || rules->nb_philo > 250)
+	all->nb_philo = ft_atoi(argv[1]);
+	all->time_death = ft_atoi(argv[2]);
+	all->time_eat = ft_atoi(argv[3]);
+	all->time_sleep = ft_atoi(argv[4]);
+	all->dieded = 0;
+	if (all->nb_philo < 1 || all->time_death < 0 || all->time_eat < 0
+		|| all->time_sleep < 0 || all->nb_philo > 250)
 		return (1);
 	if (argv[5])
 	{
-		rules->nb_eat = ft_atoi(argv[5]);
-		if (rules->nb_eat <= 0)
+		all->nb_eat = ft_atoi(argv[5]);
+		if (all->nb_eat <= 0)
 			return (1);
 	}
 	else
-		rules->nb_eat = -1;
-	if (rules->nb_eat == 1)
-		rules->nb_eat++;
-	if (ft_init_semaphore(rules))
+		all->nb_eat = -1;
+	if (all->nb_eat == 1)
+		all->nb_eat++;
+	if (ft_init_semaphore(all))
 		return (2);
-	ft_init_philosophers(rules);
+	ft_init_philosophers(all);
 	return (0);
 }

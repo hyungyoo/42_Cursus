@@ -36,12 +36,12 @@ long long	ft_time_diff(long long past, long long pres)
 	return (pres - past);
 }
 
-void	ft_smart_sleep(long long time, t_rules *rules)
+void	ft_smart_sleep(long long time, t_info *all)
 {
 	long long	i;
 
 	i = ft_timestamp();
-	while (!(rules->dieded))
+	while (!(all->dieded))
 	{
 		if (ft_time_diff(i, ft_timestamp()) >= time)
 			break ;
@@ -49,15 +49,15 @@ void	ft_smart_sleep(long long time, t_rules *rules)
 	}
 }
 
-void	ft_action_print(t_rules *rules, int id, char *string)
+void	ft_action_print(t_info *all, int id, char *string)
 {
-	sem_wait(rules->writing);
-	if (!(rules->dieded))
+	sem_wait(all->writing);
+	if (!(all->dieded))
 	{
-		printf("%lli ", ft_timestamp() - rules->first_timestamp);
+		printf("%lli ", ft_timestamp() - all->first_timestamp);
 		printf("%i ", id + 1);
 		printf("%s\n", string);
 	}
-	sem_post(rules->writing);
+	sem_post(all->writing);
 	return ;
 }

@@ -13,7 +13,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 
-struct	s_rules;
+struct	s_info;
 
 typedef struct s_philosopher
 {
@@ -22,12 +22,12 @@ typedef struct s_philosopher
 	int					left_fork_id;
 	int					right_fork_id;
 	long long			t_last_meal;
-	struct s_rules		*rules;
+	struct s_info		*all;
 	pthread_t			death_check;
 	pid_t				proc_id;
 }						t_philosopher;
 
-typedef struct s_rules
+typedef struct s_info
 {
 	int					nb_philo;
 	int					time_death;
@@ -40,7 +40,7 @@ typedef struct s_rules
 	sem_t				*forks;
 	sem_t				*writing;
 	t_philosopher		philosophers[250];
-}						t_rules;
+}						t_info;
 
 /*
 ** ----- display.c -----
@@ -52,23 +52,23 @@ int						ft_error_manager(int error);
 ** ----- init.c -----
 */
 
-int						ft_init_all(t_rules *rules, char **argv);
+int						ft_init_all(t_info *all, char **argv);
 
 /*
 ** ----- util.c -----
 */
 
 int						ft_atoi(const char *str);
-void					ft_action_print(t_rules *rules, int id, char *string);
+void					ft_action_print(t_info *all, int id, char *string);
 long long				ft_timestamp(void);
 long long				ft_time_diff(long long past, long long pres);
-void					ft_smart_sleep(long long time, t_rules *rules);
+void					ft_smart_sleep(long long time, t_info *all);
 
 /*
 ** ----- process.c -----
 */
 
-int						ft_launcher(t_rules *rules);
-void					ft_exit_launcher(t_rules *rules);
+int						ft_process_loop(t_info *all);
+void					ft_exit_launcher(t_info *all);
 
 #endif
