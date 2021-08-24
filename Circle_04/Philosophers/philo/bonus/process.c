@@ -1,6 +1,6 @@
 #include "philo_bonus.h"
 
-void	ft_philo_eats(t_philosopher *philo)
+void	ft_philo_eats(t_philo *philo)
 {
 	t_info	*all;
 
@@ -19,28 +19,28 @@ void	ft_philo_eats(t_philosopher *philo)
 	sem_post(all->forks);
 }
 
-void	*ft_death_checker(void *void_philosopher)
+void	*ft_death_checker(void *void_philo)
 {
-	t_philosopher	*philo;
-	t_info			*r;
+	t_philo	*philo;
+	t_info			*all;
 
-	philo = (t_philosopher *)void_philosopher;
-	r = philo->all;
+	philo = (t_philo *)void_philo;
+	all = philo->all;
 	while (42)
 	{
-		sem_wait(r->meal_check);
-		if (ft_time_diff(philo->t_last_meal, ft_timestamp()) > r->time_death)
+		sem_wait(all->meal_check);
+		if ((ft_timestamp() - philo->t_last_meal) > all->time_death)
 		{
-			ft_action_print(r, philo->id, "died");
-			r->dieded = 1;
-			sem_wait(r->writing);
+			ft_action_print(all, philo->id, "died");
+			all->dieded = 1;
+			sem_wait(all->writing);
 			exit(1);
 		}
-		sem_post(r->meal_check);
-		if (r->dieded)
+		sem_post(all->meal_check);
+		if (all->dieded)
 			break ;
 		usleep(1000);
-		if (philo->x_ate >= r->nb_eat && r->nb_eat != -1)
+		if (philo->x_ate >= all->nb_eat && all->nb_eat != -1)
 			break ;
 	}
 	return (NULL);
@@ -48,10 +48,10 @@ void	*ft_death_checker(void *void_philosopher)
 
 void	ft_process(void *void_phil)
 {
-	t_philosopher	*philo;
-	t_info			*all;
+	t_philo		*philo;
+	t_info		*all;
 
-	philo = (t_philosopher *)void_phil;
+	philo = (t_philo *)void_phil;
 	all = philo->all;
 	philo->t_last_meal = ft_timestamp();
 	pthread_create(&(philo->death_check), NULL, ft_death_checker, void_phil);
@@ -85,7 +85,7 @@ void	ft_exit_launcher(t_info *all)
 		{
 			i = -1;
 			while (++i < all->nb_philo)
-				kill(all->philosophers[i].proc_id, 15);
+				kill(all->philo[i].proc_id, 15);
 			break ;
 		}
 		i++;
@@ -101,10 +101,10 @@ void	ft_exit_launcher(t_info *all)
 int	ft_process_loop(t_info *all)
 {
 	int				i;
-	t_philosopher	*phi;
+	t_philo			*phi;
 
 	i = -1;
-	phi = all->philosophers;
+	phi = all->philo;
 	all->first_timestamp = ft_timestamp();
 	while (++i < all->nb_philo)
 	{

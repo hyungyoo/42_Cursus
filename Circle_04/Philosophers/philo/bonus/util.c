@@ -31,10 +31,10 @@ long long	ft_timestamp(void)
 	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
 }
 
-long long	ft_time_diff(long long past, long long pres)
-{
-	return (pres - past);
-}
+//long long	ft_time_diff(long long past, long long pres)
+//{
+//	return (pres - past);
+//}
 
 void	ft_smart_sleep(long long time, t_info *all)
 {
@@ -43,7 +43,7 @@ void	ft_smart_sleep(long long time, t_info *all)
 	i = ft_timestamp();
 	while (!(all->dieded))
 	{
-		if (ft_time_diff(i, ft_timestamp()) >= time)
+		if (ft_timestamp() - i >= time)
 			break ;
 		usleep(50);
 	}

@@ -11,17 +11,17 @@ int	ft_init_semaphore(t_info *all)
 	return (0);
 }
 
-int	ft_init_philosophers(t_info *all)
+int	ft_init_philo(t_info *all)
 {
 	int	i;
 
 	i = all->nb_philo;
 	while (--i >= 0)
 	{
-		all->philosophers[i].id = i;
-		all->philosophers[i].x_ate = 0;
-		all->philosophers[i].t_last_meal = 0;
-		all->philosophers[i].all = all;
+		all->philo[i].id = i;
+		all->philo[i].x_ate = 0;
+		all->philo[i].t_last_meal = 0;
+		all->philo[i].all = all;
 	}
 	return (0);
 }
@@ -48,6 +48,6 @@ int	ft_init_all(t_info *all, char **argv)
 		all->nb_eat++;
 	if (ft_init_semaphore(all))
 		return (2);
-	ft_init_philosophers(all);
+	ft_init_philo(all);
 	return (0);
 }

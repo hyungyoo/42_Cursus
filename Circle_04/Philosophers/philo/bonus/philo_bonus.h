@@ -15,7 +15,7 @@
 
 struct	s_info;
 
-typedef struct s_philosopher
+typedef struct s_philo
 {
 	int					id;
 	int					x_ate;
@@ -25,7 +25,7 @@ typedef struct s_philosopher
 	struct s_info		*all;
 	pthread_t			death_check;
 	pid_t				proc_id;
-}						t_philosopher;
+}						t_philo;
 
 typedef struct s_info
 {
@@ -39,7 +39,7 @@ typedef struct s_info
 	sem_t				*meal_check;
 	sem_t				*forks;
 	sem_t				*writing;
-	t_philosopher		philosophers[250];
+	t_philo				philo[250];
 }						t_info;
 
 /*
@@ -61,7 +61,6 @@ int						ft_init_all(t_info *all, char **argv);
 int						ft_atoi(const char *str);
 void					ft_action_print(t_info *all, int id, char *string);
 long long				ft_timestamp(void);
-long long				ft_time_diff(long long past, long long pres);
 void					ft_smart_sleep(long long time, t_info *all);
 
 /*
