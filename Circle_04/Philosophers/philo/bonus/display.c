@@ -16,7 +16,7 @@ int	ft_write_error(char *str)
 int	ft_error_manager(int error)
 {
 	if (error == 1)
-		return (ft_write_error("At least one wrong argument"));
+		return (ft_write_error("wrong argument"));
 	if (error == 2)
 		return (ft_write_error("Fatal error when intializing semaphores"));
 	return (1);
