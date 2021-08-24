@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/21 18:30:11 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/23 21:55:46 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/08/24 14:12:00 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,8 @@ SRCS = ./src/main.c \
 SRCS_BONUS =./bonus/main.c \
 			./bonus/display.c \
 			./bonus/init.c \
-			./bonus/init2.c \
 			./bonus/util.c \
-			./bonus/sleep.c \
-			./bonus/thread.c \
-			./bonus/thread2.c \
+			./bonus/process.c \
 
 OBJS 		= ${SRCS:.c=.o}
 OBJS_B		= ${SRCS_BONUS:.c=.o}

@@ -1,34 +1,63 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/21 18:31:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/23 21:52:11 by hyungyoo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "philo_bonus.h"
 
-#include "../philo_bonus.h"
-
-int	ft_atoi(char *nbr)
+int			ft_atoi(const char *str)
 {
-	int	neg;
-	int	res;
+	long int	n;
+	int			sign;
 
-	neg = 1;
-	res = 0;
-	if (*nbr == '-' || *nbr == '+')
+	n = 0;
+	sign = 1;
+	while ((*str <= 13 && *str >= 9) || *str == 32)
+		str++;
+	if (*str == '-')
+		return (-1);
+	else if (*str == '+')
+		str++;
+	while (*str)
 	{
-		if (*nbr == '-')
-			neg = -1;
-		nbr++;
+		if (*str >= '0' && *str <= '9')
+			n = n * 10 + (*str++ - '0');
+		else
+			return (-1);
 	}
-	while (*nbr)
+	return ((int)(n * sign));
+}
+
+long long	ft_timestamp(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+}
+
+long long	ft_time_diff(long long past, long long pres)
+{
+	return (pres - past);
+}
+
+void		ft_smart_sleep(long long time, t_rules *rules)
+{
+	long long i;
+
+	i = ft_timestamp();
+	while (!(rules->dieded))
 	{
-		res = res * 10 + (*nbr - '0');
-		nbr++;
+		if (ft_time_diff(i, ft_timestamp()) >= time)
+			break ;
+		usleep(50);
 	}
-	return (res * neg);
+}
+
+void		ft_action_print(t_rules *rules, int id, char *string)
+{
+	sem_wait(rules->writing);
+	if (!(rules->dieded))
+	{
+		printf("%lli ", ft_timestamp() - rules->first_timestamp);
+		printf("%i ", id + 1);
+		printf("%s\n", string);
+	}
+	sem_post(rules->writing);
+	return ;
 }

@@ -1,69 +1,53 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/21 18:30:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/24 13:08:54 by hyungyoo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "philo_bonus.h"
 
-#include "../philo_bonus.h"
-
-void	ft_init_info(t_info *all)
+int	ft_init_semaphore(t_rules *rules)
 {
-	all->flag_eat = 0;
-	all->flag_die = 0;
-	all->time_start = 0;
-	all->philo = NULL;
-	all->fork = NULL;
+	sem_unlink("/philo_forks");
+	sem_unlink("/philo_write");
+	sem_unlink("/philo_mealcheck");
+	rules->forks = sem_open("/philo_forks", O_CREAT, S_IRWXU, rules->nb_philo);
+	rules->writing = sem_open("/philo_write", O_CREAT, S_IRWXU, 1);
+	rules->meal_check = sem_open("/philo_mealcheck", O_CREAT, S_IRWXU, 1);
+	return (0);
 }
 
-int	ft_init_philo(t_info *all)
+int	ft_init_philosophers(t_rules *rules)
 {
-	int	i;
+	int i;
 
-	i = 0;
-	all->philo = (t_philo *)malloc(sizeof(t_philo) * (all->num_philo));
-	if (!(all->philo))
-		return (ft_print_error("Error malloc"));
-	while (i < all->num_philo)
+	i = rules->nb_philo;
+	while (--i >= 0)
 	{
-		all->philo[i].id = i;
-		all->philo[i].count_eat = 0;
-		all->philo[i].last_eat = 0;
-		all->philo[i].pid_philo = 0;
-		all->philo[i].all = all;
-		i++;
+		rules->philosophers[i].id = i;
+		rules->philosophers[i].x_ate = 0;
+		rules->philosophers[i].t_last_meal = 0;
+		rules->philosophers[i].rules = rules;
 	}
-	return (1);
+	return (0);
 }
 
-int	ft_init_sem(t_info *all)
+int	ft_init_all(t_rules *rules, char **argv)
 {
-	sem_unlink("/philo_fork");
-	sem_unlink("/philo_msg");
-	sem_unlink("/philo_checker");
-	all->fork = sem_open("/philo_fork", O_CREAT, S_IRWXU, all->num_philo);
-	all->msg = sem_open("/philo_msg", O_CREAT, S_IRWXU, 1);
-	all->checker = sem_open("/philo_checker", O_CREAT, S_IRWXU, 1);
-	return (1);
-}
-
-int	ft_init(int argc, char **argv, t_info *all)
-{
-	if (!(ft_arg(argc, argv)))
-		return (0);
-	if (!(ft_init_all1(argc, argv, all)))
-		return (0);
-	if (!(ft_init_all2(argv, all)))
-		return (0);
-	ft_init_info(all);
-	if (!(ft_init_philo(all)))
-		return (0);
-	if (!(ft_init_sem(all)))
-		return (0);
-	return (1);
+	rules->nb_philo = ft_atoi(argv[1]);
+	rules->time_death = ft_atoi(argv[2]);
+	rules->time_eat = ft_atoi(argv[3]);
+	rules->time_sleep = ft_atoi(argv[4]);
+	rules->dieded = 0;
+	if (rules->nb_philo < 2 || rules->time_death < 0 || rules->time_eat < 0
+		|| rules->time_sleep < 0 || rules->nb_philo > 250)
+		return (1);
+	if (argv[5])
+	{
+		rules->nb_eat = ft_atoi(argv[5]);
+		if (rules->nb_eat <= 0)
+			return (1);
+	}
+	else
+		rules->nb_eat = -1;
+	if (rules->nb_eat == 1)
+		rules->nb_eat++;
+	if (ft_init_semaphore(rules))
+		return (2);
+	ft_init_philosophers(rules);
+	return (0);
 }

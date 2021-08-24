@@ -1,44 +1,23 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/21 18:30:37 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/24 12:40:02 by hyungyoo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "philo_bonus.h"
 
-#include "../philo_bonus.h"
-
-void	ft_putchar(char c)
+int	ft_write_error(char *str)
 {
-	write(1, &c, 1);
+	int len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	write(2, "Error: ", 7);
+	write(2, str, len);
+	write(2, "\n", 1);
+	return (1);
 }
 
-void	ft_putstr(char *str)
+int	ft_error_manager(int error)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
-}
-
-void	ft_display(int id, char *str, t_info *all)
-{
-	sem_wait(all->msg);
-	if (!(all->flag_die))
-		printf("%lld %d %s\n", ft_get_time() - all->time_start, id + 1, str);
-	sem_post(all->msg);
-}
-
-int	ft_print_error(char *str)
-{
-	printf("%s\n", str);
-	return (0);
+	if (error == 1)
+		return (ft_write_error("At least one wrong argument"));
+	if (error == 2)
+		return (ft_write_error("Fatal error when intializing semaphores"));
+	return (1);
 }
