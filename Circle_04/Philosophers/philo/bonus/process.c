@@ -21,8 +21,8 @@ void	ft_philo_eats(t_philo *philo)
 
 void	*ft_death_checker(void *void_philo)
 {
-	t_philo	*philo;
-	t_info			*all;
+	t_philo		*philo;
+	t_info		*all;
 
 	philo = (t_philo *)void_philo;
 	all = philo->all;
