@@ -33,7 +33,7 @@ int	ft_init_all(t_rules *rules, char **argv)
 	rules->time_eat = ft_atoi(argv[3]);
 	rules->time_sleep = ft_atoi(argv[4]);
 	rules->dieded = 0;
-	if (rules->nb_philo < 2 || rules->time_death < 0 || rules->time_eat < 0
+	if (rules->nb_philo < 1 || rules->time_death < 0 || rules->time_eat < 0
 		|| rules->time_sleep < 0 || rules->nb_philo > 250)
 		return (1);
 	if (argv[5])

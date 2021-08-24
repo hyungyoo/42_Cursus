@@ -43,7 +43,7 @@ typedef struct s_rules
 }						t_rules;
 
 /*
-** ----- error_manager.c -----
+** ----- display.c -----
 */
 int						ft_write_error(char *str);
 int						ft_error_manager(int error);
@@ -55,7 +55,7 @@ int						ft_error_manager(int error);
 int						ft_init_all(t_rules *rules, char **argv);
 
 /*
-** ----- utils.c -----
+** ----- util.c -----
 */
 
 int						ft_atoi(const char *str);
@@ -65,7 +65,7 @@ long long				ft_time_diff(long long past, long long pres);
 void					ft_smart_sleep(long long time, t_rules *rules);
 
 /*
-** ----- launcher.c -----
+** ----- process.c -----
 */
 
 int						ft_launcher(t_rules *rules);
