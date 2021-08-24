@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:30:23 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/21 19:13:09 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/24 13:37:26 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <sys/wait.h>
+# include <semaphore.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 struct	s_info;
 
@@ -26,9 +30,8 @@ typedef struct s_philo
 {
 	int				id;
 	int				count_eat;
-	int				r_fork;
-	int				l_fork;
 	pthread_t		thread_id;
+	pid_t			pid_philo;
 	long long		last_eat;
 	struct s_info	*all;
 }				t_philo;
@@ -44,9 +47,9 @@ typedef struct s_info
 	int					flag_die;
 	long long			time_start;
 	t_philo				*philo;
-	pthread_mutex_t		*fork;
-	pthread_mutex_t		msg;
-	pthread_mutex_t		checker;
+	sem_t				*fork;
+	sem_t				*msg;
+	sem_t				*checker;
 }				t_info;
 
 /*
@@ -55,7 +58,8 @@ typedef struct s_info
 void		ft_thread(t_info *all);
 void		ft_eat(t_philo *philo);
 void		ft_sleep_think(t_philo *philo);
-void		*ft_philo(void	*philo_ptr);
+void		*ft_philo(t_philo *philo_ptr);
+void		*ft_loop_checker(void *philo_ptr);
 /*
  * init.c
  */

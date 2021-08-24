@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:30:37 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/23 21:51:08 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/24 12:40:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ft_putstr(char *str)
 
 void	ft_display(int id, char *str, t_info *all)
 {
-	pthread_mutex_lock(&(all->msg));
+	sem_wait(all->msg);
 	if (!(all->flag_die))
 		printf("%lld %d %s\n", ft_get_time() - all->time_start, id + 1, str);
-	pthread_mutex_unlock(&(all->msg));
+	sem_post(all->msg);
 }
 
 int	ft_print_error(char *str)

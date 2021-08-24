@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:30:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/23 21:51:19 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/08/24 13:08:54 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,22 @@ int	ft_init_philo(t_info *all)
 	{
 		all->philo[i].id = i;
 		all->philo[i].count_eat = 0;
-		all->philo[i].l_fork = i;
-		all->philo[i].r_fork = (i + 1) % all->num_philo;
 		all->philo[i].last_eat = 0;
+		all->philo[i].pid_philo = 0;
 		all->philo[i].all = all;
 		i++;
 	}
 	return (1);
 }
 
-int	ft_init_mutex(t_info *all)
+int	ft_init_sem(t_info *all)
 {
-	int	i;
-
-	i = 0;
-	all->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
-			* all->num_philo);
-	if (!(all->fork))
-		return (ft_print_error("Error malloc fork"));
-	while (i < all->num_philo)
-	{
-		if (pthread_mutex_init(&(all->fork[i]), NULL))
-			return (ft_print_error("Error initialize mutex"));
-		i++;
-	}
-	if (pthread_mutex_init(&(all->msg), NULL))
-		return (ft_print_error("Error initialize mutex"));
-	if (pthread_mutex_init(&(all->checker), NULL))
-		return (ft_print_error("Error initialize mutex"));
+	sem_unlink("/philo_fork");
+	sem_unlink("/philo_msg");
+	sem_unlink("/philo_checker");
+	all->fork = sem_open("/philo_fork", O_CREAT, S_IRWXU, all->num_philo);
+	all->msg = sem_open("/philo_msg", O_CREAT, S_IRWXU, 1);
+	all->checker = sem_open("/philo_checker", O_CREAT, S_IRWXU, 1);
 	return (1);
 }
 
@@ -75,7 +63,7 @@ int	ft_init(int argc, char **argv, t_info *all)
 	ft_init_info(all);
 	if (!(ft_init_philo(all)))
 		return (0);
-	if (!(ft_init_mutex(all)))
+	if (!(ft_init_sem(all)))
 		return (0);
 	return (1);
 }
