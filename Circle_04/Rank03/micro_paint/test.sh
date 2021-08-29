@@ -2,7 +2,7 @@
 echo "> start"
 echo "$ compile"
 rm -f _micro_paint* _gen*
-gcc -Wall -Wextra -Werror micro_paint.c -lm -o _micro_paint
+gcc -Wall -Wextra -Werror main.c -lm -o _micro_paint
 gcc -Wall -Wextra -Werror our_micro_paint.c -lm -o _our_micro_paint
 g++ -Wall -Wextra -Werror generate_example.cpp -lm -o _gen
 echo "$ test"

@@ -28,14 +28,15 @@ typedef struct	s_draw
 	char	t;
 	float	x;
 	float	y;
-	float	r;
+	float	width;
+	float	height;
 	char	c;
 }				t_draw;
 
 int	ft_error(FILE *fd, int err)
 {
 	if (err == 2 &&  (err = 1))
-		ft_putstr("Error: Operation file corruptrd");
+		ft_putstr("Error: Operation file corrupted");
 	else if (err == 1)
 		ft_putstr("Error: argument");
 	else
@@ -51,11 +52,20 @@ int	ft_error(FILE *fd, int err)
 	return (err);
 }
 
+int	ft_is_rec(float x, float y, t_draw *rec)
+{
+	
+	if ((((x < rec->x) || (rec->x + rec->width < x)) || ((y < rec->y) || (rec->y + rec->height < y))))
+		return (0);
+	if ((((x - rec->x < 1.00000000) || (rec->x + rec->width - x < 1.00000000)) || (((y - rec->y < 1.00000000) || (rec->y + rec->height - y < 1.00000000)))))
+		return (2);	//border
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
-	t_draw		cir;
+	t_draw		rec;
 	FILE		*fd;
-	float		sqr;
 	int			res;
 
 	fd = NULL;
@@ -77,23 +87,19 @@ int	main(int argc, char **argv)
 				}
 				while (42)
 				{
-					res = fscanf(fd, "\n%c %f %f %f %c", &cir.t, &cir.x, &cir.y, &cir.r, &cir.c);
+					res = fscanf(fd, "\n%c %f %f %f %f %c", &rec.t, &rec.x, &rec.y, &rec.width, &rec.height, &rec.c);
 					if (res == -1)
 						return (ft_error(fd, 0));
-					else if (res != 5 || cir.r <=  0 || (cir.t != 'c' && cir.t != 'C'))
+					else if (res != 6 || rec.width <= 0.00000000 || rec.height <=  0.00000000 || (rec.t != 'r' && rec.t != 'R'))
 						break ;
 					for (int row = 0; row < H; row++)
 					{
 						for (int col = 0; col < W; col++)
 						{
-							sqr = sqrtf((col - cir.x) * (col - cir.x) + (row - cir.y) * (row - cir.y));
-							if (sqr <= cir.r)
-							{
-								if (cir.t == 'c' && sqr + 1 > cir.r)
-									TAB[row][col] = cir.c;
-								else if (cir.t == 'C')
-									TAB[row][col] = cir.c;
-							}
+							if (ft_is_rec(col, row, &rec) == 2) // && rec.t == 'r'  ////////xxxxxxxxxx///////////
+								TAB[row][col] = rec.c;
+							else if (ft_is_rec(col, row, &rec) == 1 && rec.t == 'R') ///////////////////col, row/////////
+								TAB[row][col] = rec.c;
 						}
 					}
 				}
