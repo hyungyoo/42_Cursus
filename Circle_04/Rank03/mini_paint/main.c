@@ -35,7 +35,7 @@ typedef struct	s_draw
 int	ft_error(FILE *fd, int err)
 {
 	if (err == 2 &&  (err = 1))
-		ft_putstr("Error: Operation file corruptrd");
+		ft_putstr("Error: Operation file corrupted");
 	else if (err == 1)
 		ft_putstr("Error: argument");
 	else
