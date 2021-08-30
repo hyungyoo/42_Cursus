@@ -1,16 +1,26 @@
-#include <string.h>
-#include <unistd.h>
 #include <stdio.h>
-#include <unistd.h>
+#include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <unistd.h>
 
 int		W;
 int		H;
 char	BG;
 char	**TAB;
 
-void	ft_putchar(char	c)
+typedef struct s_circle
+{
+	char	c;
+	float	x;
+	float	y;
+	float	w;
+	float	h;
+	char	draw;
+}			t_circle;
+
+
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
@@ -22,26 +32,17 @@ void	ft_putstr(char *str)
 		ft_putchar(str[i++]);
 	ft_putchar('\n');
 }
-
-typedef struct	s_draw
-{
-	char	t;
-	float	x;
-	float	y;
-	float	width;
-	float	height;
-	char	c;
-}				t_draw;
+	
 
 int	ft_error(FILE *fd, int err)
 {
-	if (err == 2 &&  (err = 1))
-		ft_putstr("Error: Operation file corrupted");
-	else if (err == 1)
+	if (err == 2 && (err = 1))
 		ft_putstr("Error: argument");
+	else if (err == 1)
+		ft_putstr("Error: Operation file corrupted");
 	else
 	{
-		for (int i = 0; i < H; i++)
+		for (int i = 0; i < H;i++)
 		{
 			write(1, TAB[i], W);
 			write(1, "\n", 1);
@@ -52,25 +53,24 @@ int	ft_error(FILE *fd, int err)
 	return (err);
 }
 
-int	ft_is_rec(float x, float y, t_draw *rec)
+int	ft_is_rec(float x, float y, t_circle *cir)
 {
-	
-	if ((((x < rec->x) || (rec->x + rec->width < x)) || ((y < rec->y) || (rec->y + rec->height < y))))
+	if (x < cir->x || cir->x + cir->w < x || cir->y > y || cir->y + cir->h  < y)
 		return (0);
-	if ((((x - rec->x < 1.00000000) || (rec->x + rec->width - x < 1.00000000)) || (((y - rec->y < 1.00000000) || (rec->y + rec->height - y < 1.00000000)))))
-		return (2);	//border
-	return (1);
+	else if (x - cir->x < 1 || cir->x + cir->w - x < 1 || 1 > y - cir->y || cir->y + cir->h - y < 1)
+		return (1);
+	return (2);
 }
 
 int	main(int argc, char **argv)
 {
-	t_draw		rec;
-	FILE		*fd;
-	int			res;
-
+	FILE *fd;
 	fd = NULL;
+	int	res;
+	t_circle	cir;
+
 	if (argc != 2)
-		return (ft_error(fd, 1));
+		return (ft_error(fd, 2));
 	if ((fd = fopen(argv[1], "r")))
 	{
 		if ((res = fscanf(fd, "%d %d %c", &W, &H, &BG)) == 3)
@@ -79,32 +79,35 @@ int	main(int argc, char **argv)
 			{
 				if (!(TAB = malloc(sizeof(char *) * H)))
 					return (0);
-				for (int i = 0; i < H; i++)
+				for (int i = 0;i < H; i++)
 				{
-					if (!(TAB[i] = (char*)malloc(sizeof(char) * W)))
+					if (!(TAB[i] = malloc(sizeof(char) * W)))
 						return (0);
 					memset(TAB[i], BG, W);
 				}
 				while (42)
 				{
-					res = fscanf(fd, "\n%c %f %f %f %f %c", &rec.t, &rec.x, &rec.y, &rec.width, &rec.height, &rec.c);
+					res = fscanf(fd, "\n%c %f %f %f %f %c", &cir.c, &cir.x, &cir.y, &cir.w, &cir.h, &cir.draw);
 					if (res == -1)
 						return (ft_error(fd, 0));
-					else if (res != 6 || rec.width <= 0.00000000 || rec.height <=  0.00000000 || (rec.t != 'r' && rec.t != 'R'))
-						break ;
-					for (int row = 0; row < H; row++)
+					else if (res != 6 || cir.w <= 0 || cir.h <= 0|| (cir.c != 'r' && cir.c != 'R'))
+						break;
+					for (int y = 0; y < H; y++)
 					{
-						for (int col = 0; col < W; col++)
+						for (int x = 0; x < W; x++)
 						{
-							if (ft_is_rec(col, row, &rec) == 2) // && rec.t == 'r'  ////////xxxxxxxxxx///////////
-								TAB[row][col] = rec.c;
-							else if (ft_is_rec(col, row, &rec) == 1 && rec.t == 'R') ///////////////////col, row/////////
-								TAB[row][col] = rec.c;
+							if (ft_is_rec(x, y, &cir) == 1)// && cir.c ==  'r')
+								TAB[y][x] = cir.draw;
+							else if (ft_is_rec(x, y, &cir) == 2 && cir.c == 'R')
+								TAB[y][x] = cir.draw;
 						}
 					}
 				}
+
 			}
 		}
 	}
-	return (ft_error(fd, 2));
+	return (ft_error(fd, 1));
 }
+
+
