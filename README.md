@@ -16,4 +16,5 @@
 | 02     | [push_swap](./2_push_swap)         |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/push_swap)](https://github.com/JaeSeoKim/badge42)        | 2021-06-10 |
 | 02     | [pipex](./2_pipex)   |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/pipex)](https://github.com/JaeSeoKim/badge42)     | |
 | 02     | [so_long](./2_so_long)   |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/so_long)](https://github.com/JaeSeoKim/badge42)     | |
-| 03     | [philosophers](./3_philosophers)   |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/philosophers)](https://github.com/JaeSeoKim/badge42)     | |
+| 03     | [philosophers](./3_philosophers)   |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Philosophers)](https://github.com/JaeSeoKim/badge42)     | |
+| 03     | [Exam Rank 03](./3_examrank03)     |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%30Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2021-04-13 |
