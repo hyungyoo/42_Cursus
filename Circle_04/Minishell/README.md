@@ -74,6 +74,15 @@
 	2. 30 부터 46까지먼저보고
 	3. rl로 시작하는거 찾아보기
 
+
+	ft_putstr_fd("\x1b[1A", STDOUT);
+	ft_putstr_fd("\033[12C", STDOUT);
+	https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
+
+brew install readline
+#In your compilation, append these flags:
+-lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+
 ### 3. 구현 순서
 	1. 변수, 구조체 초기화
 	2. 
