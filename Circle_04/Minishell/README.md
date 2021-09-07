@@ -1,3 +1,4 @@
+p_MK6jaYa9YmoTnfP72I3qr3jhXtKTbr4b7lOQ
 # MINI_SHELL
 
 ### 1. 명령어 정리
