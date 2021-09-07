@@ -1,6 +1,23 @@
 p_MK6jaYa9YmoTnfP72I3qr3jhXtKTbr4b7lOQ
 # MINI_SHELL
 
+### MINISHELL이란?
+	shell은 kernel과 user를 이어주는것!
+	 스티븐 본에 의해서 개발되었으며, 현재는 bash, zsh etc.
+	 CLI 또는 GUI로 나뉨
+	
+	kernel과 user는 os에서의  dual mode이다!
+	kernel은 컴퓨터의 메모리에 는 적재되어있으며, 프로세스, 메모리, 입출력, 파일관리등을 한다.
+	user 모드에서 kernel의 기능을 사용하는 방법은 시스템콜을 하는것.
+         즉, user모드에서 시스템콜을 하여 kernel의 기능을 사용하기위해서는
+	 user->shell->kernel->shell->user 의 과정을 갖는다.
+
+### SHELL의 구성요소
+	TOKENIZER-> TOKEN으로 나눔
+	LEXER-> 나누어진 TOKEN의 의미를 분석
+	PARSER-> 위의 두 단계로 얻은 TOKEN을 구조적으로 나타내어주며,  명령테이블에 저장
+	EXERCUTOR-? 명령테이블의 모든명령에 대해 새 프로세스를 생성
+
 ### 1. 명령어 정리
 	1. echo
 		출력
