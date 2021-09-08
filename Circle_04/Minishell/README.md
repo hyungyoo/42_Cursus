@@ -45,6 +45,7 @@ p_MK6jaYa9YmoTnfP72I3qr3jhXtKTbr4b7lOQ
 	4. rl_replace_line
 	5. rl_redisplay 
 	6. add_history
+          
 	7. printf
 	8. malloc 
 	9. free 
@@ -52,31 +53,37 @@ p_MK6jaYa9YmoTnfP72I3qr3jhXtKTbr4b7lOQ
 	11. open 
 	12. read 
 	13. close 
-	14.	fork 
-	15.	wait
+	
+        14. fork 
+	15. wait
 	16. waitpid 
 	17. wait3, wait4
 	18. signal 
 	19. kill 
 	20. exit 
+
 	21. getcwd
 	22. chdir 
 	23. stat 
 	24. lstat 
 	25. fstat 
 	26. unlink 
+
 	27. execve 
 	28. dup, dup2
 	29. pipe 
+
 	30. opendir 
 	31. readdir 
 	32. closedir 
+
 	33. strerror,perror
 	34. isatty 
 	35. ttyname 
 	36. ttyslot 
 	37. ioctl 
 	38. getenv
+
 	39. tcsetattr
 	40. tcgetattr 
 	41. tgetent 
@@ -85,12 +92,6 @@ p_MK6jaYa9YmoTnfP72I3qr3jhXtKTbr4b7lOQ
 	44. tgetstr 
 	45. tgoto 
 	46. tputs
-
-### 계획
-	1. 함수 정리 및 연습!
-		근데 함수가 존재하지않는것들이 있음 ㅅㅂ
-	2. 30 부터 46까지먼저보고
-	3. rl로 시작하는거 찾아보기
 
 
 	ft_putstr_fd("\x1b[1A", STDOUT);
@@ -101,6 +102,10 @@ brew install readline
 #In your compilation, append these flags:
 -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
-### 3. 구현 순서
+### 2. 구현 순서
 	1. 변수, 구조체 초기화
-	2. 
+	2. 헤더 stdio.h를 제일 위로(구조체 참조)
+        3. Parsing cmd, args
+        4. Fork (child process)
+        5. Execuve
+
