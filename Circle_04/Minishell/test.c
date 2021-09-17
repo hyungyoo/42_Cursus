@@ -6,8 +6,20 @@
 #include <signal.h>
 #include <fcntl.h>
 
+void	handle(int sig)
+{
+		if (sig == SIGINT)
+		{
+			printf("sigint\n");
+		}
+		else if (sig == SIGQUIT)
+		{
+			printf("\b\b	\b\b");
+		}
+}
+
 int	main(void)
 {
-	rl_on_new_line();
+	signal(SIGINT, handle);
 	return (0);
 }
