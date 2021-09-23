@@ -1,0 +1,139 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pseudocode.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/23 13:53:32 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/09/23 14:41:17 by hyungyoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+////////////////////////////////////////////struct /////////////////////////////////////////////
+typedef struct	s_element
+{
+	int flag_pipe;
+	int	num_pipe;
+	int	flag_redirection;
+	int	num_redirection;
+	int	flag_semi;
+	int	num_semi;
+}				t_element;
+
+typedef struct	s_cmd
+{
+	char *cmd;
+	char *args;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}				t_cmd;
+
+typedef struct	s_info
+{
+	t_element	*ele;
+	t_cmd		*premier_cmd;
+}				t_info;
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////function pour initial//////////////////////////
+
+void	ft_pipe(t_info *all, char **argv)
+{
+	t_element ele;
+	
+	to do:
+		1. l 또는 ;이 있는지 확인
+		2. ele 초기화 후에, all에 저장
+}
+
+void	ft_split_cmd(argc, argv, envp)
+{
+	while (i < num_element)
+	{
+		to do:
+			각각의 명령어를 스플릿한후에, 리스트로 연결
+	}
+}
+
+void	ft_init(t_info *all, char **argv, char **envp)
+{
+	to do:
+		1. ft_pipe(all, argv);
+			// | ; 확인 , t_element *ele; all->ele 초기화
+		2. ft_split_cmd(argc, argv, envp);
+			// 있다면, 각각의 명령어를  split한후에, 리스트화시킨후 cmd, args 로 저장, 빌트인이어야하는
+			// 함수가 아니면, 에러메세지 
+}
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+/////////////////////////////////////////////////function pour signal ///////////////////////
+void	handle_fuction(int signal_int)
+{
+	to do:
+		1. ctrl+c
+		2. ctrl+d
+}
+
+void	ft_siginal(t_info *all, char **envp)
+{
+	to do:
+		signal(signal_int, handle_function);
+		signal(signal_int, handle_function);
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+//////////////////////////////////////////////////function pour prompt/////////////////////////
+
+char	*ft_prompt(void)
+{
+	to do:
+		1. readline 함수이용해서 pwd이용하여, prompt 나타내기
+		2. 반환값 저장하여 initial!
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+void	ft_minishell(t_info *all, char **envp)
+{
+	to do:
+		1. ft_siginal(all, envp);
+		2. while (42)
+		{
+			char *cmd = ft_prompt();
+			ft_init(all, envp, cmd);
+
+		}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+int	main(int argc, char **argv, char **envp)
+{
+	t_info all;
+	to do:
+		1. ft_minishell(&all, envp);
+	return (0);
+}
