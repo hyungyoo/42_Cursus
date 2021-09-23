@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 13:53:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/23 14:41:17 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/09/23 15:01:09 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_info
 
 ////////////////////////////////////////////////function pour initial//////////////////////////
 
-void	ft_pipe(t_info *all, char **argv)
+void	ft_pipe(t_info *all, char *cmd)
 {
 	t_element ele;
 	
@@ -54,21 +54,21 @@ void	ft_pipe(t_info *all, char **argv)
 		2. ele 초기화 후에, all에 저장
 }
 
-void	ft_split_cmd(argc, argv, envp)
+void	ft_split_cmd(t_info *all, char *cmd)
 {
 	while (i < num_element)
 	{
 		to do:
-			각각의 명령어를 스플릿한후에, 리스트로 연결
+			각각의 명령어를 스플릿한후에cmd테이블에 저장 후 , 리스트로 연결
 	}
 }
 
-void	ft_init(t_info *all, char **argv, char **envp)
+void	ft_init(t_info *all, char *cmd)
 {
 	to do:
-		1. ft_pipe(all, argv);
+		1. ft_pipe(all, cmd);
 			// | ; 확인 , t_element *ele; all->ele 초기화
-		2. ft_split_cmd(argc, argv, envp);
+		2. ft_split_cmd(all, cmd);
 			// 있다면, 각각의 명령어를  split한후에, 리스트화시킨후 cmd, args 로 저장, 빌트인이어야하는
 			// 함수가 아니면, 에러메세지 
 }
@@ -124,7 +124,11 @@ void	ft_minishell(t_info *all, char **envp)
 		2. while (42)
 		{
 			char *cmd = ft_prompt();
-			ft_init(all, envp, cmd);
+			if (ft_init(cmd))
+				error_message
+			else 
+				add_history(cmd);
+
 
 		}
 }
