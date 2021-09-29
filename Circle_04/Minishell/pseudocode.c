@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 13:53:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/23 15:01:09 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/09/29 16:08:50 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void	ft_split_cmd(t_info *all, char *cmd)
 void	ft_init(t_info *all, char *cmd)
 {
 	to do:
+		0. ft_dquote(all, cmd);
+			// 1. " ' 를 쓸수있는지 확인하기
+			// 2. " ' 가 짝수인지 확인후 홀수라면 끄기
 		1. ft_pipe(all, cmd);
 			// | ; 확인 , t_element *ele; all->ele 초기화
 		2. ft_split_cmd(all, cmd);
@@ -84,7 +87,7 @@ void	handle_fuction(int signal_int)
 {
 	to do:
 		1. ctrl+c
-		2. ctrl+d
+		2. ctrl+\
 }
 
 void	ft_siginal(t_info *all, char **envp)
@@ -123,7 +126,12 @@ void	ft_minishell(t_info *all, char **envp)
 		1. ft_siginal(all, envp);
 		2. while (42)
 		{
+			// 함수 readline쓰기
 			char *cmd = ft_prompt();
+			// ctrl + d eof 나타내기
+			if  (NULL --> eof)
+				// 끝내기
+
 			if (ft_init(cmd))
 				error_message
 			else 

@@ -56,7 +56,7 @@ int	main(int ac, char **av, char **env)
     while(1)
     {
         /* readline함수가 호출되면 인자(prompt : )를 터미널에 출력하고 저장할 라인을 입력받는다 */
-        str = readline("minishell : ");/* read함수는 저장한 문자열의 메모리주소를 반환한다 */
+        str = readline("minishell $>");/* read함수는 저장한 문자열의 메모리주소를 반환한다 */
         if (str == NULL || (ft_strcmp(str, "exit") == 0))/* str = NULL 이라면 (EOF, cntl + D)*/
         {
 		    ft_putstr_fd("minishell exit\n", 1);
