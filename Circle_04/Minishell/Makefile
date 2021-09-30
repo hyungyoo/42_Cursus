@@ -6,8 +6,9 @@ HEADER = ./includes/minishell.h
 
 OBJS = $(SRCS:.c=.o)
 
-LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib 
-#~/.brew/opt/readline/lib  // ecole42 complie
+IB = -L. -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
+LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
+
 #/usr/local/opt/readline/lib //keulee home complie
 
 INC = -I /usr/local/opt/readline/include
@@ -16,7 +17,7 @@ INC = -I /usr/local/opt/readline/include
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror 
 
 LIBFT = libft.a
 
