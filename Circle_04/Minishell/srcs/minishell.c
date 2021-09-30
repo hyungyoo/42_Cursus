@@ -6,22 +6,11 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:01:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/30 23:31:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/01 00:29:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	handler(int signum)
-{
-	if (signum != SIGINT)
-		return ;
-    write(STDOUT_FILENO, "\n", 1);
-    if (rl_on_new_line() == -1)
-       ft_exit();
-    rl_replace_line("", 1);
-    rl_redisplay();
-}
 
 int	main(int ac, char **av, char **env)
 {
@@ -34,6 +23,7 @@ int	main(int ac, char **av, char **env)
 
 	ft_initial(env);
     signal(SIGINT, handler);
+    signal(SIGQUIT, handler);
     while(1)
     {
         str = readline("minishell $>");

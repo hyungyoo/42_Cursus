@@ -6,10 +6,14 @@ SRCS = 	srcs/minishell.c \
 		srcs/exit/exit.c	\
 		srcs/util/util.c	\
 		srcs/initial/initial.c	\
+		srcs/signal/signal.c	\
 
 HEADER = ./includes/minishell.h
 
-OBJS = ${SRCS:.c=.o}
+OBJS = ${SRCS:%.c=%.o}
+
+%.o: %.c
+	$(CC) $(CFLAG) -c $< -o $@
 
 LI = -L. -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
 IB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 

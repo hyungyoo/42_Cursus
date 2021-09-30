@@ -55,7 +55,9 @@ int				ft_add(int num);
 /* exit.c */
 void			ft_exit(void);
 
-/* initial */
+/* initial.c */
 void			ft_initial(char **env);
 
+/* signal.c */
+void			handler(int signum);
 #endif
