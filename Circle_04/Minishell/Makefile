@@ -9,10 +9,11 @@ SRCS = 	srcs/minishell.c \
 
 HEADER = ./includes/minishell.h
 
-OBJS = $(SRCS:.c=.o)
+OBJS = ${SRCS:.c=.o}
 
-IB = -L. -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
-LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
+LI = -L. -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
+IB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
+LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib -I /usr/local/opt/readline/include
 
 #/usr/local/opt/readline/lib //keulee home complie
 
@@ -20,7 +21,7 @@ INC = -I /usr/local/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
 
-CC = clang
+CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror 
 
@@ -31,7 +32,7 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME) 
 
 $(LIBFT):
 	$(MAKE) -C libft
