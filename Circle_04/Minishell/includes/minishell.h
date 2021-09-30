@@ -53,6 +53,9 @@ int				ft_verifier_dquote(char *str);
 int				ft_add(int num);
 
 /* exit.c */
-void	ft_exit(void);
+void			ft_exit(void);
+
+/* initial */
+void			ft_initial(char **env);
 
 #endif

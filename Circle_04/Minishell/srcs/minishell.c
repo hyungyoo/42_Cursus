@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:01:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/30 17:14:50 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/09/30 17:45:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,6 @@ void	handler(int signum)
     //rl_redisplay();
 }
 
-void    copy_env(char **env)
-{
-    int i;
-    int count;
-
-    i = 0;
-    count = 0;
-    while (env[count])
-        count++;
-    g_info.env = (char **)malloc(sizeof(char *) * (count + 1));
-    while (env[i])
-    {
-        g_info.env[i] = ft_strdup(env[i]);
-        i++;
-    }
-    g_info.env[i] = NULL;        
-}
-
 int	main(int ac, char **av, char **env)
 {
     char *str;
@@ -49,11 +31,8 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	(void)av;
     str = NULL;
-    g_info.env = NULL;
 
-    copy_env(env);
-	g_info.quit_quote = 0;
-
+	ft_initial(env);
     signal(SIGINT, handler);
     while(1)
     {
