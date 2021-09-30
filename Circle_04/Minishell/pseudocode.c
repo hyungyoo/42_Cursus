@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 13:53:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/29 16:08:50 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/09/30 17:26:49 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,3 +149,10 @@ int	main(int argc, char **argv, char **envp)
 		1. ft_minishell(&all, envp);
 	return (0);
 }
+
+
+to do:
+	1. initial and free 함수만들기
+	2. parsing 
+		1. echo
+		2. list
