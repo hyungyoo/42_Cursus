@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:15:44 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/30 17:15:46 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/09/30 17:08:49 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	ft_exit(void)
+void	parsing(char *str)
 {
-	exit(1);
+	ft_verifier_dquote(str);
 }

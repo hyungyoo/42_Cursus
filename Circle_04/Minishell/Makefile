@@ -1,8 +1,10 @@
 NAME = minishell
 
 SRCS = 	srcs/minishell.c \
-		srcs/parsing.c	\
+		srcs/parsing/parsing.c	\
+		srcs/parsing/quote.c	\
 		srcs/exit.c	\
+		srcs/util/util.c	\
 
 HEADER = ./includes/minishell.h
 

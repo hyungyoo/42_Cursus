@@ -46,6 +46,12 @@ t_info	g_info;
 /* parsing.c */
 void			parsing(char *str);
 
+/* quote.c*/
+int				ft_verifier_dquote(char *str);
+
+/* util.c */
+int				ft_add(int num);
+
 /* exit.c */
 void	ft_exit(void);
 

@@ -1,15 +1,22 @@
-#include "../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/09/30 17:11:07 by hyungyoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//parsing :
-// to do:
-//      1. " ' 가 나오면 짝수인지확인
-//      2. dquote> or quote> until ctrl + c
+#include "../../includes/minishell.h"
 
 int	ft_dquote(char *str)
 {
 	int	i;
 	int	num_dquote;
-	
+
 	num_dquote = 0;
 	i = 0;
 	while (str[i])
@@ -25,7 +32,7 @@ int	ft_quote(char *str)
 {
 	int	i;
 	int	num_quote;
-	
+
 	num_quote = 0;
 	i = 0;
 	while (str[i])
@@ -37,11 +44,6 @@ int	ft_quote(char *str)
 	return (num_quote);
 }
 
-int	ft_add(int num)
-{
-	return ((num % 2) == 0);
-}
-
 void	afficher_handler(int sig)
 {
 	if (sig == SIGINT)
@@ -50,7 +52,7 @@ void	afficher_handler(int sig)
 
 int	ft_afficher_quote(char *quote)
 {
-	char *str;
+	char	*str;
 
 	signal(SIGINT, afficher_handler);
 	while (1)
@@ -61,7 +63,7 @@ int	ft_afficher_quote(char *quote)
 			g_info.quit_quote = 0;
 			free(str);
 			break ;
-		}	
+		}
 		free(str);
 	}
 	return (1);
@@ -81,9 +83,4 @@ int	ft_verifier_dquote(char *str)
 	else if (!ft_add(num_quote))
 		return (ft_afficher_quote("quote>"));
 	return (0);
-}
-	
-void	parsing(char *str)
-{
-	ft_verifier_dquote(str);		
 }
