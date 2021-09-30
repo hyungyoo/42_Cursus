@@ -1,6 +1,8 @@
 NAME = minishell
 
-SRCS = srcs/minishell.c
+SRCS = 	srcs/minishell.c \
+		srcs/parsing.c	\
+		srcs/exit.c	\
 
 HEADER = ./includes/minishell.h
 
@@ -32,8 +34,7 @@ $(LIBFT):
 	$(MAKE) -C libft
 	mv libft/$(LIBFT) .
 
-$(OBJS): $(SRCS) $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+$(OBJS): ${SRCS:.c=.o}
 
 clean:
 	$(MAKE) -C libft clean

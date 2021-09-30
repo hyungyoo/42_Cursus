@@ -36,10 +36,17 @@ typedef struct s_pars {
 } t_pars;
 
 typedef	struct s_info {
-	char **env;
+	char	**env;
+	int		quit_quote;	
 } t_info;
 
 /* one global variable */
 t_info	g_info;
+
+/* parsing.c */
+void			parsing(char *str);
+
+/* exit.c */
+void	ft_exit(void);
 
 #endif

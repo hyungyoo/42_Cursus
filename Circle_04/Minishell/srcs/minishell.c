@@ -37,8 +37,9 @@ int	main(int ac, char **av, char **env)
     (void)av;
     str = NULL;
     g_info.env = NULL;
-    
+
     copy_env(env);
+	g_info.quit_quote = 0;
 
     signal(SIGINT, handler);
     while(1)
@@ -50,6 +51,7 @@ int	main(int ac, char **av, char **env)
             exit (1);
         }
         //add_history(str);
+		parsing(str);
         free(str);
         str = NULL;
     }
