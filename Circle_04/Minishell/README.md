@@ -7,7 +7,7 @@
 
 Probleme
 	1. apres quote, if faut "enter"
-		pour cela, 
+		pour cela,  "escape sequence"
 	2. echo " ' dwqdqw" dqw' -->
 	3. parsing struct
 		parsing-> 
