@@ -48,6 +48,7 @@ void			parsing(char *str);
 
 /* quote.c*/
 int				ft_verifier_dquote(char *str);
+void			ft_exit_quote(char *quote);
 
 /* util.c */
 int				ft_add(int num);

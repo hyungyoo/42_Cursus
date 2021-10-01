@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/30 17:11:07 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/01 03:02:05 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ int	ft_quote(char *str)
 void	afficher_handler(int sig)
 {
 	if (sig == SIGINT)
+	{
+		ft_exit_quote("quote");
 		g_info.quit_quote = 1;
+	}
+
 }
 
 int	ft_afficher_quote(char *quote)

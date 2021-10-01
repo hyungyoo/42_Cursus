@@ -6,11 +6,19 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 00:26:27 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/01 01:32:35 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/01 03:07:05 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	ft_exit_quote(char *quote)
+{
+	printf("\r");
+	rl_on_new_line();
+	rl_redisplay();
+	printf("  \b\b");
+}
 
 void	handler(int signum)
 {
