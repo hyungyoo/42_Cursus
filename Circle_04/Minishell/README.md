@@ -1,9 +1,19 @@
 # minishell
 42 project minishell to write a shell
 
+
+
+
+
 Probleme
 	1. apres quote, if faut "enter"
 		pour cela, 
+	2. echo " ' dwqdqw" dqw' -->
+		
+		
+		
+		
+		
 --------
 
 ## Resume of the subject (Mandatory)
