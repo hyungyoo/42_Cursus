@@ -1,33 +1,30 @@
 NAME = minishell
 
-SRCS = 	srcs/minishell.c \
-		srcs/parsing/parsing.c	\
-		srcs/parsing/quote.c	\
-		srcs/exit/exit.c	\
-		srcs/util/util.c	\
-		srcs/initial/initial.c	\
-		srcs/signal/signal.c	\
+SRCS = srcs/minishell.c \
+       srcs/parsing/parsing.c  \
+       srcs/parsing/quote.c    \
+       srcs/exit/exit.c    \
+       srcs/util/util.c    \
+       srcs/initial/initial.c  \
+       srcs/signal/signal.c    \
 
 HEADER = ./includes/minishell.h
 
-OBJS = ${SRCS:%.c=%.o}
+OBJS = $(SRCS:.c=.o)
 
-%.o: %.c
-	$(CC) $(CFLAG) -c $< -o $@
-
-LI = -L. -lft -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include
-IB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
-LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib -I /usr/local/opt/readline/include
-
+LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib
+#~/.brew/opt/readline/lib  // ecole42 complie
 #/usr/local/opt/readline/lib //keulee home complie
+#linux complie ??
 
-INC = -I /usr/local/opt/readline/include
+INC = -I ~/.brew/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
+#linux complie ??
 
-CC = gcc
+CC = clang
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 LIBFT = libft.a
 
@@ -36,13 +33,17 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME) 
+	$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C libft
 	mv libft/$(LIBFT) .
 
-$(OBJS): ${SRCS:.c=.o}
+.c.o:
+		${CC} ${CFLAGS} $(INC) -c $< -o ${<:.c=.o}
+
+#$(OBJS): $(SRCS) $(HEADER)
+#	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:
 	$(MAKE) -C libft clean
@@ -54,4 +55,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re%

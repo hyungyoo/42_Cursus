@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 00:26:27 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/01 03:07:05 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/04 16:09:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_exit_quote(char *quote)
 {
+	(void)quote;
 	printf("\r");
 	rl_on_new_line();
 	rl_redisplay();
