@@ -6,11 +6,11 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/04 17:38:30 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/04 18:04:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int	ft_dquote(char *str)
 {
@@ -42,6 +42,18 @@ int	ft_quote(char *str)
 		i++;
 	}
 	return (num_quote);
+}
+
+int	ft_verifier_ordre(char *str)
+{
+	int	first_quote;
+	int	last_quote;
+	int	first_dquote;
+	int last_dquote;
+
+	// "로 시작한다면, "로 끝나거나, 마무리가되어야함
+	// '로 시작한다면, '로 끝나거나, 마무리가되어야함
+	return (0);
 }
 
 int	ft_verifier_dquote(char *str)

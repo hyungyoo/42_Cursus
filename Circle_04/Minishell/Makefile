@@ -2,7 +2,7 @@ NAME = minishell
 
 SRCS = srcs/minishell.c \
        srcs/parsing/parsing.c  \
-       srcs/parsing/quote.c    \
+       srcs/parsing/quote/quote.c    \
        srcs/exit/exit.c    \
        srcs/util/util.c    \
        srcs/initial/initial.c  \
