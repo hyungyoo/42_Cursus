@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/10/04 17:43:13 by hyungyoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -28,17 +40,19 @@
 # define DRIGHT 11
 # define LEFT 12
 
-typedef struct s_pars {
+typedef struct s_pars
+{
 	int				type;
-	char 			*str;
+	char			*str;
 	struct s_pars	*prev;
 	struct s_pars	*next;
-} t_pars;
+}				t_pars;
 
-typedef	struct s_info {
+typedef struct s_info
+{
 	char	**env;
 	int		quit_quote;	
-} t_info;
+}				t_info;
 
 /* one global variable */
 t_info	g_info;
@@ -48,7 +62,6 @@ void			parsing(char *str);
 
 /* quote.c*/
 int				ft_verifier_dquote(char *str);
-void			ft_exit_quote(char *quote);
 
 /* util.c */
 int				ft_add(int num);
