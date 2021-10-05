@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/04 18:07:28 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:40:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_quote(char *str)
 	}
 	return (num_quote);
 }
-
+/*
 int	ft_verifier_ordre(char *str)
 {
 	int	first_quote;
@@ -55,7 +55,7 @@ int	ft_verifier_ordre(char *str)
 	// '로 시작한다면, '로 끝나거나, 마무리가되어야함
 	return (0);
 }
-
+*/
 int	ft_verifier_dquote(char *str)
 {
 	int	num_dquote;
@@ -71,7 +71,7 @@ int	ft_verifier_dquote(char *str)
 		ft_putstr("Error: dquote\n");
 	return (0);
 }
-
+/*
 int ft_verifier_dquote(char *str)
 {
 	to do:
@@ -79,3 +79,5 @@ int ft_verifier_dquote(char *str)
 		"로 닫히는지? 짝수인지? 
 		2. 첫번쨰가 '라면,
 		'로 닫히는지? 짝수인지?
+}
+*/
