@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:44:33 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/30 17:46:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:12:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	copy_env(char **env)
 void	ft_initial_g(void)
 {
 	g_info.env = NULL;
-	g_info.quit_quote = 0;
 }
 
 void	ft_initial(char **env)
