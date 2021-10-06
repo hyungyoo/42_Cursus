@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/05 14:40:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:09:33 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_dquote(char *str)
 			num_dquote++;
 		i++;
 	}
-	return (num_dquote);
+	return (num_dquote % 2);
 }
 
 int	ft_quote(char *str)
@@ -41,43 +41,73 @@ int	ft_quote(char *str)
 			num_quote++;
 		i++;
 	}
-	return (num_quote);
+	return (num_quote % 2);
 }
-/*
-int	ft_verifier_ordre(char *str)
+
+int	ft_verifier_quote(char c)
+{
+	if (c == 34)
+		return (34);
+	else if (c == 39)
+		return (39);
+	else
+		return (0);
+}
+
+void	ft_init_quote(char *str, int *first_quote, int *last_quote)
+{
+	char	tmp;
+	int		i;
+	int		flag;
+
+	flag = 0;
+	i = -1;
+	while (str[++i])
+	{
+		if (ft_verifier_quote(str[i]))
+		{
+			if (flag == 0)
+				*first_quote = str[i];
+			else
+				tmp = str[i];
+			flag++;
+		}
+	}
+	*last_quote = tmp;
+}
+
+int	ft_num_quote(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_verifier_quote(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_verifier_dquote(char *str)
 {
 	int	first_quote;
 	int	last_quote;
-	int	first_dquote;
-	int last_dquote;
 
-	// "로 시작한다면, "로 끝나거나, 마무리가되어야함
-	// '로 시작한다면, '로 끝나거나, 마무리가되어야함
+	first_quote = '\0';
+	last_quote = '\0';
+	ft_init_quote(str, &first_quote, &last_quote);
+	if (!ft_num_quote(str))
+		return (0);
+	if (first_quote != last_quote)
+	{
+		printf("in here\n");
+		if (first_quote == 39)
+			ft_putstr("Error: quote\n");
+		else if (first_quote == 34)
+			ft_putstr("Error: dquote\n");
+		return (1);
+	}
 	return (0);
 }
-*/
-int	ft_verifier_dquote(char *str)
-{
-	int	num_dquote;
-	int	num_quote;
-
-	num_dquote = 0;
-	num_quote = 0;
-	num_dquote = ft_dquote(str);
-	num_quote = ft_quote(str);
-	if (num_quote % 2)
-		ft_putstr("Error: quote\n");
-	else if (num_dquote % 2)
-		ft_putstr("Error: dquote\n");
-	return (0);
-}
-/*
-int ft_verifier_dquote(char *str)
-{
-	to do:
-		1. 첫번재가 "라면,
-		"로 닫히는지? 짝수인지? 
-		2. 첫번쨰가 '라면,
-		'로 닫히는지? 짝수인지?
-}
-*/
