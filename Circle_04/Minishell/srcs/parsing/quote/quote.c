@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/06 16:09:33 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:51:01 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int	ft_verifier_dquote(char *str)
 		return (0);
 	if (first_quote != last_quote)
 	{
-		printf("in here\n");
 		if (first_quote == 39)
 			ft_putstr("Error: quote\n");
 		else if (first_quote == 34)
