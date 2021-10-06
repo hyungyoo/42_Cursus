@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/06 16:49:12 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:12:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ typedef struct s_info
 typedef struct s_parsing
 {
 	char	*cmd;
-	char	**cmd_option;
-	char	**arg;
-	struct s_parsing *prev;
+	char	**cmd_option;	// split cmd with ' ' '\t' etc, cmd + option for execve
+	char	**arg;			// split arg with ' ' '\t' etc
 	struct s_parsing *next;
 }				t_parsing;
 
