@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/08 22:42:59 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/09 01:48:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	main(void)
 	split오류 == 
 	pivot이 << >> 은 인식못함!
 	그렇기때문에, 좆됨...
+	DONC, avec strjoin, et avec strcmp(ret[i], < ou << ou | ou > ou >>);
+	avec cela, strjoin jusqu'a multi_cmd
 	아니면 check_pivot에 strcmp로 <<가 있는지 확인하는것도있는데 그건별로임..
 	그리고 cmd1| 이것도 pivot으로 읽을듯
 	다른방법을 찾아야함
