@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:15:44 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/08 08:14:21 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/09/30 17:01:30 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/10/08 08:12:08 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-void	ft_free_env(void)
+int	main(void)
 {
-	int	i;
 
-	i = 0;
-	while (g_info.env[i])
+	//str = readline("\033[38;5;41mminishell $>\033[0m");
+	//free(str);
+	char *str = NULL;
+	str = malloc(sizeof(char) * 5);
+	int i = 0;
+	while (i < 4)
 	{
-		free(g_info.env[i]);
-		i++;
+			str[i] = 'a';
+			i++;
 	}
-	free(g_info.env);
-}
-
-void	ft_exit(void)
-{
+	str[i] = '\0';
+	printf("%s\n", str);
+	char *tmp = str;
+	add_history("a");
 	rl_clear_history();
-	ft_free_env();
-	exit(1);
+	free(str);
+	return (0);
 }
