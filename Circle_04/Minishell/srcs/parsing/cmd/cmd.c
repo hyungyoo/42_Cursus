@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 18:26:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/08 17:15:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/08 21:41:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,18 @@ void	ft_parsing_cmd(char *str)
 	in there, multi cmd aussi! 
 	cmd1 option arg m_cmd cmd2 option arg..
 	
+	split오류 == 
+	pivot이 << >> 은 인식못함!
+	그렇기때문에, 좆됨...
+	아니면 check_pivot에 strcmp로 <<가 있는지 확인하는것도있는데 그건별로임..
+	그리고 cmd1| 이것도 pivot으로 읽을듯
+	다른방법을 찾아야함
+	다 읽어가면서 앞뒤가 space이며 pivot = "|" < << > >> 인 경우를 기준으로
+	split할수있는 함수가 있어야한다.
+	아니면 전부다 띄어쓰기로 split한것을 합쳐보면서, 만약에 | << >> > 일떄는 그것까지 합치고
+	나머지는 free하는것도 방법인듯함
+	좋아!
+
 	cmd1 option arg m_cmd
 
 	cmd2 option arg null

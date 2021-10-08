@@ -1,54 +1,59 @@
 NAME = minishell
 
-SRCS_DIR = ./
+SRCS = srcs/minishell.c \
+       srcs/parsing/parsing.c  \
+       srcs/parsing/quote/quote.c    \
+       srcs/parsing/cmd/cmd.c    \
+       srcs/exit/exit.c    \
+       srcs/util/util.c    \
+       srcs/initial/initial.c  \
+       srcs/signal/signal.c    \
 
+HEADER = ./includes/minishell.h
 
-HEADER_DIR = ./includes
+OBJS = $(SRCS:.c=.o)
 
-LIBFT_DIR = ./libft
+LI = -L. -lft -lreadline -L /usr/local/opt/readline/lib 
+LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
+#/usr/local/opt/readline/lib //keulee home complie
+#linux complie ??
 
-READLINE_DIR = $(shell brew --prefix readline)
+IN = -I /usr/local/opt/readline/include
+INC = -I ~/.brew/opt/readline/include 
+#/usr/local/opt/readline/include //keulee home complie
+#linux complie ??
 
-MAIN = ${SRCS_DIR}srcs/minishell.c
+CC = clang
 
-SRCS_NAME =	srcs/parsing/parsing.c \
-			srcs/parsing/quote/quote.c \
-			srcs/parsing/cmd/cmd.c \
-			srcs/exit/exit.c \
-			srcs/util/util.c \
-			srcs/initial/initial.c \
-			srcs/initial/initial_node.c \
-			srcs/signal/signal.c \
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
-SRCS = ${addprefix ${SRCS_DIR}, ${SRCS_NAME}}
+LIBFT = libft.a
 
-OBJS = ${MAIN:.c=.o}
+RM = rm -f
 
-OBJS += ${SRCS:.c=.o}
+all: $(NAME)
 
-CC = gcc
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
 
-CFLAGS = -Wall -Wextra -Werror -I${READLINE_DIR}/include -I${HEADER_DIR} -I${LIBFT_DIR}
+$(LIBFT):
+	$(MAKE) -C libft
+	mv libft/$(LIBFT) .
 
-RM = rm -rf
+.c.o:
+		${CC} ${CFLAGS} $(INC) -c $< -o ${<:.c=.o}
 
-all: ${NAME}
-
-${NAME}: ${OBJS} ${HEADER_DIR}
-	@${MAKE} -C ${LIBFT_DIR}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L${READLINE_DIR}/lib -lreadline -lhistory -L${LIBFT_DIR} -lft
+#$(OBJS): $(SRCS) $(HEADER)
+#	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:
-	${MAKE} -C ${LIBFT_DIR} clean
-	${RM} ${OBJS}
+	$(MAKE) -C libft clean
+	$(RM) $(OBJS)
 
 fclean: clean
-	${MAKE} -C ${LIBFT_DIR} fclean
-	${RM} ${NAME}
+	$(MAKE) -C libft fclean
+	$(RM) $(NAME) $(LIBFT)
 
 re: fclean all
 
-val:
-	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
-
-.PHONY: all clean fclean re val
+.PHONY: all clean fclean re%
