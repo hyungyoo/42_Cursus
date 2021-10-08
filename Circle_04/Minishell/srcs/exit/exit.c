@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:15:44 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/08 08:14:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/08 08:25:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ void	ft_free_env(void)
 	free(g_info.env);
 }
 
+void	ft_free_global(void)
+{
+	ft_free_env();
+}
+
 void	ft_exit(void)
 {
 	rl_clear_history();
-	ft_free_env();
+	ft_free_global();
 	exit(1);
 }
