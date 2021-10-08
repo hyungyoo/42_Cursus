@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/08 07:58:42 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/08 17:11:50 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 typedef struct s_info
 {
 	char	**env;
+	int		count_node;
 }				t_info;
 
 typedef struct s_parsing
@@ -36,7 +37,9 @@ typedef struct s_parsing
 	char	*cmd;
 	char	**cmd_option;	// split cmd with ' ' '\t' etc, cmd + option for execve
 	char	**arg;			// split arg with ' ' '\t' etc
+	char	*next_multi_cmd;
 	struct s_parsing *next;
+	struct s_parsing *prev;
 }				t_parsing;
 
 /* one global variable */
@@ -56,6 +59,7 @@ void			ft_exit(void);
 
 /* initial.c */
 void			ft_initial(char **env);
+void			ft_init_node(t_parsing *parsing);
 
 /* signal.c */
 void			handler(int signum);
