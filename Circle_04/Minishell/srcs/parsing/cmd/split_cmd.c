@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/09 15:01:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/09 15:05:03 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	**ft_strjoin_split(char **str)
 	  to do:
 	  	1. quand "ft_strcmp_pivot est egale a 1, strjoin, et tout de suit,
 		 appelle function ft_new_node et ft_link_node;
+
+		2. ou bien, avoir num_split, et malloc double array et strcpy..apres strjoin...
 
 	*/
 
