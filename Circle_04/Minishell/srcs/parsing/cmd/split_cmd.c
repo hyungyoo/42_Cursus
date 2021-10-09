@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/09 18:16:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:53:58 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,40 @@ int	ft_count_pivot(char **str)
 	return (count_pivot);
 }
 
+char	**ft_malloc_split(int	size_split)
+{
+	char	**ret;
+	
+	ret = (char **)malloc(sizeof(char*) * (size_split) + 1);
+	if (!ret)
+		return (NULL);
+	ret[size_split] = '\0';
+	return (ret);
+}
+
 char	**ft_split_cmd(char **str)
 {
-	char **ret;
+	char	**ret;
+	char	**split_str;
+	int		size_split;
 
-	//ret = str;
+	split_str = ft_split(str, ' ');
+	size_split = ft_count_pivot(split_str) + 1;
+	ret = ft_malloc_split(size_split);
+	
+	/*
+	   if (str[i] == mt_cmd ou str[i + 1] == mt_cmd)
+	  		==> on doit finir 
+	*/
 	/*
 	to do
-		1. num_split -- > malloc double_array
+		1. num_split -- > malloc double_array  ok
 		2. get_strjoin for each multiple_cmd
 			cat |>infile |
 			grep hello > 
 			cat outfile <
 			heool
-		3. ft_strcpy-> mettre dans double array et free autre 
+		3. ou bien, donne justement addresse!
 	*/
 	return (ret);
 }
