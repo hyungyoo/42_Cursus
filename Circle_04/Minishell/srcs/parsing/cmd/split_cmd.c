@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/09 19:28:07 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/09 19:46:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,13 @@ char	**ft_split_cmd(char *str)
 	index_ret = 0;
 	while (split_str[i])
 	{
-		if (split_str[i] && ft_strcmp_pivot(split_str[i]) && i++)
-			ret[index_ret++] = split_str[i];
-		else 
-		{
-			ret[index_ret] = split_str[i];
-			while (split_str[i] && split_str[i + 1] && !(ft_strcmp_pivot(split_str[i])))
-			{
-	
-				ret[index_ret] = ft_strjoin_free(ret[index_ret], split_str[i + 1]);
-				i++;
-			}
-			if (ft_strcmp_pivot(split_str[i]))
-			{
-				ret[index_ret] = ft_strjoin_free(ret[index_ret], split_str[i]);
-				i++;
-			}
-			index_ret++;
-		}
+		/*
+		   to do:
+		   1. split_str[i] == pivot,
+		   strjoin et 
+		   changement de ret[index_ret++] et encore strjoin
+		 */
+		i++;
 	}
 	return (ret);
 }
@@ -149,10 +138,10 @@ int	main(void)
 	char **ret2 = ft_split_cmd(str);
 	
 	
-	printf("count_pivot = %d\n", ft_count_pivot(ret));
+	printf("count_pivot = %d\n", ft_count_pivot(ft_split(str, ' ')));
 	printf("%s\n\n", str);
 	
-	printf("count_pivot2 = %d\n", ft_count_pivot(ret2));
+	printf("count_pivot2 = %d\n", ft_count_pivot(ft_split(str2, ' ')));
 	printf("%s\n\n", str2);
 	
 	ft_print_all(ret);	
