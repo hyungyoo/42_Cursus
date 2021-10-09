@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../../../includes/minishell.h"
 
 int	main(void)
 {
@@ -42,5 +43,16 @@ int	main(void)
 		printf("in if \n");
 	printf("%d == 1\n", k);
 
+
+	printf("ret 0 == %s\n", ret[0]);
+	printf("ret 1 == %s\n", ret[1]);
+	printf("ret 2 == %s\n", ret[2]);
+	
+	char *test;
+	test = ret[0];
+	test = ft_strjoin(test, ret[1]);
+	test = ft_strjoin(test, ret[2]);
+	
+	printf("test == aaabbbccc  == %s\n", test);
 	return (0);
 }
