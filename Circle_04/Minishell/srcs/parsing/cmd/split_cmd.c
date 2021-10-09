@@ -6,18 +6,47 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/09 01:48:02 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/09 15:01:10 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+int	ft_strcmp_pivot(char *str)
+{
+	if (ft_strcmp(str, "|") || ft_strcmp(str, "<")
+			|| ft_strcmp(str, "<<") || ft_strcmp(str, ">")
+			|| ft_strcmp(str, ">>"))
+		return (1);
+	return (0);
+}
+
+char	**ft_strjoin_split(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] && !ft_strcmp_pivot(str[i]))
+		{
+		}
+		i++;
+	}
+	/*
+	  to do:
+	  	1. quand "ft_strcmp_pivot est egale a 1, strjoin, et tout de suit,
+		 appelle function ft_new_node et ft_link_node;
+
+	*/
+
+}
+
 char	**ft_split_cmd(char *str)
 {
 	char **ret;
 
-	ret = ft_split(str, ' ');
-
+	ret = ft_strjoin_split(ft_split(str));
 	return (ret);
 }
 
