@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/09 18:53:58 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/09 19:28:07 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,44 @@ char	**ft_malloc_split(int	size_split)
 	return (ret);
 }
 
-char	**ft_split_cmd(char **str)
+char	**ft_split_cmd(char *str)
 {
 	char	**ret;
 	char	**split_str;
 	int		size_split;
+	int		i;
+	int		index_ret;
 
 	split_str = ft_split(str, ' ');
 	size_split = ft_count_pivot(split_str) + 1;
 	ret = ft_malloc_split(size_split);
+	i = 0;
+	index_ret = 0;
+	while (split_str[i])
+	{
+		if (split_str[i] && ft_strcmp_pivot(split_str[i]) && i++)
+			ret[index_ret++] = split_str[i];
+		else 
+		{
+			ret[index_ret] = split_str[i];
+			while (split_str[i] && split_str[i + 1] && !(ft_strcmp_pivot(split_str[i])))
+			{
 	
+				ret[index_ret] = ft_strjoin_free(ret[index_ret], split_str[i + 1]);
+				i++;
+			}
+			if (ft_strcmp_pivot(split_str[i]))
+			{
+				ret[index_ret] = ft_strjoin_free(ret[index_ret], split_str[i]);
+				i++;
+			}
+			index_ret++;
+		}
+	}
+	return (ret);
+}
+			
+		
 	/*
 	   if (str[i] == mt_cmd ou str[i + 1] == mt_cmd)
 	  		==> on doit finir 
@@ -91,8 +119,6 @@ char	**ft_split_cmd(char **str)
 			heool
 		3. ou bien, donne justement addresse!
 	*/
-	return (ret);
-}
 
 
 void	ft_print_all(char **ret)
@@ -102,7 +128,7 @@ void	ft_print_all(char **ret)
 		return ;
 	while (ret[i])
 		printf("%s\n", ret[i++]);
-
+}
 
 void	ft_free_double(char **str)
 {
@@ -119,8 +145,8 @@ int	main(void)
 {
 	char str[100] = "cat |>infile | grep hello > cat outfile < heool";
 	char str2[100] = "< cat |>infile | grep hello > cat outfile < heool";
-	char **ret = ft_split_cmd(ft_split(str, ' '));
-	char **ret2 = ft_split_cmd(ft_split(str2, ' '));
+	char **ret = ft_split_cmd(str);
+	char **ret2 = ft_split_cmd(str);
 	
 	
 	printf("count_pivot = %d\n", ft_count_pivot(ret));

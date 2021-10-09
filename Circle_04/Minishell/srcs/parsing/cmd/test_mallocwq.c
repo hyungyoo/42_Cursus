@@ -32,6 +32,15 @@ int	main(void)
 	while (ret[i])
 		printf("%s\n", ret[i++]);
 	
+	int	j = 1;
+	i = 0;
+	int	k = 0;
+	if (j == 0 && k++)
+		printf("in if \n");
+	printf("%d == 0\n", k);
+	if (i == 0 && k++)
+		printf("in if \n");
+	printf("%d == 1\n", k);
 
 	return (0);
 }
