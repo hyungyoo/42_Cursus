@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/09 15:05:03 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:16:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,66 @@
 
 int	ft_strcmp_pivot(char *str)
 {
-	if (ft_strcmp(str, "|") || ft_strcmp(str, "<")
-			|| ft_strcmp(str, "<<") || ft_strcmp(str, ">")
-			|| ft_strcmp(str, ">>"))
+	if (!ft_strcmp(str, "|"))
+		return (1);
+	else if (!ft_strcmp(str, "<"))
+		return (1);
+	else if (!ft_strcmp(str, "<<"))
+		return (1);
+	else if (!ft_strcmp(str, ">"))
+		return (1);
+	else if (!ft_strcmp(str, ">>"))
 		return (1);
 	return (0);
 }
 
-char	**ft_strjoin_split(char **str)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
+	char	*ret;
+	char	*tmp;
+
+	tmp = ft_strjoin(s1, " ");
+	free(s1);
+	ret = ft_strjoin(tmp, s2);
+	free(s2);
+	free(tmp);
+	return (ret);
+}
+
+int	ft_count_pivot(char **str)
+{
+	int	count_pivot;
 	int	i;
 
 	i = 0;
+	count_pivot = 0;
 	while (str[i])
 	{
-		if (str[i] && !ft_strcmp_pivot(str[i]))
-		{
-		}
+		if (ft_strcmp_pivot(str[i]))
+			count_pivot++;
 		i++;
 	}
-	/*
-	  to do:
-	  	1. quand "ft_strcmp_pivot est egale a 1, strjoin, et tout de suit,
-		 appelle function ft_new_node et ft_link_node;
-
-		2. ou bien, avoir num_split, et malloc double array et strcpy..apres strjoin...
-
-	*/
-
+	return (count_pivot);
 }
 
-char	**ft_split_cmd(char *str)
+char	**ft_split_cmd(char **str)
 {
 	char **ret;
 
-	ret = ft_strjoin_split(ft_split(str));
+	//ret = str;
+	/*
+	to do
+		1. num_split -- > malloc double_array
+		2. get_strjoin for each multiple_cmd
+			cat |>infile |
+			grep hello > 
+			cat outfile <
+			heool
+		3. ft_strcpy-> mettre dans double array et free autre 
+	*/
 	return (ret);
 }
+
 
 void	ft_print_all(char **ret)
 {
@@ -59,13 +82,35 @@ void	ft_print_all(char **ret)
 		return ;
 	while (ret[i])
 		printf("%s\n", ret[i++]);
+
+
+void	ft_free_double(char **str)
+{
+	int	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
 
 int	main(void)
 {
-	char str[100] = "cat |>infile | grep hello > cat outfile";
-	char **ret = ft_split_cmd(str);
-	ft_print_all(ret);
+	char str[100] = "cat |>infile | grep hello > cat outfile < heool";
+	char str2[100] = "< cat |>infile | grep hello > cat outfile < heool";
+	char **ret = ft_split_cmd(ft_split(str, ' '));
+	char **ret2 = ft_split_cmd(ft_split(str2, ' '));
+	
+	
+	printf("count_pivot = %d\n", ft_count_pivot(ret));
+	printf("%s\n\n", str);
+	
+	printf("count_pivot2 = %d\n", ft_count_pivot(ret2));
+	printf("%s\n\n", str2);
+	
+	ft_print_all(ret);	
+
 	return (0);
 }
 
