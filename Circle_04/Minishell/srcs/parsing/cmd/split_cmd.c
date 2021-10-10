@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/10 17:12:15 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/10 17:21:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	**ft_split_cmd(char *str_for_split)
 			ret[ret_index++] = strdup(str[i]);
 			free(str[i++]);
 		}
-		else
+		else if (str[i])
 		{
 			ret[ret_index] = strdup(str[i]);
 			free(str[i++]);
@@ -115,26 +115,33 @@ void	ft_print_all(char **ret)
 int	main(void)
 {
 	char *str = ft_strdup("cat |>infile | grep hello > cat outfile | grep hell");
-	char *str2 = ft_strdup("< cat |>infile | grep hello > cat outfile < heoola >");
+	char *str2 = ft_strdup("< file_in | cat -e");
+	char *str3 = ft_strdup("< |");
 	char **ret = ft_split_cmd(str);
 	char **ret2 = ft_split_cmd(str2);
+	char **ret3 = ft_split_cmd(str3);
 	
 	
+	
+	printf("\n\n\n");
 	printf("%s\n\n", str);
-	
-	printf("%s\n\n", str2);
-	
-	printf("\n\n\n");
-	printf("ret \n");
 	ft_print_all(ret);	
+
+
 	printf("\n\n\n");
-	printf("ret2 \n");
+	printf("%s\n\n", str2);
 	ft_print_all(ret2);
+
+	printf("\n\n\n");
+	printf("%s\n\n", str3);
+	ft_print_all(ret3);
 
 	ft_free_double(ret);
 	ft_free_double(ret2);
+	ft_free_double(ret3);
 	free(str);
 	free(str2);
+	free(str3);
 	printf("\n\n\n");
 	return (0);
 }
