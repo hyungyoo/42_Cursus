@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/10 16:45:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/10 17:12:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,6 @@ int	ft_count_pivot(char **str)
 	return (count_pivot);
 }
 
-char	**ft_malloc_split(int	size_split)
-{
-	char	**ret;
-	
-	ret = (char **)malloc(sizeof(char*) * (size_split) + 1);
-	if (!ret)
-		return (NULL);
-	ret[size_split] = NULL;
-	return (ret);
-}
-
 void	ft_free_double(char **str)
 {
 	int	i = 0;
@@ -70,7 +59,9 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	char	*ret;
 	char	*tmp;
 
-	tmp= ft_strjoin(s1, " ");
+	if (!s1 || !s2)
+		return (NULL);
+	tmp = ft_strjoin(s1, " ");
 	ret = ft_strjoin(tmp, s2);
 	free(tmp);
 	free(s2);
@@ -88,16 +79,15 @@ char	**ft_split_cmd(char *str_for_split)
 
 	str = ft_split(str_for_split, ' ');
 	size_split = ft_count_pivot(str) + 1;
-	ret = ft_malloc_split(size_split);
+	ret = ft_calloc(sizeof(char *), size_split + 1);;
 	i = 0;
 	ret_index = 0;
 	while (str[i])
 	{
-		if (i == 0 && ft_strcmp_pivot(str[0]))
+		if (i == 0 && ft_strcmp_pivot(str[i]))
 		{
-			ret[ret_index++] = strdup(str[0]);
-			free(str[0]);
-			i++;
+			ret[ret_index++] = strdup(str[i]);
+			free(str[i++]);
 		}
 		else
 		{
@@ -124,8 +114,8 @@ void	ft_print_all(char **ret)
 
 int	main(void)
 {
-	char str[100] = "cat |>infile | grep hello > cat outfile | grep hell";
-	char str2[100] = "< cat |>infile | grep hello > cat outfile < heool >";
+	char *str = ft_strdup("cat |>infile | grep hello > cat outfile | grep hell");
+	char *str2 = ft_strdup("< cat |>infile | grep hello > cat outfile < heoola >");
 	char **ret = ft_split_cmd(str);
 	char **ret2 = ft_split_cmd(str2);
 	
@@ -143,6 +133,8 @@ int	main(void)
 
 	ft_free_double(ret);
 	ft_free_double(ret2);
+	free(str);
+	free(str2);
 	printf("\n\n\n");
 	return (0);
 }
