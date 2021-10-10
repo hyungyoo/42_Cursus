@@ -1,2 +1,2 @@
 all:
-	gcc split_cmd.c -L. -lft && ./a.out
+	gcc split_cmd.c -L. -lft && leaks -atExit -- ./a.out
