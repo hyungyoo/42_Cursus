@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/10 17:34:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/10 19:25:01 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	**ft_split_cmd(char **str)
 			ret_index++;
 		}
 	}
+	free(str);
 	return (ret);
 }
 
