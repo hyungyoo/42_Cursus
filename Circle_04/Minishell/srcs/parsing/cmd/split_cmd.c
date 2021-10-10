@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/10 17:21:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/10 17:34:10 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ int	ft_count_pivot(char **str)
 
 void	ft_free_double(char **str)
 {
-	int	i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i])
 	{
 		free(str[i]);
@@ -69,17 +71,15 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (ret);
 }
 
-char	**ft_split_cmd(char *str_for_split)
+char	**ft_split_cmd(char **str)
 {
 	char	**ret;
-	char	**str;
 	int		size_split;
 	int		i;
 	int		ret_index;
 
-	str = ft_split(str_for_split, ' ');
 	size_split = ft_count_pivot(str) + 1;
-	ret = ft_calloc(sizeof(char *), size_split + 1);;
+	ret = ft_calloc(sizeof(char *), size_split + 1);
 	i = 0;
 	ret_index = 0;
 	while (str[i])
@@ -117,12 +117,11 @@ int	main(void)
 	char *str = ft_strdup("cat |>infile | grep hello > cat outfile | grep hell");
 	char *str2 = ft_strdup("< file_in | cat -e");
 	char *str3 = ft_strdup("< |");
-	char **ret = ft_split_cmd(str);
-	char **ret2 = ft_split_cmd(str2);
-	char **ret3 = ft_split_cmd(str3);
+	char **ret = ft_split_cmd(ft_split(str, ' '));
+	char **ret2 = ft_split_cmd(ft_split(str2, ' '));
+	char **ret3 = ft_split_cmd(ft_split(str3, ' '));
 	
-	
-	
+
 	printf("\n\n\n");
 	printf("%s\n\n", str);
 	ft_print_all(ret);	
