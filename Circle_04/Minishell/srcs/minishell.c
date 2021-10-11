@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:01:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/08 07:58:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/11 14:00:11 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	minishell(char *str)
 {
-	str = readline("\033[38;5;41mminishell $>\033[0m");
+	str = readline("\033[38;5;41mminishell $> \033[0m");
 	if (str == NULL || (ft_strcmp(str, "exit") == 0))
 	{	
 		free(str);

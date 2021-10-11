@@ -4,24 +4,9 @@
 
 
 
+1. " " , ' ' verifier fermature et print all et finir (ne passe pas a parsing)
 
-Probleme
-	1. apres quote, if faut "enter"
-		pour cela,  "escape sequence"
-	2. echo " ' dwqdqw" dqw' -->
-	3. parsing struct
-		parsing-> 
-		1/cmd, 
-		2/arg, 
-		3/option(commance avec -),
-		4/(multi commande)
-		
-	
-
-
-
-
-
+2. pasing cmd node link!!!!!!!!!!!!!!!!!!!!!!!!!!putin 
 
 
 
