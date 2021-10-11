@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/11 14:26:55 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/11 14:58:52 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 // ft_verifier_dquote 리턴값 1이면, 오류
 void	parsing(char *str)
 {
-	ft_parsing_cmd(str);
+	if (!ft_parsing_cmd(str))
+		return ;
+	
+
 	/*
 	   this is for echo function
 	 */

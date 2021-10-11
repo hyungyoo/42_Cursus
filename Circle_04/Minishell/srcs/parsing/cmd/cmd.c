@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 18:26:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/11 13:12:23 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:45:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,41 @@ t_parsing	*ft_newnode(char *str)
 	return (parsing);
 }
 */
-void	ft_parsing_cmd(char *str)
+
+int	ft_check_dquote(char **split_cmd)
+{
+	int	i;
+
+	i = 0;
+	while (split_cmd[i])
+	{
+		if (ft_verifier_dquote(split_cmd[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_parsing_cmd(char *str)
 {
 	char **split_cmd;
 	char	**split_str;
-
+	
 	split_str = ft_split(str, ' ');
 	split_cmd = ft_split_cmd(split_str);
-
+	if (!ft_check_dquote(split_cmd))
+	{
+		ft_free_double(split_cmd);
+		return (0);
+	}
+	//////// apres enlever/////////
 	int	i = 0;
 	while (split_cmd[i])
 		printf("%s\n", split_cmd[i++]);
-	
+	///////////////////////////////
+
 	ft_free_double(split_cmd);
+	return (1);
 }
 /*
 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

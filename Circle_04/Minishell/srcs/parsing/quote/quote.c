@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/06 16:51:01 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:46:33 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,41 @@ int	ft_verifier_quote(char c)
 		return (0);
 }
 
-void	ft_init_quote(char *str, int *first_quote, int *last_quote)
+char	get_first(char *str)
 {
-	char	tmp;
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_verifier_quote(str[i]))
+			return (str[i]);
+		i++;
+	}
+	return ('\0');
+}
+
+char	get_last(char *str)
+{
+	char	last;
 	int		i;
 	int		flag;
 
+	i = 0;
 	flag = 0;
-	i = -1;
-	while (str[++i])
+	while (str[i])
 	{
-		if (ft_verifier_quote(str[i]))
+		if (ft_verifier_quote(str[i]) && !flag)
 		{
-			if (flag == 0)
-				*first_quote = str[i];
-			else
-				tmp = str[i];
 			flag++;
 		}
+		else if (ft_verifier_quote(str[i]) && flag)
+		{
+			last = str[i];
+		}
+		i++;
 	}
-	*last_quote = tmp;
+	return (last);
 }
 
 int	ft_num_quote(char *str)
@@ -92,14 +107,16 @@ int	ft_num_quote(char *str)
 
 int	ft_verifier_dquote(char *str)
 {
-	int	first_quote;
-	int	last_quote;
+	char	first_quote;
+	char	last_quote;
 
-	first_quote = '\0';
-	last_quote = '\0';
-	ft_init_quote(str, &first_quote, &last_quote);
+	first_quote = 0;
+	last_quote = 0;
 	if (!ft_num_quote(str))
 		return (0);
+	first_quote = get_first(str);
+	last_quote = get_last(str);
+	printf("first = %c, last %c\n", first_quote, last_quote);
 	if (first_quote != last_quote)
 	{
 		if (first_quote == 39)
