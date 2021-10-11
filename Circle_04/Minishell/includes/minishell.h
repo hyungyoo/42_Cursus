@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/08 17:11:50 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/11 12:26:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,18 @@ t_info	g_info;
 /* parsing.c */
 void			parsing(char *str);
 
+/* split_cmd.c*/
+char			**ft_split_cmd(char **str);
+
+/* cmd.c */
+void			ft_parsing_cmd(char *str);
+
 /* quote.c*/
 int				ft_verifier_dquote(char *str);
 
 /* util.c */
 int				ft_add(int num);
-
+void			ft_free_double(char **str);
 /* exit.c */
 void			ft_exit(void);
 

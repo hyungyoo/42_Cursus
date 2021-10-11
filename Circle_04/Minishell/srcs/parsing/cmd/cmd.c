@@ -6,12 +6,13 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 18:26:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/08 21:45:31 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/11 12:34:58 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+/*
 char	*ft_parsing_cmd(char *str)
 {
 	char *cmd;
@@ -60,9 +61,19 @@ t_parsing	*ft_newnode(char *str)
 	parsing->prev = parsing;
 	return (parsing);
 }
-
+*/
 void	ft_parsing_cmd(char *str)
 {
+	char **split_cmd;
+	
+	split_cmd = ft_split_cmd(ft_split(str, ' '));
+
+	int	i = 0;
+	while (split_cmd[i])
+		printf("%s\n", split_cmd[i++]);
+	
+	ft_free_double(split_cmd);
+}
 
 	/*
 
@@ -117,6 +128,4 @@ void	ft_parsing_cmd(char *str)
 	
 	or t_parsing *ft_parsing_cmd(char *str) for free in minishell fucntion
 	*/
-	return ;
-}
 
