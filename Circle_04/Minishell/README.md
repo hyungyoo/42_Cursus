@@ -3,10 +3,17 @@
 
 
 
+1. 문제점
+ node로 split을 했지만, 만약에 "abc jdwlq"가 있다면,
+ 두개를 합쳐줘야한다
+ 아니면 cmd_arg에서 이게 두개로나옴
 
-1. " " , ' ' verifier fermature et print all et finir (ne passe pas a parsing)
+ 2. < cmd1 o
+  < cmd1 | arg1j2 ==> arg1j2 부터된다.
+  노드 저장이안됨
 
-2. pasing cmd node link!!!!!!!!!!!!!!!!!!!!!!!!!!putin 
+3. free_node 만들기
+
 
 
 

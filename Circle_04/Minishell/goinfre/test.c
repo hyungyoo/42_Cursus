@@ -9,15 +9,11 @@ int		main(int argc, char **argv, char **env)
 	ret[2] = NULL;
 	ret[0] = "ls";
 	ret[1] = "-al";
-	pid_t a;
-	a = fork();
-	if (a == 0)
-		execve("/bin/ls", ret, env);
-	else if (a == 0)
-	{
-		waitpid(a, &sta, 0);
-		printf("p\n");
-	}
-	printf("%s\n", getenv("PATH"));
+
+	int	i = 0;
+	while (ret[i])
+		i++;
+	--i;
+	printf("%s == -al\n",ret[i]);
 	return (0);
 }

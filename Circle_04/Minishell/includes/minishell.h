@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 13:16:13 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 21:58:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 
 # include "../libft/libft.h"
 
+# define PIPE 5
+# define LEFT 6
+# define DLEFT 7
+# define RIGHT 8
+# define DRIGHT 9
+
 typedef struct s_info
 {
 	char	**env;
@@ -35,12 +41,11 @@ typedef struct s_info
 
 typedef struct s_parsing
 {
-	char				*cmd;
-	char				**cmd_option;
-	char				**arg;
-	char				*next_multi_cmd;
+	char				*cmd;            //ls --> 
+	char				*access_cmd;    // path + cmd, null->error_message
+	char				**cmd_arg;	// cmd + arg --> 2 array   ls // -al
+	int					flag;
 	struct s_parsing	*next;
-	struct s_parsing	*prev;
 }				t_parsing;
 
 /* one global variable */
@@ -48,12 +53,16 @@ t_info	g_info;
 
 /* parsing.c */
 void			parsing(char *str);
+void			ft_printf_parsing_cmd(char **cmd);
+void			ft_print_all_node(t_parsing **parsing);
+void			ft_print_node(t_parsing *a);
 
 /* split_cmd.c*/
 char			**ft_split_cmd(char **str);
+int				ft_strcmp_pivot(char *str);
 
 /* cmd.c */
-int				ft_parsing_cmd(char *str);
+int				ft_parsing_cmd(char *str, char ***split_cmd);
 
 /* quote.c*/
 int				ft_verifier_dquote(char *str);
@@ -69,7 +78,7 @@ void			ft_exit(void);
 
 /* initial.c */
 void			ft_initial(char **env);
-void			ft_init_node(t_parsing *parsing);
+void			ft_init_node(t_parsing **parsing, char **split_cmd);
 
 /* signal.c */
 void			handler(int signum);

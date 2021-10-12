@@ -9,6 +9,7 @@ SRCS = srcs/minishell.c \
        srcs/exit/exit.c    \
        srcs/util/util.c    \
        srcs/initial/initial.c  \
+       srcs/initial/initial_node.c  \
        srcs/signal/signal.c    \
 
 HEADER = ./includes/minishell.h

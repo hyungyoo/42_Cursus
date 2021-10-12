@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 17:31:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 22:05:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,64 @@
  *	1. ft_parsing_cmd : parsing cmd
  *	2. free all
  */
+void	ft_printf_parsing_cmd(char **cmd)
+{
+	int	i;
+
+	if (!cmd)
+		return ;
+	i = 0;
+	while (cmd[i])
+	{
+		printf("%s\n", cmd[i++]);
+	}
+}
+
+void	ft_print_all_node(t_parsing **parsing)
+{
+	while (*parsing)
+	{
+		printf("cmd == %s\n", (*parsing)->cmd);
+		printf("access_cmd = %s\n", (*parsing)->access_cmd);
+		printf("\n");
+		printf("cmd_arg :\n");
+		ft_printf_parsing_cmd((*parsing)->cmd_arg);
+		printf("\n");
+		printf("flag = %d\n", (*parsing)->flag);
+		*parsing = (*parsing)->next;
+		printf("\n\n\n\n\n");
+	}
+}
+
+void	ft_print_node(t_parsing *a)
+{
+	printf("\n");
+	printf("cmd == %s\n", a->cmd);
+	printf("access_cmd == %s\n", a->access_cmd);
+	printf("\n cmd_arg: \n");
+	ft_printf_parsing_cmd(a->cmd_arg);
+	printf("\n");
+	printf("flag == %d\n", a->flag);
+}
+
 void	parsing(char *str)
 {
+	t_parsing	*parsing;
+	char		**split_cmd;
+
+	split_cmd = NULL;
+	parsing = NULL;
+	//parsing_node = NULL;
 	if (!str)
 		return ;
-	if (!ft_parsing_cmd(str))
+	// charck : parsing, quote, dquote
+	if (!ft_parsing_cmd(str, &split_cmd))
+		return ;
+	if (!split_cmd)
 		return ;
 	/*
-	to do:
-		1. 
-	*/
-	int	i = 0;
-	while (g_info.split_cmd[i])
-	{
-		printf("%s\n", g_info.split_cmd[i++]);
-	}
+	 * to do
+	 * ft_parsing_cmd2 --> for struct and for node
+	 */
+	ft_init_node(&parsing, split_cmd);
 }

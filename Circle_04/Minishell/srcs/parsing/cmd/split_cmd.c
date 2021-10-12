@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 18:05:09 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 19:37:52 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int	ft_strcmp_pivot(char *str)
 {
 	if (!ft_strcmp(str, "|"))
-		return (1);
+		return (5);
 	else if (!ft_strcmp(str, "<"))
-		return (1);
+		return (6);
 	else if (!ft_strcmp(str, "<<"))
-		return (1);
+		return (7);
 	else if (!ft_strcmp(str, ">"))
-		return (1);
+		return (8);
 	else if (!ft_strcmp(str, ">>"))
-		return (1);
+		return (9);
 	return (0);
 }
 
