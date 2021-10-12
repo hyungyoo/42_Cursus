@@ -16,8 +16,53 @@
 
 
 
+minishell $> aaaaaaaa aaaaaaa | bbbbbb bbbbbbbbbbbb | ccccccc cccccccc
+4 eme
 
-		
+cmd == aaaaaaaa
+access_cmd == (null)
+
+ cmd_arg:
+aaaaaaaa
+aaaaaaa
+
+flag == 5
+5 eme
+
+cmd == bbbbbb
+access_cmd == (null)
+
+ cmd_arg:
+bbbbbb
+bbbbbbbbbbbb
+
+flag == 5
+next_parsing cmd = aaaaaaaa
+6 eme
+
+cmd == ccccccc
+access_cmd == (null)
+
+ cmd_arg:
+ccccccc
+cccccccc
+
+flag == 0
+next_parsing cmd = bbbbbb
+========printf all node==========
+!!!!!!!!!!!size of node!!!!!!!!! = 2
+cmd == bbbbbb
+access_cmd = (null)
+
+cmd_arg :
+bbbbbb
+bbbbbbbbbbbb
+
+flag = 5
+
+////////////////////////////
+노드 사이즈를 2개로밖에 못받는다.
+전 노드까지는 괜찮을거같은데
 		
 --------
 

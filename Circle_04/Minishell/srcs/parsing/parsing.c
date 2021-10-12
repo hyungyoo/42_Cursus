@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 22:05:06 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 22:30:37 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,22 @@ void	ft_printf_parsing_cmd(char **cmd)
 	}
 }
 
+int	ft_size_node(t_parsing *a)
+{
+	int	ret;
+
+	ret = 0;
+	while (a)
+	{
+		a = a->next;
+		ret++;
+	}
+	return (ret);
+}
+
 void	ft_print_all_node(t_parsing **parsing)
 {
+	printf("!!!!!!!!!!!size of node!!!!!!!!! = %d\n", ft_size_node(*parsing));
 	while (*parsing)
 	{
 		printf("cmd == %s\n", (*parsing)->cmd);
