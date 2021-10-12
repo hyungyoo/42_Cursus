@@ -35,6 +35,21 @@ RM = rm -f
 
 all: $(NAME)
 
+	@printf "\033[38;5;41m"
+	@printf "                                                                         \r"
+	@printf "################################################\n"
+	@printf "#          :::      ::::::::                   #\n"
+	@printf "#        :+:      :+:    :+:       keulee      #\n"
+	@printf "#      +:+ +:+         +:+          and        #\n"
+	@printf "#    +#+  +:+       +#+           hyungyoo     #\n"
+	@printf "#  +#+#+#+#+#+   +#+                 as        #\n"
+	@printf "#       #+#    #+#                Minishell    #\n"
+	@printf "#      ###   ###########                       #\n"
+	@printf "################################################\n"
+	@printf " \033[0m"
+
+	@printf "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n"
+
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
 
@@ -56,21 +71,10 @@ fclean: clean
 	$(MAKE) -C libft fclean
 	$(RM) $(NAME) $(LIBFT)
 
-re: fclean all
-			@printf "\033[38;5;41m" 
-			@printf "                                                                         \r"
-			@printf "################################################\n"
-			@printf "#          :::      ::::::::                   #\n"
-			@printf "#        :+:      :+:    :+:      hyungyoo     #\n"
-			@printf "#      +:+ +:+         +:+          and        #\n"
-			@printf "#    +#+  +:+       +#+            keulee      #\n"
-			@printf "#  +#+#+#+#+#+   +#+                 as        #\n"
-			@printf "#       #+#    #+#                Minishell    #\n"
-			@printf "#      ###   ########nice.fr                   #\n"
-			@printf "################################################\n"
-			@printf " \033[0m"
-	
-			@printf "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n"
+nor:
+	norminette -R CheckForbiddenSourceHeader includes srcs libft
 
-.PHONY: all clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re nor
 
