@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:10:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/11 13:01:07 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 13:44:42 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_add(int num)
 
 void	ft_free_double(char **str)
 {
+	if (!str)
+		return ;
 	int	i;
 
 	i = 0;
