@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:14:47 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/11 12:57:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 18:05:09 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**ft_split_cmd(char **str)
 	while (str[i])
 	{
 		if (i == 0 && ft_strcmp_pivot(str[i]))
-			ret[ret_index++] = ft_strdup(str[i]);
+			ret[ret_index++] = ft_strdup(str[i++]);
 		else if (str[i])
 		{
 			ret[ret_index] = ft_strdup(str[i++]);

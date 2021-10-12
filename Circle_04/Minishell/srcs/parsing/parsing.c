@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 13:41:41 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:31:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,9 @@ void	parsing(char *str)
 	to do:
 		1. 
 	*/
+	int	i = 0;
+	while (g_info.split_cmd[i])
+	{
+		printf("%s\n", g_info.split_cmd[i++]);
+	}
 }
