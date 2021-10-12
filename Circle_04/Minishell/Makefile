@@ -57,5 +57,20 @@ fclean: clean
 	$(RM) $(NAME) $(LIBFT)
 
 re: fclean all
+			@printf "\033[38;5;41m" 
+			@printf "                                                                         \r"
+			@printf "################################################\n"
+			@printf "#          :::      ::::::::                   #\n"
+			@printf "#        :+:      :+:    :+:      hyungyoo     #\n"
+			@printf "#      +:+ +:+         +:+          and        #\n"
+			@printf "#    +#+  +:+       +#+            keulee      #\n"
+			@printf "#  +#+#+#+#+#+   +#+                 as        #\n"
+			@printf "#       #+#    #+#                Minishell    #\n"
+			@printf "#      ###   ########nice.fr                   #\n"
+			@printf "################################################\n"
+			@printf " \033[0m"
+	
+			@printf "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n"
 
 .PHONY: all clean fclean re
+
