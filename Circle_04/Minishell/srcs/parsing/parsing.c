@@ -6,15 +6,21 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 12:59:12 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 13:30:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// ft_verifier_dquote 리턴값 1이면, 오류
+/* 
+ *	1. ft_parsing_cmd : parsing cmd
+ *	2. free all
+ */
 void	parsing(char *str)
 {
 	if (!ft_parsing_cmd(str))
 		return ;
+	
+	to do:
+		1. 
 }

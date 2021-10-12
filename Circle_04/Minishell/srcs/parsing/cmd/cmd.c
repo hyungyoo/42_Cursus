@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 18:26:07 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 13:10:28 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 13:16:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ int	ft_check_dquote(char **split_cmd)
  * return 0 si y a probleme
  * sinon return 1
  */
- 
 int	ft_parsing_cmd(char *str)
 {
 	char	**split_str;
-	
+
 	split_str = ft_split(str, ' ');
 	g_info.split_cmd = ft_split_cmd(split_str);
 	if (!ft_check_dquote(g_info.split_cmd))

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 13:53:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/09/30 17:26:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 13:27:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_init(t_info *all, char *cmd)
 			// 있다면, 각각의 명령어를  split한후에, 리스트화시킨후 cmd, args 로 저장, 빌트인이어야하는
 			// 함수가 아니면, 에러메세지 
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -83,6 +84,7 @@ void	ft_init(t_info *all, char *cmd)
 
 
 /////////////////////////////////////////////////function pour signal ///////////////////////
+
 void	handle_fuction(int signal_int)
 {
 	to do:
@@ -95,6 +97,7 @@ void	ft_siginal(t_info *all, char **envp)
 	to do:
 		signal(signal_int, handle_function);
 		signal(signal_int, handle_function);
+
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -113,12 +116,7 @@ char	*ft_prompt(void)
 		2. 반환값 저장하여 initial!
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 void	ft_minishell(t_info *all, char **envp)
 {
@@ -142,6 +140,7 @@ void	ft_minishell(t_info *all, char **envp)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_info all;
