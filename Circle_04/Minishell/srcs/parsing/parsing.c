@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/11 14:58:52 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 12:59:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,4 @@ void	parsing(char *str)
 {
 	if (!ft_parsing_cmd(str))
 		return ;
-	
-
-	/*
-	   this is for echo function
-	 */
-	
-	
-	//if (ft_verifier_dquote(str))
-	//	return ;
-	
-	
-	/*
-	   if quote, str doit etre ne pas considere
-
-	*/
 }

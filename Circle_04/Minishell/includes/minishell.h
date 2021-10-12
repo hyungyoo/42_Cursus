@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/11 14:54:40 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 13:11:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_info
 {
 	char	**env;
 	int		count_node;
+	char	**split_cmd;
 }				t_info;
 
 typedef struct s_parsing
@@ -56,6 +57,9 @@ int				ft_parsing_cmd(char *str);
 
 /* quote.c*/
 int				ft_verifier_dquote(char *str);
+int				ft_dquote(char *str);
+int				ft_quote(char *str);
+int				ft_verifier_quote(char c);
 
 /* util.c */
 int				ft_add(int num);

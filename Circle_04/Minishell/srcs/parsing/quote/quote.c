@@ -6,53 +6,11 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/11 15:50:39 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/12 13:07:00 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-int	ft_dquote(char *str)
-{
-	int	i;
-	int	num_dquote;
-
-	num_dquote = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == 34)
-			num_dquote++;
-		i++;
-	}
-	return (num_dquote % 2);
-}
-
-int	ft_quote(char *str)
-{
-	int	i;
-	int	num_quote;
-
-	num_quote = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == 39)
-			num_quote++;
-		i++;
-	}
-	return (num_quote % 2);
-}
-
-int	ft_verifier_quote(char c)
-{
-	if (c == 34)
-		return (34);
-	else if (c == 39)
-		return (39);
-	else
-		return (0);
-}
 
 char	get_first(char *str)
 {
@@ -116,9 +74,6 @@ int	ft_verifier_dquote(char *str)
 		return (0);
 	first_quote = get_first(str);
 	last_quote = get_last(str);
-	//
-	printf("cmd == %s first = %c, last %c\n",str,  first_quote, last_quote);
-	//
 	if (first_quote != last_quote)
 	{
 		if (first_quote == 39)
