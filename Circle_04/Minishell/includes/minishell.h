@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 22:36:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 00:54:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			parsing(char *str);
 
 ////////////지울것
 void			ft_printf_parsing_cmd(char **cmd);
-void			ft_print_all_node(t_parsing **parsing);
+void			ft_print_all_node(t_parsing *parsing);
 void			ft_print_node(t_parsing *a);
 int				ft_size_node(t_parsing *a);
 ////////////////

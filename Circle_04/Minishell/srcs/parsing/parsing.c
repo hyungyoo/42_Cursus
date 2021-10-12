@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 22:30:37 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 00:54:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ int	ft_size_node(t_parsing *a)
 	return (ret);
 }
 
-void	ft_print_all_node(t_parsing **parsing)
+void	ft_print_all_node(t_parsing *parsing)
 {
-	printf("!!!!!!!!!!!size of node!!!!!!!!! = %d\n", ft_size_node(*parsing));
-	while (*parsing)
+	printf("!!!!!!!!!!!size of node!!!!!!!!! = %d\n", ft_size_node(parsing));
+	while (parsing)
 	{
-		printf("cmd == %s\n", (*parsing)->cmd);
-		printf("access_cmd = %s\n", (*parsing)->access_cmd);
+		printf("cmd == %s\n", (parsing)->cmd);
+		printf("access_cmd = %s\n", (parsing)->access_cmd);
 		printf("\n");
 		printf("cmd_arg :\n");
-		ft_printf_parsing_cmd((*parsing)->cmd_arg);
+		ft_printf_parsing_cmd((parsing)->cmd_arg);
 		printf("\n");
-		printf("flag = %d\n", (*parsing)->flag);
-		*parsing = (*parsing)->next;
+		printf("flag = %d\n", (parsing)->flag);
+		parsing = (parsing)->next;
 		printf("\n\n\n\n\n");
 	}
 }
@@ -90,4 +90,6 @@ void	parsing(char *str)
 	 * ft_parsing_cmd2 --> for struct and for node
 	 */
 	ft_init_node(&parsing, split_cmd);
+	printf("========printf all node==========\n");
+	ft_print_all_node(parsing);
 }

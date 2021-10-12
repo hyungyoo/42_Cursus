@@ -16,13 +16,13 @@ HEADER = ./includes/minishell.h
 
 OBJS = $(SRCS:.c=.o)
 
-LI = -L. -lft -lreadline -L /usr/local/opt/readline/lib 
-LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
+LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib 
+LI = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
 #/usr/local/opt/readline/lib //keulee home complie
 #linux complie ??
 
-IN = -I /usr/local/opt/readline/include
-INC = -I ~/.brew/opt/readline/include 
+INC = -I /usr/local/opt/readline/include
+IN = -I ~/.brew/opt/readline/include 
 #/usr/local/opt/readline/include //keulee home complie
 #linux complie ??
 
