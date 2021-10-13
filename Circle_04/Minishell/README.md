@@ -4,66 +4,18 @@
 
 
 1. 문제점
- node로 split을 했지만, 만약에 "abc jdwlq"가 있다면,
- 두개를 합쳐줘야한다
- 아니면 cmd_arg에서 이게 두개로나옴
+	cpy_env leaks! valgirnd
 
- 2. < cmd1 o
+2. < cmd1 o
   < cmd1 | arg1j2 ==> arg1j2 부터된다.
   노드 저장이안됨
 
-3. free_node 만들기
+3. grep valgrind -v 
+
+4. cmd_access !!
 
 
-
-minishell $> aaaaaaaa aaaaaaa | bbbbbb bbbbbbbbbbbb | ccccccc cccccccc
-4 eme
-
-cmd == aaaaaaaa
-access_cmd == (null)
-
- cmd_arg:
-aaaaaaaa
-aaaaaaa
-
-flag == 5
-5 eme
-
-cmd == bbbbbb
-access_cmd == (null)
-
- cmd_arg:
-bbbbbb
-bbbbbbbbbbbb
-
-flag == 5
-next_parsing cmd = aaaaaaaa
-6 eme
-
-cmd == ccccccc
-access_cmd == (null)
-
- cmd_arg:
-ccccccc
-cccccccc
-
-flag == 0
-next_parsing cmd = bbbbbb
-========printf all node==========
-!!!!!!!!!!!size of node!!!!!!!!! = 2
-cmd == bbbbbb
-access_cmd = (null)
-
-cmd_arg :
-bbbbbb
-bbbbbbbbbbbb
-
-flag = 5
-
-////////////////////////////
-노드 사이즈를 2개로밖에 못받는다.
-전 노드까지는 괜찮을거같은데
-		
+	
 --------
 
 ## Resume of the subject (Mandatory)
