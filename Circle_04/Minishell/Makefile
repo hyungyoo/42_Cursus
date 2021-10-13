@@ -1,81 +1,56 @@
 NAME = minishell
 
-SRCS = srcs/minishell.c \
-       srcs/parsing/parsing.c  \
-       srcs/parsing/quote/quote.c    \
-       srcs/parsing/quote/quote_2.c    \
-       srcs/parsing/cmd/cmd.c    \
-       srcs/parsing/cmd/split_cmd.c    \
-       srcs/exit/exit.c    \
-       srcs/util/util.c    \
-       srcs/initial/initial.c  \
-       srcs/initial/initial_node.c  \
-       srcs/signal/signal.c    \
+SRCS_DIR = ./
 
-HEADER = ./includes/minishell.h
 
-OBJS = $(SRCS:.c=.o)
+HEADER_DIR = ./includes
 
-LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib 
-LI = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
-#/usr/local/opt/readline/lib //keulee home complie
-#linux complie ??
+LIBFT_DIR = ./libft
 
-INC = -I /usr/local/opt/readline/include
-IN = -I ~/.brew/opt/readline/include 
-#/usr/local/opt/readline/include //keulee home complie
-#linux complie ??
+READLINE_DIR = $(shell brew --prefix readline)
 
-CC = clang
+MAIN = ${SRCS_DIR}srcs/minishell.c
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+SRCS_NAME =	srcs/parsing/parsing.c \
+			srcs/parsing/quote/quote.c \
+			srcs/parsing/quote/quote_2.c \
+			srcs/parsing/cmd/cmd.c \
+			srcs/parsing/cmd/split_cmd.c \
+			srcs/exit/exit.c \
+			srcs/util/util.c \
+			srcs/initial/initial.c \
+			srcs/initial/initial_node.c \
+			srcs/signal/signal.c \
 
-LIBFT = libft.a
+SRCS = ${addprefix ${SRCS_DIR}, ${SRCS_NAME}}
 
-RM = rm -f
+OBJS = ${MAIN:.c=.o}
 
-all: $(NAME)
+OBJS += ${SRCS:.c=.o}
 
-	@printf "\033[38;5;41m"
-	@printf "                                                                         \r"
-	@printf "################################################\n"
-	@printf "#          :::      ::::::::                   #\n"
-	@printf "#        :+:      :+:    :+:       keulee      #\n"
-	@printf "#      +:+ +:+         +:+          and        #\n"
-	@printf "#    +#+  +:+       +#+           hyungyoo     #\n"
-	@printf "#  +#+#+#+#+#+   +#+                 as        #\n"
-	@printf "#       #+#    #+#                Minishell    #\n"
-	@printf "#      ###   ###########                       #\n"
-	@printf "################################################\n"
-	@printf " \033[0m"
+CC = gcc
 
-	@printf "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n"
+CFLAGS = -Wall -Wextra -Werror -I${READLINE_DIR}/include -I${HEADER_DIR} -I${LIBFT_DIR}
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
+RM = rm -rf
 
-$(LIBFT):
-	$(MAKE) -C libft
-	mv libft/$(LIBFT) .
+all: ${NAME}
 
-.c.o:
-		${CC} ${CFLAGS} $(INC) -c $< -o ${<:.c=.o}
-
-#$(OBJS): $(SRCS) $(HEADER)
-#	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+${NAME}: ${OBJS} ${HEADER_DIR}
+	@${MAKE} -C ${LIBFT_DIR}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L${READLINE_DIR}/lib -lreadline -lhistory -L${LIBFT_DIR} -lft
 
 clean:
-	$(MAKE) -C libft clean
-	$(RM) $(OBJS)
+	${MAKE} -C ${LIBFT_DIR} clean
+	${RM} ${OBJS}
 
 fclean: clean
-	$(MAKE) -C libft fclean
-	$(RM) $(NAME) $(LIBFT)
-
-nor:
-	norminette -R CheckForbiddenSourceHeader includes srcs libft
+	${MAKE} -C ${LIBFT_DIR} fclean
+	${RM} ${NAME}
 
 re: fclean all
 
-.PHONY: all clean fclean re nor
+val:
+	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
 
+.PHONY: all clean fclean re val

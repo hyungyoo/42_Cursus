@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/13 00:54:17 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 02:04:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
  *	1. ft_parsing_cmd : parsing cmd
  *	2. free all
  */
+
+
+////////////////////////////////////////////
 void	ft_printf_parsing_cmd(char **cmd)
 {
 	int	i;
@@ -28,6 +31,7 @@ void	ft_printf_parsing_cmd(char **cmd)
 		printf("%s\n", cmd[i++]);
 	}
 }
+/////////////////////////////////////////////
 
 int	ft_size_node(t_parsing *a)
 {
@@ -77,19 +81,17 @@ void	parsing(char *str)
 
 	split_cmd = NULL;
 	parsing = NULL;
-	//parsing_node = NULL;
 	if (!str)
 		return ;
-	// charck : parsing, quote, dquote
 	if (!ft_parsing_cmd(str, &split_cmd))
 		return ;
 	if (!split_cmd)
 		return ;
-	/*
-	 * to do
-	 * ft_parsing_cmd2 --> for struct and for node
-	 */
 	ft_init_node(&parsing, split_cmd);
+	///////////////////////////////////////////////////
 	printf("========printf all node==========\n");
 	ft_print_all_node(parsing);
+
+	ft_free_all_node(&parsing);
+	///////////////////////////////////////////////////
 }

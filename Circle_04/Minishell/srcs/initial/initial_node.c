@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:09:55 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/13 00:58:05 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 02:03:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,30 @@ void	ft_ajouter_node(t_parsing **parsing, t_parsing *node)
 	last->next = node;
 }
 
+void	ft_free_node(t_parsing *parsing)
+{
+	free(parsing->cmd);
+	free(parsing->access_cmd);
+	ft_free_double(parsing->cmd_arg);
+}
+
+void	ft_free_all_node(t_parsing **parsing)
+{
+	t_parsing	*current;
+	t_parsing	*next;
+
+	if (!parsing)
+		return ;
+	current = *parsing;
+	while (current)
+	{
+		next = current->next;
+		ft_free_node(current);
+		free(current);
+		current = next;
+	}
+	*parsing = NULL;
+}
 /*
  * to do:
  * 1. initial struct avec g_info.split_cmd

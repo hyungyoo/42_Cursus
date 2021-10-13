@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/13 00:54:28 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 02:04:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			ft_exit(void);
 /* initial.c */
 void			ft_initial(char **env);
 void			ft_init_node(t_parsing **parsing, char **split_cmd);
-
+void			ft_free_all_node(t_parsing **parsing);
 /* signal.c */
 void			handler(int signum);
 #endif

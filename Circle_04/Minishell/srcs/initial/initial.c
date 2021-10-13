@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:44:33 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 13:40:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 02:08:03 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_initial_g(void)
 {
 	g_info.env = NULL;
 	g_info.count_node = 0;
-	g_info.split_cmd = NULL;
 }
 
 void	ft_initial(char **env)
