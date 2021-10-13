@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:06:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/13 02:04:30 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 16:10:51 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,5 @@ void	parsing(char *str)
 	if (!split_cmd)
 		return ;
 	ft_init_node(&parsing, split_cmd);
-	///////////////////////////////////////////////////
-	printf("========printf all node==========\n");
-	ft_print_all_node(parsing);
-
-	ft_free_all_node(&parsing);
-	///////////////////////////////////////////////////
+	g_info.parsing = parsing;
 }

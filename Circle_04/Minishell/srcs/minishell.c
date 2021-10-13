@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:01:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/12 13:39:31 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 16:18:00 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	minishell(char *str)
 	parsing(str);
 	free(str);
 	str = NULL;
+	ft_print_all_node(g_info.parsing);
 }
 
 int	main(int ac, char **av, char **env)

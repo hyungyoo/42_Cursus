@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/13 02:04:06 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/13 16:10:35 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@
 # define RIGHT 8
 # define DRIGHT 9
 
-typedef struct s_info
-{
-	char	**env;
-	int		count_node;
-	char	**split_cmd;
-}				t_info;
-
 typedef struct s_parsing
 {
 	char				*cmd;            //ls --> 
@@ -47,6 +40,14 @@ typedef struct s_parsing
 	int					flag;
 	struct s_parsing	*next;
 }				t_parsing;
+
+typedef struct s_info
+{
+	char	**env;
+	int		count_node;
+	struct s_parsing	*parsing;
+}				t_info;
+
 
 /* one global variable */
 t_info	g_info;
