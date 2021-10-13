@@ -1,56 +1,56 @@
 NAME = minishell
 
-SRCS_DIR = ./
+SRCS = srcs/minishell.c \
+		srcs/signal.c \
+		srcs/copy_env.c \
+		srcs/parsing.c \
+		srcs/list.c \
+		srcs/ascii_logo.c \
+		srcs/parsing_quote.c \
+		srcs/parsing_operation_word.c \
+		srcs/ft_exit.c \
+		srcs/parsing_arg_word.c
 
+HEADER = ./includes/minishell.h
 
-HEADER_DIR = ./includes
+OBJS = $(SRCS:.c=.o)
 
-LIBFT_DIR = ./libft
+SRCS_DIR = ./srcs
 
-READLINE_DIR = $(shell brew --prefix readline)
+LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib 
+#/usr/local/opt/readline/lib //keulee home complie
 
-MAIN = ${SRCS_DIR}srcs/minishell.c
+INC = -I ~/.brew/opt/readline/include
+#/usr/local/opt/readline/include //keulee home complie
 
-SRCS_NAME =	srcs/parsing/parsing.c \
-			srcs/parsing/quote/quote.c \
-			srcs/parsing/quote/quote_2.c \
-			srcs/parsing/cmd/cmd.c \
-			srcs/parsing/cmd/split_cmd.c \
-			srcs/exit/exit.c \
-			srcs/util/util.c \
-			srcs/initial/initial.c \
-			srcs/initial/initial_node.c \
-			srcs/signal/signal.c \
+CC = clang
 
-SRCS = ${addprefix ${SRCS_DIR}, ${SRCS_NAME}}
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
-OBJS = ${MAIN:.c=.o}
+LIBFT = libft.a
 
-OBJS += ${SRCS:.c=.o}
+RM = rm -f
 
-CC = gcc
+all: $(NAME)
 
-CFLAGS = -Wall -Wextra -Werror -I${READLINE_DIR}/include -I${HEADER_DIR} -I${LIBFT_DIR}
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME) 
 
-RM = rm -rf
+$(LIBFT):
+	$(MAKE) -C libft
+	mv libft/$(LIBFT) .
 
-all: ${NAME}
-
-${NAME}: ${OBJS} ${HEADER_DIR}
-	@${MAKE} -C ${LIBFT_DIR}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L${READLINE_DIR}/lib -lreadline -lhistory -L${LIBFT_DIR} -lft
+%.o : %.c $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:
-	${MAKE} -C ${LIBFT_DIR} clean
-	${RM} ${OBJS}
+	$(MAKE) -C libft clean
+	$(RM) $(OBJS)
 
 fclean: clean
-	${MAKE} -C ${LIBFT_DIR} fclean
-	${RM} ${NAME}
+	$(MAKE) -C libft fclean
+	$(RM) $(NAME) $(LIBFT)
 
 re: fclean all
 
-val:
-	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
-
-.PHONY: all clean fclean re val
+.PHONY: all clean fclean re

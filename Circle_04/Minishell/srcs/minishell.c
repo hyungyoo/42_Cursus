@@ -1,48 +1,48 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:01:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/13 16:18:00 by hyungyoo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/minishell.h"
-
-void	minishell(char *str)
-{
-	str = readline("\033[38;5;41mminishell $> \033[0m");
-	if (str == NULL || (ft_strcmp(str, "exit") == 0))
-	{	
-		free(str);
-		str = NULL;
-		ft_putstr_fd("minishell exit\n", 1);
-		ft_exit();
-	}
-	add_history(str);
-	parsing(str);
-	free(str);
-	str = NULL;
-	ft_print_all_node(g_info.parsing);
-}
 
 int	main(int ac, char **av, char **env)
 {
-	char	*str;
+	/* readline함수의 리턴값을 저장하기위해 임의로 포인터를 하나 선언한다 */
+	char *line;
+	t_cmd *cmd;
 
-	if (ac != 1)
-		return (0);
-	(void)av;
-	str = NULL;
-	ft_initial(env);
-	while (42)
+	/* Init before launch*/
+	ft_initial(env, ac, av); /* copy env variable with malloc */
+	// cmd = init_cmd();
+	ascii_logo_lol();
+	while(1)
 	{
 		signal(SIGINT, handler);
 		signal(SIGQUIT, handler);
-		minishell(str);
+		line = readline("\033[38;5;41mminishell $> \033[0m");
+		cmd = init_cmd();
+		if (line == NULL || (ft_strcmp(line, "exit") == 0))
+		{
+			ft_putendl_fd("\033[38;5;31mminishell exit \033[0m", 1);
+			free_tab2(g_info.env);
+			free_list(&cmd);
+			free(line);
+			line = NULL;
+			ft_exit(1);
+		}
+		add_history(line); /* add_history에 저장된 문자열은 up & down 방향키를 이용해 확인할수있다 */
+		/* 
+		** here : parsing process with str
+		*/
+		if (ft_parsing(line, &cmd))
+		{
+			ft_putendl_fd("Minishell: Syntax error", 1); /* 임시 message */
+			/* if there's memory allocations, need to free here */
+			free_list(&cmd);
+			free(line);
+			line = NULL;
+			continue ;
+		}
+		print_cmdline(&cmd);
+		free_list(&cmd);
+		free(line);
+		line = NULL;
 	}
-	return (0);
+	// free_tab2(g_info.env);
+	return(0);
 }

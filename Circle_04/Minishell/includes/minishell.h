@@ -1,92 +1,80 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 17:43:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/13 16:10:35 by hyungyoo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <stdlib.h>
 # include <string.h>
 # include <signal.h>
 # include <unistd.h>
 # include <dirent.h>
 # include <errno.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdbool.h>
 
 # include "../libft/libft.h"
 
+/*
+** TYPE in s_pars
+*/
+# define WORD 1
+# define SINQ 2
+# define DOUQ 3
+# define DOLR 4
 # define PIPE 5
-# define LEFT 6
-# define DLEFT 7
+# define SEMC 6
+# define LEFT 7
 # define RIGHT 8
-# define DRIGHT 9
+# define DLEFT 9
+# define DRIGHT 10
 
-typedef struct s_parsing
-{
-	char				*cmd;            //ls --> 
-	char				*access_cmd;    // path + cmd, null->error_message
-	char				**cmd_arg;	// cmd + arg --> 2 array   ls // -al
-	int					flag;
-	struct s_parsing	*next;
-}				t_parsing;
+# define TRUE 1
+# define FALSE 0
 
-typedef struct s_info
-{
-	char	**env;
-	int		count_node;
-	struct s_parsing	*parsing;
-}				t_info;
+/* cmd line node */
+typedef struct s_node {
+	int				type;
+	char 			*str;
+	struct s_node	*next;
+} t_node;
 
+/* cmd struct for counting size and stocking node */
+typedef struct s_cmd {
+	int				size;
+	struct s_node	*cmd_node;
+} t_cmd;
+
+typedef	struct s_info {
+	char **env;
+} t_info;
 
 /* one global variable */
 t_info	g_info;
 
-/* parsing.c */
-void			parsing(char *str);
+void	ascii_logo_lol(void);
+
+void	handler(int signum);
+
+void	ft_exit(int exit_code);
+
+void    copy_env(char **env);
+void	ft_initial_g(void);
+void	ft_initial(char **env, int ac, char **av);
+
+int		ft_parsing(char *line, t_cmd **cmd);
+int		is_quotes_pair(char *line, int *index, char pair);
+int		parsing_quotes(char *line, int *index, t_cmd **cmd);
+
+t_cmd	*init_cmd(void);
+void	insert_node(t_cmd **cmd, int type, char *str);
+int		get_listsize(t_node **node);
+void	print_cmdline(t_cmd **cmd); /* tmp */
+void	free_list(t_cmd **cmd);
+
+int		operation_word(t_cmd **cmd, char *line, int *index);
+void	argument_word(t_cmd **cmd, char *line, int *index);
+int		parsing_quotes(char *line, int *index, t_cmd **cmd);
+int		is_quotes_pair(char *line, int *index, char pair);
 
 
-////////////지울것
-void			ft_printf_parsing_cmd(char **cmd);
-void			ft_print_all_node(t_parsing *parsing);
-void			ft_print_node(t_parsing *a);
-int				ft_size_node(t_parsing *a);
-////////////////
-//
-//
-/* split_cmd.c*/
-char			**ft_split_cmd(char **str);
-int				ft_strcmp_pivot(char *str);
-
-/* cmd.c */
-int				ft_parsing_cmd(char *str, char ***split_cmd);
-
-/* quote.c*/
-int				ft_verifier_dquote(char *str);
-int				ft_dquote(char *str);
-int				ft_quote(char *str);
-int				ft_verifier_quote(char c);
-
-/* util.c */
-int				ft_add(int num);
-void			ft_free_double(char **str);
-/* exit.c */
-void			ft_exit(void);
-
-/* initial.c */
-void			ft_initial(char **env);
-void			ft_init_node(t_parsing **parsing, char **split_cmd);
-void			ft_free_all_node(t_parsing **parsing);
-/* signal.c */
-void			handler(int signum);
 #endif
