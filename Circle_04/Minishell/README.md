@@ -1,68 +1,30 @@
-# minishell
-42 project minishell to write a shell
+# To do list keulee (update date: 11.09.2021)
+> 1. 쪼개진 파싱 다시 한번 세부적으로 이름표 부여 CMD, ARG, FILE 등
 
---------
+# Code log (update date: 14.10.2021)
+> 1. parsing_arg_word.c 코드 추가
+> 2. print_cmdline에 디버깅 도표 형식으로 추가 (미니쉘 실행 후 커맨드 라인이 어떤 타입과 어떤 방식으로 쪼개지는지 보여줌)  
 
-## Resume of the subject (Mandatory)
+# Code log (update date: 12.10.2021)
+> 1. parsing_arg_word.c (argument_word 함수) 추가 : 오퍼레이션 워드, 싱글/더블쿼터 제외한 나머지 모두 파싱하는 함수. (이후 적절한 조치 (strjoin 등)을 통해 exec argument로 사용 기대)  
+	 일반 알파벳 (is letter)일때인 경우와 그렇지 않은 다른 문자들의 경우로 나눠 line이 null이 아닐때까지 진행해 str을 뽑아냄.  
 
-1. program name : minishell
-2. Makefile     : yes
-3. Libft        : yes
-4. External functions
-```
-readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay, add_history, printf, 
-malloc, free, write, open, read, close, fork, wait, waitpid, wait3, wait4, signal, kill, exit, 
-getcwd, chdir, stat, lstat, fstat, unlink, execve, dup, dup2, pipe, opendir, readdir, closedir, 
-strerror, perror, isatty, ttyname, ttyslot, ioctl, getenv, tcsetattr, tcgetattr, tgetent, tgetflag, 
-tgetnum, tgetstr, tgoto, tputs
-```
+# Code log (update date: 11.10.2021)
+> 1. ft_exit.c 추가 : 형준이 ft_exit에다가 argument로 int 변수 exit_code 추가
+> 2. parsiing_operation_word : <, >, >>, <<, |, $ 와 같은 오퍼레이션 토큰 파싱 후 list에 추가
+> 3. parsing_quote.c : 09일 code log에서와 같이 싱글쿼터, 더블쿼터로 나눠진 토큰을 싱글쿼터, 더블쿼터 타입으로 나눠 cmd_node에 추가 함.
+> 4. list.c : free_list함수 추가로 while 마지막에가서 cmd_node를 비워주고 리셋함. (다음 커맨드를 받기 위해)
 
-### To do List
+# Code log (update date: 09.10.2021)
+> 1. 학교 맥에서 하다보니 학교 readline 컴파일 경로를 makefile에 넣어둠. linux에서 사용할 때는 readline 인클루드/라이브러리 패스를 바꿔야할 수도 있음 참고!
+> 2. 쿼터가 짝이 안맞을 시, Syntax error 뜨도록 업데이트.(터미널에서 >quote >dquote로 출력되는 부분 모두 Syntax error처리)  
+echo "hihi"  ==>  파싱 성공  
+echo "hihi'hihi" ==> 파싱 성공  
+echo "hihi"hihi" ==> Syntax error  
+echo "hihi'hihi" 'hihi"hihi' ==> Syntax error  
+> 3. ascii_logo 추가 (이렇게 하는 게 아니라 txt를 open해서 하는 거 같은데 귀찮아서 ft_putendl로 추가... 웃어도 됨...하하...)
+> 4. list.c 추가 -> s_cmd struct를 기준으로 내부에 s_node를 추가. s_cmd는 노드 수를 체크하고 각 노드는 타입에 따라 커맨드라인 안의 토큰(파싱단위)를 저장.
+예1) echo hihi | grep hi (노드 수 5 / echo : WORD(type) / hihi : WORD / | : PIPE / grep : WORD / hi : WORD)
+예2) cat << done | ls -al >> out (노드 수 8 / cat : word / << : DLESS / done : word / ls : word / -al : word / >> : DGREAT / out : word)
+> 5. copy_env, signal 형준이 코드로 추가 및 변경
 
-Your shell should:
-1. Not interpret unclosed quotes or unspecified special characters like \ or ;.
-2. Not use more than one global variable, think about it and be ready to explain why you do it.
-3. Show a prompt when waiting for a new command.
-4. Have a working History.
-5. Search and launch the right executable (based on the PATH variable or by using relative or absolute path)
-6. It must implement the builtins:
-```
- * echo with option -n
- * cd with only a relative or absolute path
- * pwd with no options
- * export with no options
- * unset with no options
- * env with no options or arguments
- * exit with no options
-```
-7. ’ inhibit all interpretation of a sequence of characters.
-8. " inhibit all interpretation of a sequence of characters except for $.
-9. Redirections:
-```
- * < should redirect input.
- * > should redirect output.
- * “<<” read input from the current source until a line containing only the delimiter is seen.
-    it doesn’t need to update history!
- * “>>” should redirect output with append mode
-```
-10. Pipes | The output of each command in the pipeline is connected via a pipe to the input of the next command.
-11. Environment variables ($ followed by characters) should expand to their values.rrrrr
-12. $? should expand to the exit status of the most recently executed foreground pipeline.
-13. ctrl-C ctrl-D ctrl-\ should work like in bash.
-14. When interactive:
-```
- * ctrl-C print a new prompt on a newline
- * ctrl-D exit the shell.
- * ctrl-\ do nothing.
-```
-> readline function can produce some leak you don’t need to fix this.
-> But beware your own code should not produce leaks.
-> You should limit yourself to the subject description.
-> Anything not asked is not required.
-> For every point, if you have any doubt take bash(https://www.gnu.org/savannah-checkouts/gnu/bash/manual/) as a reference.
-
-## Bonus part
-
-1. If the Mandatory part is not perfect don’t even think about bonuses
-2. &&, || with parenthesis for priorities.
-3. the wildcard * should work for the current working directory.

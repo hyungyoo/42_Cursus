@@ -1,5 +1,59 @@
 #include "../includes/minishell.h"
 
+int	is_builtin(char *str)
+{
+	if (!ft_strcmp(str, "echo"))
+		return (1);
+	else if (!ft_strcmp(str, "pwd"))
+		return (1);
+	else if (!ft_strcmp(str, "export"))
+		return (1);
+	else if (!ft_strcmp(str, "cd"))
+		return (1);
+	else if (!ft_strcmp(str, "unset"))
+		return (1);
+	else if (!ft_strcmp(str, "env"))
+		return (1);
+	return (0);
+}
+
+void    set_detail_type(t_cmd **cmd)
+{
+    t_node    *tmp_node;
+
+    if (!cmd)
+        return ;
+    tmp_node = (*cmd)->cmd_start;
+    while (tmp_node)
+    {
+        if (is_builtin(tmp_node->str))
+            tmp_node->type = BUILTIN_CMD;
+        else
+            tmp_node->type = CMD;
+        tmp_node = tmp_node->next;
+    }
+}
+
+/*
+void	ft_exec(t_cmd **cmd)
+{
+	t_node *tmp;
+
+	tmp = (*cmd)->cmd_start;
+	if (!tmp)
+		return ;
+	while (tmp->next != NULL)
+	{
+		if (tmp->type == BUILTIN_CMD)
+			// bti
+		else
+			// execv
+
+		tmp = tmp->next;
+	}
+}
+*/
+
 int	main(int ac, char **av, char **env)
 {
 	/* readline함수의 리턴값을 저장하기위해 임의로 포인터를 하나 선언한다 */
@@ -19,14 +73,14 @@ int	main(int ac, char **av, char **env)
 		if (line == NULL || (ft_strcmp(line, "exit") == 0))
 		{
 			ft_putendl_fd("\033[38;5;31mminishell exit \033[0m", 1);
-			free_tab2(g_info.env);
+			// free_tab2(g_info.env);
 			free_list(&cmd);
 			free(line);
 			line = NULL;
 			ft_exit(1);
 		}
 		add_history(line); /* add_history에 저장된 문자열은 up & down 방향키를 이용해 확인할수있다 */
-		/* 
+		/*
 		** here : parsing process with str
 		*/
 		if (ft_parsing(line, &cmd))
@@ -38,6 +92,9 @@ int	main(int ac, char **av, char **env)
 			line = NULL;
 			continue ;
 		}
+		/* set detail types - CMD, BUILTIN_CMD, ARG, FILE etc with parsing elements */
+		set_detail_type(&cmd);
+		//ft_exec(&cmd);
 		print_cmdline(&cmd);
 		free_list(&cmd);
 		free(line);
@@ -46,55 +103,3 @@ int	main(int ac, char **av, char **env)
 	// free_tab2(g_info.env);
 	return(0);
 }
-
-
-
-
-	// void	classify(struct dirent *ent)
-// {
-// 	printf("%s\t", ent->d_name);
-// 	if (ent->d_type == DT_BLK)
-// 		printf("Block Device\n");
-// 	else if (ent->d_type == DT_CHR)
-// 		printf("Character Device\n");
-// 	else if (ent->d_type == DT_DIR)
-// 		printf("Directory\n");
-// 	else if (ent->d_type == DT_LNK)
-// 		printf("Symbolic Link\n");
-// 	else if (ent->d_type == DT_REG)
-// 		printf("Regular File\n");
-// 	else if (ent->d_type == DT_SOCK)
-// 		printf("Unix Domain Socket\n");
-// 	else
-// 		printf("Unknown Type File\n");
-// }
-
-
-	// DIR *test;
-	// struct dirent *file;
-	// int tmp;
-
-	// test = opendir("/Users/keulee/mygithub/minishell");
-	// if (!test)
-	// {
-	//     write(1, "error\n", 6);
-	//     return (1);
-	// }
-	// while (1)
-	// {
-	//     tmp = errno;
-	//     file = readdir(test);
-	//     if (!file && tmp != errno)
-	//     {
-	//         write(1, "error\n", 6);
-	//         break;
-	//     }
-	//     if (!file)
-	//         break;
-	//     classify(file);
-	// }
-	// closedir(test);
-	// return (0);
-
-	
-	/* 함수종료 */

@@ -17,11 +17,11 @@ OBJS = $(SRCS:.c=.o)
 
 SRCS_DIR = ./srcs
 
-LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
+LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib
 #~/.brew/opt/readline/lib  // ecole42 complie
 #/usr/local/opt/readline/lib //keulee home complie
 
-INC = -I /usr/local/opt/readline/include
+INC = -I ~/.brew/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
 

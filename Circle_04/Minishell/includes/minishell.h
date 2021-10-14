@@ -17,16 +17,20 @@
 /*
 ** TYPE in s_pars
 */
-# define WORD 1
-# define SINQ 2
-# define DOUQ 3
-# define DOLR 4
-# define PIPE 5
-# define SEMC 6
-# define LEFT 7
-# define RIGHT 8
-# define DLEFT 9
-# define DRIGHT 10
+# define WORD 		0
+# define SINQ 		1
+# define DOUQ 		2
+# define DOLR 		3
+# define PIPE 		4
+# define SEMC 		5
+# define LEFT 		6
+# define RIGHT 		7
+# define DLEFT 		8
+# define DRIGHT 	9
+# define CMD		10
+# define BUILTIN_CMD 11
+# define ARG		12
+# define FILE		13
 
 # define TRUE 1
 # define FALSE 0
@@ -41,7 +45,7 @@ typedef struct s_node {
 /* cmd struct for counting size and stocking node */
 typedef struct s_cmd {
 	int				size;
-	struct s_node	*cmd_node;
+	struct s_node	*cmd_start;
 } t_cmd;
 
 typedef	struct s_info {

@@ -8,7 +8,7 @@ t_cmd	*init_cmd(void)
 	if (!cmd)
 		return (NULL);
 	cmd->size = 0;
-	cmd->cmd_node = NULL;
+	cmd->cmd_start = NULL;
 	return (cmd);
 }
 
@@ -23,9 +23,9 @@ void	insert_node(t_cmd **cmd, int type, char *str)
 	new->next = NULL;
 	new->str = str;
 	new->type = type;
-	tmp = (*cmd)->cmd_node;
+	tmp = (*cmd)->cmd_start;
 	if (tmp == NULL)
-		(*cmd)->cmd_node = new;
+		(*cmd)->cmd_start = new;
 	else
 	{
 		while (tmp->next != NULL)
@@ -39,14 +39,14 @@ void	free_list(t_cmd **cmd)
 {
 	t_node	*tmp;
 
-	while ((*cmd)->cmd_node)
+	while ((*cmd)->cmd_start)
 	{
-		tmp = (*cmd)->cmd_node->next;
-		free((*cmd)->cmd_node->str);
-		(*cmd)->cmd_node->str = NULL;
-		free((*cmd)->cmd_node);
-		(*cmd)->cmd_node = NULL;
-		(*cmd)->cmd_node = tmp;
+		tmp = (*cmd)->cmd_start->next;
+		free((*cmd)->cmd_start->str);
+		(*cmd)->cmd_start->str = NULL;
+		free((*cmd)->cmd_start);
+		(*cmd)->cmd_start = NULL;
+		(*cmd)->cmd_start = tmp;
 	}
 	free(*cmd);
 }
@@ -71,15 +71,26 @@ int		get_listsize(t_node **node)
 void	print_cmdline(t_cmd **cmd)
 {
 	t_node *tmp;
+	int i;
 
 	if (!cmd)
 		return ;
-	tmp = (*cmd)->cmd_node;
-	while (tmp)
+	tmp = (*cmd)->cmd_start;
+	i = 0;
+	printf("\n");
+	printf("\033[1;34m----------DEBUG---------\n");
+	printf("\n");
+	printf(" NODE | TYPE  |    STR    \n");
+	while (tmp && i < (*cmd)->size)
 	{
-		printf("type: %d\n", tmp->type);
-		printf("str: %s\n", tmp->str);
+		printf("------|-------|-----------\n");
+		if (tmp->type >= CMD)
+			printf("  %d   |   %d  | %s \n", i++, tmp->type, tmp->str);
+		else
+			printf("  %d   |   %d   | %s \n", i++, tmp->type, tmp->str);
 		tmp = tmp->next;
 	}
+	printf("\n");
+	printf("----------DONE---------\n");
 }
 
