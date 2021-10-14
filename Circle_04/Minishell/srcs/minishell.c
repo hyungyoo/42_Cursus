@@ -46,3 +46,55 @@ int	main(int ac, char **av, char **env)
 	// free_tab2(g_info.env);
 	return(0);
 }
+
+
+
+
+	// void	classify(struct dirent *ent)
+// {
+// 	printf("%s\t", ent->d_name);
+// 	if (ent->d_type == DT_BLK)
+// 		printf("Block Device\n");
+// 	else if (ent->d_type == DT_CHR)
+// 		printf("Character Device\n");
+// 	else if (ent->d_type == DT_DIR)
+// 		printf("Directory\n");
+// 	else if (ent->d_type == DT_LNK)
+// 		printf("Symbolic Link\n");
+// 	else if (ent->d_type == DT_REG)
+// 		printf("Regular File\n");
+// 	else if (ent->d_type == DT_SOCK)
+// 		printf("Unix Domain Socket\n");
+// 	else
+// 		printf("Unknown Type File\n");
+// }
+
+
+	// DIR *test;
+	// struct dirent *file;
+	// int tmp;
+
+	// test = opendir("/Users/keulee/mygithub/minishell");
+	// if (!test)
+	// {
+	//     write(1, "error\n", 6);
+	//     return (1);
+	// }
+	// while (1)
+	// {
+	//     tmp = errno;
+	//     file = readdir(test);
+	//     if (!file && tmp != errno)
+	//     {
+	//         write(1, "error\n", 6);
+	//         break;
+	//     }
+	//     if (!file)
+	//         break;
+	//     classify(file);
+	// }
+	// closedir(test);
+	// return (0);
+
+	
+	/* 함수종료 */

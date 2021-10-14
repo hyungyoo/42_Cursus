@@ -14,7 +14,7 @@ void	argument_word(t_cmd **cmd, char *line, int *index)
 	else
 	{
 		while (line[*index] && (line[*index] != ' '))
-			(*index)++;
+		(*index)++;
 	}
 	if (*index - tmp)
 	{

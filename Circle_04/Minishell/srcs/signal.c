@@ -4,13 +4,13 @@ void	handler(int signum)
 {
 	if (signum == SIGINT || signum == SIGQUIT)
 	{
-		printf("\r");
+		ft_putstr("\r");
 		rl_on_new_line();
 		rl_redisplay();
-		printf("  \b\b");
+		ft_putstr("  \b\b");
 		if (signum == SIGINT)
 		{
-			printf("\n");
+			ft_putstr("\n");
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
