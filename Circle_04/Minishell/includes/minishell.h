@@ -17,7 +17,7 @@
 /*
 ** TYPE in s_pars
 */
-# define WORD 		0
+// # define WORD 		0
 # define SINQ 		1
 # define DOUQ 		2
 # define DOLR 		3
@@ -31,6 +31,7 @@
 # define BUILTIN_CMD 11
 # define ARG		12
 # define FILE		13
+# define LIMITER	14
 
 # define TRUE 1
 # define FALSE 0
@@ -54,6 +55,10 @@ typedef	struct s_info {
 
 /* one global variable */
 t_info	g_info;
+
+/* built_in */
+void	ft_built_in(t_node **cmd);
+void	ft_pwd(t_node **cmd);
 
 void	ascii_logo_lol(void);
 
@@ -80,5 +85,7 @@ void	argument_word(t_cmd **cmd, char *line, int *index);
 int		parsing_quotes(char *line, int *index, t_cmd **cmd);
 int		is_quotes_pair(char *line, int *index, char pair);
 
+void	set_detail_type(t_cmd **cmd);
+int		is_builtin(char *str);
 
 #endif

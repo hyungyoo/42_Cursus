@@ -1,58 +1,22 @@
 #include "../includes/minishell.h"
 
-int	is_builtin(char *str)
-{
-	if (!ft_strcmp(str, "echo"))
-		return (1);
-	else if (!ft_strcmp(str, "pwd"))
-		return (1);
-	else if (!ft_strcmp(str, "export"))
-		return (1);
-	else if (!ft_strcmp(str, "cd"))
-		return (1);
-	else if (!ft_strcmp(str, "unset"))
-		return (1);
-	else if (!ft_strcmp(str, "env"))
-		return (1);
-	return (0);
-}
+ void	ft_exec(t_cmd **cmd)
+ {
+ 	t_node *tmp;
 
-void    set_detail_type(t_cmd **cmd)
-{
-    t_node    *tmp_node;
-
-    if (!cmd)
-        return ;
-    tmp_node = (*cmd)->cmd_start;
-    while (tmp_node)
-    {
-        if (is_builtin(tmp_node->str))
-            tmp_node->type = BUILTIN_CMD;
-        else
-            tmp_node->type = CMD;
-        tmp_node = tmp_node->next;
-    }
-}
-
-/*
-void	ft_exec(t_cmd **cmd)
-{
-	t_node *tmp;
-
-	tmp = (*cmd)->cmd_start;
-	if (!tmp)
-		return ;
-	while (tmp->next != NULL)
+ 	tmp = (*cmd)->cmd_start;
+ 	if (!tmp)
+ 		return ;
+ 	while (tmp)
 	{
-		if (tmp->type == BUILTIN_CMD)
-			// bti
-		else
-			// execv
-
-		tmp = tmp->next;
+ 		if (tmp->type == BUILTIN_CMD)
+ 			ft_built_in(&tmp);
+ 		//else
+ 			// execv
+ 		tmp = tmp->next;
 	}
 }
-*/
+
 
 int	main(int ac, char **av, char **env)
 {
@@ -80,7 +44,7 @@ int	main(int ac, char **av, char **env)
 			ft_exit(1);
 		}
 		add_history(line); /* add_history에 저장된 문자열은 up & down 방향키를 이용해 확인할수있다 */
-		/*
+		/* 
 		** here : parsing process with str
 		*/
 		if (ft_parsing(line, &cmd))
@@ -94,7 +58,7 @@ int	main(int ac, char **av, char **env)
 		}
 		/* set detail types - CMD, BUILTIN_CMD, ARG, FILE etc with parsing elements */
 		set_detail_type(&cmd);
-		//ft_exec(&cmd);
+		ft_exec(&cmd);
 		print_cmdline(&cmd);
 		free_list(&cmd);
 		free(line);
@@ -103,3 +67,4 @@ int	main(int ac, char **av, char **env)
 	// free_tab2(g_info.env);
 	return(0);
 }
+

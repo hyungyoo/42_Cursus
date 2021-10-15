@@ -9,7 +9,10 @@ SRCS = srcs/minishell.c \
 		srcs/parsing_quote.c \
 		srcs/parsing_operation_word.c \
 		srcs/ft_exit.c \
-		srcs/parsing_arg_word.c
+		srcs/parsing_arg_word.c \
+		srcs/set_detail_type.c	\
+		srcs/builtin/ft_built_in.c \
+		srcs/builtin/ft_pwd.c \
 
 HEADER = ./includes/minishell.h
 
@@ -17,11 +20,11 @@ OBJS = $(SRCS:.c=.o)
 
 SRCS_DIR = ./srcs
 
-LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib
+LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
 #~/.brew/opt/readline/lib  // ecole42 complie
 #/usr/local/opt/readline/lib //keulee home complie
 
-INC = -I ~/.brew/opt/readline/include
+INC = -I /usr/local/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
 

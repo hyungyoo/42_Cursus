@@ -85,7 +85,14 @@ void	print_cmdline(t_cmd **cmd)
 	{
 		printf("------|-------|-----------\n");
 		if (tmp->type >= CMD)
-			printf("  %d   |   %d  | %s \n", i++, tmp->type, tmp->str);
+		{
+			if (i >= 10)
+				printf("  %d  |   %d  | %s \n", i++, tmp->type, tmp->str);
+			else
+				printf("  %d   |   %d  | %s \n", i++, tmp->type, tmp->str);
+		}
+		else if (i >= 10)
+			printf("  %d  |   %d   | %s \n", i++, tmp->type, tmp->str);
 		else
 			printf("  %d   |   %d   | %s \n", i++, tmp->type, tmp->str);
 		tmp = tmp->next;

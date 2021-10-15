@@ -14,6 +14,6 @@ void	argument_word(t_cmd **cmd, char *line, int *index)
 	if (*index - tmp)
 	{
 		str = ft_substr(line, tmp, *index - tmp);
-		insert_node(cmd, WORD, str);
+		insert_node(cmd, ARG, str);
 	}
 }
