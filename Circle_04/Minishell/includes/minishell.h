@@ -50,7 +50,7 @@ typedef struct s_cmd {
 } t_cmd;
 
 typedef	struct s_info {
-	char **env;
+	char **envp;
 } t_info;
 
 typedef struct s_envp
