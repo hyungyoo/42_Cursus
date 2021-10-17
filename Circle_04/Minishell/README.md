@@ -1,8 +1,13 @@
 
-pwd 
+pwd		--> arg 없이 check!
+
+echo 도
+
+env는 key와 value로 나눠서 하기
+
 즉, cmd 리스트를 |나 이런것 전까지 나가도록
-pwd는 arg없다
 그럴때는 exec함수를 그만둬야하니 리턴값이 있어야할까?
+
 
 # To do list keulee (update date: 11.09.2021)
 > 1. 각 cmd에 따른 코드 논의 

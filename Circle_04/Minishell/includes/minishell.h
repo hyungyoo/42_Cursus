@@ -53,6 +53,15 @@ typedef	struct s_info {
 	char **env;
 } t_info;
 
+typedef struct s_envp
+{
+	char	*envp_str;
+	char	*envp_key;
+	char	*envp_value;
+	struct s_envp	*next;
+	struct s_envp	*prev;
+}				t_envp;
+
 /* one global variable */
 t_info	g_info;
 
