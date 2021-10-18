@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/18 21:34:41 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:58:49 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ char	*ft_key(char *env)
 	return (key);
 }
 
-char	*ft_value(char *env)
+char	*ft_value(char *key)
 {
 	char	*value;
 
-	value = getenv(ft_key(env));
+	value = getenv(key);
 	return (value);
 }
 
@@ -54,7 +54,7 @@ t_envp	*ft_new_node(char *env)
 		return (NULL);
 	envp->envp_str = ft_strdup(env);
 	envp->envp_key = ft_key(env);
-	envp->envp_value = ft_value(env);
+	envp->envp_value = ft_value(envp->envp_key);
 	envp->next = envp;
 	envp->prev = envp;
 	return (envp);
