@@ -2,14 +2,11 @@
 
 void    copy_env(char **env)
 {
-	/*
-
-
-	envp ==> minishell.h에서 리스트로 바꾸기
 	t_envp	*envp;
-	*/
-
-	g_info.envp = env;
+	
+	envp  =NULL;
+	ft_node_list_env(&envp, env);
+	g_info.envp = envp;
 	
 }
 
@@ -23,6 +20,5 @@ void	ft_initial(char **env, int ac, char **av)
 	(void)ac;
 	(void)av;
 	ft_initial_g();
-
 	copy_env(env);
 }

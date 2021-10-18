@@ -49,10 +49,6 @@ typedef struct s_cmd {
 	struct s_node	*cmd_start;
 } t_cmd;
 
-typedef	struct s_info {
-	char **envp;
-} t_info;
-
 typedef struct s_envp
 {
 	char	*envp_str;
@@ -62,12 +58,18 @@ typedef struct s_envp
 	struct s_envp	*prev;
 }				t_envp;
 
+typedef	struct s_info {
+	struct s_envp *envp;
+} t_info;
+
 /* one global variable */
 t_info	g_info;
 
 /* built_in */
 void	ft_built_in(t_node **cmd);
 void	ft_pwd(t_node **cmd);
+void	ft_node_list_env(t_envp **envp_list, char **env);
+void	ft_print_env(t_envp *envp);
 
 void	ascii_logo_lol(void);
 

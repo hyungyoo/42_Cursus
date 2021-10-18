@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:31:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/15 17:07:50 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:40:36 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void	ft_built_in(t_node	**cmd)
 	else if (!ft_strcmp((*cmd)->str, "unset"))
 		printf("i am unset\n");
 	else if (!ft_strcmp((*cmd)->str, "env"))
-		printf("env\n");
+		ft_print_env(g_info.envp);
 }

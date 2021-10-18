@@ -13,6 +13,7 @@ SRCS = srcs/minishell.c \
 		srcs/set_detail_type.c	\
 		srcs/builtin/ft_built_in.c \
 		srcs/builtin/ft_pwd.c \
+		srcs/builtin/ft_node_list_env.c \
 
 HEADER = ./includes/minishell.h
 
@@ -30,7 +31,7 @@ INC = -I /usr/local/opt/readline/include
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 LIBFT = libft.a
 

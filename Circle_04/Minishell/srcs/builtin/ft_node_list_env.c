@@ -6,16 +6,34 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/17 16:47:36 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:34:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
+
+int	ft_size_key(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (i);
+		i++;
+	}
+	return (0);
+}
 
 char	*ft_key(char *env)
 {
 	char	*key;
+	int		size_key;
 
+	size_key = ft_size_key(env);
+	key = (char *)malloc(sizeof(char) * size_key + 1);
+	ft_strlcpy(key, env, size_key + 1);
 	return (key);
 }
 
@@ -23,6 +41,7 @@ char	*ft_value(char *env)
 {
 	char	*value;
 
+	value = getenv(ft_key(env));
 	return (value);
 }
 
@@ -41,18 +60,18 @@ t_envp	*ft_new_node(char *env)
 	return (envp);
 }
 
-static void	ft_ajouter_node(t_envp **envp_list, t_env *env)
+static void	ft_ajouter_node(t_envp **envp, t_envp *new)
 {
-	if (!envp || !env)
+	if (!envp || !new)
 		return ;
 	if (!*envp)
-		return ;
+		*envp = new;
 	else
 	{
-		(*envp)->prev->next = env;
-		env->prev = (*envp)->prev;
-		(*envp)->prev = env;
-		env->next = (*envp);
+		(*envp)->prev->next = new;
+		new->prev = (*envp)->prev;
+		(*envp)->prev = new;
+		new->next = (*envp);
 	}
 }
 
@@ -61,9 +80,26 @@ void	ft_node_list_env(t_envp **envp_list, char **env)
 	int	i;
 
 	i = 0;
-	while (envp[i])
+	while (env[i])
 	{
-		ft_aouter_node(env_list, ft_new_node(env[i]));
+		ft_ajouter_node(envp_list, ft_new_node(env[i]));
 		i++;
+	}
+}
+
+void	ft_print_env(t_envp *envp)
+{
+	int	i;
+	t_envp	*new;
+
+	if (!envp)
+		return ;
+	new = envp->prev;
+	i = 1;
+	while (new != envp)
+	{
+		ft_putstr(envp->envp_str);
+		ft_putstr("\n");
+		envp = envp->next;
 	}
 }
