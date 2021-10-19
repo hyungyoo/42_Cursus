@@ -6,11 +6,27 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 21:29:38 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/19 22:07:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	*ft_getenv(t_envp *envp, char *key)
+{
+	t_envp	*tmp;
+
+	tmp = envp->prev;
+	while (tmp != envp)
+	{
+		if (!ft_strcmp(envp->envp_key, key))
+			return (envp->envp_value);
+		envp = envp->next;
+	}
+	if (!ft_strcmp(envp->envp_key, key))
+		return (envp->envp_value);
+	return (NULL);
+}
 
 int	ft_size_key(char *str)
 {

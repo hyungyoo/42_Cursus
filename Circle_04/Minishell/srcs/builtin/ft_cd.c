@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 21:41:52 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/19 22:07:54 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_cd(t_node **cmd)
 	pwd = getenv("PWD");
 
 	printf("%s == pwd\n", pwd);
-	char *new = ft_strjoin(pwd, "/Minishell");
-	pwd = getenv(new);
+	char *new = "/Users/hyungyoo/42_Cursus/Circle_04";
 	int	i = chdir(new);
+	pwd = ft_getenv(g_info.envp, "haha");
 	printf("%d, %s == pwd\n",i , pwd);
 }

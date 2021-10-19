@@ -86,6 +86,7 @@ char	*ft_key(char *env);
 int		ft_size_key(char *str);
 int		ft_check_egal(char *str);
 char	*ft_ajouter_value(char *str);
+char	*ft_getenv(t_envp *envp, char *key);
 
 void	ascii_logo_lol(void);
 
