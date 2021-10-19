@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 17:48:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:24:11 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,17 @@ void	ft_node_list_env(t_envp **envp_list, char **env)
 
 void	ft_print_env(t_envp *envp)
 {
+	t_envp	*tmp;
+
 	if (!envp)
 		return ;
-
-	envp->prev->next = NULL;
-	while (envp)
+	tmp = envp->prev;
+	while (envp != tmp)
 	{
 		ft_putstr(envp->envp_str);
 		ft_putstr("\n");
 		envp = envp->next;
 	}
+	ft_putstr(envp->envp_str);
+	ft_putstr("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:45:04 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 00:40:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:35:44 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ void	ft_pwd(t_node **cmd)
 	ft_putstr(pwd);
 	ft_putstr("\n");
 	g_info.exit_code = 0;
-
 }
