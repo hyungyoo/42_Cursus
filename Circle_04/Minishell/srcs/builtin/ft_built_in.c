@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:31:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 17:56:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:45:51 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	ft_built_in(t_node	**cmd)
 {
 	if (!ft_strcmp((*cmd)->str, "echo"))
-		printf("i am echo\n");
+		ft_echo(cmd);
 	else if (!ft_strcmp((*cmd)->str, "pwd"))
 		ft_pwd(cmd);
 	else if (!ft_strcmp((*cmd)->str, "cd"))
@@ -31,5 +31,5 @@ void	ft_built_in(t_node	**cmd)
 		ft_unset(cmd);
 	else if (!ft_strcmp((*cmd)->str, "env"))
 		ft_env(cmd);
-	// arg!!
 }
+//passe all arg

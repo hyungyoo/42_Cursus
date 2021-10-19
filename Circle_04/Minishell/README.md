@@ -1,19 +1,11 @@
 
-pwd		--> arg 없이 check!
-env			--> arg NO!
 
-env--> free _ env!!
+1. echo함수 전체 노드를 돌리면서 출력 성공시 띄어쓰기 아닐시 무시
 
-s il y a des arg,
-   afficher error_message and passe les args et  next cmd
+2. getenv가 되는지, 안된다면 새로만들기 ==> 노드를 돌면서 key를 받고 찾는다면, value출력하기
 
+3. cd만들기
 
-
-echo 도
-
-
-즉, cmd 리스트를 |나 이런것 전까지 나가도록
-그럴때는 exec함수를 그만둬야하니 리턴값이 있어야할까?
 
 
 # To do list keulee (update date: 11.09.2021)
