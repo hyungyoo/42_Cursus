@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 16:45:04 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 00:40:34 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/10/19 00:10:53 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/10/19 00:41:24 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_pwd(t_node **cmd)
+void	ft_env(t_node **cmd)
 {
-	char	*pwd;
-
 	if ((*cmd)->next && (*cmd)->next->type == 12)
 	{
-		ft_putstr("pwd : too many arguments\n");
+		ft_putstr("env: too many arguments\n");
 		g_info.exit_code = 1;
 		return ;
 	}
-	pwd = NULL;
-	pwd = getenv("PWD");
-	ft_putstr(pwd);
-	ft_putstr("\n");
+	ft_print_env(g_info.envp);
 	g_info.exit_code = 0;
-
 }

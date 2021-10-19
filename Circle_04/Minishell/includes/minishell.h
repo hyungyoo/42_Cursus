@@ -59,7 +59,8 @@ typedef struct s_envp
 }				t_envp;
 
 typedef	struct s_info {
-	struct s_envp *envp;
+	struct s_envp 	*envp;
+	int				exit_code;
 } t_info;
 
 /* one global variable */
@@ -68,8 +69,17 @@ t_info	g_info;
 /* built_in */
 void	ft_built_in(t_node **cmd);
 void	ft_pwd(t_node **cmd);
-void	ft_node_list_env(t_envp **envp_list, char **env);
 void	ft_print_env(t_envp *envp);
+void	ft_env(t_node **cmd);
+void	ft_export(t_node **cmd);
+
+/* node for env */
+void	ft_node_list_env(t_envp **envp_list, char **env);
+void	ft_ajouter_node(t_envp **envp, t_envp *new);
+t_envp	*ft_new_node_env(char *env);
+char	*ft_value(char *key);
+char	*ft_key(char *env);
+int		ft_size_key(char *str);
 
 void	ascii_logo_lol(void);
 

@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 16:45:04 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 00:40:34 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/10/19 02:25:51 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_pwd(t_node **cmd)
+int	ft_chercher_key(t_envp *env, char *arg)
 {
-	char	*pwd;
-
-	if ((*cmd)->next && (*cmd)->next->type == 12)
+	env->prev->next = NULL;
+	while (env)
 	{
-		ft_putstr("pwd : too many arguments\n");
-		g_info.exit_code = 1;
-		return ;
+		if (!ft_strcmp(env->envp_key, arg))
+			return (1);
+		env = env->next;
 	}
-	pwd = NULL;
-	pwd = getenv("PWD");
-	ft_putstr(pwd);
-	ft_putstr("\n");
-	g_info.exit_code = 0;
+	return (0);
+}
+
+void	ft_unset(t_node **cmd)
+{
+	char	*arg;
+
+	if (!cmd || !*cmd)
+		return ;
+	arg = (*cmd)->next->str;
+	if (!ft_chercher_key(g_info.envp, arg))
+		return ;
 
 }
+
+///il faut refaire pour unset
+// pas besoin de ft_chercher;;;;
