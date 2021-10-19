@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:31:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 19:45:51 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:55:49 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_built_in(t_node	**cmd)
 	else if (!ft_strcmp((*cmd)->str, "pwd"))
 		ft_pwd(cmd);
 	else if (!ft_strcmp((*cmd)->str, "cd"))
-		printf("i am cd\n");
+		ft_cd(cmd);
 	else if (!ft_strcmp((*cmd)->str, "export"))
 		ft_export(cmd);
 	else if (!ft_strcmp((*cmd)->str, "unset"))

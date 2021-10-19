@@ -18,6 +18,7 @@ SRCS = srcs/minishell.c \
 		srcs/builtin/ft_export.c \
 		srcs/builtin/ft_unset.c \
 		srcs/builtin/ft_echo.c \
+		srcs/builtin/ft_cd.c \
 
 HEADER = ./includes/minishell.h
 
