@@ -16,6 +16,7 @@ SRCS = srcs/minishell.c \
 		srcs/builtin/ft_node_list_env.c \
 		srcs/builtin/ft_env.c \
 		srcs/builtin/ft_export.c \
+		srcs/builtin/ft_unset.c \
 
 HEADER = ./includes/minishell.h
 

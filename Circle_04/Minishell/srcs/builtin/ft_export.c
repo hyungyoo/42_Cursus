@@ -53,6 +53,6 @@ void	ft_export(t_node **cmd)
 	if (!ft_check_egal(str))
 		return ;
 	new = ft_new_node_env(str);
-	ft_ajouter_node(&(g_info.envp), ft_new_node_env(str));
 	new->envp_value = ft_ajouter_value(str);
+	ft_ajouter_node(&(g_info.envp), new);
 }

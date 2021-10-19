@@ -72,6 +72,7 @@ void	ft_pwd(t_node **cmd);
 void	ft_print_env(t_envp *envp);
 void	ft_env(t_node **cmd);
 void	ft_export(t_node **cmd);
+void	ft_unset(t_node **cmd);
 
 /* node for env */
 void	ft_node_list_env(t_envp **envp_list, char **env);
