@@ -25,9 +25,25 @@ int	ft_check_egal(char *str)
 	return (0);
 }
 
+char	*ft_ajouter_value(char *str)
+{
+	int		i;
+	int		size_value;
+	char	*ret;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	size_value = ft_strlen(str) - i;
+	ret = (char *)malloc(sizeof(char) * size_value);
+	ft_strlcpy(ret, str + i + 1, size_value);
+	return (ret);
+}
+
 void	ft_export(t_node **cmd)
 {
 	char	*str;
+	t_envp	*new;
 
 	if (!cmd || !(*cmd))
 		return ;
@@ -36,19 +52,7 @@ void	ft_export(t_node **cmd)
 	str = (*cmd)->next->str;
 	if (!ft_check_egal(str))
 		return ;
+	new = ft_new_node_env(str);
 	ft_ajouter_node(&(g_info.envp), ft_new_node_env(str));
-
-
-	// retard pour afficher env
-
-	// pas de value! et free for malloc
-
-	//malloc --> strdup
-	//et free
-
-
-	// hell=ok
-	// hell no '\n'
-	// hellhell= jdlwq --> ' '
-	// hellhell =djlkwq --> error message
+	new->envp_value = ft_ajouter_value(str);
 }

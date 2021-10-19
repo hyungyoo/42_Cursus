@@ -12,6 +12,7 @@ void	ft_free_env(t_envp *envp)
 		tmp = envp->next;
 		free(envp->envp_str);
 		free(envp->envp_key);
+		free(envp->envp_value);
 		free(envp);
 		envp = tmp;
 	}
