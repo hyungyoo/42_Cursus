@@ -13,6 +13,7 @@ void    copy_env(char **env)
 void	ft_initial_g(void)
 {
 	g_info.envp = NULL;
+	g_info.last_env_str = NULL;
 	g_info.exit_code = 0;
 }
 

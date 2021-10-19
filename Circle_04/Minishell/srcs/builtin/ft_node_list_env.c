@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 19:24:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:43:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,29 @@ void	ft_ajouter_node(t_envp **envp, t_envp *new)
 	}
 }
 
+int	ft_env_len(char **env)
+{
+	int	ret;
+
+	ret = 0;
+	while (env[ret])
+		ret++;
+	return (ret);
+}
+
 void	ft_node_list_env(t_envp **envp_list, char **env)
 {
 	int	i;
+	int	last_env;
 
+	last_env = ft_env_len(env) - 1;
 	i = 0;
-	while (env[i])
+	while (i < last_env)
 	{
 		ft_ajouter_node(envp_list, ft_new_node_env(env[i]));
 		i++;
 	}
+	g_info.last_env_str = ft_strdup(env[last_env]);
 }
 
 void	ft_print_env(t_envp *envp)
@@ -104,5 +117,7 @@ void	ft_print_env(t_envp *envp)
 		envp = envp->next;
 	}
 	ft_putstr(envp->envp_str);
+	ft_putstr("\n");
+	ft_putstr(g_info.last_env_str);
 	ft_putstr("\n");
 }

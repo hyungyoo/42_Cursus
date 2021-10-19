@@ -60,6 +60,7 @@ typedef struct s_envp
 
 typedef	struct s_info {
 	struct s_envp 	*envp;
+	char			*last_env_str;
 	int				exit_code;
 } t_info;
 
