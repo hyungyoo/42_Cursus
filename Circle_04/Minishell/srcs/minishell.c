@@ -1,21 +1,16 @@
 #include "../includes/minishell.h"
 
- void	ft_exec(t_cmd **cmd)
+ void	ft_exec(t_node *cmd)
  {
- 	t_node *tmp;
-
- 	tmp = (*cmd)->cmd_start;
- 	if (!tmp)
+ 	if (!cmd)
  		return ;
- 	while (tmp)
+ 	while ((cmd))
 	{
- 		if (tmp->type == BUILTIN_CMD || !ft_strcmp(tmp->str, "exit"))
- 			ft_built_in(&tmp);
+ 		if ((cmd)->type == BUILTIN_CMD || !ft_strcmp((cmd)->str, "exit"))
+ 			ft_built_in(&cmd);
 		else
-			printf("not funtion \n");
- 		//else
- 			// execv
- 		tmp = tmp->next;
+			printf("%s == is not built in funtion \n", (cmd)->str);
+ 		(cmd) = (cmd)->next;
 	}
 }
 
@@ -60,7 +55,7 @@ int	main(int ac, char **av, char **env)
 		}
 		/* set detail types - CMD, BUILTIN_CMD, ARG, FILE etc with parsing elements */
 		set_detail_type(&cmd);
-		ft_exec(&cmd);
+		ft_exec((cmd->cmd_start));
 		
 		print_cmdline(&cmd);
 		

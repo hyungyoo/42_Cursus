@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 19:34:16 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:11:10 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,27 @@ void	ft_free_one_node(t_envp *envp, char *arg)
 	}
 }
 
+void	ft_unset_exec(t_node **cmd)
+{
+	(*cmd) = (*cmd)->next;
+	while ((*cmd) && (*cmd)->type == 12)
+	{
+		printf("%s == arg\n", (*cmd)->str);
+		if (ft_chercher_key(g_info.envp, (*cmd)->str))
+		{
+			printf("same cmd\n");
+			ft_free_one_node(g_info.envp, (*cmd)->str);
+		}
+		g_info.exit_code = 0;
+		if ((*cmd)->next)
+			(*cmd) = (*cmd)->next;
+		else
+			return ;
+	}
+}
+
 void	ft_unset(t_node **cmd)
 {
-	char	*arg;
-
 	if (!cmd || !(*cmd))
 		return ;
 	if (!((*cmd)->next))
@@ -66,9 +83,5 @@ void	ft_unset(t_node **cmd)
 		g_info.exit_code = 1;
 		return ;
 	}
-	arg = (*cmd)->next->str;
-	if (!ft_chercher_key(g_info.envp, arg))
-		return ;
-	ft_free_one_node(g_info.envp, arg);
-	g_info.exit_code = 0;
+	ft_unset_exec(cmd);
 }
