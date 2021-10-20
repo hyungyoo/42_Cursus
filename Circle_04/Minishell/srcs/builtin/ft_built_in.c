@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:31:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 20:55:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/20 15:09:43 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	ft_built_in(t_node	**cmd)
 		ft_unset(cmd);
 	else if (!ft_strcmp((*cmd)->str, "env"))
 		ft_env(cmd);
+	else if (!ft_strcmp((*cmd)->str, "exit"))
+		ft_exit_builtin(cmd);
 }
 //passe all arg

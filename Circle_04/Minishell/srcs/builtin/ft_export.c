@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/20 00:20:39 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/20 14:58:09 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	ft_export(t_node **cmd)
 	else
 	{
 		new = ft_new_node_env(str);
-		new->envp_value = ft_ajouter_value(str);
 		ft_ajouter_node(&(g_info.envp), new);
 	}
 	free(key_tmp);

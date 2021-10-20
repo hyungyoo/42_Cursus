@@ -76,6 +76,7 @@ void	ft_export(t_node **cmd);
 void	ft_unset(t_node **cmd);
 void	ft_echo(t_node **cmd);
 void	ft_cd(t_node **cmd);
+void	ft_exit_builtin(t_node **cmd);
 
 /* node for env */
 void	ft_node_list_env(t_envp **envp_list, char **env);
@@ -87,6 +88,7 @@ int		ft_size_key(char *str);
 int		ft_check_egal(char *str);
 char	*ft_ajouter_value(char *str);
 char	*ft_getenv(t_envp *envp, char *key);
+void	ft_free_env(t_envp *envp);
 
 void	ascii_logo_lol(void);
 

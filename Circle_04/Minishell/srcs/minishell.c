@@ -9,8 +9,10 @@
  		return ;
  	while (tmp)
 	{
- 		if (tmp->type == BUILTIN_CMD)
+ 		if (tmp->type == BUILTIN_CMD || !ft_strcmp(tmp->str, "exit"))
  			ft_built_in(&tmp);
+		else
+			printf("not funtion \n");
  		//else
  			// execv
  		tmp = tmp->next;
