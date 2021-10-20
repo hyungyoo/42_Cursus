@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:22:42 by keulee            #+#    #+#             */
-/*   Updated: 2021/10/04 01:34:36 by keulee           ###   ########.fr       */
+/*   Updated: 2021/10/20 18:51:52 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void	ft_putchar_fd(char c, int fd);
 int		ft_strcmp(char *s1, char *s2);
 void	free_tab2(char **str);
 int		ft_is_letter(char c);
+void	ft_putnbr_fd(int n, int fd);
 
 #endif

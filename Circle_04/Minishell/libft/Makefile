@@ -6,7 +6,7 @@
 #    By: keulee <keulee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/19 17:00:13 by keulee            #+#    #+#              #
-#    Updated: 2021/10/04 01:34:43 by keulee           ###   ########.fr        #
+#    Updated: 2021/10/20 18:52:10 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = ft_putchar.c ft_putstr.c ft_strlen.c ft_strncmp.c \
 	  ft_atoi.c ft_strcpy.c ft_strlcpy.c ft_strncpy.c \
 	  ft_bzero.c ft_calloc.c ft_itoa.c ft_putstr_fd.c \
 	  ft_putchar_fd.c ft_putendl_fd.c ft_strcmp.c \
-	  ft_free_tab2.c ft_is_letter.c
+	  ft_free_tab2.c ft_is_letter.c ft_putnbr.c \
 
 OBJ = $(SRC:.c=.o)
 

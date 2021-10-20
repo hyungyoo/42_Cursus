@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/19 20:51:36 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/20 19:15:44 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,49 @@ int	ft_check_option(char *str)
 	return (1);
 }
 
+void	ft_echo_type_3(t_node **cmd)
+{
+	if ((*cmd)->next)
+		(*cmd) = (*cmd)->next;
+	if ((*cmd)->type == 12)
+	{
+		if (!ft_strcmp((*cmd)->str, "?"))
+			ft_putnbr_fd(g_info.exit_code, 1);
+		else
+			ft_putstr(ft_getenv(g_info.envp, (*cmd)->str));
+	}
+}
+
+void	ft_echo_type_2(t_node **cmd)
+{
+	if (!ft_strcmp((*cmd)->str + 1, "?"))
+		ft_putnbr_fd(g_info.exit_code, 1);
+	else
+		ft_putstr(ft_getenv(g_info.envp, (*cmd)->str + 1));
+}
+
 void	ft_print_echo(t_node **cmd)
 {
-	/*
-	 * 모든노드 확인
-	 * echo 다음에 나올 변수들
-	 * 1. $ 가 나온다면 1. $? 일경우, 
-	 *					2. $환경변수
-	 * 2. "" 타입이 2 인 경우 , 환경변수
-	 *
-	 * 3. 출력에 성공했을경우 ' ' 아닐경우 무시
-	 */
-	while ((*cmd) && (*cmd)->next && (*cmd)->next->type == 12)
+	int	flag_space;
+
+	flag_space = 1;
+	while (*cmd)
 	{
-		ft_putstr((*cmd)->str);
-		ft_putstr(" ");
-		(*cmd) = (*cmd)->next;
+		if (!(*cmd)->next)
+			flag_space = 0;
+		if ((*cmd)->type == 3)
+			ft_echo_type_3(cmd);
+		else if ((*cmd)->type == 2)
+			ft_echo_type_2(cmd);
+		else
+			ft_putstr((*cmd)->str);
+		if (flag_space)
+			ft_putstr(" ");
+		if ((*cmd)->next)
+			(*cmd) = (*cmd)->next;
+		else
+			return ;
 	}
-	if ((*cmd))
-		ft_putstr((*cmd)->str);
 }
 
 void	ft_echo(t_node **cmd)
@@ -54,9 +78,7 @@ void	ft_echo(t_node **cmd)
 	if (!cmd || !*cmd)
 		return ;
 	if (!((*cmd)->next))
-	   return ;
-	if (!ft_strcmp((*cmd)->next->str, "$") && !ft_strcmp((*cmd)->next->next->str, "?"))
-		printf("%d",(g_info.exit_code));
+		return ;
 	(*cmd) = (*cmd)->next;
 	if (ft_check_option((*cmd)->str))
 	{
