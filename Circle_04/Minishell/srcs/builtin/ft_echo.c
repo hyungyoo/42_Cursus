@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/20 19:20:23 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/20 19:50:50 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,18 @@ void	ft_echo_type_3(t_node **cmd)
 
 void	ft_echo_type_2(t_node **cmd)
 {
-	if (!ft_strcmp((*cmd)->str + 1, "?"))
-		ft_putnbr_fd(g_info.exit_code, 1);
-	else
+	if (((*cmd)->str)[0] == '$')
 	{
-		if (ft_getenv(g_info.envp, (*cmd)->str + 1))
-			ft_putstr(ft_getenv(g_info.envp, (*cmd)->str + 1));
+		if (!ft_strcmp((*cmd)->str + 1, "?"))
+			ft_putnbr_fd(g_info.exit_code, 1);
+		else
+		{
+			if (ft_getenv(g_info.envp, (*cmd)->str + 1))
+				ft_putstr(ft_getenv(g_info.envp, (*cmd)->str + 1));
+		}
 	}
+	else
+		ft_putstr((*cmd)->str);
 }
 
 void	ft_print_echo(t_node **cmd)
