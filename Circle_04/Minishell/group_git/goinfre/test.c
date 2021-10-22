@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_env.c                                         :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 16:04:24 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/22 16:56:31 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/10/22 18:26:22 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/10/22 18:27:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "includes/minishell.h"
 
-void	copy_env(char **env)
+void	ft_cd_exec(char *path, char *new_path)
 {
-	t_envp	*envp;
-
-	envp = NULL;
-	ft_node_list_env(&envp, env);
-	g_info.envp = envp;
-	g_info.env = env;
+	return ;
 }
 
-void	ft_initial_g(void)
+int	main(int argc, char **argv)
 {
-	g_info.envp = NULL;
-	g_info.flag_espace = 0;
-	g_info.last_env_str = NULL;
-	g_info.env = NULL;
-}
+	char	*path = argv[1];
+	char	*new_path = argv[2];
 
-void	ft_initial(char **env, int ac, char **av)
-{
-	(void)ac;
-	(void)av;
-	ft_initial_g();
-	copy_env(env);
+	printf("%s\n", path);
+	printf("%s\n", new_path);
 }

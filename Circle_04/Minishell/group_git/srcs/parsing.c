@@ -1,5 +1,18 @@
 #include "../includes/minishell.h"
 
+
+void	insert_nospace_flag(t_cmd **cmd)
+{
+	t_node *node;
+
+	if (!*cmd)
+		return ;
+	node = (*cmd)->cmd_start;
+	while (node->next != NULL)
+		node = node->next;
+	node->flag_nospace = 1;
+}
+
 int ft_parsing(char *line, t_cmd **cmd)
 {
 	int i;
@@ -36,11 +49,8 @@ int ft_parsing(char *line, t_cmd **cmd)
 			argument_word(cmd, line, &i);
 			i--;
 		}
-		/////////////////////////////////////
-		//if (line[i + 1] != ' ')
-		//	insert_space_flag(cmd);
-			//g_info.flag_espace = 1;
-		//////////////////////////////////////
+		if (line[i + 1] != ' ' && line[i + 1] != '\0') //give a flag if there isn't space after argument.
+			insert_nospace_flag(cmd);
 	}
 	return (0);
 }

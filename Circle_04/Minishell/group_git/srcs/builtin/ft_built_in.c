@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:31:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/21 17:17:04 by keulee           ###   ########.fr       */
+/*   Updated: 2021/10/22 17:48:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,25 @@
 //to do:
 //	1. passe arg until next pipe ou redir
 //	2. and check il y a arg?
+static void	ft_error_message(t_node **cmd)
+{
+	ft_putstr("minishell: ");
+	while ((*cmd) && (*cmd)->flag_nospace == 1)
+	{
+		ft_putstr((*cmd)->str);
+		if ((*cmd)->next)
+			(*cmd) = (*cmd)->next;
+	}
+	ft_putstr((*cmd)->str);
+	ft_putstr(": command not found\n");
+	g_info.exit_code = 127;
+}
 
 void	ft_built_in(t_node	**cmd)
 {
-	if (!ft_strcmp((*cmd)->str, "echo"))
+	if ((*cmd)->flag_nospace == 1)
+		ft_error_message(cmd);
+	else if (!ft_strcmp((*cmd)->str, "echo"))
 		ft_echo(cmd);
 	else if (!ft_strcmp((*cmd)->str, "pwd"))
 		ft_pwd(cmd);
@@ -33,5 +48,8 @@ void	ft_built_in(t_node	**cmd)
 		ft_env(cmd);
 	else if (!ft_strcmp((*cmd)->str, "exit"))
 		ft_exit_builtin(cmd);
+	if ((*cmd)->next)
+		if ((*cmd)->next->type != PIPE)
+			while ((*cmd)->next->type == PIPE && (*cmd)->next)
+				(*cmd) = (*cmd)->next;
 }
-//passe all arg

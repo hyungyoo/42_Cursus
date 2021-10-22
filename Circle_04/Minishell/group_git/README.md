@@ -1,5 +1,5 @@
 # To do list keulee (update date: 11.09.2021)
-> 1. quoto parsing again
+> 1. flag_nospace;
 
 # Code log (update date: 20.10.2021)
 > 1. builtin merge : 형준이가 준 builtin_keulee 폴더 merge, (*cmd)->next로 쓴 것 node->next로 수정함. ft 인자도 t_node *node로 수정

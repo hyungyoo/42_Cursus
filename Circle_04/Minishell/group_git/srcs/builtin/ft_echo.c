@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/22 17:03:36 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:35:36 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,8 @@ void	ft_print_echo(t_node **cmd)
 			ft_putstr((*cmd)->str);
 		if (flag_space)
 			ft_putstr(" ");
-		/////////////////////////////////
-		//if ((*cmd)->flag_espace == 1)
-		//	ft_putstr("\b");
-		/////////////////////////////////
+		if ((*cmd)->flag_nospace == 1)
+			ft_putstr("\b");
 		if ((*cmd)->next)
 			(*cmd) = (*cmd)->next;
 		else

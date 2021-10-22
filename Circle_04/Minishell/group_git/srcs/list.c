@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-t_cmd	*init_cmd(voiid)
+t_cmd	*init_cmd(void)
 {	
 	t_cmd *cmd;
 
@@ -24,7 +24,7 @@ void	insert_node(t_cmd **cmd, int type, char *str)
 	new->next = NULL;
 	new->str = str;
 	new->type = type;
-	new->flag_space = 0;
+	new->flag_nospace = 0;
 	tmp = (*cmd)->cmd_start;
 	if (tmp == NULL)
 		(*cmd)->cmd_start = new;
@@ -83,21 +83,21 @@ void	print_cmdline(t_cmd **cmd)
 	printf("\n");
 	printf("\033[1;34m----------DEBUG---------\n");
 	printf("\n");
-	printf(" NODE | TYPE  |    STR    \n");
+	printf(" NODE | TYPE  |    STR(NOSPACE)    \n");
 	while (tmp && i < (*cmd)->size)
 	{
 		printf("------|-------|-----------\n");
 		if (tmp->type >= CMD)
 		{
 			if (i >= 10)
-				printf("  %d  |   %d  | %s \n", i++, tmp->type, tmp->str);
+				printf("  %d  |   %d  | %s(%d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace);
 			else
-				printf("  %d   |   %d  | %s \n", i++, tmp->type, tmp->str);
+				printf("  %d   |   %d  | %s(%d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace);
 		}
 		else if (i >= 10)
-			printf("  %d  |   %d   | %s \n", i++, tmp->type, tmp->str);
+			printf("  %d  |   %d   | %s(%d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace);
 		else
-			printf("  %d   |   %d   | %s \n", i++, tmp->type, tmp->str);
+			printf("  %d   |   %d   | %s(%d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace);
 		tmp = tmp->next;
 	}
 	printf("\n");
