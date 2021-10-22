@@ -43,6 +43,7 @@
 typedef struct s_node {
 	int				type;
 	char 			*str;
+	int				flag_space;
 	struct s_node	*prev;
 	struct s_node	*next;
 } t_node;

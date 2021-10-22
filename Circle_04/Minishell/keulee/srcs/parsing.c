@@ -36,6 +36,11 @@ int ft_parsing(char *line, t_cmd **cmd)
 			argument_word(cmd, line, &i);
 			i--;
 		}
+		/////////////////////////////////////
+		//if (line[i + 1] != ' ')
+		//	insert_space_flag(cmd);
+			//g_info.flag_espace = 1;
+		//////////////////////////////////////
 	}
 	return (0);
 }
