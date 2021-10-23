@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/23 17:00:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/23 21:20:46 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,8 @@ void	ft_echo_type_2_sans_espace(char **key, char *str)
 	{
 		if (i == 0 && str[0] != '$')
 			ft_putstr(key[i]);
-		else if (key[i][0] == '$')
-		{
-			if (!ft_strcmp(key[i], "?"))
+		else if (!ft_strcmp(key[i], "?"))
 				ft_putnbr_fd(g_info.exit_code, 1);
-		}
 		else
 		{
 			if (ft_getenv(g_info.envp, key[i]))

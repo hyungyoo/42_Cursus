@@ -82,6 +82,8 @@ echo "hihi'hihi" 'hihi"hihi' ==> 파싱 성공
 	echo "'$USER'" --> 'hyungyoo'
 	echo "wap$USER'we'" --> waphyungyoo'we'
 	echo "wap'$USERwe" -->  wap'
-
+> 7. ft_echo.c line 85,
+	key[i][0] == '$'로 나오지않음. 스플릿을 꺼셔하던가, 
+	아니면, 그 포인트만큼 주소값을 더해서 알아보는방법이있다/
 
 
