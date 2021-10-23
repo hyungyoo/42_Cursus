@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/20 16:10:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/23 18:12:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ void	ft_update_env(t_envp *envp, char *str, char *key)
 void	ft_export(t_node **cmd)
 {
 	char	*key_tmp;
-	t_envp	*new;
 
 	if (!cmd || !(*cmd))
+		return ;
+	if (!(*cmd)->next)
 		return ;
 	(*cmd) = (*cmd)->next;
 	while (*cmd && (*cmd)->type == 12)
@@ -73,10 +74,7 @@ void	ft_export(t_node **cmd)
 			if (ft_getenv(g_info.envp, key_tmp))
 				ft_update_env(g_info.envp, (*cmd)->str, key_tmp);
 			else
-			{
-				new = ft_new_node_env((*cmd)->str);
-				ft_ajouter_node(&(g_info.envp), new);
-			}
+				ft_ajouter_node(&(g_info.envp), ft_new_node_env((*cmd)->str));
 			free(key_tmp);
 		}
 		if ((*cmd)->next)
