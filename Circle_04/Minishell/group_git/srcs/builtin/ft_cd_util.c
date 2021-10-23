@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 18:26:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/23 04:29:37 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/23 17:01:51 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_strlen_avant_slash(char *path)
 
 void	ft_avant_path(char **path)
 {
-	int	size_new_path;
+	int		size_new_path;
 	char	*new_path;
 
 	new_path = NULL;
@@ -79,7 +79,6 @@ void	ft_ajouter_path(char **path, char *add_path)
 {
 	if (!path || !*path || !add_path)
 		return ;
-	printf("%c ! \n", (*path)[ft_strlen(*path) - 1]);
 	if (!(!ft_strcmp(*path, "/") || (*path)[ft_strlen(*path) - 1] == '/'))
 		*path = ft_strjoin_cd(*path, "/");
 	*path = ft_strjoin_cd(*path, add_path);
@@ -87,25 +86,10 @@ void	ft_ajouter_path(char **path, char *add_path)
 
 void	ft_cd_exec(char **path, char *new_path)
 {
-	char	**path_split;
-	int		i;
-
-	if (new_path[0] == '/')
-	{
-		free(*path);
-		*path = ft_strdup(new_path);
+	if (!ft_strcmp(new_path, "."))
 		return ;
-	}
-	i = -1;
-	path_split = ft_split(new_path, '/');
-	while (path_split[++i])
-	{
-		if (!ft_strcmp(path_split[i], "."))
-			continue ;
-		else if (!ft_strcmp(path_split[i], ".."))
-			ft_avant_path(path);
-		else
-			ft_ajouter_path(path, path_split[i]);
-	}
-	free_tab2(path_split);
+	else if (!ft_strcmp(new_path, ".."))
+		ft_avant_path(path);
+	else
+		ft_ajouter_path(path, new_path);
 }

@@ -59,3 +59,14 @@ echo "hihi'hihi" 'hihi"hihi' ==> 파싱 성공
 # Code log (update date: 22.10.2021)
 > 1. 그냥올려봄
 > 2. chdir 함수 마무리하기	
+
+# Code log (update date: 23.10.2021)
+> 1. signal 함수에 자식프로세스를 위해서, ctrl + c, ctrl + \ 추가함. bash랑 같게 출력됨.
+			그로인해서, ft_execmd함수에 pid를 g_info에 넣어두고, handler함수에서 새롭게 함수를만듬
+
+> 2. cd 함수 완성. ~는 구현할필요가없었지만, 그냥 만듬
+
+> 3. echo에서는 echo "this$PATHis" 일떄, this만 출력되게하는것등등 여러가지를 실험하고 코드를 바꿈
+
+> 4. cd 뺴고는 norminette까지 끝냄
+	

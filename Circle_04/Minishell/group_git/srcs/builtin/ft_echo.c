@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_eho.c                                           :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/22 17:35:36 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/23 17:00:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,16 @@ int	ft_check_sans_espace(char *str)
 	return (count);
 }
 
-void	ft_echo_type_2_sans_espace(char **key)
+void	ft_echo_type_2_sans_espace(char **key, char *str)
 {
 	int	i;
 
-	i = -1;
-	while (key[++i])
+	i = 0;
+	while (key[i])
 	{
-		if (key[i][0] == '$')
+		if (i == 0 && str[0] != '$')
+			ft_putstr(key[i]);
+		else if (key[i][0] == '$')
 		{
 			if (!ft_strcmp(key[i], "?"))
 				ft_putnbr_fd(g_info.exit_code, 1);
@@ -90,6 +92,7 @@ void	ft_echo_type_2_sans_espace(char **key)
 			if (ft_getenv(g_info.envp, key[i]))
 				ft_putstr(ft_getenv(g_info.envp, key[i]));
 		}
+		i++;
 	}
 }
 
@@ -98,31 +101,33 @@ void	ft_type2_sans_espace(t_node **cmd)
 	char	**split_str;
 
 	split_str = ft_split((*cmd)->str, '$');
-	ft_echo_type_2_sans_espace(split_str);
+	ft_echo_type_2_sans_espace(split_str, (*cmd)->str);
+}
+
+int	ft_check_type(int type)
+{
+	if (!(type == PIPE || type == RIGHT
+			|| type == DRIGHT || type == LEFT || type == DLEFT))
+		return (1);
+	return (0);
 }
 
 void	ft_print_echo(t_node **cmd)
 {
-	int	flag_space;
-
-	flag_space = 1;
-	while (*cmd && !((*cmd)->type == PIPE || (*cmd)->type == RIGHT 
-			|| (*cmd)->type == DRIGHT || (*cmd)->type == LEFT ||  (*cmd)->type == DLEFT))
+	while (*cmd && ft_check_type((*cmd)->type))
 	{
-		if (!(*cmd)->next)
-			flag_space = 0;
-		if ((*cmd)->type == 3)
+		if ((*cmd)->type == DOLR)
 			ft_echo_type_3(cmd);
-		else if ((*cmd)->type == 2)
+		else if ((*cmd)->type == DOUQ)
 		{
-			if (ft_check_sans_espace((*cmd)->str) > 1)
+			if (ft_check_sans_espace((*cmd)->str) >= 1)
 				ft_type2_sans_espace(cmd);
 			else
 				ft_echo_type_2(cmd);
 		}
 		else
 			ft_putstr((*cmd)->str);
-		if (flag_space)
+		if ((*cmd)->next)
 			ft_putstr(" ");
 		if ((*cmd)->flag_nospace == 1)
 			ft_putstr("\b");

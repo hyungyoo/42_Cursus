@@ -87,18 +87,17 @@ int ft_execmd(t_node *node)
 	/* cmd + arg 얻는 함수 - malloc*/
 	char    **argv;
     int     flag;
-    pid_t   pid;
     int     status;
 
     /* fork here*/ 
-    pid = fork();
+    g_info.pid_child = fork();
     g_info.fork_flag = 1;
     path = get_path(node);
 	argv = get_arg(node);
 
-    if (pid < 0)
+    if (g_info.pid_child < 0)
         return (-1) ;
-    else if (pid == 0)
+    else if (g_info.pid_child == 0)
     {
         flag = execve(path, argv, g_info.env);
         if (flag == -1)

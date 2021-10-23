@@ -67,6 +67,7 @@ typedef	struct s_info {
 	struct s_envp 	*envp;
 	char	**env;
 	int		fork_flag;
+	pid_t	pid_child;
 	int		count_pipe;
 	int		exit_code;
 	char			*last_env_str;
