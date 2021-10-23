@@ -1,4 +1,5 @@
 # To do list keulee (update date: 11.09.2021)
+<<<<<<< HEAD
 > 1. ft_execmd 노드 읽는 법 바꿔야 함
 
 # Code log (update date: 20.10.2021)
@@ -7,6 +8,9 @@
 > 2. srcs파일 내 ft_exit.c (builtin 아님) 파일 ft_free_exit.c로 이름 변경
 > 3. list내 print_cmdlist ft에 flag_nospace 인쇄할 수 있도록 추가.
 > 4. parsing_quote ft 이전 버전으로 restore  
+=======
+> 1. flag_nospace;
+>>>>>>> a4dca87f35201104d5264d31de6b48a9cfac1900
 
 # Code log (update date: 20.10.2021)
 > 1. builtin merge : 형준이가 준 builtin_keulee 폴더 merge, (*cmd)->next로 쓴 것 node->next로 수정함. ft 인자도 t_node *node로 수정
