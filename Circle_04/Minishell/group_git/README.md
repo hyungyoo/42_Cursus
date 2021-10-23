@@ -69,4 +69,10 @@ echo "hihi'hihi" 'hihi"hihi' ==> 파싱 성공
 > 3. echo에서는 echo "this$PATHis" 일떄, this만 출력되게하는것등등 여러가지를 실험하고 코드를 바꿈
 
 > 4. cd 뺴고는 norminette까지 끝냄
-	
+
+> 5. ls 등 명령어를 실행할떄, path를 가지고오는걸, ft_getenv 로 만들어야한다.
+	그래야지 path를 삭제했을때, 명령어가 실해되지않음 --> execute_cmd 함수에서 내가 getenv를 
+	ft_getenv로 바꿈
+> 6. echo "'$USER'"     -->  '로만 결과값이 나옴 $나오면 출력하는걸로만 해서그런듯.
+									즉, $USER' 로 읽기때문이다. '$USER'로 읽혀야한다.
+	"가 나오고 '가 나오면, 무시한후에,그냥 출력, 마지막에있는것도 삭제

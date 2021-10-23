@@ -15,7 +15,12 @@ char	*get_path(t_node *node)
 		if (access(node->str, F_OK | X_OK) == 0)
 			return (node->str);
 	}
-	split_path = ft_split(getenv("PATH"), ':');
+	////////////////////////////////////////////////////////////////
+	//split_path = ft_split(getenv("PATH"), ':');
+	split_path = ft_split(ft_getenv(g_info.envp, "PATH"), ':');
+	if (!split_path)
+		return (NULL);
+	//////////////////////////////////////////////////////////////////
 	while (split_path[i])
 	{
 		tmp1 = ft_strjoin(split_path[i], "/");
@@ -111,6 +116,7 @@ int ft_execmd(t_node *node)
     else
     { /*pid > 0*/
         wait(&status);
+		g_info.pid_child = 0;
         // printf("done\n");
     }
     // else if (pid > 0)
