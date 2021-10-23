@@ -1,5 +1,12 @@
 # To do list keulee (update date: 11.09.2021)
-> 1. quoto parsing again
+> 1. ft_execmd 노드 읽는 법 바꿔야 함
+
+# Code log (update date: 20.10.2021)
+> 1. parsing 변경 : flag_nospace 변수 struct t_node에 추가함.  
+> => 만약 파싱 된 인자 뒤에 빈칸이 없다면 flag_nospace의 값이 1로 변경됨 (default 0)  
+> 2. srcs파일 내 ft_exit.c (builtin 아님) 파일 ft_free_exit.c로 이름 변경
+> 3. list내 print_cmdlist ft에 flag_nospace 인쇄할 수 있도록 추가.
+> 4. parsing_quote ft 이전 버전으로 restore  
 
 # Code log (update date: 20.10.2021)
 > 1. builtin merge : 형준이가 준 builtin_keulee 폴더 merge, (*cmd)->next로 쓴 것 node->next로 수정함. ft 인자도 t_node *node로 수정
@@ -48,3 +55,7 @@ echo "hihi'hihi" 'hihi"hihi' ==> 파싱 성공
 예2) cat << done | ls -al >> out (노드 수 8 / cat : word / << : DLESS / done : word / ls : word / -al : word / >> : DGREAT / out : word)
 > 5. copy_env, signal 형준이 코드로 추가 및 변경
 
+
+# Code log (update date: 22.10.2021)
+> 1. 그냥올려봄
+> 2. chdir 함수 마무리하기	

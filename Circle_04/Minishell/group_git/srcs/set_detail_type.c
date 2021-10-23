@@ -19,7 +19,7 @@ int	is_builtin(char *str)
 	return (0);
 }
 
-int		is_operation_word(t_node *node)
+int	is_operation_word(t_node *node)
 {
 	if (node->type == LEFT || node->type == RIGHT || node->type == DRIGHT)
 		return (0);
@@ -28,10 +28,10 @@ int		is_operation_word(t_node *node)
 
 void	set_detail_type(t_cmd **cmd)
 {
-    t_node	*tmp;
+	t_node	*tmp;
 
-    if (!*cmd || !(*cmd)->cmd_start)
-        return ;
+	if (!*cmd || !(*cmd)->cmd_start)
+		return ;
 	tmp = (*cmd)->cmd_start;
 	if (is_builtin(tmp->str))
 		tmp->type = BUILTIN_CMD;

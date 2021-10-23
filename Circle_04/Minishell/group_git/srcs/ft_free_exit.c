@@ -5,36 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 15:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/22 19:03:22 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/10/22 16:04:16 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/10/22 16:04:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-void	ft_free_cmd(t_node *cmd)
+void	ft_free_env(t_envp *envp)
 {
-	t_node	*tmp;
+	t_envp	*tmp;
 
-	if (!cmd)
+	if (!envp)
 		return ;
-	while (cmd)
+	envp->prev->next = NULL;
+	while (envp)
 	{
-		tmp = cmd->next;
-		free(cmd->str);
-		free(cmd);
-		cmd = tmp;
+		tmp = envp->next;
+		free(envp->envp_str);
+		free(envp->envp_key);
+		free(envp->envp_value);
+		free(envp);
+		envp = tmp;
 	}
+	free(g_info.last_env_str);
 }
 
-void	ft_exit_builtin(t_node **cmd)
+void	ft_exit(int exit_code)
 {
-	if (!cmd || !*cmd)
-		return ;
-	if (!ft_strcmp((*cmd)->str, "exit"))
-	{
-		ft_putendl_fd("\033[38;5;31mminishell exit \033[0m", 1);
-		ft_free_cmd(*cmd);
-		ft_exit(1);
-	}
+	ft_free_env(g_info.envp);
+	rl_clear_history();
+	exit(exit_code);
+}
+
+void	ft_exit_minishell(int exit_code, t_cmd **cmd)
+{
+	ft_free_env(g_info.envp);
+	free_list(cmd);
+	rl_clear_history();
+	exit(exit_code);
 }

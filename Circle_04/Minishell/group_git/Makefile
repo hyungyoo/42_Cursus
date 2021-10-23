@@ -8,7 +8,7 @@ SRCS = srcs/minishell.c \
 		srcs/ascii_logo.c \
 		srcs/parsing_quote.c \
 		srcs/parsing_operation_word.c \
-		srcs/ft_exit.c \
+		srcs/ft_free_exit.c \
 		srcs/parsing_arg_word.c \
 		srcs/set_detail_type.c \
 		srcs/execute.c \
@@ -21,6 +21,7 @@ SRCS = srcs/minishell.c \
 		srcs/builtin/ft_unset.c \
 		srcs/builtin/ft_echo.c \
 		srcs/builtin/ft_cd.c \
+		srcs/builtin/ft_cd_util.c \
 		srcs/builtin/ft_exit.c
 
 HEADER = ./includes/minishell.h
@@ -29,17 +30,19 @@ OBJS = $(SRCS:.c=.o)
 
 SRCS_DIR = ./srcs
 
+LI = -L. -lft -lreadline -L ~/.brew/opt/readline/lib
 LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
 #~/.brew/opt/readline/lib  // ecole42 complie
 #/usr/local/opt/readline/lib //keulee home complie
 
+IN = -I ~/.brew/opt/readline/include
 INC = -I /usr/local/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 LIBFT = libft.a
 

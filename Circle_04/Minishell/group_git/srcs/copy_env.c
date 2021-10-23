@@ -1,28 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   copy_env.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/22 16:04:24 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/10/22 17:22:18 by hyungyoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-void    copy_env(char **env)
+void	copy_env(char **env)
 {
-	// int i;
-	// int count;
+	t_envp	*envp;
 
-	// i = 0;
-	// count = 0;
-	// while (env[count])
-	// 	count++;
-	// g_info.env = (char **)malloc(sizeof(char *) * (count + 1));
-	// if (!g_info.env)
-	// 	return ;
-	// while (env[i])
-	// {
-	// 	g_info.env[i] = ft_strdup(env[i]);
-	// 	i++;
-	// }
-	// g_info.env[i] = NULL;
+	envp = NULL;
+	ft_node_list_env(&envp, env);
+	g_info.envp = envp;
 	g_info.env = env;
 }
 
 void	ft_initial_g(void)
 {
+	g_info.envp = NULL;
+	g_info.last_env_str = NULL;
 	g_info.env = NULL;
 }
 

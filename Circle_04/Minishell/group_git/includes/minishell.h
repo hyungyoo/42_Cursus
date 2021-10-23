@@ -34,7 +34,6 @@
 # define ARG		12
 # define FILE		13
 # define LIMITER	14
-# define BLANK		15
 
 # define TRUE 1
 # define FALSE 0
@@ -43,6 +42,7 @@
 typedef struct s_node {
 	int				type;
 	char 			*str;
+	int				flag_nospace;
 	struct s_node	*prev;
 	struct s_node	*next;
 } t_node;
@@ -81,6 +81,7 @@ void	ascii_logo_lol(void);
 
 void	handler(int signum);
 
+void	ft_exit_minishell(int exit_code, t_cmd **cmd);
 void	ft_exit(int exit_code);
 
 void    copy_env(char **env);
@@ -123,6 +124,13 @@ void	ft_echo(t_node **cmd);
 void	ft_cd(t_node **cmd);
 void	ft_exit_builtin(t_node **cmd);
 
+/* built_in cd */
+char	*ft_strjoin_cd(char *s1, char *s2);
+int		ft_strlen_avant_slash(char *path);
+void	ft_avant_path(char **path);
+void	ft_ajouter_path(char **path, char *add_path);
+void	ft_cd_exec(char **path, char *new_path);
+
 /* node for env */
 void	ft_node_list_env(t_envp **envp_list, char **env);
 void	ft_ajouter_node(t_envp **envp, t_envp *new);
@@ -134,5 +142,6 @@ int		ft_check_egal(char *str);
 char	*ft_ajouter_value(char *str);
 char	*ft_getenv(t_envp *envp, char *key);
 void	ft_free_env(t_envp *envp);
+void	ft_update_env(t_envp *envp, char *str, char *key);
 
 #endif

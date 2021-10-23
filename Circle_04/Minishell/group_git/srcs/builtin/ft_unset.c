@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/20 16:11:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:42:24 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,8 @@ void	ft_unset_exec(t_node **cmd)
 	(*cmd) = (*cmd)->next;
 	while ((*cmd) && (*cmd)->type == 12)
 	{
-		printf("%s == arg\n", (*cmd)->str);
 		if (ft_chercher_key(g_info.envp, (*cmd)->str))
-		{
-			printf("same cmd\n");
 			ft_free_one_node(g_info.envp, (*cmd)->str);
-		}
 		g_info.exit_code = 0;
 		if ((*cmd)->next)
 			(*cmd) = (*cmd)->next;
