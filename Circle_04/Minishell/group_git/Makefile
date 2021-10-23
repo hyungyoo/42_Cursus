@@ -30,7 +30,6 @@ OBJS = $(SRCS:.c=.o)
 
 SRCS_DIR = ./srcs
 
-<<<<<<< HEAD
 LI = -L. -lft -lreadline -L ~/.brew/opt/readline/lib
 LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
 #~/.brew/opt/readline/lib  // ecole42 complie
@@ -38,15 +37,6 @@ LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
 
 IN = -I ~/.brew/opt/readline/include
 INC = -I /usr/local/opt/readline/include
-=======
-LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib
-LI = -L. -lft -lreadline -L /usr/local/opt/readline/lib
-#~/.brew/opt/readline/lib  // ecole42 complie
-#/usr/local/opt/readline/lib //keulee home complie
-
-INC = -I ~/.brew/opt/readline/include
-IN = -I /usr/local/opt/readline/include
->>>>>>> a4dca87f35201104d5264d31de6b48a9cfac1900
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
 
