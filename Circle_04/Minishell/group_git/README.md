@@ -1,7 +1,7 @@
 # To do list keulee (update date: 11.09.2021)
 > 1. ft_execmd 노드 읽는 법 바꿔야 함
 
-# Code log (update date: 20.10.2021)
+# Code log (update date: 22.10.2021)
 > 1. parsing 변경 : flag_nospace 변수 struct t_node에 추가함.  
 > => 만약 파싱 된 인자 뒤에 빈칸이 없다면 flag_nospace의 값이 1로 변경됨 (default 0)  
 > 2. srcs파일 내 ft_exit.c (builtin 아님) 파일 ft_free_exit.c로 이름 변경

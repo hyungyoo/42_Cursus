@@ -1,6 +1,5 @@
 #include "../includes/minishell.h"
 
-
 void	insert_nospace_flag(t_cmd **cmd)
 {
 	t_node *node;
