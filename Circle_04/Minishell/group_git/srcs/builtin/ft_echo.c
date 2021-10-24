@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/24 16:21:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/24 16:51:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,14 @@ int	ft_check_quote(char *str)
 /*
  *	trouver last_index point and malloc and return env;
  */
-char	*ft_find_key(char *str, int start_index, int last_index)
+char	*ft_find_key(char *str, int start_index, int *last_index)
 {
 	char	*ret;
 	int		size_str;
 	int		i;
 
 	i = 0;
-	size_str = last_index - start_index;
+	size_str = *last_index - start_index + 1;
 	ret = (char *)malloc(sizeof(char) * size_str + 1);
 	if (!ret)
 		return (NULL);
@@ -131,46 +131,35 @@ char	*ft_find_key(char *str, int start_index, int last_index)
 	return (ret);
 }
 
+int	ft_check_last(char *str, int *last_index)
+{
+	if (str[*last_index] == 39 || str[(*last_index)] == '$'
+		|| str[*last_index] == ' ' || !str[(*last_index)])
+	{
+		(*last_index)--;
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_print_env_quote(char *str, int *last_index)
 {
 	int		start_index;
 	char	*find_key;
 
 	start_index = ++(*last_index);
-	while (str[*last_index])
+	while (42)
 	{
-		/*
-		 *
-		 *결국 해야하는것!
-		 echo "'$USERw$wwdwq" --?  '
-		 $가 끝나는곳은 뒤에 더이상없거나, ' 또는 ' '  또는 $
-		 그렇게 끝나면, ft_find_key로, 출력을한다.
-		 그 출력한 key로 env를 검색한다/
-		 */
-		if (str[*last_index] == 39 || str[*last_index] == '$'
-			|| str[*last_index] == ' ' || !str[(*last_index) + 1])
-
+		if (ft_check_last(str, last_index))
 		{
-			find_key = ft_find_key(str, start_index, *last_index);
-			//////////////////////
-			ft_putstr(" find key == ");
-			ft_putstr(find_key);
-			ft_putstr("\n");
-			///////////////////////
+			find_key = ft_find_key(str, start_index, last_index);
 			if (!ft_getenv(g_info.envp, find_key))
 			{
 				free(find_key);
-				(*last_index)--;
 				return ;
 			}
 			ft_putstr(ft_getenv(g_info.envp, find_key));
 			free(find_key);
-			if (str[*last_index] == 39)
-				ft_putchar(str[(*last_index)]);
-			else if (str[*last_index] == '$')
-				(*last_index)--;
-			else if (str[*last_index] == ' ')
-				ft_putchar(' ');
 			return ;
 		}
 		(*last_index)++;
@@ -196,7 +185,6 @@ void	ft_type2_sans_espace(t_node **cmd)
 {
 	char	**split_str;
 
-	// 만약에 '가 있다면, '는 그대로 출력, 그리고 나머지는.. 출력 밑 경로출력
 	if (ft_check_quote((*cmd)->str))
 		ft_type2_with_quote((*cmd)->str);
 	else
