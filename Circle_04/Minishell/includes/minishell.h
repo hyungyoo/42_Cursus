@@ -34,6 +34,7 @@
 # define ARG		12
 # define FILE		13
 # define LIMITER	14
+# define BLANK		15
 
 # define TRUE 1
 # define FALSE 0
@@ -71,7 +72,6 @@ typedef	struct s_info {
 	int		count_pipe;
 	int		exit_code;
 	char			*last_env_str;
-
 	int	flag_read;
 } t_info;
 
@@ -103,6 +103,8 @@ int		operation_word(t_cmd **cmd, char *line, int *index);
 void	argument_word(t_cmd **cmd, char *line, int *index);
 int		parsing_quotes(char *line, int *index, t_cmd **cmd);
 int		is_quotes_pair(char *line, int *index, char pair);
+int		is_operation_word(t_node *node);
+void	parsing_the_rest(t_cmd **cmd, t_node *node);
 
 void	set_detail_type(t_cmd **cmd);
 int		is_builtin(char *str);

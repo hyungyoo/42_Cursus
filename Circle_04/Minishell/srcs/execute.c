@@ -41,9 +41,14 @@ void	ft_exec(t_node *node)
 		execute_cmds(node);
 		if (node->next && node->type != PIPE)
 				node = node->next;
-		node = node->next;
+		////////////// protection ///////////////
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+		////////////// protection ///////////////
 		if (node)
-		i++;
+		i++;  ///이것은 무엇인가요??///
 	}
 	// if (g_info.fork_flag)
 	// {

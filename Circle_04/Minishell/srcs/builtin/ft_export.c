@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/23 18:12:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/25 15:34:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,116 @@ void	ft_update_env(t_envp *envp, char *str, char *key)
 	}
 }
 
+int	ft_size_node(t_envp *envp)
+{
+	int		ret;
+	t_envp	*tmp;
+
+	ret = 0;
+	if (!envp)
+		return (-1);
+	tmp = envp->prev;
+	while (envp != tmp)
+	{
+		ret++;
+		envp = envp->next;
+	}
+	return (ret + 1);
+}
+
+char	**ft_array_double_env(void)
+{
+	t_envp	*envp;
+	char	**array_env;
+	int		i;
+
+	i = 0;
+	envp = NULL;
+	envp = g_info.envp;
+	if (!envp)
+		return (NULL);
+	array_env = (char **)malloc(sizeof(char *) * (ft_size_node(envp) + 2));
+	if (!array_env)
+		return (NULL);
+	while (i < ft_size_node(envp))
+	{
+		array_env[i] = ft_strdup(envp->envp_str);
+		if (envp->next)
+		{
+			envp = envp->next;
+			i++;
+		}
+	}
+	array_env[i++] = ft_strdup(g_info.last_env_str);
+	array_env[i] = NULL;
+	return (array_env);
+}
+
+int	ft_tab_size(char **str)
+{
+	int	ret;
+
+	ret = 0;
+	while (str[ret])
+		ret++;
+	return (ret);
+}
+
+void	ft_sort_env(char **env_sort)
+{
+	int		i;
+	int		j;
+	int		size_array;
+	char	*tmp;
+
+	tmp = NULL;
+	i = 0;
+	size_array = ft_tab_size(env_sort);
+	while (i < size_array - 1)
+	{
+		j = i + 1;
+		while (j < size_array)
+		{
+			if (ft_strcmp(env_sort[i], env_sort[j]) > 0)
+			{
+				tmp = env_sort[i];
+				env_sort[i] = env_sort[j];
+				env_sort[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	ft_export_env(void)
+{
+	char	**env_sort;
+	int		i;
+
+	i = 0;
+	env_sort = ft_array_double_env();
+	ft_sort_env(env_sort);
+	while (env_sort[i])
+	{
+		ft_putstr("declare -x ");
+		ft_putstr(env_sort[i]);
+		ft_putstr("\n");
+		i++;
+	}
+	free_tab2(env_sort);
+}
+
 void	ft_export(t_node **cmd)
 {
 	char	*key_tmp;
 
-	if (!cmd || !(*cmd))
+	if (!cmd || !(*cmd) || !(*cmd)->next)
+	{
+		if (!(*cmd)->next)
+			ft_export_env();
 		return ;
-	if (!(*cmd)->next)
-		return ;
+	}
 	(*cmd) = (*cmd)->next;
 	while (*cmd && (*cmd)->type == 12)
 	{
