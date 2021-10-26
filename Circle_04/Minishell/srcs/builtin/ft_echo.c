@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/24 16:51:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/25 15:42:13 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_check_option(char *str)
 	return (1);
 }
 
-void	ft_echo_type_3(t_node **cmd)
+void	ft_echo_type_dolr(t_node **cmd)
 {
 	if ((*cmd)->next)
 		(*cmd) = (*cmd)->next;
@@ -83,7 +83,7 @@ void	ft_echo_type_2_sans_espace(char **key, char *str)
 		if (i == 0 && str[0] != '$')
 			ft_putstr(key[i]);
 		else if (!ft_strcmp(key[i], "?"))
-				ft_putnbr_fd(g_info.exit_code, 1);
+			ft_putnbr_fd(g_info.exit_code, 1);
 		else
 		{
 			if (ft_getenv(g_info.envp, key[i]))
@@ -207,7 +207,7 @@ void	ft_print_echo(t_node **cmd)
 	while (*cmd && ft_check_type((*cmd)->type))
 	{
 		if ((*cmd)->type == DOLR)
-			ft_echo_type_3(cmd);
+			ft_echo_type_dolr(cmd);
 		else if ((*cmd)->type == DOUQ)
 		{
 			if (ft_check_sans_espace((*cmd)->str) >= 1)

@@ -1,6 +1,9 @@
 # To do list keulee (update date: 24.10.2021)
 > 1. no such file or directory, command not found, permission denied 등 여러 에러 상황에 따른 코드 추가 작성 및 수정   
 
+# Code log (update date: 25.10.2021)
+> 1. execute_cmd.c : 원래 상태로 되돌림. 지저분하고 잘못된 재파싱으로 (ㅠㅠ) 손댈 수 없는 leaks와 여러가지 상황들이 생겨 이틀동안 다른 방법으로 시도해보았지만 계속 똑같은 상황으로 돌아가는 데에 한계를 느낌 ㅠㅠ 위가 아파 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 도와죠
+
 # Code log (update date: 24.10.2021)
 > 1. execute_cmd.c : flag_nospace 있을 때와 없을 때 나눠서 path, argv 획득하는 식으로 파싱을 하나 더 추가함.  
 > execve함수를 사용해 주기 위해서 execve에 들어갈 인자를 재 구성해야하다보니 flag_nospace가 있을 때 노드 파싱을 새로 하는 게 더 나아보였음.

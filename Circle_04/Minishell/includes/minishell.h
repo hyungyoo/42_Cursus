@@ -114,7 +114,7 @@ void	ft_exec(t_node *cmd);
 
 int		ft_execmd(t_node *node);
 char	**get_arg(t_node *node);
-char	*get_path(t_node *node);
+char	*get_path(char *str);
 
 /* built_in */
 void	ft_built_in(t_node **cmd);

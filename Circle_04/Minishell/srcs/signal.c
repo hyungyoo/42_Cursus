@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:57:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/23 17:48:03 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/26 19:29:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	hanlder_child_pid(int signum)
 		g_info.exit_code = 131;
 		ft_putstr("Quit: 3\n");
 	}
+	g_info.pid_child = 0;
 }
 
 void	handler(int signum)
