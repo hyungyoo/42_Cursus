@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/27 10:52:30 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/27 11:15:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 void	ft_error_message_cd(char *new_path)
 {
-	ft_putstr("minishell: cd: ");
-	ft_putstr(new_path);
-	perror(" \b");
+	if (new_path)
+	{
+		ft_putstr("minishell: cd: ");
+		ft_putstr(new_path);
+		perror(" \b");
+	}
+	else
+	{
+		ft_putstr("minishell: cd");
+		perror(" ");
+	}
 	g_info.exit_code = 1;
 }
 

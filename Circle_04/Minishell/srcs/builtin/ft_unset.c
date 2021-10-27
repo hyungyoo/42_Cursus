@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/22 17:42:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:37:07 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ void	ft_unset(t_node **cmd)
 		g_info.exit_code = 1;
 		return ;
 	}
+	if (!ft_strcmp((*cmd)->next->str, "PWD"))
+		return ;
 	ft_unset_exec(cmd);
 }

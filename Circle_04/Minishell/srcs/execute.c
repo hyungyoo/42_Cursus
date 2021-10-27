@@ -30,6 +30,8 @@ void	ft_exec(t_node *node)
 {
 	int	i = 1;
 
+	// if (!node)
+	// 	return ;
 	init_befor_exec(node);
 	while (node)
 	{

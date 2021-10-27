@@ -87,7 +87,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 
 	ret = NULL;
 	if (!s1)
-		ret = (s2);
+		ret = ft_strdup((s2));
 	else
 	{
 		size_str = ft_strlen(s1) + ft_strlen(s2);
@@ -121,7 +121,7 @@ char	*ft_arg(t_node **node)
 			(*node) = (*node)->next;
 	}
 	if ((*node))
-		ret = ft_strjoin(ret, (*node)->str);
+		ret = ft_strjoin_free(ret, (*node)->str);
 	return (ret);
 }
 
@@ -154,32 +154,42 @@ char	**get_arg(t_node *node)
 
 int	ft_execmd(t_node *node)
 {
-	char	*path;
-	char	**argv;
 	int		status;
+	
 
-	argv = get_arg(node);
-	path = get_path(argv[0]);
+	// argv = get_arg(node);
+	// path = get_path(argv[0]);
 	g_info.pid_child = fork();
 	if (g_info.pid_child < 0)
 		return (-1);
 	else if (g_info.pid_child == 0)
 	{
-		if (execve(path, argv, g_info.env) == -1)
+		char	*path;
+		char	**argv;
+		char	**env;
+
+		env = ft_array_double_env();
+		argv = get_arg(node);
+		path = get_path(argv[0]);
+		if (execve(path, argv, env) == -1)
 		{
 			printf("Minishell: %s: command not found\n", argv[0]);
 			free(path);
 			free_tab2(argv);
+			free_tab2(env);
 			g_info.exit_code = 1;
 			exit(1);
 		}
+		free(path);
+		free_tab2(argv);
+		free_tab2(env);
 	}
 	else
 	{
 		waitpid(g_info.pid_child, &status, 0);
 		g_info.pid_child = 0;
 	}
-	free(path);
-	free_tab2(argv);
+	// free(path);
+	// free_tab2(argv);
 	return (EXIT_SUCCESS);
 }

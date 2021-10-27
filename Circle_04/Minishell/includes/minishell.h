@@ -146,5 +146,6 @@ char	*ft_ajouter_value(char *str);
 char	*ft_getenv(t_envp *envp, char *key);
 void	ft_free_env(t_envp *envp);
 void	ft_update_env(t_envp *envp, char *str, char *key);
+char	**ft_array_double_env(void);
 
 #endif
