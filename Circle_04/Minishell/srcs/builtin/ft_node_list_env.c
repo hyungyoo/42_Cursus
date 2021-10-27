@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/27 17:06:03 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/27 22:22:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_envp	*ft_new_node_env(char *env)
 {
 	t_envp	*envp;
 
-	envp =NULL;
+	envp = NULL;
 	envp = (t_envp *)malloc(sizeof(t_envp));
 	if (!envp)
 		return (NULL);

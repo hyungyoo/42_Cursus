@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/27 11:15:45 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/27 22:48:16 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_new_path(char **path, char *new_path)
 	return (1);
 }
 
-static int ft_is_slash(char *str)
+static int	ft_is_slash(char *str)
 {
 	int	i;
 
@@ -73,22 +73,22 @@ char	**ft_split_cd(char *new_path)
 	return (ret);
 }
 
-int	ft_exec_dir(char **path, char *new_path)
+int	ft_check_error(char **path, char *new_path)
 {
-	char	**split_new_path;
-	int		i;
-	char	*path_tmp;
-
-	split_new_path = NULL;
-	path_tmp = NULL;
 	if (!new_path)
 		return (0);
 	if (new_path[0] == '/')
 		return (ft_new_path(path, new_path));
 	if (!path || !*path)
 		return (0);
-	split_new_path = ft_split_cd(new_path);
-	path_tmp = ft_strdup(*path);
+	return (1);
+}
+
+int	ft_exec_chdir(char **path, char *new_path, char *path_tmp,
+		char **split_new_path)
+{
+	int	i;
+
 	i = -1;
 	while (split_new_path[++i])
 	{
@@ -102,6 +102,22 @@ int	ft_exec_dir(char **path, char *new_path)
 			return (0);
 		}
 	}
+	return (1);
+}
+
+int	ft_exec_dir(char **path, char *new_path)
+{
+	char	**split_new_path;
+	char	*path_tmp;
+
+	split_new_path = NULL;
+	path_tmp = NULL;
+	if (!(ft_check_error(path, new_path)))
+		return (0);
+	split_new_path = ft_split_cd(new_path);
+	path_tmp = ft_strdup(*path);
+	if (!(ft_exec_chdir(path, new_path, path_tmp, split_new_path)))
+		return (0);
 	free(path_tmp);
 	free_tab2(split_new_path);
 	return (1);

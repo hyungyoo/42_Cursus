@@ -13,7 +13,9 @@ char	*get_path(char *str)
 	if (!ft_strncmp(str, "/", 1))
 	{
 		if (access(str, F_OK | X_OK) == 0)
-			return (str);
+			return (ft_strdup(str));
+		else
+			return (ft_strdup(str));
 	}
 	split_path = ft_split(ft_getenv(g_info.envp, "PATH"), ':');
 	if (!split_path)
@@ -32,7 +34,7 @@ char	*get_path(char *str)
 		i++;
 	}
 	free_tab2(split_path);
-	return (NULL);
+	return (ft_strdup(str));
 }
 
 int	count_arg(t_node *node)
@@ -152,44 +154,52 @@ char	**get_arg(t_node *node)
 	return (path_arg);
 }
 
+void	ft_error_message(char *path, char **argv, char **env)
+{
+	ft_putstr("Minishell: ");
+	ft_putstr(path);
+	ft_putstr(": command not found\n");
+	free(path);
+	free_tab2(argv);
+	free_tab2(env);
+	g_info.exit_code = 1;
+	exit(1);
+}
+
+void	ft_execmd_child(t_node *node)
+{
+	char	*path;
+	char	**argv;
+	char	**env;
+	int		flag_access;
+	
+	env = ft_array_double_env();
+	argv = get_arg(node);
+	path = get_path(argv[0]);
+	flag_access = access(path, F_OK | X_OK);
+	if (flag_access == -1)
+		ft_error_message(path, argv, env);
+	else if (flag_access == 0)
+		execve(path, argv, env);
+	free(path);
+	free_tab2(argv);
+	free_tab2(env);
+}
+
 int	ft_execmd(t_node *node)
 {
 	int		status;
 	
 
-	// argv = get_arg(node);
-	// path = get_path(argv[0]);
 	g_info.pid_child = fork();
 	if (g_info.pid_child < 0)
 		return (-1);
 	else if (g_info.pid_child == 0)
-	{
-		char	*path;
-		char	**argv;
-		char	**env;
-
-		env = ft_array_double_env();
-		argv = get_arg(node);
-		path = get_path(argv[0]);
-		if (execve(path, argv, env) == -1)
-		{
-			printf("Minishell: %s: command not found\n", argv[0]);
-			free(path);
-			free_tab2(argv);
-			free_tab2(env);
-			g_info.exit_code = 1;
-			exit(1);
-		}
-		free(path);
-		free_tab2(argv);
-		free_tab2(env);
-	}
+		ft_execmd_child(node);
 	else
 	{
 		waitpid(g_info.pid_child, &status, 0);
 		g_info.pid_child = 0;
 	}
-	// free(path);
-	// free_tab2(argv);
 	return (EXIT_SUCCESS);
 }
