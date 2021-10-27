@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/26 16:56:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:52:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	ft_exec_dir(char **path, char *new_path)
 		return (0);
 	if (new_path[0] == '/')
 		return (ft_new_path(path, new_path));
+	if (!path || !*path)
+		return (0);
 	split_new_path = ft_split_cd(new_path);
 	path_tmp = ft_strdup(*path);
 	i = -1;
@@ -103,7 +105,10 @@ void	ft_exec_home(void)
 	char	*path;
 
 	path_env = NULL;
-	path = ft_strdup(ft_getenv(g_info.envp, "HOME"));
+	if (ft_getenv(g_info.envp, "HOME"))
+		path = ft_strdup(ft_getenv(g_info.envp, "HOME"));
+	else
+		path = NULL;
 	if (chdir(path) == -1)
 	{
 		ft_error_message_cd(path);
@@ -124,7 +129,10 @@ void	ft_exec_path(char *new_path)
 	char	*path_env;
 
 	path_env = NULL;
-	path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
+	if (ft_getenv(g_info.envp, "PWD"))
+		path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
+	else
+		path = NULL;
 	if (ft_exec_dir(&path, new_path))
 	{
 		path_env = ft_strjoin("PWD=", path);

@@ -87,7 +87,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 
 	ret = NULL;
 	if (!s1)
-		ret = ft_strdup(s2);
+		ret = (s2);
 	else
 	{
 		size_str = ft_strlen(s1) + ft_strlen(s2);

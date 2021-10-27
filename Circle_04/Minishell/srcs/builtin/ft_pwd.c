@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:45:04 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/23 01:01:57 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:50:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	ft_pwd(t_node **cmd)
 {
 	(void)cmd;
-	ft_putstr(ft_getenv(g_info.envp, "PWD"));
+	if (ft_getenv(g_info.envp, "PWD"))
+		ft_putstr(ft_getenv(g_info.envp, "PWD"));
 	ft_putstr("\n");
 	g_info.exit_code = 0;
 }

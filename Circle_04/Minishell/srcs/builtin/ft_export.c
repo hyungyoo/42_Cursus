@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/25 15:34:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:56:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,39 @@ char	*ft_ajouter_value(char *str)
 	int		size_value;
 	char	*ret;
 
+	if (!str)
+		return (NULL);
+	ret = NULL;
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
 	size_value = ft_strlen(str) - i;
-	ret = (char *)malloc(sizeof(char) * size_value);
-	ft_strlcpy(ret, str + i + 1, size_value);
+	ret = (char *)malloc(sizeof(char) * size_value + 1);
+	ft_strlcpy(ret, str + i + 1, size_value + 1);
 	return (ret);
 }
 
 void	ft_update_env(t_envp *envp, char *str, char *key)
 {
-	while (envp)
+	if (ft_getenv(g_info.envp, key))
 	{
-		if (!ft_strcmp((envp)->envp_key, key))
+		while (envp)
 		{
-			free((envp)->envp_value);
-			(envp)->envp_value = ft_ajouter_value(str);
-			free((envp)->envp_str);
-			(envp)->envp_str = ft_strdup(str);
-			return ;
+			if (!ft_strcmp((envp)->envp_key, key))
+			{
+				free((envp)->envp_value);
+				envp->envp_value = NULL;
+				(envp)->envp_value = ft_ajouter_value(str);
+				free((envp)->envp_str);
+				envp->envp_str = NULL;
+				(envp)->envp_str = ft_strdup(str);
+				return ;
+			}
+			envp = (envp)->next;
 		}
-		envp = (envp)->next;
 	}
+	else
+		ft_ajouter_node(&envp, ft_new_node_env(str));
 }
 
 int	ft_size_node(t_envp *envp)
@@ -85,7 +95,7 @@ char	**ft_array_double_env(void)
 	envp = g_info.envp;
 	if (!envp)
 		return (NULL);
-	array_env = (char **)malloc(sizeof(char *) * (ft_size_node(envp) + 2));
+	array_env = (char **)malloc(sizeof(char *) * (ft_size_node(envp) + 1));
 	if (!array_env)
 		return (NULL);
 	while (i < ft_size_node(envp))
@@ -97,7 +107,6 @@ char	**ft_array_double_env(void)
 			i++;
 		}
 	}
-	array_env[i++] = ft_strdup(g_info.last_env_str);
 	array_env[i] = NULL;
 	return (array_env);
 }

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/25 15:42:13 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:21:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,12 +185,15 @@ void	ft_type2_sans_espace(t_node **cmd)
 {
 	char	**split_str;
 
+	split_str = NULL;
 	if (ft_check_quote((*cmd)->str))
 		ft_type2_with_quote((*cmd)->str);
 	else
 	{
 		split_str = ft_split((*cmd)->str, '$');
 		ft_echo_type_2_sans_espace(split_str, (*cmd)->str);
+		free_tab2(split_str);
+		split_str = NULL;
 	}
 }
 
