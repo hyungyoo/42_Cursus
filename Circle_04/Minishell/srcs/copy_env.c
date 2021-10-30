@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:04:24 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/23 19:01:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/28 01:08:13 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ void	copy_env(char **env)
 	envp = NULL;
 	ft_node_list_env(&envp, env);
 	g_info.envp = envp;
-	g_info.env = env;
 }
 
 void	ft_initial_g(void)
 {
 	g_info.envp = NULL;
 	g_info.pid_child = 0;
+	g_info.flag_pwd = 0;
 	g_info.last_env_str = NULL;
-	g_info.env = NULL;
 }
 
 void	ft_initial(char **env, int ac, char **av)

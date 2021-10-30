@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/22 17:42:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/28 02:52:59 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ void	ft_free_one_node(t_envp *envp, char *arg)
 void	ft_unset_exec(t_node **cmd)
 {
 	(*cmd) = (*cmd)->next;
-	while ((*cmd) && (*cmd)->type == 12)
+	while ((*cmd) && (*cmd)->type != PIPE)
 	{
-		if (ft_chercher_key(g_info.envp, (*cmd)->str))
+		if ((*cmd)->type == DOLR && (*cmd)->flag_nospace == 1)
+			(*cmd) = (*cmd)->next;
+		else if (ft_chercher_key(g_info.envp, (*cmd)->str))
 			ft_free_one_node(g_info.envp, (*cmd)->str);
 		g_info.exit_code = 0;
 		if ((*cmd)->next)
@@ -73,11 +75,15 @@ void	ft_unset(t_node **cmd)
 		g_info.exit_code = 1;
 		return ;
 	}
-	if ((*cmd)->next->type != 12)
+	if ((*cmd)->next->type == PIPE)
 	{
 		ft_putstr("unset : not enough arguments\n");
 		g_info.exit_code = 1;
 		return ;
 	}
-	ft_unset_exec(cmd);
+	if (!ft_strcmp((*cmd)->next->str, "PWD"))
+		g_info.flag_pwd = 1;
+	else
+		ft_unset_exec(cmd);
+	g_info.exit_code = 0;
 }

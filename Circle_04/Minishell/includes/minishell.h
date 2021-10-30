@@ -64,15 +64,11 @@ typedef struct s_envp
 }				t_envp;
 
 typedef	struct s_info {
-	int		blank;
 	struct s_envp 	*envp;
-	char	**env;
-	int		fork_flag;
-	pid_t	pid_child;
-	int		count_pipe;
-	int		exit_code;
+	pid_t			pid_child;
+	int				exit_code;
+	int				flag_pwd;
 	char			*last_env_str;
-	int	flag_read;
 } t_info;
 
 /* one global variable */
@@ -144,7 +140,9 @@ int		ft_size_key(char *str);
 int		ft_check_egal(char *str);
 char	*ft_ajouter_value(char *str);
 char	*ft_getenv(t_envp *envp, char *key);
+char	*ft_getenv_echo(t_envp *envp, char *key);
 void	ft_free_env(t_envp *envp);
 void	ft_update_env(t_envp *envp, char *str, char *key);
+char	**ft_array_double_env(void);
 
 #endif

@@ -1,75 +1,93 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 18:20:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/05/17 18:20:40 by keulee           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 
-size_t	ft_strnum(char *s, char c)
+int		ft_nbr_words(char *str, char c)
 {
-	size_t	i;
-	size_t	num;
+	int nbr;
+	int i;
 
-	num = 0;
+	nbr = 0;
 	i = 0;
-	while (s[i])
+	while (str[i] != '\0')
 	{
-		if (s[i] != c)
-		{
-			while (s[i] != c && s[i])
-				i++;
-			num++;
-		}
-		else
+		while (str[i] == c)
 			i++;
-	}
-	return (num);
-}
-
-void	str_malloc_copy(char *s, char c, size_t num, char **res)
-{
-	size_t	x;
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	x = 0;
-	while (s[i] && x < num)
-	{
-		len = 0;
-		if (s[i] != c)
+		if (str[i] != c && str[i] != '\0' &&\
+			(str[i + 1] == c || str[i + 1] == '\0'))
 		{
-			while (s[i + len] != c && s[i + len])
-				len++;
-			res[x] = ft_calloc(sizeof(char), len + 1);
-			if (res[x] == 0)
-				return ;
-			ft_strlcpy(res[x], s + i, len + 1);
-			x++;
+			i++;
+			nbr++;
 		}
-		i += 1 + len;
+		if (str[i] == '\0')
+			return (nbr);
+		i++;
 	}
+	return (nbr);
 }
 
-char	**ft_split(char const *s, char c)
+static int		ft_word_size(char *str, int k, char c)
 {
-	size_t	num;
-	char	**res;
+	int	word_size;
 
-	if (s == 0)
-		return (0);
-	num = ft_strnum((char *)s, c);
-	res = ft_calloc(sizeof(char *), num + 1);
-	if (res == 0)
-		return (0);
-	res[num] = 0;
-	str_malloc_copy((char *)s, c, num, res);
-	return (res);
+	word_size = 0;
+	while (str[k] != c && str[k] != '\0')
+	{
+		word_size++;
+		k++;
+	}
+	return (word_size);
+}
+
+static void		free_tab(char **t)
+{
+	int idx;
+
+	idx = 0;
+	while (t[idx])
+	{
+		free(t[idx]);
+		idx++;
+	}
+	free(t);
+}
+
+static char		**spl_f(char **new_str, char *str, char c, int i)
+{
+	int j;
+	int k;
+
+	k = 0;
+	while (str[k])
+	{
+		while (str[k] == c && str[k])
+			k++;
+		if (str[k])
+		{
+			j = 0;
+			if (!(new_str[i] = malloc(sizeof(char) *\
+					(ft_word_size(str, k, c) + 1))))
+			{
+				free_tab(new_str);
+				free(new_str);
+				return (NULL);
+			}
+			while (str[k] != c && str[k])
+				new_str[i][j++] = str[k++];
+			new_str[i++][j] = '\0';
+		}
+	}
+	new_str[i] = 0;
+	return (new_str);
+}
+
+char			**ft_split(char const *s, char c)
+{
+	char	**new_str;
+	char	*str;
+
+	if (!((str = (char*)s)) ||\
+			!(new_str = malloc((ft_nbr_words(str, c) + 1) * sizeof(char*))))
+		return (NULL);
+	if (!(new_str = spl_f(new_str, str, c, 0)))
+		return (NULL);
+	return (new_str);
 }

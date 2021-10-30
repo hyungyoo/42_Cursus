@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/26 16:56:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/28 01:18:07 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 void	ft_error_message_cd(char *new_path)
 {
-	ft_putstr("minishell: cd: ");
-	ft_putstr(new_path);
-	perror(" \b");
+	if (new_path)
+	{
+		ft_putstr("minishell: cd: ");
+		ft_putstr(new_path);
+		perror(" \b");
+	}
+	else
+	{
+		ft_putstr("minishell: cd");
+		perror(" ");
+	}
 	g_info.exit_code = 1;
 }
 
@@ -32,7 +40,7 @@ int	ft_new_path(char **path, char *new_path)
 	return (1);
 }
 
-static int ft_is_slash(char *str)
+static int	ft_is_slash(char *str)
 {
 	int	i;
 
@@ -65,20 +73,22 @@ char	**ft_split_cd(char *new_path)
 	return (ret);
 }
 
-int	ft_exec_dir(char **path, char *new_path)
+int	ft_check_error(char **path, char *new_path)
 {
-	char	**split_new_path;
-	int		i;
-	char	*path_tmp;
-
-	split_new_path = NULL;
-	path_tmp = NULL;
 	if (!new_path)
 		return (0);
 	if (new_path[0] == '/')
 		return (ft_new_path(path, new_path));
-	split_new_path = ft_split_cd(new_path);
-	path_tmp = ft_strdup(*path);
+	if (!path || !*path)
+		return (0);
+	return (1);
+}
+
+int	ft_exec_chdir(char **path, char *new_path, char *path_tmp,
+		char **split_new_path)
+{
+	int	i;
+
 	i = -1;
 	while (split_new_path[++i])
 	{
@@ -92,6 +102,22 @@ int	ft_exec_dir(char **path, char *new_path)
 			return (0);
 		}
 	}
+	return (1);
+}
+
+int	ft_exec_dir(char **path, char *new_path)
+{
+	char	**split_new_path;
+	char	*path_tmp;
+
+	split_new_path = NULL;
+	path_tmp = NULL;
+	if (!(ft_check_error(path, new_path)))
+		return (0);
+	split_new_path = ft_split_cd(new_path);
+	path_tmp = ft_strdup(*path);
+	if (!(ft_exec_chdir(path, new_path, path_tmp, split_new_path)))
+		return (0);
 	free(path_tmp);
 	free_tab2(split_new_path);
 	return (1);
@@ -103,7 +129,10 @@ void	ft_exec_home(void)
 	char	*path;
 
 	path_env = NULL;
-	path = ft_strdup(ft_getenv(g_info.envp, "HOME"));
+	if (ft_getenv(g_info.envp, "HOME"))
+		path = ft_strdup(ft_getenv(g_info.envp, "HOME"));
+	else
+		path = NULL;
 	if (chdir(path) == -1)
 	{
 		ft_error_message_cd(path);
@@ -114,6 +143,7 @@ void	ft_exec_home(void)
 		ft_update_env(g_info.envp, path_env, "PWD");
 		free(path_env);
 		g_info.exit_code = 0;
+		g_info.flag_pwd = 0;
 	}
 	free(path);
 }
@@ -124,13 +154,17 @@ void	ft_exec_path(char *new_path)
 	char	*path_env;
 
 	path_env = NULL;
-	path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
+	if (ft_getenv(g_info.envp, "PWD"))
+		path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
+	else
+		path = NULL;
 	if (ft_exec_dir(&path, new_path))
 	{
 		path_env = ft_strjoin("PWD=", path);
 		ft_update_env(g_info.envp, path_env, "PWD");
 		free(path_env);
 		g_info.exit_code = 0;
+		g_info.flag_pwd = 0;
 	}
 	free(path);
 }
@@ -148,6 +182,8 @@ void	ft_cd(t_node **cmd)
 			ft_exec_home();
 		else
 			ft_exec_path(new_path);
+		free(new_path);
 	}
-	free(new_path);
+	else
+		ft_exec_home();
 }

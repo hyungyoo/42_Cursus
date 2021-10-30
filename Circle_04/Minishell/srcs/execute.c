@@ -8,55 +8,98 @@ void	execute_cmds(t_node *node)
 		ft_execmd(node);
 }
 
-void	init_befor_exec(t_node *node)
+int	count_pipe(t_node *node)
 {
-	t_node *tmp;
+	int		count_pipe;
+	t_node	*tmp;
 
-	tmp = node;
-	g_info.fork_flag = 0;
-	g_info.count_pipe = 0;
-	while (tmp)
+	count_pipe = 0;
+	tmp = node->prev;
+	while (node && node != tmp)
 	{
-		if (tmp->type == PIPE)
-			g_info.count_pipe++;
-		if (tmp->next)
-			tmp = tmp->next;
-		else
-			break;
+		if (node->type == PIPE)
+			count_pipe++;
+		node = node->next;
 	}
+	return (count_pipe);
+}
+
+int	count_cmd(t_node *node)
+{
+	int		count_cmd;
+	t_node	*tmp;
+
+	count_cmd = 0;
+	tmp = node->prev;
+	while (node && node != tmp)
+	{
+		if (node->type == BUILTIN_CMD || node->type == CMD)
+			count_cmd++;
+		node = node->next;
+	}
+	return (count_cmd);
+}
+
+void	ft_error_message_exec(void)
+{
+	ft_putstr("minishell: syntax error near unexpected |\n");
+}
+
+void	ft_exec_multi_pipe(t_node *node)
+{
+	printf("for multi pipe\n");
+	(void)node;
+}
+
+void	ft_exec_one_pipe(t_node *node)
+{
+	// ft_check_path_exec(node);
+	// ft_execmd_child(node);
+	
+	// ft_built_in(node);
+	// all_free_function;
+	// exit(0);
+	printf("for one pipe\n");
+	(void)node;
 }
 
 void	ft_exec(t_node *node)
 {
-	int	i = 1;
+	if (!node)
+		return ;
+	printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
+	if (count_pipe(node) && (count_cmd(node) <= (count_pipe(node))))
+		ft_error_message_exec();
+	else if (count_pipe(node) == 0)
+		execute_cmds(node);
+	else if (count_pipe(node) == 1)
+		ft_exec_one_pipe(node);	// fork deux exec
+	else if (count_pipe(node) > 1)
+		ft_exec_multi_pipe(node);	// fork all
+}
 
-	init_befor_exec(node);
+/*
+int	init_befor_exec(t_node *node)
+{
+	pipe count;
+}
+
+void	ft_exec(t_node *node)
+{
+	if (!node)
+	 	return ;
+	//init_befor_exec(node);
 	while (node)
 	{
-
-		//set_pipe
-		// redirect_in
-		//  redirect_out
-		//	pipe_flag == 1;
 		execute_cmds(node);
 		if (node->next && node->type != PIPE)
 				node = node->next;
-		////////////// protection ///////////////
 		if (node->next)
 			node = node->next;
 		else
 			break ;
-		////////////// protection ///////////////
-		if (node)
-		i++;  ///이것은 무엇인가요??///
 	}
-	// if (g_info.fork_flag)
-	// {
-	// 	while (waitpid(-1, &status, 0) > 0)
-	// 	{
-	// 		printf("waiting\n");
-	// 		if(WIFEXITED(status) == 0)
-	// 			g_info.exit_code = WEXITSTATUS(status);
-	// 	}
-	// }
 }
+*/
+
+

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/25 15:42:13 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/28 01:41:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_echo_type_dolr(t_node **cmd)
 			ft_putnbr_fd(g_info.exit_code, 1);
 		else
 		{
-			if (ft_getenv(g_info.envp, (*cmd)->str))
+			if (ft_getenv_echo(g_info.envp, (*cmd)->str))
 				ft_putstr(ft_getenv(g_info.envp, (*cmd)->str));
 		}
 	}
@@ -49,7 +49,7 @@ void	ft_echo_type_2(t_node **cmd)
 			ft_putnbr_fd(g_info.exit_code, 1);
 		else
 		{
-			if (ft_getenv(g_info.envp, (*cmd)->str + 1))
+			if (ft_getenv_echo(g_info.envp, (*cmd)->str + 1))
 				ft_putstr(ft_getenv(g_info.envp, (*cmd)->str + 1));
 		}
 	}
@@ -86,8 +86,8 @@ void	ft_echo_type_2_sans_espace(char **key, char *str)
 			ft_putnbr_fd(g_info.exit_code, 1);
 		else
 		{
-			if (ft_getenv(g_info.envp, key[i]))
-				ft_putstr(ft_getenv(g_info.envp, key[i]));
+			if (ft_getenv_echo(g_info.envp, key[i]))
+				ft_putstr(ft_getenv_echo(g_info.envp, key[i]));
 		}
 		i++;
 	}
@@ -153,12 +153,12 @@ void	ft_print_env_quote(char *str, int *last_index)
 		if (ft_check_last(str, last_index))
 		{
 			find_key = ft_find_key(str, start_index, last_index);
-			if (!ft_getenv(g_info.envp, find_key))
+			if (!ft_getenv_echo(g_info.envp, find_key))
 			{
 				free(find_key);
 				return ;
 			}
-			ft_putstr(ft_getenv(g_info.envp, find_key));
+			ft_putstr(ft_getenv_echo(g_info.envp, find_key));
 			free(find_key);
 			return ;
 		}
@@ -185,12 +185,15 @@ void	ft_type2_sans_espace(t_node **cmd)
 {
 	char	**split_str;
 
+	split_str = NULL;
 	if (ft_check_quote((*cmd)->str))
 		ft_type2_with_quote((*cmd)->str);
 	else
 	{
 		split_str = ft_split((*cmd)->str, '$');
 		ft_echo_type_2_sans_espace(split_str, (*cmd)->str);
+		free_tab2(split_str);
+		split_str = NULL;
 	}
 }
 

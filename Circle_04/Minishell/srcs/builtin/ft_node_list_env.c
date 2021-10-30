@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/20 18:48:00 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/28 01:39:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@ char	*ft_getenv(t_envp *envp, char *key)
 {
 	t_envp	*tmp;
 
+	tmp = NULL;
+	tmp = envp->prev;
+	while (tmp != envp)
+	{
+		if (!ft_strcmp(envp->envp_key, key))
+			return (envp->envp_value);
+		envp = envp->next;
+	}
+	if (!ft_strcmp(envp->envp_key, key))
+		return (envp->envp_value);
+	return (NULL);
+}
+
+char	*ft_getenv_echo(t_envp *envp, char *key)
+{
+	t_envp	*tmp;
+
+	if (!ft_strcmp(key, "PWD") && g_info.flag_pwd == 1)
+		return (NULL);
+	tmp = NULL;
 	tmp = envp->prev;
 	while (tmp != envp)
 	{
@@ -47,6 +67,7 @@ char	*ft_key(char *env)
 	char	*key;
 	int		size_key;
 
+	key = NULL;
 	size_key = ft_size_key(env);
 	key = (char *)malloc(sizeof(char) * size_key + 1);
 	ft_strlcpy(key, env, size_key + 1);
@@ -57,6 +78,7 @@ char	*ft_value(char *str)
 {
 	char	*value;
 
+	value = NULL;
 	value = ft_ajouter_value(str);
 	return (value);
 }
@@ -65,6 +87,7 @@ t_envp	*ft_new_node_env(char *env)
 {
 	t_envp	*envp;
 
+	envp = NULL;
 	envp = (t_envp *)malloc(sizeof(t_envp));
 	if (!envp)
 		return (NULL);
@@ -125,12 +148,18 @@ void	ft_print_env(t_envp *envp)
 	tmp = envp->prev;
 	while (envp != tmp)
 	{
-		ft_putstr(envp->envp_str);
-		ft_putstr("\n");
+		if (!(g_info.flag_pwd == 1 && !ft_strcmp(envp->envp_key, "PWD")))
+		{
+			ft_putstr(envp->envp_str);
+			ft_putstr("\n");
+		}
 		envp = envp->next;
 	}
-	ft_putstr(envp->envp_str);
-	ft_putstr("\n");
+	if (!(g_info.flag_pwd == 1 && !ft_strcmp(envp->envp_key, "PWD")))
+	{
+		ft_putstr(envp->envp_str);
+		ft_putstr("\n");
+	}
 	ft_putstr(g_info.last_env_str);
 	ft_putstr("\n");
 }

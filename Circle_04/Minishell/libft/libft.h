@@ -35,5 +35,6 @@ int		ft_strcmp(char *s1, char *s2);
 void	free_tab2(char **str);
 int		ft_is_letter(char c);
 void	ft_putnbr_fd(int n, int fd);
+int		ft_is_digit(char c);
 
 #endif

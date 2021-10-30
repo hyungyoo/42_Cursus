@@ -1,6 +1,9 @@
 # To do list keulee (update date: 24.10.2021)
 > 1. no such file or directory, command not found, permission denied 등 여러 에러 상황에 따른 코드 추가 작성 및 수정   
 
+# Code log (update date: 28.10.2021)
+> 1. execute_cmd.c : 각 커맨드의 인자를 파이프 전까지 recuperer할 수 있도록 코드 수정  
+
 # Code log (update date: 25.10.2021)
 > 1. execute_cmd.c : 원래 상태로 되돌림. 지저분하고 잘못된 재파싱으로 (ㅠㅠ) 손댈 수 없는 leaks와 여러가지 상황들이 생겨 이틀동안 다른 방법으로 시도해보았지만 계속 똑같은 상황으로 돌아가는 데에 한계를 느낌 ㅠㅠ 위가 아파 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 도와죠
 
@@ -89,11 +92,8 @@ echo "hihi'hihi" 'hihi"hihi' ==> 파싱 성공
 
 
 
-	echo "'$USER'" --> 'hyungyoo'
-	echo "wap$USER'we'" --> waphyungyoo'we'
-	echo "wap'$USERwe" -->  wap'
-> 7. ft_echo.c line 85,
-	key[i][0] == '$'로 나오지않음. 스플릿을 꺼셔하던가, 
-	아니면, 그 포인트만큼 주소값을 더해서 알아보는방법이있다/
+# code log (update date: 26.10.2021)
 
-
+> 1. cmd -> ls, ft_split!
+> 2. execute --> no arg--> syscall param execve
+> 3. ft_arg --> strjoin_free definitely lost
