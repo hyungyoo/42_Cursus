@@ -6,7 +6,7 @@
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 22:08:23 by cclaude           #+#    #+#             */
-/*   Updated: 2021/10/31 02:33:39 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/31 02:03:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	main (int ac, char **av, char **env)
 			//dup2(fd_in, STDIN);
 			redir(av[i++], env, 1);
 		}
+		// last one, not pipe
 		exec(av[i], env);
 	}
 	else
