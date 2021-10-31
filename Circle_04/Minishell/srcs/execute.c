@@ -1,11 +1,28 @@
 #include "../includes/minishell.h"
 
-void	execute_cmds(t_node *node)
+void	ft_move_to_pipe(t_node **node)
 {
-	if (node->type == BUILTIN_CMD)
-		ft_built_in(&node);
-	else if (node->type == CMD)
-		ft_execmd(node);
+	if (!node || !*node || (*node)->type == PIPE)
+		return ;
+	while ((*node))
+	{
+		if ((*node)->type == PIPE)
+				return ;
+		if ((*node)->next)
+			(*node) = (*node)->next;
+		else
+			return ;
+	}
+}
+
+void	execute_cmds(t_node **node)
+{
+	if ((*node)->type == BUILTIN_CMD)
+		ft_built_in(node);
+	else if ((*node)->type == CMD)
+		ft_execmd(*node);
+	ft_move_to_pipe(node);
+	ft_update_last_env((*node)->str);
 }
 
 int	count_pipe(t_node *node)
@@ -49,41 +66,105 @@ void	ft_exec_multi_pipe(t_node *node)
 {
 	printf("for multi pipe\n");
 	(void)node;
+
+	//////////// set fd for < << > >> ////////
+	// t_fd_set	fd_set;
+	// ft_init_fd_set(&fd_set);
+	// if (ft_left_redirect(node, fd_set))
+		//dup(fd_set.fd_in, STDIN);
+	// if (ft_left_redirect(node, fd_set))
+		//dup(fd_set.fd_out, STDOUT);
+	///////////////////////////////////////////
+	/*
+	   if (  fd_in of file for < or <<)
+			exec_for_<
+	   while (node.. etc, i < ft_num_pipe(node))
+	   {
+			execute_cmd_with_pipe(node)
+			// to do:
+			//	pipe(pipe_fd);
+			// 	if (pid == 0)
+			//	{
+			//		close(pipe_fd[0]);
+			//		dup2(pipe_fd[1], STDOUT);
+			//		execute_cmd(node);
+			//		free_all_for_fork_process
+			//		exit();
+			//	}
+			//	else if (pid > 0)
+			//	{
+			//		close(pipe_fd[1]);
+			//		dup2(pipe_fd[0], STDIN);
+			//		wait
+			//
+	   		//	}
+		}
+		execute_last(node)
+		{
+			fork --> execute_cmd
+		}
+
+	*/
+
+
+	///////////////////////////////////////
+	// ft_reset_fd_set(&fd_set);
+	/*
+
+	int   ft_left_redirect and right(node, fd_set)
+	   {
+	   		if (ft_find_left(node, fd_set))
+				return (1);
+	   		if (ft_find_dleft(node, fd_set))
+				return (1);
+	   		if (ft_find_right(node, fd_set))
+				return (1);
+	   		if (ft_find_drignt(node, fd_set))
+				return (1);
+			return (0);
+		}
+
+	 */
+}
+
+void	ft_exec_builtin(t_node **node)
+{
+	ft_built_in(node);
+	ft_exit_minishell(0, &(g_info.cmd));
 }
 
 void	ft_exec_one_pipe(t_node *node)
 {
 	// ft_check_path_exec(node);
 	// ft_execmd_child(node);
-	
-	// ft_built_in(node);
-	// all_free_function;
-	// exit(0);
+
+	// exit str == ' ' ou |
 	printf("for one pipe\n");
 	(void)node;
 }
 
+/*
 void	ft_exec(t_node *node)
 {
 	if (!node)
 		return ;
-	printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
+	//printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
 	if (count_pipe(node) && (count_cmd(node) <= (count_pipe(node))))
 		ft_error_message_exec();
 	else if (count_pipe(node) == 0)
-		execute_cmds(node);
+		execute_cmds(&node);
 	else if (count_pipe(node) == 1)
 		ft_exec_one_pipe(node);	// fork deux exec
 	else if (count_pipe(node) > 1)
 		ft_exec_multi_pipe(node);	// fork all
 }
-
+*/
 /*
 int	init_befor_exec(t_node *node)
 {
 	pipe count;
 }
-
+*/
 void	ft_exec(t_node *node)
 {
 	if (!node)
@@ -91,7 +172,7 @@ void	ft_exec(t_node *node)
 	//init_befor_exec(node);
 	while (node)
 	{
-		execute_cmds(node);
+		execute_cmds(&node);
 		if (node->next && node->type != PIPE)
 				node = node->next;
 		if (node->next)
@@ -100,6 +181,5 @@ void	ft_exec(t_node *node)
 			break ;
 	}
 }
-*/
 
 

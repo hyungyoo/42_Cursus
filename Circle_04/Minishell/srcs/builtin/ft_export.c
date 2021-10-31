@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/28 07:16:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/31 16:30:39 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,10 +173,11 @@ void	ft_export_env(void)
 
 void	ft_error_message_export(char *str)
 {
-	ft_putstr("minishell: export: ");
-	ft_putstr("'");
-	ft_putstr(str);
-	ft_putstr("': not a valid identifier\n");
+	ft_putstr_fd("minishell: export: ", 2);
+	ft_putstr_fd("'", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+	g_info.exit_code = 1;
 }
 
 int	ft_check_num(char *str)

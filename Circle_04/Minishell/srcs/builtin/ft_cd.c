@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/28 01:18:07 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/31 16:24:33 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	ft_error_message_cd(char *new_path)
 {
 	if (new_path)
 	{
-		ft_putstr("minishell: cd: ");
-		ft_putstr(new_path);
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(new_path, 2);
 		perror(" \b");
 	}
 	else
 	{
-		ft_putstr("minishell: cd");
+		ft_putstr_fd("minishell: cd", 2);
 		perror(" ");
 	}
 	g_info.exit_code = 1;
@@ -129,6 +129,7 @@ void	ft_exec_home(void)
 	char	*path;
 
 	path_env = NULL;
+	path = NULL;
 	if (ft_getenv(g_info.envp, "HOME"))
 		path = ft_strdup(ft_getenv(g_info.envp, "HOME"));
 	else

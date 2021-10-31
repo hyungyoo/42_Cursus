@@ -48,14 +48,11 @@ void	free_list(t_cmd **cmd)
 		free((*cmd)->cmd_start->str);
 		(*cmd)->cmd_start->str = NULL;
 		free((*cmd)->cmd_start);
-		// (*cmd)->cmd_start = NULL;
 		(*cmd)->cmd_start = tmp;
 	}
 	free(*cmd);
 	(*cmd) = NULL;
 }
-
-/* tmp */
 
 int		get_listsize(t_node **node)
 {

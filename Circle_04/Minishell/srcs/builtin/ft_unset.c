@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/28 02:52:59 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/31 16:27:40 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ void	ft_unset(t_node **cmd)
 		return ;
 	if (!((*cmd)->next))
 	{
-		ft_putstr("unset : not enough arguments\n");
+		ft_putstr_fd("unset : not enough arguments\n", 2);
 		g_info.exit_code = 1;
 		return ;
 	}
 	if ((*cmd)->next->type == PIPE)
 	{
-		ft_putstr("unset : not enough arguments\n");
+		ft_putstr_fd("unset : not enough arguments\n", 2);
 		g_info.exit_code = 1;
 		return ;
 	}

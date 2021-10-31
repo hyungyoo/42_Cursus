@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 16:04:24 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/28 01:08:13 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/28 20:37:49 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_initial_g(void)
 	g_info.pid_child = 0;
 	g_info.flag_pwd = 0;
 	g_info.last_env_str = NULL;
+	g_info.cmd = NULL;
 }
 
 void	ft_initial(char **env, int ac, char **av)

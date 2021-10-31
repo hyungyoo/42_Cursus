@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/28 01:41:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/31 16:52:10 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,27 @@ int	ft_check_option(char *str)
 	return (1);
 }
 
+void	ft_put_last_env(void)
+{
+	ft_putstr((g_info.last_env_str + 2));
+	ft_putstr("\n");
+}
+
 void	ft_echo_type_dolr(t_node **cmd)
 {
-	if ((*cmd)->next)
+	if ((*cmd)->flag_nospace == 0)
+	{
+		ft_putstr("$");
+		return ;
+	}
+	else if ((*cmd)->next && (*cmd)->flag_nospace == 1)
 		(*cmd) = (*cmd)->next;
 	if ((*cmd)->type == 12)
 	{
 		if (!ft_strcmp((*cmd)->str, "?"))
 			ft_putnbr_fd(g_info.exit_code, 1);
+		else if (!ft_strcmp((*cmd)->str, "_"))
+			ft_put_last_env();
 		else
 		{
 			if (ft_getenv_echo(g_info.envp, (*cmd)->str))
@@ -47,6 +60,8 @@ void	ft_echo_type_2(t_node **cmd)
 	{
 		if (!ft_strcmp((*cmd)->str + 1, "?"))
 			ft_putnbr_fd(g_info.exit_code, 1);
+		else if (!ft_strcmp((*cmd)->str + 1, "_"))
+			ft_put_last_env();
 		else
 		{
 			if (ft_getenv_echo(g_info.envp, (*cmd)->str + 1))

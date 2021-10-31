@@ -65,6 +65,7 @@ typedef struct s_envp
 
 typedef	struct s_info {
 	struct s_envp 	*envp;
+	struct s_cmd	*cmd;
 	pid_t			pid_child;
 	int				exit_code;
 	int				flag_pwd;
@@ -108,7 +109,7 @@ int		is_builtin(char *str);
 // void	ft_exec(t_cmd **cmd);
 void	ft_exec(t_node *cmd);
 
-int		ft_execmd(t_node *node);
+void	ft_execmd(t_node *node);
 char	**get_arg(t_node *node);
 char	*get_path(char *str);
 
@@ -144,5 +145,6 @@ char	*ft_getenv_echo(t_envp *envp, char *key);
 void	ft_free_env(t_envp *envp);
 void	ft_update_env(t_envp *envp, char *str, char *key);
 char	**ft_array_double_env(void);
+void	ft_update_last_env(char *path);
 
 #endif
