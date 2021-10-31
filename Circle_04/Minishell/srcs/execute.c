@@ -25,10 +25,22 @@ void	execute_cmds_pipe(t_node **node)
 
 void	execute_cmds(t_node **node)
 {
+	int	status;
+
 	if ((*node)->type == BUILTIN_CMD)
 		ft_built_in(node);
 	else if ((*node)->type == CMD)
-		ft_execmd(*node);
+	{
+		g_info.pid_child = fork();
+		if (g_info.pid_child == 0)
+			ft_execmd(*node);
+		else if (g_info.pid_child > 0)
+		{
+			waitpid(g_info.pid_child, &status, 0);
+			g_info.pid_child = 0;
+			g_info.exit_code = WEXITSTATUS(status);
+		}
+	}
 	ft_move_to_pipe(node);
 	ft_update_last_env((*node)->str);
 }
