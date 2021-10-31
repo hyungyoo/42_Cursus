@@ -115,6 +115,7 @@ char	*get_path(char *str);
 
 /* built_in */
 void	ft_built_in(t_node **cmd);
+void	ft_built_in_pipe(t_node **cmd);
 void	ft_pwd(t_node **cmd);
 void	ft_print_env(t_envp *envp);
 void	ft_env(t_node **cmd);

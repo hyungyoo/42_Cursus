@@ -15,6 +15,14 @@ void	ft_move_to_pipe(t_node **node)
 	}
 }
 
+void	execute_cmds_pipe(t_node **node)
+{
+	if ((*node)->type == BUILTIN_CMD)
+		ft_built_in_pipe(node);
+	else if ((*node)->type == CMD)
+		ft_execmd(*node);
+}
+
 void	execute_cmds(t_node **node)
 {
 	if ((*node)->type == BUILTIN_CMD)
@@ -59,7 +67,14 @@ int	count_cmd(t_node *node)
 
 void	ft_error_message_exec(void)
 {
-	ft_putstr("minishell: syntax error near unexpected |\n");
+	ft_putstr_fd("minishell: syntax error near unexpected |\n", 2);
+}
+
+
+void	ft_exec_builtin(t_node **node)
+{
+	ft_built_in(node);
+	ft_exit_minishell(0, &(g_info.cmd));
 }
 
 void	ft_exec_multi_pipe(t_node *node)
@@ -127,52 +142,14 @@ void	ft_exec_multi_pipe(t_node *node)
 	 */
 }
 
-void	ft_exec_builtin(t_node **node)
-{
-	ft_built_in(node);
-	ft_exit_minishell(0, &(g_info.cmd));
-}
-
-void	ft_exec_one_pipe(t_node *node)
-{
-	// ft_check_path_exec(node);
-	// ft_execmd_child(node);
-
-	// exit str == ' ' ou |
-	printf("for one pipe\n");
-	(void)node;
-}
-
-/*
-void	ft_exec(t_node *node)
-{
-	if (!node)
-		return ;
-	//printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
-	if (count_pipe(node) && (count_cmd(node) <= (count_pipe(node))))
-		ft_error_message_exec();
-	else if (count_pipe(node) == 0)
-		execute_cmds(&node);
-	else if (count_pipe(node) == 1)
-		ft_exec_one_pipe(node);	// fork deux exec
-	else if (count_pipe(node) > 1)
-		ft_exec_multi_pipe(node);	// fork all
-}
-*/
-/*
-int	init_befor_exec(t_node *node)
-{
-	pipe count;
-}
-*/
-void	ft_exec(t_node *node)
+void	ft_exec_pipe(t_node *node)
 {
 	if (!node)
 	 	return ;
 	//init_befor_exec(node);
 	while (node)
 	{
-		execute_cmds(&node);
+		execute_cmds_pipe(&node); //fork for built in aussi
 		if (node->next && node->type != PIPE)
 				node = node->next;
 		if (node->next)
@@ -182,4 +159,15 @@ void	ft_exec(t_node *node)
 	}
 }
 
-
+void	ft_exec(t_node *node)
+{
+	if (!node)
+		return ;
+	//printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
+	if (count_pipe(node) && (count_cmd(node) <= (count_pipe(node))))
+		ft_error_message_exec();
+	else if (count_pipe(node) == 0)
+		execute_cmds(&node);
+	else if (count_pipe(node) >= 1)
+		ft_exec_pipe(node);	// fork all
+}

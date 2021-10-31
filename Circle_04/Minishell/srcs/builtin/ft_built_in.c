@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:31:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/31 16:54:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/10/31 17:18:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_error_message(t_node **cmd)
 	g_info.exit_code = 127;
 }
 
-void	ft_built_in(t_node	**cmd)
+void	ft_built_in_pipe(t_node	**cmd)
 {
 	if ((*cmd)->flag_nospace == 1)
 		ft_error_message(cmd);
@@ -49,4 +49,24 @@ void	ft_built_in(t_node	**cmd)
 	else if (!ft_strcmp((*cmd)->str, "exit"))
 		ft_exit_builtin(cmd);
 	ft_exit_minishell(g_info.exit_code, &(g_info.cmd));
+}
+
+void	ft_built_in(t_node	**cmd)
+{
+	if ((*cmd)->flag_nospace == 1)
+		ft_error_message(cmd);
+	else if (!ft_strcmp((*cmd)->str, "echo"))
+		ft_echo(cmd);
+	else if (!ft_strcmp((*cmd)->str, "pwd"))
+		ft_pwd(cmd);
+	else if (!ft_strcmp((*cmd)->str, "cd"))
+		ft_cd(cmd);
+	else if (!ft_strcmp((*cmd)->str, "export"))
+		ft_export(cmd);
+	else if (!ft_strcmp((*cmd)->str, "unset"))
+		ft_unset(cmd);
+	else if (!ft_strcmp((*cmd)->str, "env"))
+		ft_env(cmd);
+	else if (!ft_strcmp((*cmd)->str, "exit"))
+		ft_exit_builtin(cmd);
 }
