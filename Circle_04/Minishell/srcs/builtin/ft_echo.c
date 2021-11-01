@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/31 16:52:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/01 16:46:13 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,19 +212,14 @@ void	ft_type2_sans_espace(t_node **cmd)
 	}
 }
 
-int	ft_check_type(int type)
-{
-	if (!(type == PIPE || type == RIGHT
-			|| type == DRIGHT || type == LEFT || type == DLEFT))
-		return (1);
-	return (0);
-}
-
 void	ft_print_echo(t_node **cmd)
 {
-	while (*cmd && ft_check_type((*cmd)->type))
+	while (*cmd && ((*cmd)->type != PIPE))
 	{
-		if ((*cmd)->type == DOLR)
+		//printf("\n exit node == %s\n", (*cmd)->str);
+		if (!ft_redir_passe_node(cmd))
+			return ;
+		else if ((*cmd)->type == DOLR)
 			ft_echo_type_dolr(cmd);
 		else if ((*cmd)->type == DOUQ)
 		{

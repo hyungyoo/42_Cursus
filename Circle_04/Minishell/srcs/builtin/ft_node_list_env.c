@@ -6,11 +6,35 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/28 01:39:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/01 16:55:03 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	ft_check_redir_str(char *str)
+{
+	if (!ft_strcmp(str, "<") || !ft_strcmp(str, "<<") || !ft_strcmp(str, ">") || !ft_strcmp(str, ">>"))
+		return (1);
+	return (0);
+}
+
+int	ft_check_redir_type(t_node *node)
+{
+	if (node->type == LEFT || node->type == DLEFT || node->type == RIGHT || node->type == DRIGHT)
+		return (1);
+	return (0);
+}
+
+int	ft_redir_passe_node(t_node **node)
+{
+	/*
+	 * 1. 모든 노드를 다 돌면서, > 다음에 다음거가있는지 없으면 리턴 0
+	 * 포인터하나보내고 여기로돌아왓을떄, 과연 노드가 움직이는지 안옴우직여있는지 확인
+	 * 다 돌고 돌아와서  이건다른곳에해서 ft_redir_pass랑 합치기
+	 *
+	 * 2. 다이렉션일떄는, 들어와서, 바로 다음다음으로 들어가도록 노드를 새로 반환
+}
 
 char	*ft_getenv(t_envp *envp, char *key)
 {

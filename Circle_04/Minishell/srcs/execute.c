@@ -171,12 +171,31 @@ void	ft_exec_pipe(t_node *node)
 	}
 }
 
+int	ft_check_pipe_error(t_node *node)
+{
+	while (node)
+	{
+		if (node->type == PIPE)
+		{
+			if (!(node->next))
+				return (0);
+		}
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	return (1);
+}
+
 void	ft_exec(t_node *node)
 {
 	if (!node)
 		return ;
 	//printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
-	if (count_pipe(node) && (count_cmd(node) <= (count_pipe(node))))
+	// echo str | < file 또한 에러로읽힌다. cmd가 아니기때문, 아니면, 한바퀴돌면서
+	// 파이프다음에 이것들중에 하나라도 없으면 에러?
+	if (!ft_check_pipe_error(node))
 		ft_error_message_exec();
 	else if (count_pipe(node) == 0)
 		execute_cmds(&node);

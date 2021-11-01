@@ -147,5 +147,8 @@ void	ft_free_env(t_envp *envp);
 void	ft_update_env(t_envp *envp, char *str, char *key);
 char	**ft_array_double_env(void);
 void	ft_update_last_env(char *path);
+int		ft_check_redir_str(char *str);
+int		ft_check_redir_type(t_node *node);
+int		ft_redir_passe_node(t_node **node);
 
 #endif
