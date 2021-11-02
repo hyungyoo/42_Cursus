@@ -81,6 +81,7 @@ void	handler(int signum);
 
 void	ft_exit_minishell(int exit_code, t_cmd **cmd);
 void	ft_exit(int exit_code);
+void	get_type_dir(t_node *node);
 
 void    copy_env(char **env);
 void	ft_initial_g(void);

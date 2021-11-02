@@ -41,7 +41,8 @@ void	execute_cmds(t_node **node)
 			g_info.exit_code = WEXITSTATUS(status);
 		}
 	}
-	ft_move_to_pipe(node);
+	// 있어야할까? 이게?
+	//ft_move_to_pipe(node);
 	ft_update_last_env((*node)->str);
 }
 
@@ -61,6 +62,7 @@ int	count_pipe(t_node *node)
 	return (count_pipe);
 }
 
+/*
 int	count_cmd(t_node *node)
 {
 	int		count_cmd;
@@ -76,7 +78,7 @@ int	count_cmd(t_node *node)
 	}
 	return (count_cmd);
 }
-
+*/
 void	ft_error_message_exec(void)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected |\n", 2);
@@ -188,10 +190,16 @@ int	ft_check_pipe_error(t_node *node)
 	return (1);
 }
 
+/* 
+ * to do:
+ * 1 execuve함수와 일반 빌트인함수에서 나오는 다이렉션 무시하고 할수있도록 해야함 즉 12인 arg만 읽도록 아니면 넘기도록
+ */
+
 void	ft_exec(t_node *node)
 {
 	if (!node)
 		return ;
+	get_type_dir(node);
 	//printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
 	// echo str | < file 또한 에러로읽힌다. cmd가 아니기때문, 아니면, 한바퀴돌면서
 	// 파이프다음에 이것들중에 하나라도 없으면 에러?
@@ -199,6 +207,8 @@ void	ft_exec(t_node *node)
 		ft_error_message_exec();
 	else if (count_pipe(node) == 0)
 		execute_cmds(&node);
+	/*
 	else if (count_pipe(node) >= 1)
 		ft_exec_pipe(node);	// fork all
+	*/
 }

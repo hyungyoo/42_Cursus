@@ -13,6 +13,7 @@ SRCS = srcs/minishell.c \
 		srcs/set_detail_type.c \
 		srcs/execute.c \
 		srcs/execute_cmd.c \
+		srcs/get_type_dir.c \
 		srcs/builtin/ft_built_in.c \
 		srcs/builtin/ft_pwd.c \
 		srcs/builtin/ft_node_list_env.c \
@@ -30,13 +31,13 @@ OBJS = $(SRCS:.c=.o)
 
 SRCS_DIR = ./srcs
 
-LIB = -L. -lft -lreadline -L ~/.brew/opt/readline/lib
-LI = -L. -lft -lreadline -L /usr/local/opt/readline/lib
+LI = -L. -lft -lreadline -L ~/.brew/opt/readline/lib
+LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
 #~/.brew/opt/readline/lib  // ecole42 complie
 #/usr/local/opt/readline/lib //keulee home complie
 
-INC = -I ~/.brew/opt/readline/include
-IN = -I /usr/local/opt/readline/include
+IN = -I ~/.brew/opt/readline/include
+INC = -I /usr/local/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
 
