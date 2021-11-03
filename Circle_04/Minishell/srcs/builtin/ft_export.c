@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 01:49:18 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 01:53:03 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,11 @@ void	ft_export(t_node **cmd)
 	char	*key_tmp;
 
 	if (!ft_check_export(cmd))
+	{
+		g_info.exit_code = 1;
 		return ;
+	}
+	g_info.exit_code = 0;
 	(*cmd) = (*cmd)->next;
 	while (*cmd && (*cmd)->type == 12)
 	{
