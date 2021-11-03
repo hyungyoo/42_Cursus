@@ -26,7 +26,14 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 		ft_execmd(*node, cmd);
 }
 
-// fd open, set
+void	ft_error_message_left(char *str)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": No such file or directory", 2);
+	g_info.exit_code = 1;
+}
+
 int	ft_left_fd(t_node **node, t_fd *fd)
 {
 	if (!(*node)->next)
@@ -37,7 +44,10 @@ int	ft_left_fd(t_node **node, t_fd *fd)
 	(*node) = (*node)->next;
 	fd->fd_in = open((*node)->str, O_RDONLY, 0644);
 	if (fd->fd_in == -1)
+	{
+		ft_error_message_left((*node)->str);
 		return (0);
+	}
 	dup2(fd->fd_in, 0);
 	return (1);
 }
@@ -127,14 +137,18 @@ void	ft_set_fd(t_fd *fd)
 {
 	fd->fd_std_in = dup(0);
 	fd->fd_std_out = dup(1);
+	fd->fd_in  = -1;
+	fd->fd_out = -1;
 }
 
 void	ft_close_fd(t_fd *fd)
 {
 	dup2(fd->fd_std_in, 0);
 	dup2(fd->fd_std_out, 1);
-	close(fd->fd_in);
-	close(fd->fd_out);
+	if (fd->fd_in != -1)
+		close(fd->fd_in);
+	if (fd->fd_out != -1)
+		close(fd->fd_out);
 	close(fd->fd_std_in);
 	close(fd->fd_std_out);
 }
@@ -162,8 +176,8 @@ void	execute_cmds(t_node **node, t_cmd *cmd)
 			ft_built_in(node, cmd);
 		else if ((*node)->type == CMD)
 			ft_execve_cmd(node, cmd);
-		ft_close_fd(&fd);
 	}
+	ft_close_fd(&fd);
 	ft_move_to_last(node);
 	ft_update_last_env((*node)->str);
 }
