@@ -13,7 +13,6 @@ int	main(int ac, char **av, char **env)
 		signal(SIGQUIT, handler);
 		line = readline("\033[38;5;41mminishell $> \033[0m");
 		cmd = init_cmd();
-		g_info.cmd = cmd;
 		if (line == NULL)
 		{
 			ft_putendl_fd("\033[38;5;31mminishell exit \033[0m", 1);
@@ -31,7 +30,7 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		}
 		set_detail_type(&(cmd));
-		ft_exec((cmd)->cmd_start);
+		ft_exec(cmd);
 		print_cmdline(&(cmd));
 		free_list(&(cmd));
 		free(line);

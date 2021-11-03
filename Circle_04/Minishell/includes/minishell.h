@@ -65,7 +65,6 @@ typedef struct s_envp
 
 typedef	struct s_info {
 	struct s_envp 	*envp;
-	struct s_cmd	*cmd;
 	pid_t			pid_child;
 	int				exit_code;
 	int				flag_pwd;
@@ -107,16 +106,15 @@ void	parsing_the_rest(t_cmd **cmd, t_node *node);
 void	set_detail_type(t_cmd **cmd);
 int		is_builtin(char *str);
 
-// void	ft_exec(t_cmd **cmd);
-void	ft_exec(t_node *cmd);
+void	ft_exec(t_cmd *cmd);
 
-void	ft_execmd(t_node *node);
+void	ft_execmd(t_node *node, t_cmd *cmd_start);
 char	**get_arg(t_node *node);
 char	*get_path(char *str);
 
 /* built_in */
-void	ft_built_in(t_node **cmd);
-void	ft_built_in_pipe(t_node **cmd);
+void	ft_built_in(t_node **cmd, t_cmd *cmd_start);
+void	ft_built_in_pipe(t_node **cmd, t_cmd *cmd_start);
 void	ft_pwd(t_node **cmd);
 void	ft_print_env(t_envp *envp);
 void	ft_env(t_node **cmd);
@@ -124,7 +122,7 @@ void	ft_export(t_node **cmd);
 void	ft_unset(t_node **cmd);
 void	ft_echo(t_node **cmd);
 void	ft_cd(t_node **cmd);
-void	ft_exit_builtin(t_node **cmd);
+void	ft_exit_builtin(t_node **cmd, t_cmd *cmd_start);
 
 /* built_in cd */
 char	*ft_strjoin_cd(char *s1, char *s2);

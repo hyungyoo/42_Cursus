@@ -21,7 +21,7 @@ void	ft_change_type(t_node **node)
 
 void	ft_type_cmd(t_node *node)
 {
-	if (!ft_strcmp(node->str, "pwd") || !ft_strcmp(node->str, "cd") || !ft_strcmp(node->str, "env") || !ft_strcmp(node->str, "export") || !ft_strcmp(node->str, "unset") || !ft_strcmp(node->str, "echo"))
+	if (!ft_strcmp(node->str, "pwd") || !ft_strcmp(node->str, "cd") || !ft_strcmp(node->str, "env") || !ft_strcmp(node->str, "export") || !ft_strcmp(node->str, "unset") || !ft_strcmp(node->str, "echo") || !ft_strcmp(node->str, "exit"))
 		node->type = BUILTIN_CMD;
 	else
 		node->type = CMD;

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/31 16:07:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 01:16:11 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_check_num_exit(char *str)
 	return (1);
 }
 
-void	ft_exit_builtin(t_node **cmd)
+void	ft_exit_builtin(t_node **cmd, t_cmd *cmd_start)
 {
 	int	exit_code ;
 
@@ -64,6 +64,6 @@ void	ft_exit_builtin(t_node **cmd)
 			}
 		}
 		ft_putendl_fd("\033[38;5;31mminishell exit \033[0m", 2);
-		ft_exit_minishell(exit_code, &(g_info.cmd));
+		ft_exit_minishell(exit_code, &(cmd_start));
 	}
 }

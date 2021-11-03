@@ -43,7 +43,7 @@ INC = -I /usr/local/opt/readline/include
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 LIBFT = libft.a
 

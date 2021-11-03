@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/01 16:02:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 01:49:18 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,21 +190,21 @@ int	ft_check_num(char *str)
 		if (ft_is_digit(str[i]))
 		{
 			ft_error_message_export(str);
-			return (1);
+			return (0);
 		}
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_check_str(char *str)
 {
-	if (!ft_strncmp(str, "=", 1))
+	if (str[0] == '=')
 	{
 		ft_error_message_export(str);
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_check_all(t_node *cmd)
@@ -221,8 +221,6 @@ int	ft_check_all(t_node *cmd)
 			return (0);
 		cmd = cmd->next;
 	}
-	if (cmd && cmd->type != PIPE)
-		printf("%s\n", cmd->str);
 	return (1);
 }
 

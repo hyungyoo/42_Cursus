@@ -15,25 +15,25 @@ void	ft_move_to_pipe(t_node **node)
 	}
 }
 
-void	execute_cmds_pipe(t_node **node)
+void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 {
 	if ((*node)->type == BUILTIN_CMD)
-		ft_built_in_pipe(node);
+		ft_built_in_pipe(node, cmd);
 	else if ((*node)->type == CMD)
-		ft_execmd(*node);
+		ft_execmd(*node, cmd);
 }
 
-void	execute_cmds(t_node **node)
+void	execute_cmds(t_node **node, t_cmd *cmd)
 {
 	int	status;
 
 	if ((*node)->type == BUILTIN_CMD)
-		ft_built_in(node);
+		ft_built_in(node, cmd);
 	else if ((*node)->type == CMD)
 	{
 		g_info.pid_child = fork();
 		if (g_info.pid_child == 0)
-			ft_execmd(*node);
+			ft_execmd(*node, cmd);
 		else if (g_info.pid_child > 0)
 		{
 			waitpid(g_info.pid_child, &status, 0);
@@ -82,13 +82,6 @@ int	count_cmd(t_node *node)
 void	ft_error_message_exec(void)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected |\n", 2);
-}
-
-
-void	ft_exec_builtin(t_node **node)
-{
-	ft_built_in(node);
-	ft_exit_minishell(0, &(g_info.cmd));
 }
 
 void	ft_exec_multi_pipe(t_node *node)
@@ -156,14 +149,14 @@ void	ft_exec_multi_pipe(t_node *node)
 	 */
 }
 
-void	ft_exec_pipe(t_node *node)
+void	ft_exec_pipe(t_node *node, t_cmd *cmd)
 {
 	if (!node)
 	 	return ;
 	//init_befor_exec(node);
 	while (node)
 	{
-		execute_cmds_pipe(&node); //fork for built in aussi
+		execute_cmds_pipe(&node, cmd); //fork for built in aussi
 		if (node->next && node->type != PIPE)
 				node = node->next;
 		if (node->next)
@@ -195,8 +188,11 @@ int	ft_check_pipe_error(t_node *node)
  * 1 execuve함수와 일반 빌트인함수에서 나오는 다이렉션 무시하고 할수있도록 해야함 즉 12인 arg만 읽도록 아니면 넘기도록
  */
 
-void	ft_exec(t_node *node)
+void	ft_exec(t_cmd *cmd)
 {
+	t_node	*node;
+
+	node = cmd->cmd_start;
 	if (!node)
 		return ;
 	get_type_dir(node);
@@ -206,7 +202,7 @@ void	ft_exec(t_node *node)
 	if (!ft_check_pipe_error(node))
 		ft_error_message_exec();
 	else if (count_pipe(node) == 0)
-		execute_cmds(&node);
+		execute_cmds(&node, cmd);
 	/*
 	else if (count_pipe(node) >= 1)
 		ft_exec_pipe(node);	// fork all

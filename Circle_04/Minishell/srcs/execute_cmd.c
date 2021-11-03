@@ -119,7 +119,7 @@ char	**get_arg(t_node *node)
 	return (path_arg);
 }
 
-void	ft_error_message(char *path, char **argv, char **env)
+void	ft_error_message(char *path, char **argv, char **env, t_cmd *cmd_start)
 {
 	ft_putstr_fd("Minishell: ", 2);
 	ft_putstr_fd(path, 2);
@@ -127,10 +127,10 @@ void	ft_error_message(char *path, char **argv, char **env)
 	free(path);
 	free_tab2(argv);
 	free_tab2(env);
-		ft_exit_minishell(127, &(g_info.cmd));
+		ft_exit_minishell(127, &(cmd_start));
 }
 
-void	ft_error_message_no_path(char **argv, char **env)
+void	ft_error_message_no_path(char **argv, char **env, t_cmd *cmd_start)
 {
 	if (!ft_strncmp(argv[0], "/", 1))
 		return ;
@@ -141,7 +141,7 @@ void	ft_error_message_no_path(char **argv, char **env)
 		ft_putstr_fd(": command not found\n", 2);
 		free_tab2(argv);
 		free_tab2(env);
-		ft_exit_minishell(127, &(g_info.cmd));
+		ft_exit_minishell(127, &(cmd_start));
 	}
 }
 
@@ -167,7 +167,7 @@ int	ft_argv_len(char **argv)
 	return (ret);
 }
 
-void	ft_check_path_exec(t_node *node)
+void	ft_check_path_exec(t_node *node, t_cmd *cmd_start)
 {
 	char	*path;
 	char	**argv;
@@ -177,19 +177,19 @@ void	ft_check_path_exec(t_node *node)
 	path = NULL;
 	env = ft_array_double_env();
 	argv = get_arg(node);
-	ft_error_message_no_path(argv, env);
+	ft_error_message_no_path(argv, env, cmd_start);
 	if (argv[0])
 		path = get_path(argv[0]);
 	flag_access = access(path, F_OK | X_OK);
 	if (flag_access == -1)
-		ft_error_message(path, argv, env);
+		ft_error_message(path, argv, env, cmd_start);
 	free_tab2(argv);
 	free_tab2(env);
 	free(path);
 }
 
-void	ft_execmd(t_node *node)
+void	ft_execmd(t_node *node, t_cmd *cmd_start)
 {
-	ft_check_path_exec(node);
+	ft_check_path_exec(node, cmd_start);
 	ft_execmd_child(node);
 }
