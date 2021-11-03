@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:31:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 01:15:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 03:21:42 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_error_message(t_node **cmd)
 
 void	ft_built_in_pipe(t_node	**cmd, t_cmd *cmd_start)
 {
-	if ((*cmd)->flag_nospace == 1)
+	if ((*cmd)->flag_nospace == 1 && (*cmd)->next->type == ARG)
 		ft_error_message(cmd);
 	else if (!ft_strcmp((*cmd)->str, "echo"))
 		ft_echo(cmd);
@@ -53,7 +53,7 @@ void	ft_built_in_pipe(t_node	**cmd, t_cmd *cmd_start)
 
 void	ft_built_in(t_node	**cmd, t_cmd *cmd_start)
 {
-	if ((*cmd)->flag_nospace == 1)
+	if ((*cmd)->flag_nospace == 1 && (*cmd)->next->type == ARG)
 		ft_error_message(cmd);
 	else if (!ft_strcmp((*cmd)->str, "echo"))
 		ft_echo(cmd);

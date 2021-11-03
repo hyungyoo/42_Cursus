@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/01 16:23:09 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 03:17:29 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,14 +170,41 @@ void	ft_exec_path(char *new_path)
 	free(path);
 }
 
+// cd one arg;
+// pass until one
+
+int	ft_num_arg_cd(t_node *cmd)
+{
+	t_node	*tmp;
+	int		arg_count;
+
+	arg_count = 0;
+	tmp = cmd->prev;
+	while (tmp != cmd)
+	{
+		if (cmd->type == ARG)
+			arg_count++;
+		cmd = cmd->next;
+	}
+	return (arg_count);
+}
+
 void	ft_cd(t_node **cmd)
 {
 	char	*new_path;
 
 	new_path = NULL;
+	if (ft_num_arg_cd(*cmd) > 1)
+	{
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+		g_info.exit_code = 1;
+		return ;
+	}
 	if ((*cmd)->next)
 	{
 		(*cmd) = (*cmd)->next;
+		while ((*cmd) && (*cmd)->type != ARG)
+			(*cmd) = (*cmd)->next;
 		new_path = ft_strdup((*cmd)->str);
 		if (!ft_strcmp(new_path, "~"))
 			ft_exec_home();
@@ -187,4 +214,5 @@ void	ft_cd(t_node **cmd)
 	}
 	else
 		ft_exec_home();
+	g_info.exit_code = 0;
 }

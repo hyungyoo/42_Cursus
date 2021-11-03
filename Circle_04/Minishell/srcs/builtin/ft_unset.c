@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/31 16:27:40 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 03:08:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ void	ft_unset_exec(t_node **cmd)
 	(*cmd) = (*cmd)->next;
 	while ((*cmd) && (*cmd)->type != PIPE)
 	{
-		if ((*cmd)->type == DOLR && (*cmd)->flag_nospace == 1)
-			(*cmd) = (*cmd)->next;
-		else if (ft_chercher_key(g_info.envp, (*cmd)->str))
-			ft_free_one_node(g_info.envp, (*cmd)->str);
-		g_info.exit_code = 0;
+		if ((*cmd)->type == ARG)
+		{
+			if ((*cmd)->type == DOLR && (*cmd)->flag_nospace == 1)
+				(*cmd) = (*cmd)->next;
+			else if (ft_chercher_key(g_info.envp, (*cmd)->str))
+				ft_free_one_node(g_info.envp, (*cmd)->str);
+			g_info.exit_code = 0;
+		}
 		if ((*cmd)->next)
 			(*cmd) = (*cmd)->next;
 		else
@@ -69,18 +72,10 @@ void	ft_unset(t_node **cmd)
 {
 	if (!cmd || !(*cmd))
 		return ;
-	if (!((*cmd)->next))
-	{
-		ft_putstr_fd("unset : not enough arguments\n", 2);
-		g_info.exit_code = 1;
+	else if (!((*cmd)->next))
 		return ;
-	}
-	if ((*cmd)->next->type == PIPE)
-	{
-		ft_putstr_fd("unset : not enough arguments\n", 2);
-		g_info.exit_code = 1;
+	else if ((*cmd)->next->type == PIPE)
 		return ;
-	}
 	if (!ft_strcmp((*cmd)->next->str, "PWD"))
 		g_info.flag_pwd = 1;
 	else

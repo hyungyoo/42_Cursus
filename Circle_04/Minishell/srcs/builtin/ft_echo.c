@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/01 21:28:04 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 03:04:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,9 +216,6 @@ void	ft_print_echo(t_node **cmd)
 {
 	while (*cmd && ((*cmd)->type != PIPE))
 	{
-		//printf("\n exit node == %s\n", (*cmd)->str);
-		//if (!ft_redir_passe_node(cmd))
-		//	return ;
 		if ((*cmd)->type == DOLR)
 			ft_echo_type_dolr(cmd);
 		else if ((*cmd)->type == DOUQ)
@@ -228,11 +225,11 @@ void	ft_print_echo(t_node **cmd)
 			else
 				ft_echo_type_2(cmd);
 		}
-		else
+		else if ((*cmd)->type == ARG)
 			ft_putstr((*cmd)->str);
-		if ((*cmd)->next)
+		if ((*cmd)->type == ARG && (*cmd)->next)
 			ft_putstr(" ");
-		if ((*cmd)->flag_nospace == 1)
+		if ((*cmd)->type == ARG && (*cmd)->prev->type == ARG && (*cmd)->flag_nospace == 1)
 			ft_putstr("\b");
 		if ((*cmd)->next)
 			(*cmd) = (*cmd)->next;

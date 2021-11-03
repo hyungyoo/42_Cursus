@@ -34,7 +34,6 @@ void	execute_cmds(t_node **node, t_cmd *cmd)
 			break ;
 		(*node) = (*node)->next;
 	}
-	printf("%s == str node\n", (*node)->str);
 /////////////////////////////////////////////
 
 

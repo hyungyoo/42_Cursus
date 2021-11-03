@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 00:10:53 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/31 16:26:01 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 03:06:00 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_update_last_env(char	*path)
 void	ft_env(t_node **cmd)
 {
 	ft_update_last_env("env");
-	if ((*cmd)->next && (*cmd)->next->type == 12)
+	if ((*cmd)->next && (*cmd)->next->type == ARG)
 	{
 		ft_putstr_fd("env: too many arguments\n", 2);
 		g_info.exit_code = 1;
