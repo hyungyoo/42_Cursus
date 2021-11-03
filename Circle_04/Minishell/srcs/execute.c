@@ -1,13 +1,16 @@
 #include "../includes/minishell.h"
 
-void	ft_move_to_pipe(t_node **node)
+void	ft_move_to_last(t_node **node)
 {
 	if (!node || !*node || (*node)->type == PIPE)
 		return ;
 	while ((*node))
 	{
 		if ((*node)->type == PIPE)
+		{
+				(*node) = (*node)->prev;
 				return ;
+		}
 		if ((*node)->next)
 			(*node) = (*node)->next;
 		else
@@ -23,37 +26,139 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 		ft_execmd(*node, cmd);
 }
 
-void	execute_cmds(t_node **node, t_cmd *cmd)
+// fd open, set
+int	ft_left_fd(t_node **node, t_fd *fd)
+{
+	if (!(*node)->next)
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		return (0);
+	}
+	(*node) = (*node)->next;
+	fd->fd_in = open((*node)->str, O_RDONLY, 0644);
+	if (fd->fd_in == -1)
+		return (0);
+	dup2(fd->fd_in, 0);
+	return (1);
+}
+
+int	ft_dleft_fd(t_node **node, t_fd *fd)
+{
+	(void)node;
+	(void)fd;
+	printf("i am heredoc\n");
+	return (1);
+}
+
+int	ft_right_fd(t_node **node, t_fd *fd)
+{
+	if (!(*node)->next)
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		return (0);
+	}
+	(*node) = (*node)->next;
+	fd->fd_out = open((*node)->str, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	if (fd->fd_out == -1)
+		return (0);
+	dup2(fd->fd_out, 1);
+	return (1);
+}
+
+int	ft_dright_fd(t_node **node, t_fd *fd)
+{
+	if (!(*node)->next)
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		return (0);
+	}
+	(*node) = (*node)->next;
+	fd->fd_out = open((*node)->str, O_CREAT | O_APPEND | O_RDWR, 0644);
+	if (fd->fd_out == -1)
+		return (0);
+	dup2(fd->fd_out, 1);
+	return (1);
+}
+
+// 1. no find file name, print error message return 0
+int	ft_fd_checker(t_node *node, t_fd *fd)
+{
+	t_node	*tmp;
+	int		flag_exit;
+
+	flag_exit = 1;
+	tmp = node->prev;
+	while (node != tmp && node->type != PIPE)
+	{
+		if (!strcmp(node->str, "<"))
+			flag_exit = ft_left_fd(&node, fd);
+		else if (!strcmp(node->str, "<<"))
+			flag_exit = ft_dleft_fd(&node, fd);
+		else if (!strcmp(node->str, ">"))
+			flag_exit = ft_right_fd(&node, fd);
+		else if (!strcmp(node->str, ">>"))
+			flag_exit = ft_dright_fd(&node, fd);
+		if (!flag_exit)
+			return (0);
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	return (1);
+}
+
+void	ft_execve_cmd(t_node **node, t_cmd *cmd)
 {
 	int	status;
 
-	////////////////for while---> fd checker/////////
-	while (*node)
+	g_info.pid_child = fork();
+	if (g_info.pid_child == 0)
+		ft_execmd(*node, cmd);
+	else if (g_info.pid_child > 0)
 	{
-		if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
-			break ;
-		(*node) = (*node)->next;
+		waitpid(g_info.pid_child, &status, 0);
+		g_info.pid_child = 0;
+		g_info.exit_code = WEXITSTATUS(status);
 	}
-/////////////////////////////////////////////
+}
+
+void	ft_set_fd(t_fd *fd)
+{
+	fd->fd_std_in = dup(0);
+	fd->fd_std_out = dup(1);
+}
+
+void	ft_close_fd(t_fd *fd)
+{
+	dup2(fd->fd_std_in, 0);
+	dup2(fd->fd_std_out, 1);
+	close(fd->fd_in);
+	close(fd->fd_out);
+	close(fd->fd_std_in);
+	close(fd->fd_std_out);
+}
 
 
-	//ft_fd_checker(fd_in, fd_out);
-	if ((*node)->type == BUILTIN_CMD)
-		ft_built_in(node, cmd);
-	else if ((*node)->type == CMD)
+void	execute_cmds(t_node **node, t_cmd *cmd)
+{
+	t_fd	fd;
+	ft_set_fd(&fd);
+	if (ft_fd_checker(*node, &fd))
 	{
-		g_info.pid_child = fork();
-		if (g_info.pid_child == 0)
-			ft_execmd(*node, cmd);
-		else if (g_info.pid_child > 0)
+		while (*node)
 		{
-			waitpid(g_info.pid_child, &status, 0);
-			g_info.pid_child = 0;
-			g_info.exit_code = WEXITSTATUS(status);
+			if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
+				break ;
+			(*node) = (*node)->next;
 		}
+		if ((*node)->type == BUILTIN_CMD)
+			ft_built_in(node, cmd);
+		else if ((*node)->type == CMD)
+			ft_execve_cmd(node, cmd);
+		ft_close_fd(&fd);
 	}
-	// 있어야할까? 이게?
-	//ft_move_to_pipe(node);
+	ft_move_to_last(node);
 	ft_update_last_env((*node)->str);
 }
 
@@ -73,91 +178,9 @@ int	count_pipe(t_node *node)
 	return (count_pipe);
 }
 
-/*
-int	count_cmd(t_node *node)
-{
-	int		count_cmd;
-	t_node	*tmp;
-
-	count_cmd = 0;
-	tmp = node->prev;
-	while (node && node != tmp)
-	{
-		if (node->type == BUILTIN_CMD || node->type == CMD)
-			count_cmd++;
-		node = node->next;
-	}
-	return (count_cmd);
-}
-*/
 void	ft_error_message_exec(void)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected |\n", 2);
-}
-
-void	ft_exec_multi_pipe(t_node *node)
-{
-	printf("for multi pipe\n");
-	(void)node;
-
-	//////////// set fd for < << > >> ////////
-	// t_fd_set	fd_set;
-	// ft_init_fd_set(&fd_set);
-	// if (ft_left_redirect(node, fd_set))
-		//dup(fd_set.fd_in, STDIN);
-	// if (ft_left_redirect(node, fd_set))
-		//dup(fd_set.fd_out, STDOUT);
-	///////////////////////////////////////////
-	/*
-	   if (  fd_in of file for < or <<)
-			exec_for_<
-	   while (node.. etc, i < ft_num_pipe(node))
-	   {
-			execute_cmd_with_pipe(node)
-			// to do:
-			//	pipe(pipe_fd);
-			// 	if (pid == 0)
-			//	{
-			//		close(pipe_fd[0]);
-			//		dup2(pipe_fd[1], STDOUT);
-			//		execute_cmd(node);
-			//		free_all_for_fork_process
-			//		exit();
-			//	}
-			//	else if (pid > 0)
-			//	{
-			//		close(pipe_fd[1]);
-			//		dup2(pipe_fd[0], STDIN);
-			//		wait
-			//
-	   		//	}
-		}
-		execute_last(node)
-		{
-			fork --> execute_cmd
-		}
-
-	*/
-
-
-	///////////////////////////////////////
-	// ft_reset_fd_set(&fd_set);
-	/*
-
-	int   ft_left_redirect and right(node, fd_set)
-	   {
-	   		if (ft_find_left(node, fd_set))
-				return (1);
-	   		if (ft_find_dleft(node, fd_set))
-				return (1);
-	   		if (ft_find_right(node, fd_set))
-				return (1);
-	   		if (ft_find_drignt(node, fd_set))
-				return (1);
-			return (0);
-		}
-
-	 */
 }
 
 void	ft_exec_pipe(t_node *node, t_cmd *cmd)

@@ -71,6 +71,14 @@ typedef	struct s_info {
 	char			*last_env_str;
 } t_info;
 
+typedef struct s_fd
+{
+	int	fd_in;
+	int	fd_out;
+	int	fd_std_in;
+	int	fd_std_out;
+}				t_fd;
+
 /* one global variable */
 t_info	g_info;
 
