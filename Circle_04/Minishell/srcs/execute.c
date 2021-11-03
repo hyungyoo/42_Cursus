@@ -8,8 +8,8 @@ void	ft_move_to_last(t_node **node)
 	{
 		if ((*node)->type == PIPE)
 		{
-				(*node) = (*node)->prev;
-				return ;
+			(*node) = (*node)->prev;
+			return ;
 		}
 		if ((*node)->next)
 			(*node) = (*node)->next;
@@ -38,7 +38,8 @@ int	ft_left_fd(t_node **node, t_fd *fd)
 {
 	if (!(*node)->next)
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		ft_putstr_fd("minishell: syntax error ", 2);
+		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
 	}
 	(*node) = (*node)->next;
@@ -111,7 +112,8 @@ int	ft_right_fd(t_node **node, t_fd *fd)
 {
 	if (!(*node)->next)
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		ft_putstr_fd("minishell: syntax error ", 2);
+		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
 	}
 	(*node) = (*node)->next;
@@ -126,7 +128,8 @@ int	ft_dright_fd(t_node **node, t_fd *fd)
 {
 	if (!(*node)->next)
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		ft_putstr_fd("minishell: syntax error ", 2);
+		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
 	}
 	(*node) = (*node)->next;
@@ -183,7 +186,7 @@ void	ft_set_fd(t_fd *fd)
 {
 	fd->fd_std_in = dup(0);
 	fd->fd_std_out = dup(1);
-	fd->fd_in  = -1;
+	fd->fd_in = -1;
 	fd->fd_out = -1;
 }
 
@@ -198,7 +201,6 @@ void	ft_close_fd(t_fd *fd)
 	close(fd->fd_std_in);
 	close(fd->fd_std_out);
 }
-
 
 void	execute_cmds(t_node **node, t_cmd *cmd)
 {
@@ -252,13 +254,12 @@ void	ft_error_message_exec(void)
 void	ft_exec_pipe(t_node *node, t_cmd *cmd)
 {
 	if (!node)
-	 	return ;
-	//init_befor_exec(node);
+		return ;
 	while (node)
 	{
 		execute_cmds_pipe(&node, cmd); //fork for built in aussi
 		if (node->next && node->type != PIPE)
-				node = node->next;
+			node = node->next;
 		if (node->next)
 			node = node->next;
 		else

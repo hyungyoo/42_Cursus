@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 03:04:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 19:38:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,8 @@ void	ft_print_echo(t_node **cmd)
 			ft_putstr((*cmd)->str);
 		if ((*cmd)->type == ARG && (*cmd)->next)
 			ft_putstr(" ");
-		if ((*cmd)->type == ARG && (*cmd)->prev->type == ARG && (*cmd)->flag_nospace == 1)
+		if ((*cmd)->type == ARG && (*cmd)->prev->type == ARG
+			&& (*cmd)->flag_nospace == 1)
 			ft_putstr("\b");
 		if ((*cmd)->next)
 			(*cmd) = (*cmd)->next;

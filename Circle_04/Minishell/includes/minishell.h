@@ -11,8 +11,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # include "../libft/libft.h"
 
@@ -40,36 +40,39 @@
 # define FALSE 0
 
 /* cmd line node */
-typedef struct s_node {
+typedef struct s_node
+{
 	int				type;
-	char 			*str;
+	char			*str;
 	int				flag_nospace;
 	struct s_node	*prev;
 	struct s_node	*next;
-} t_node;
+}				t_node;
 
 /* cmd struct for counting size and stocking node */
-typedef struct s_cmd {
+typedef struct s_cmd
+{
 	int				size;
 	struct s_node	*cmd_start;
-} t_cmd;
+}				t_cmd;
 
 typedef struct s_envp
 {
-	char	*envp_str;
-	char	*envp_key;
-	char	*envp_value;
+	char			*envp_str;
+	char			*envp_key;
+	char			*envp_value;
 	struct s_envp	*next;
 	struct s_envp	*prev;
 }				t_envp;
 
-typedef	struct s_info {
-	struct s_envp 	*envp;
+typedef struct s_info
+{
+	struct s_envp	*envp;
 	pid_t			pid_child;
 	int				exit_code;
 	int				flag_pwd;
 	char			*last_env_str;
-} t_info;
+}				t_info;
 
 typedef struct s_fd
 {
@@ -91,7 +94,7 @@ void	ft_exit_minishell(int exit_code, t_cmd **cmd);
 void	ft_exit(int exit_code);
 void	get_type_dir(t_node *node);
 
-void    copy_env(char **env);
+void	copy_env(char **env);
 void	ft_initial_g(void);
 void	ft_initial(char **env, int ac, char **av);
 

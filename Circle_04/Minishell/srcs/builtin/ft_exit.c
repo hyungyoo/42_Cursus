@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 06:31:14 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 19:41:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,21 @@ int	ft_check_num_exit(char *str)
 	return (1);
 }
 
+/*
+ *	1. exit 두개이상인자이면, too many arguments 인지
+ *	2. 숫자가 아닌 다른 이자가 들어와도 괜찮은지
+ */
 void	ft_exit_builtin(t_node **cmd, t_cmd *cmd_start)
 {
 	int	exit_code ;
 
 	exit_code = 0;
-	if (!cmd || !*cmd)
-		return ;
 	if ((*cmd)->next)
 	{
 		while ((*cmd) && (*cmd)->type != ARG)
 			(*cmd) = (*cmd)->next;
 		if (ft_check_num_exit((*cmd)->str))
 		{
-			// atoi for exit--> atoi_exit 0 < exit_code < 255
 			exit_code = ft_atoi((*cmd)->str);
 			if (exit_code < 0)
 				exit_code *= -1;

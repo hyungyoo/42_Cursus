@@ -41,7 +41,7 @@ int	count_arg(t_node *node)
 			else if (node->flag_nospace == 1)
 			{
 				if (node->next && node->next->type != ARG)
-						size++;
+					size++;
 			}
 		}
 		if (node->next)
@@ -137,7 +137,7 @@ void	ft_error_message(char *path, char **argv, char **env, t_cmd *cmd_start)
 	free(path);
 	free_tab2(argv);
 	free_tab2(env);
-		ft_exit_minishell(127, &(cmd_start));
+	ft_exit_minishell(127, &(cmd_start));
 }
 
 void	ft_error_message_no_path(char **argv, char **env, t_cmd *cmd_start)
@@ -160,7 +160,7 @@ void	ft_execmd_child(t_node *node)
 	char	*path;
 	char	**argv;
 	char	**env;
-	
+
 	env = ft_array_double_env();
 	argv = get_arg(node);
 	path = get_path(argv[0]);
@@ -173,7 +173,7 @@ void	ft_check_path_exec(t_node *node, t_cmd *cmd_start)
 	char	**argv;
 	char	**env;
 	int		flag_access;
-	
+
 	path = NULL;
 	env = ft_array_double_env();
 	argv = get_arg(node);

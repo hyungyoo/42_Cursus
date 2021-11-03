@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/01 21:27:17 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/03 19:38:49 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 int	ft_check_redir_str(char *str)
 {
-	if (!ft_strcmp(str, "<") || !ft_strcmp(str, "<<") || !ft_strcmp(str, ">") || !ft_strcmp(str, ">>"))
+	if (!ft_strcmp(str, "<") || !ft_strcmp(str, "<<")
+		|| !ft_strcmp(str, ">") || !ft_strcmp(str, ">>"))
 		return (1);
 	return (0);
 }
 
 int	ft_check_redir_type(t_node *node)
 {
-	if (node->type == LEFT || node->type == DLEFT || node->type == RIGHT || node->type == DRIGHT)
+	if (node->type == LEFT || node->type == DLEFT
+		|| node->type == RIGHT || node->type == DRIGHT)
 		return (1);
 	return (0);
 }

@@ -21,7 +21,10 @@ void	ft_change_type(t_node **node)
 
 void	ft_type_cmd(t_node *node)
 {
-	if (!ft_strcmp(node->str, "pwd") || !ft_strcmp(node->str, "cd") || !ft_strcmp(node->str, "env") || !ft_strcmp(node->str, "export") || !ft_strcmp(node->str, "unset") || !ft_strcmp(node->str, "echo") || !ft_strcmp(node->str, "exit"))
+	if (!ft_strcmp(node->str, "pwd") || !ft_strcmp(node->str, "cd")
+		|| !ft_strcmp(node->str, "env") || !ft_strcmp(node->str, "export")
+		|| !ft_strcmp(node->str, "unset") || !ft_strcmp(node->str, "echo")
+		|| !ft_strcmp(node->str, "exit"))
 		node->type = BUILTIN_CMD;
 	else
 		node->type = CMD;
@@ -36,8 +39,11 @@ void	get_type_dir(t_node *node)
 	{
 		if (ft_check_redir_str(node->str))
 			ft_change_type(&node);
-		else if (node->type != PIPE && flag_cmd == 0 && (flag_cmd = 1))
+		else if (node->type != PIPE && flag_cmd == 0)
+		{
+			flag_cmd = 1;
 			ft_type_cmd(node);
+		}
 		if (node->next)
 		{
 			node = node->next;
