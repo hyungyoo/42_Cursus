@@ -54,9 +54,31 @@ int	ft_left_fd(t_node **node, t_fd *fd)
 
 int	ft_dleft_fd(t_node **node, t_fd *fd)
 {
+	/*
+	char *line;
+
+	if (!(*node)->next)
+	{
+		ft_putstr_fd("minishell: parse error near '\n'\n", 2);
+		return (0);
+	}
+	(*node) = (*node)->next;
+	dup2(fd->fd_std_in, 0);
+	while (get_next_line(0, &line) > 0)
+	{
+		if (!ft_strcmp(line, (*node)->str))
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(line, fd->fd_std_in);
+		ft_putstr_fd(line, 1);
+		ft_putstr_fd("\n", 1);
+		free(line);
+	}
+	*/
 	(void)node;
 	(void)fd;
-	printf("i am heredoc\n");
 	return (1);
 }
 

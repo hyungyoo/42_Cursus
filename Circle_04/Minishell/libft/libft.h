@@ -6,6 +6,8 @@
 # include <string.h>
 # include <fcntl.h>
 
+# define BUFFER_SIZE 1
+
 void	ft_putchar(const char c);
 void	ft_putstr(const char *str);
 int		ft_strlen(const char *str);
@@ -36,5 +38,6 @@ void	free_tab2(char **str);
 int		ft_is_letter(char c);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_is_digit(char c);
+int		get_next_line(int fd, char **line);
 
 #endif
