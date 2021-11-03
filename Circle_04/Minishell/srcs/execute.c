@@ -143,14 +143,20 @@ void	ft_close_fd(t_fd *fd)
 void	execute_cmds(t_node **node, t_cmd *cmd)
 {
 	t_fd	fd;
+	t_node	*tmp;
+
+	tmp = (*node)->prev;
 	ft_set_fd(&fd);
 	if (ft_fd_checker(*node, &fd))
 	{
-		while (*node)
+		while ((*node) != tmp)
 		{
 			if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
 				break ;
-			(*node) = (*node)->next;
+			if ((*node)->next)
+				(*node) = (*node)->next;
+			else
+				break ;
 		}
 		if ((*node)->type == BUILTIN_CMD)
 			ft_built_in(node, cmd);
