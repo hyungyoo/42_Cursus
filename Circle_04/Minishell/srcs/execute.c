@@ -52,33 +52,44 @@ int	ft_left_fd(t_node **node, t_fd *fd)
 	return (1);
 }
 
-int	ft_dleft_fd(t_node **node, t_fd *fd)
+int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 {
-	/*
 	char *line;
+	int	status;
 
+	pipe(fd->fd_heredoc_pipe);
+	g_info.pid_child = fork();
 	if (!(*node)->next)
 	{
 		ft_putstr_fd("minishell: parse error near '\n'\n", 2);
 		return (0);
 	}
 	(*node) = (*node)->next;
-	dup2(fd->fd_std_in, 0);
-	while (get_next_line(0, &line) > 0)
+	if (g_info.pid_child > 0)
 	{
-		if (!ft_strcmp(line, (*node)->str))
-		{
-			free(line);
-			break ;
-		}
-		ft_putstr_fd(line, fd->fd_std_in);
-		ft_putstr_fd(line, 1);
-		ft_putstr_fd("\n", 1);
-		free(line);
+		close(fd->fd_heredoc_pipe[1]);
+		dup2(fd->fd_heredoc_pipe[0], 0);
+		waitpid(g_info.pid_child, &status, 0);
+		g_info.pid_child = 0;
+		g_info.exit_code = WEXITSTATUS(status);
 	}
-	*/
-	(void)node;
-	(void)fd;
+	else if (g_info.pid_child == 0)
+	{
+		close(fd->fd_heredoc_pipe[0]);
+		dup2(fd->fd_heredoc_pipe[1], 1);
+		while (get_next_line(0, &line) > 0)
+		{
+			if (!ft_strcmp(line, (*node)->str))
+			{
+				free(line);
+				break ;
+			}
+			ft_putstr_fd(line, 1);
+			ft_putstr_fd("\n", 1);
+			free(line);
+		}
+		ft_exit_minishell(0, &cmd);
+	}
 	return (1);
 }
 
@@ -112,8 +123,7 @@ int	ft_dright_fd(t_node **node, t_fd *fd)
 	return (1);
 }
 
-// 1. no find file name, print error message return 0
-int	ft_fd_checker(t_node *node, t_fd *fd)
+int	ft_fd_checker(t_node *node, t_fd *fd, t_cmd *cmd)
 {
 	t_node	*tmp;
 	int		flag_exit;
@@ -125,7 +135,7 @@ int	ft_fd_checker(t_node *node, t_fd *fd)
 		if (!strcmp(node->str, "<"))
 			flag_exit = ft_left_fd(&node, fd);
 		else if (!strcmp(node->str, "<<"))
-			flag_exit = ft_dleft_fd(&node, fd);
+			flag_exit = ft_dleft_fd(&node, fd, cmd);
 		else if (!strcmp(node->str, ">"))
 			flag_exit = ft_right_fd(&node, fd);
 		else if (!strcmp(node->str, ">>"))
@@ -183,7 +193,7 @@ void	execute_cmds(t_node **node, t_cmd *cmd)
 
 	tmp = (*node)->prev;
 	ft_set_fd(&fd);
-	if (ft_fd_checker(*node, &fd))
+	if (ft_fd_checker(*node, &fd, cmd))
 	{
 		while ((*node) != tmp)
 		{

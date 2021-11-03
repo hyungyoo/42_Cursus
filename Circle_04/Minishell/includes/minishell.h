@@ -77,6 +77,7 @@ typedef struct s_fd
 	int	fd_out;
 	int	fd_std_in;
 	int	fd_std_out;
+	int	fd_heredoc_pipe[2];
 }				t_fd;
 
 /* one global variable */
