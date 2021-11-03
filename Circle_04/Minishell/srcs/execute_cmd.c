@@ -32,11 +32,18 @@ int	count_arg(t_node *node)
 	int	size;
 
 	size = 0;
-	//while (node)
 	while (node && node->type != PIPE)
 	{
-		if (node->flag_nospace == 0)
-			size++;
+		if (node->type == ARG || node->type == CMD)
+		{
+			if (node->flag_nospace == 0)
+				size++;
+			else if (node->flag_nospace == 1)
+			{
+				if (node->next && node->next->type != ARG)
+						size++;
+			}
+		}
 		if (node->next)
 			node = node->next;
 		else
@@ -107,13 +114,16 @@ char	**get_arg(t_node *node)
 		return (NULL);
 	while (node && i < num_arg)
 	{
-		if (node->flag_nospace == 1)
-			path_arg[i] = ft_arg(&node);
-		else if (node->flag_nospace == 0)
-			path_arg[i] = ft_strdup(node->str);
+		if (node->type == ARG || node->type == CMD)
+		{
+			if (node->flag_nospace == 1 && node->next && node->next->type == ARG)
+				path_arg[i] = ft_arg(&node);
+			else if (node->flag_nospace == 0 || (node->flag_nospace == 1 && node->next && node->next->type != ARG))
+				path_arg[i] = ft_strdup(node->str);
+			i++;
+		}
 		if (node->next)
 			node = node->next;
-		i++;
 	}
 	path_arg[i] = NULL;
 	return (path_arg);
@@ -155,16 +165,6 @@ void	ft_execmd_child(t_node *node)
 	argv = get_arg(node);
 	path = get_path(argv[0]);
 	execve(path, argv, env);
-}
-
-int	ft_argv_len(char **argv)
-{
-	int	ret;
-
-	ret = 0;
-	while (argv[ret])
-		ret++;
-	return (ret);
 }
 
 void	ft_check_path_exec(t_node *node, t_cmd *cmd_start)

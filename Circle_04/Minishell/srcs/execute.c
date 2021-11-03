@@ -27,6 +27,18 @@ void	execute_cmds(t_node **node, t_cmd *cmd)
 {
 	int	status;
 
+	////////////////for while---> fd checker/////////
+	while (*node)
+	{
+		if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
+			break ;
+		(*node) = (*node)->next;
+	}
+	printf("%s == str node\n", (*node)->str);
+/////////////////////////////////////////////
+
+
+	//ft_fd_checker(fd_in, fd_out);
 	if ((*node)->type == BUILTIN_CMD)
 		ft_built_in(node, cmd);
 	else if ((*node)->type == CMD)
