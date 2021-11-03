@@ -52,11 +52,46 @@ int	ft_left_fd(t_node **node, t_fd *fd)
 	return (1);
 }
 
+void	heredoc_child(t_fd *fd, int status)
+{
+	close(fd->fd_heredoc_pipe[1]);
+	dup2(fd->fd_heredoc_pipe[0], 0);
+	waitpid(g_info.pid_child, &status, 0);
+	g_info.pid_child = 0;
+	g_info.exit_code = WEXITSTATUS(status);
+}
+
+//////////////////////////////////////////////
+// check valgrind
+// ///////////////////////////////////////////
+void	heredoc_parent(t_fd *fd, t_cmd *cmd, t_node **node)
+{
+	char	*line;
+
+	close(fd->fd_heredoc_pipe[0]);
+	dup2(fd->fd_heredoc_pipe[1], 1);
+	ft_putstr_fd("> ", 2);
+	while (get_next_line(0, &line) > 0)
+	{
+		if (!ft_strcmp(line, (*node)->str))
+		{
+			free(line);
+			break ;
+		}
+		else
+			ft_putstr_fd("> ", 2);
+		ft_putstr_fd(line, 1);
+		ft_putstr_fd("\n", 1);
+		free(line);
+	}
+	ft_exit_minishell(0, &cmd);
+}
+
 int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 {
-	char *line;
 	int	status;
 
+	status = 0;
 	pipe(fd->fd_heredoc_pipe);
 	g_info.pid_child = fork();
 	if (!(*node)->next)
@@ -66,30 +101,9 @@ int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 	}
 	(*node) = (*node)->next;
 	if (g_info.pid_child > 0)
-	{
-		close(fd->fd_heredoc_pipe[1]);
-		dup2(fd->fd_heredoc_pipe[0], 0);
-		waitpid(g_info.pid_child, &status, 0);
-		g_info.pid_child = 0;
-		g_info.exit_code = WEXITSTATUS(status);
-	}
+		heredoc_child(fd, status);
 	else if (g_info.pid_child == 0)
-	{
-		close(fd->fd_heredoc_pipe[0]);
-		dup2(fd->fd_heredoc_pipe[1], 1);
-		while (get_next_line(0, &line) > 0)
-		{
-			if (!ft_strcmp(line, (*node)->str))
-			{
-				free(line);
-				break ;
-			}
-			ft_putstr_fd(line, 1);
-			ft_putstr_fd("\n", 1);
-			free(line);
-		}
-		ft_exit_minishell(0, &cmd);
-	}
+		heredoc_parent(fd, cmd, node);
 	return (1);
 }
 
