@@ -18,6 +18,7 @@ void	ft_move_to_last(t_node **node)
 	}
 }
 
+/*
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 {
 	if ((*node)->type == BUILTIN_CMD)
@@ -25,6 +26,7 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 	else if ((*node)->type == CMD)
 		ft_execmd(*node, cmd);
 }
+*/
 
 void	ft_error_message_left(char *str)
 {
@@ -62,9 +64,6 @@ void	heredoc_child(t_fd *fd, int status)
 	g_info.exit_code = WEXITSTATUS(status);
 }
 
-//////////////////////////////////////////////
-// check valgrind
-// ///////////////////////////////////////////
 void	heredoc_parent(t_fd *fd, t_cmd *cmd, t_node **node)
 {
 	char	*line;
@@ -251,20 +250,36 @@ void	ft_error_message_exec(void)
 	ft_putstr_fd("minishell: syntax error near unexpected |\n", 2);
 }
 
-void	ft_exec_pipe(t_node *node, t_cmd *cmd)
+// 성공하면 꺼짐.
+// 받은 인자들이 다음명령어가 없으면, 그대로 명령어로 읽힘
+void	ft_exec_pipe(t_node **node, t_cmd *cmd)
 {
-	if (!node)
-		return ;
-	while (node)
+	(void)node;
+	(void)cmd;
+	printf("multi\n");
+}
+
+void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
+{
+	t_node	*tmp;
+	int		pipe_count;
+	int		i;
+
+	i = 0;
+	pipe_count = count_pipe(cmd->cmd_start);
+	tmp = (*node)->prev;
+	while ((*node) && i < pipe_count)
 	{
-		execute_cmds_pipe(&node, cmd); //fork for built in aussi
-		if (node->next && node->type != PIPE)
-			node = node->next;
-		if (node->next)
-			node = node->next;
+		ft_exec_pipe(node, cmd);
+		if ((*node)->next)
+		{
+			i++;
+			(*node) = (*node)->next;
+		}
 		else
 			break ;
-	}
+	}	
+	execute_cmds(node, cmd);
 }
 
 int	ft_check_pipe_error(t_node *node)
@@ -284,11 +299,6 @@ int	ft_check_pipe_error(t_node *node)
 	return (1);
 }
 
-/* 
- * to do:
- * 1 execuve함수와 일반 빌트인함수에서 나오는 다이렉션 무시하고 할수있도록 해야함 즉 12인 arg만 읽도록 아니면 넘기도록
- */
-
 void	ft_exec(t_cmd *cmd)
 {
 	t_node	*node;
@@ -297,15 +307,10 @@ void	ft_exec(t_cmd *cmd)
 	if (!node)
 		return ;
 	get_type_dir(node);
-	//printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
-	// echo str | < file 또한 에러로읽힌다. cmd가 아니기때문, 아니면, 한바퀴돌면서
-	// 파이프다음에 이것들중에 하나라도 없으면 에러?
 	if (!ft_check_pipe_error(node))
 		ft_error_message_exec();
 	else if (count_pipe(node) == 0)
 		execute_cmds(&node, cmd);
-	/*
 	else if (count_pipe(node) >= 1)
-		ft_exec_pipe(node);	// fork all
-	*/
+		execute_cmds_pipe(&node, cmd);
 }

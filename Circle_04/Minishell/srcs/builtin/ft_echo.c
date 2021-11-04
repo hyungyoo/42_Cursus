@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 19:38:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:52:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,15 @@ void	ft_type2_sans_espace(t_node **cmd)
 	}
 }
 
+int	ft_not_type(t_node *node)
+{
+	if (node->type == LEFT || node->type == FILE
+		|| node->type == DLEFT || node->type == RIGHT
+		|| node->type == DRIGHT)
+		return (0);
+	return (1);
+}
+
 void	ft_print_echo(t_node **cmd)
 {
 	while (*cmd && ((*cmd)->type != PIPE))
@@ -225,11 +234,11 @@ void	ft_print_echo(t_node **cmd)
 			else
 				ft_echo_type_2(cmd);
 		}
-		else if ((*cmd)->type == ARG)
+		else if ((*cmd)->type == ARG || (*cmd)->type == SINQ)
 			ft_putstr((*cmd)->str);
-		if ((*cmd)->type == ARG && (*cmd)->next)
+		if (ft_not_type(*cmd) && (*cmd)->next && (*cmd)->next->type != PIPE)
 			ft_putstr(" ");
-		if ((*cmd)->type == ARG && (*cmd)->prev->type == ARG
+		else if (ft_not_type((*cmd)) && ft_not_type((*cmd)->prev)
 			&& (*cmd)->flag_nospace == 1)
 			ft_putstr("\b");
 		if ((*cmd)->next)

@@ -81,6 +81,7 @@ typedef struct s_fd
 	int	fd_std_in;
 	int	fd_std_out;
 	int	fd_heredoc_pipe[2];
+	int	fd_pipe[2];
 }				t_fd;
 
 /* one global variable */
@@ -135,6 +136,7 @@ void	ft_unset(t_node **cmd);
 void	ft_echo(t_node **cmd);
 void	ft_cd(t_node **cmd);
 void	ft_exit_builtin(t_node **cmd, t_cmd *cmd_start);
+int		ft_not_type(t_node *node);
 
 /* built_in cd */
 char	*ft_strjoin_cd(char *s1, char *s2);
