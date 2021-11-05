@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_quote.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/04 00:58:32 by keulee            #+#    #+#             */
+/*   Updated: 2021/11/04 00:58:33 by keulee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	parsing_quotes(char *line, int *index, t_cmd **cmd)
@@ -25,7 +37,7 @@ int	parsing_quotes(char *line, int *index, t_cmd **cmd)
 
 int	is_quotes_pair(char *line, int *index, char pair)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = *index;
 	while (line[tmp])

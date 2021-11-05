@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/04 03:39:15 by keulee            #+#    #+#             */
+/*   Updated: 2021/11/04 03:39:16 by keulee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 t_cmd	*init_cmd(void)
 {	
-	t_cmd *cmd;
+	t_cmd	*cmd;
 
-	cmd = (t_cmd *)malloc(sizeof(t_cmd)); /* dont forget : free ft needed */
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
 	cmd->size = 0;
@@ -14,10 +26,10 @@ t_cmd	*init_cmd(void)
 
 void	insert_node(t_cmd **cmd, int type, char *str)
 {
-	t_node *new;
-	t_node *tmp;
+	t_node	*new;
+	t_node	*tmp;
 
-	new = (t_node *)malloc(sizeof(t_node)); /* dont forget : free ft needed */
+	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return ;
 	new->prev = NULL;
@@ -54,7 +66,7 @@ void	free_list(t_cmd **cmd)
 	(*cmd) = NULL;
 }
 
-int		get_listsize(t_node **node)
+int	get_listsize(t_node **node)
 {
 	t_node	*tmp;
 	int		size;
@@ -101,4 +113,3 @@ void	print_cmdline(t_cmd **cmd)
 	printf("\n");
 	printf("----------DONE---------\n");
 }
-
