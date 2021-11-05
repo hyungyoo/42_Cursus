@@ -34,13 +34,13 @@ int	count_arg(t_node *node)
 	size = 0;
 	while (node && node->type != PIPE)
 	{
-		if (node->type == ARG || node->type == CMD)
+		if (ft_not_type(node))
 		{
 			if (node->flag_nospace == 0)
 				size++;
 			else if (node->flag_nospace == 1)
 			{
-				if (node->next && node->next->type != ARG)
+				if (node->next && !ft_not_type(node->next))
 					size++;
 			}
 		}
@@ -114,11 +114,11 @@ char	**get_arg(t_node *node)
 		return (NULL);
 	while (node && i < num_arg)
 	{
-		if (node->type == ARG || node->type == CMD)
+		if ((ft_not_type(node)))
 		{
-			if (node->flag_nospace == 1 && node->next && node->next->type == ARG)
+			if (node->flag_nospace == 1 && node->next && ft_not_type(node->next))
 				path_arg[i] = ft_arg(&node);
-			else if (node->flag_nospace == 0 || (node->flag_nospace == 1 && node->next && node->next->type != ARG))
+			else if (node->flag_nospace == 0 || (node->flag_nospace == 1 && node->next && !ft_not_type(node->next)))
 				path_arg[i] = ft_strdup(node->str);
 			i++;
 		}

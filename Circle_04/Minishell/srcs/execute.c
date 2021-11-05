@@ -18,16 +18,6 @@ void	ft_move_to_last(t_node **node)
 	}
 }
 
-/*
-void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
-{
-	if ((*node)->type == BUILTIN_CMD)
-		ft_built_in_pipe(node, cmd);
-	else if ((*node)->type == CMD)
-		ft_execmd(*node, cmd);
-}
-*/
-
 void	ft_error_message_left(char *str)
 {
 	ft_putstr_fd("minishell: ", 2);
@@ -277,43 +267,41 @@ int	ft_fd_checker_pipe(t_node * node)
 // 받은 인자들이 다음명령어가 없으면, 그대로 명령어로 읽힘
 void	ft_exec_pipe(t_node **node, t_cmd *cmd)
 {
-	t_fd	fd;
+	int	fd_pipe[2];
 	t_node	*tmp;
 	int		status;
 
-	if (ft_fd_checker_pipe(*node))
+	g_info.pid_child = fork();
+	pipe(fd_pipe);
+	//ft_set_fd(&fd);
+	if (g_info.pid_child > 0)
 	{
-		g_info.pid_child = fork();
-		pipe(fd.fd_pipe);
-		ft_set_fd(&fd);
-		if (g_info.pid_child > 0)
+		close(fd_pipe[1]);
+		dup2(fd_pipe[0], 0);
+		//close(fd.fd_pipe[0]);
+		waitpid(g_info.pid_child, &status, 0);
+		g_info.exit_code = WEXITSTATUS(status);
+		g_info.pid_child = 0;
+	}
+	else if (g_info.pid_child == 0)
+	{
+		close(fd_pipe[0]);
+		dup2(fd_pipe[1], 1);
+		tmp = (*node)->prev;
+		while ((*node) != tmp)
 		{
-			close(fd.fd_pipe[1]);
-			dup2(fd.fd_pipe[0], 0);
-			waitpid(g_info.pid_child, &status, 0);
-			g_info.exit_code = WEXITSTATUS(status);
-			g_info.pid_child = 0;
+			if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
+				break ;
+			if ((*node)->next)
+				(*node) = (*node)->next;
+			else
+				break ;
 		}
-		else if (g_info.pid_child == 0)
-		{
-			close(fd.fd_pipe[0]);
-			dup2(fd. fd_pipe[1], 1);
-			tmp = (*node)->prev;
-			while ((*node) != tmp)
-			{
-				if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
-					break ;
-				if ((*node)->next)
-					(*node) = (*node)->next;
-				else
-					break ;
-			}
-			if ((*node)->type == BUILTIN_CMD)
-				ft_built_in(node, cmd);
-			else if ((*node)->type == CMD)
-				ft_execmd(*node, cmd);
-			ft_exit_minishell(g_info.pid_child, &cmd);
-		}
+		if ((*node)->type == BUILTIN_CMD)
+			ft_built_in(node, cmd);
+		else if ((*node)->type == CMD)
+			ft_execmd(*node, cmd);
+		ft_exit_minishell(g_info.pid_child, &cmd);
 	}
 	//ft_close_fd(&fd);
 	ft_move_to_last(node);
@@ -326,7 +314,7 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 	int		pipe_count;
 	int		i;
 
-	int std_in = dup(0);
+	//int std_in = dup(0);
 	//int std_out = dup(1);
 	i = 0;
 	pipe_count = count_pipe(cmd->cmd_start);
@@ -343,7 +331,7 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 			break ;
 	}
 	execute_cmds(node, cmd);
-	dup2(std_in, 0);
+	//dup2(std_in, 0);
 	//dup2(std_out, 1);
 }
 
