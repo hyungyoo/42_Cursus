@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 03:17:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/06 20:35:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,10 @@ int	ft_num_arg_cd(t_node *cmd)
 	{
 		if (cmd->type == ARG)
 			arg_count++;
-		cmd = cmd->next;
+		if (cmd->next)
+			cmd = cmd->next;
+		else
+			break ;
 	}
 	return (arg_count);
 }
@@ -193,13 +196,6 @@ void	ft_cd(t_node **cmd)
 {
 	char	*new_path;
 
-	new_path = NULL;
-	if (ft_num_arg_cd(*cmd) > 1)
-	{
-		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
-		g_info.exit_code = 1;
-		return ;
-	}
 	if ((*cmd)->next)
 	{
 		(*cmd) = (*cmd)->next;

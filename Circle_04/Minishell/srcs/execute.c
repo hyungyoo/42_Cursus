@@ -310,6 +310,10 @@ void	ft_exec_pipe(t_node **node, t_cmd *cmd)
 
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 {
+	(void)node;
+	(void)cmd;
+	printf("아직 못함ㅋㅋㅋㅋ\n");
+	/*
 	t_node	*tmp;
 	int		pipe_count;
 	int		i;
@@ -319,20 +323,19 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 	i = 0;
 	pipe_count = count_pipe(cmd->cmd_start);
 	tmp = (*node)->prev;
-	while ((*node) && i < pipe_count)
+	while ((*node) && i < cmd->size)
 	{
 		ft_exec_pipe(node, cmd);
+		i++;
 		if ((*node)->next)
-		{
-			i++;
 			(*node) = (*node)->next;
-		}
 		else
 			break ;
 	}
 	execute_cmds(node, cmd);
 	//dup2(std_in, 0);
 	//dup2(std_out, 1);
+	*/
 }
 
 int	ft_check_pipe_error(t_node *node)
