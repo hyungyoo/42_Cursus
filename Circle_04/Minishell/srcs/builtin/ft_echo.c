@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/04 18:47:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/06 18:36:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_echo_type_dolr(t_node **cmd)
 	}
 }
 
-void	ft_echo_type_2(t_node **cmd)
+void	ft_echo_type_douq(t_node **cmd)
 {
 	if (((*cmd)->str)[0] == '$')
 	{
@@ -88,7 +88,7 @@ int	ft_check_sans_espace(char *str)
 	return (count);
 }
 
-void	ft_echo_type_2_sans_espace(char **key, char *str)
+void	ft_echo_type_douq_sans_espace(char **key, char *str)
 {
 	int	i;
 
@@ -181,7 +181,7 @@ void	ft_print_env_quote(char *str, int *last_index)
 	}
 }
 
-void	ft_type2_with_quote(char *str)
+void	ft_type_douq_with_quote(char *str)
 {
 	int	i;
 
@@ -196,17 +196,17 @@ void	ft_type2_with_quote(char *str)
 	}
 }
 
-void	ft_type2_sans_espace(t_node **cmd)
+void	ft_type_douq_sans_espace(t_node **cmd)
 {
 	char	**split_str;
 
 	split_str = NULL;
 	if (ft_check_quote((*cmd)->str))
-		ft_type2_with_quote((*cmd)->str);
+		ft_type_douq_with_quote((*cmd)->str);
 	else
 	{
 		split_str = ft_split((*cmd)->str, '$');
-		ft_echo_type_2_sans_espace(split_str, (*cmd)->str);
+		ft_echo_type_douq_sans_espace(split_str, (*cmd)->str);
 		free_tab2(split_str);
 		split_str = NULL;
 	}
@@ -230,9 +230,9 @@ void	ft_print_echo(t_node **cmd)
 		else if ((*cmd)->type == DOUQ)
 		{
 			if (ft_check_sans_espace((*cmd)->str) >= 1)
-				ft_type2_sans_espace(cmd);
+				ft_type_douq_sans_espace(cmd);
 			else
-				ft_echo_type_2(cmd);
+				ft_echo_type_douq(cmd);
 		}
 		else if ((*cmd)->type == ARG || (*cmd)->type == SINQ)
 			ft_putstr((*cmd)->str);
