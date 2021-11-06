@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/06 20:35:27 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/06 23:49:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ void	ft_cd(t_node **cmd)
 {
 	char	*new_path;
 
-	if ((*cmd)->next)
+	if ((*cmd)->next && (*cmd)->next->type != PIPE)
 	{
 		(*cmd) = (*cmd)->next;
 		while ((*cmd) && (*cmd)->type != ARG)
