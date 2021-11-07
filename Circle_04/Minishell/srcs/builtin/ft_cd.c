@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/06 23:49:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:04:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,38 +123,56 @@ int	ft_exec_dir(char **path, char *new_path)
 	return (1);
 }
 
+int	ft_get_path_home(char **path)
+{
+	if (ft_getenv(g_info.envp, "HOME"))
+	{
+		(*path) = ft_strdup(ft_getenv(g_info.envp, "HOME"));
+		return (1);
+	}
+	g_info.exit_code = 1;
+	ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+	return (0);
+}
+
 void	ft_exec_home(void)
 {
 	char	*path_env;
 	char	*path;
+	char	*old_path;
+	char	*old_pwd;
 
 	path_env = NULL;
 	path = NULL;
-	if (ft_getenv(g_info.envp, "HOME"))
-		path = ft_strdup(ft_getenv(g_info.envp, "HOME"));
-	else
-		path = NULL;
+	if (!ft_get_path_home(&path))
+		return ;
+	old_path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
 	if (chdir(path) == -1)
-	{
 		ft_error_message_cd(path);
-	}
 	else
 	{
 		path_env = ft_strjoin("PWD=", path);
+		old_pwd = ft_strjoin("OLDPWD=", old_path);
 		ft_update_env(g_info.envp, path_env, "PWD");
+		ft_update_env(g_info.envp, old_pwd, "OLDPWD");
 		free(path_env);
+		free(old_pwd);
 		g_info.exit_code = 0;
 		g_info.flag_pwd = 0;
 	}
 	free(path);
+	free(old_path);
 }
 
 void	ft_exec_path(char *new_path)
 {
 	char	*path;
 	char	*path_env;
+	char	*old_pwd;
+	char	*old_path;
 
 	path_env = NULL;
+	old_path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
 	if (ft_getenv(g_info.envp, "PWD"))
 		path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
 	else
@@ -162,12 +180,16 @@ void	ft_exec_path(char *new_path)
 	if (ft_exec_dir(&path, new_path))
 	{
 		path_env = ft_strjoin("PWD=", path);
+		old_pwd = ft_strjoin("OLDPWD=", old_path);
 		ft_update_env(g_info.envp, path_env, "PWD");
+		ft_update_env(g_info.envp, old_pwd, "OLDPWD");
 		free(path_env);
+		free(old_pwd);
 		g_info.exit_code = 0;
 		g_info.flag_pwd = 0;
 	}
 	free(path);
+	free(old_path);
 }
 
 // cd one arg;

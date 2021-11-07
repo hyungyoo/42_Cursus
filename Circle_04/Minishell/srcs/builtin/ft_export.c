@@ -6,27 +6,13 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 01:53:03 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:35:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 void	ft_error_message_export(char *str);
-
-int	ft_check_egal(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 char	*ft_ajouter_value(char *str)
 {
@@ -162,9 +148,9 @@ void	ft_export_env(void)
 	{
 		if (!(!ft_strncmp(env_sort[i], "PWD", 3) && g_info.flag_pwd == 1))
 		{
-			ft_putstr("declare -x ");
-			ft_putstr(env_sort[i]);
-			ft_putstr("\n");
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(env_sort[i], 1);
+			ft_putstr_fd("\n", 1);
 		}
 		i++;
 	}
@@ -224,33 +210,22 @@ int	ft_check_all(t_node *cmd)
 	return (1);
 }
 
-int	ft_check_export(t_node **cmd)
-{
-	if (!cmd || !(*cmd) || !(*cmd)->next)
-	{
-		if (!(*cmd)->next)
-			ft_export_env();
-		return (0);
-	}
-	if (!ft_check_all((*cmd)))
-		return (0);
-	return (1);
-}
-
 void	ft_export(t_node **cmd)
 {
 	char	*key_tmp;
 
-	if (!ft_check_export(cmd))
+	if (!ft_check_all((*cmd)))
+		return ;
+	else if (!cmd || !(*cmd) || (!(*cmd)->next || (*cmd)->next->type == PIPE))
 	{
-		g_info.exit_code = 1;
+		if (!(*cmd)->next || (*cmd)->next->type == PIPE)
+			ft_export_env();
 		return ;
 	}
-	g_info.exit_code = 0;
 	(*cmd) = (*cmd)->next;
-	while (*cmd && (*cmd)->type == 12)
+	while (*cmd && (*cmd)->type != PIPE)
 	{
-		if (ft_check_egal((*cmd)->str))
+		if (ft_not_type(*cmd))
 		{
 			key_tmp = ft_key((*cmd)->str);
 			if (ft_getenv(g_info.envp, key_tmp))
@@ -264,4 +239,5 @@ void	ft_export(t_node **cmd)
 		else
 			return ;
 	}
+	g_info.exit_code = 0;
 }

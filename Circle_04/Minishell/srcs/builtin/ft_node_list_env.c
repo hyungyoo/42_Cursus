@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 19:38:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:31:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_size_key(char *str)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (i);
 }
 
 char	*ft_key(char *env)
