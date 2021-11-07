@@ -293,7 +293,7 @@ void		exec_child(t_node *node, t_node *next_cmd, t_cmd *cmd)
 		close(node->fd[0]);
 	}
 	execute_cmds(&node, cmd);
-	exit(EXIT_SUCCESS);
+	ft_exit_minishell(g_info.exit_code, &cmd);
 }
 
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
@@ -302,6 +302,13 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 	t_node	*next_cmd;
 
 	next_cmd = (*node)->next;
+	//////////////////////////
+	// << heredoc or < file 을 무시함.
+	// 넘어가게하는것 없애야할것같아:
+	// cat < Makefile > file | grep li file 같은경우는 되는데
+	// < Makefile cat > file | grep li file 같은경우는 안되
+	// cat부터 읽어버려서
+	/////////////////////////
 	while (next_cmd)
 	{
 		if (next_cmd->type == CMD || next_cmd->type == BUILTIN_CMD)
@@ -320,6 +327,7 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 	{
 		waitpid(g_info.pid_child, &status, 0);
 		g_info.pid_child = 0;
+		g_info.exit_code = WEXITSTATUS(status);
 	}
 	else if (g_info.pid_child < 0)
 		return ;

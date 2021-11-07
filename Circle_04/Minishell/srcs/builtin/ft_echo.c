@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/06 18:36:45 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/07 01:26:54 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ int	ft_not_type(t_node *node)
 {
 	if (node->type == LEFT || node->type == FILE
 		|| node->type == DLEFT || node->type == RIGHT
-		|| node->type == DRIGHT)
+		|| node->type == DRIGHT || node->type == PIPE)
 		return (0);
 	return (1);
 }
