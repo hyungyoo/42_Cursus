@@ -302,17 +302,13 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 	t_node	*next_cmd;
 
 	next_cmd = (*node)->next;
-	//////////////////////////
-	// << heredoc or < file 을 무시함.
-	// 넘어가게하는것 없애야할것같아:
-	// cat < Makefile > file | grep li file 같은경우는 되는데
-	// < Makefile cat > file | grep li file 같은경우는 안되
-	// cat부터 읽어버려서
-	/////////////////////////
 	while (next_cmd)
 	{
-		if (next_cmd->type == CMD || next_cmd->type == BUILTIN_CMD)
+		if (next_cmd->type == PIPE)
+		{
+			next_cmd = next_cmd->next;
 			break ;
+		}
 		if (next_cmd->next)
 			next_cmd = next_cmd->next;
 		else

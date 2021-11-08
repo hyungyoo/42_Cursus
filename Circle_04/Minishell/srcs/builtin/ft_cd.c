@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/07 16:04:06 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/08 14:50:24 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,10 @@ void	ft_exec_home(void)
 	path = NULL;
 	if (!ft_get_path_home(&path))
 		return ;
-	old_path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
+	if (g_info.flag_pwd == 1)
+		old_path = ft_strdup("");
+	else
+		old_path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
 	if (chdir(path) == -1)
 		ft_error_message_cd(path);
 	else
@@ -172,7 +175,10 @@ void	ft_exec_path(char *new_path)
 	char	*old_path;
 
 	path_env = NULL;
-	old_path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
+	if (g_info.flag_pwd == 1)
+		old_path = ft_strdup("");
+	else
+		old_path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
 	if (ft_getenv(g_info.envp, "PWD"))
 		path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
 	else

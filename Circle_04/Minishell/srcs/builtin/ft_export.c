@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/07 16:35:30 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/07 20:21:14 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,16 +210,31 @@ int	ft_check_all(t_node *cmd)
 	return (1);
 }
 
+int	ft_check_arg(t_node *node)
+{
+	while (node && node->type != PIPE)
+	{
+		if (node->type == ARG)
+			return (1);
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	return (0);
+}
+
 void	ft_export(t_node **cmd)
 {
 	char	*key_tmp;
 
 	if (!ft_check_all((*cmd)))
 		return ;
-	else if (!cmd || !(*cmd) || (!(*cmd)->next || (*cmd)->next->type == PIPE))
+	else if (!cmd || !(*cmd))
+		return ;
+	else if (!ft_check_arg(*cmd))
 	{
-		if (!(*cmd)->next || (*cmd)->next->type == PIPE)
-			ft_export_env();
+		ft_export_env();
 		return ;
 	}
 	(*cmd) = (*cmd)->next;
