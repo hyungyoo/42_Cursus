@@ -3,46 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_quote.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:58:32 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/04 00:58:33 by keulee           ###   ########.fr       */
+/*   Updated: 2021/11/09 03:39:58 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	parsing_quotes(char *line, int *index, t_cmd **cmd)
+int	parsing_quotes(char *str, int *index, t_cmd **cmd)
 {
 	int		tmp;
-	char	*str;
+	char	*string;
 	char	pair;
 
-	pair = line[(*index)++];
+	pair = str[(*index)++];
 	tmp = *index;
-	if (is_quotes_pair(line, index, pair))
+	if (is_quotes_pair(str, index, pair))
 		return (EXIT_FAILURE);
-	while (line[*index] && line[*index] != pair)
+	while (str[*index] && str[*index] != pair)
 		(*index)++;
-	str = ft_substr(line, tmp, *index - tmp);
+	string = ft_substr(str, tmp, *index - tmp);
 	if (*index - tmp)
 	{
 		if (pair == '\"')
-			insert_node(cmd, DOUQ, str);
+			insert_node(cmd, DOUQ, string);
 		else if (pair == '\'')
-			insert_node(cmd, SINQ, str);
+			insert_node(cmd, SINQ, string);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	is_quotes_pair(char *line, int *index, char pair)
+int	is_quotes_pair(char *str, int *index, char pair)
 {
 	int	tmp;
 
 	tmp = *index;
-	while (line[tmp])
+	while (str[tmp])
 	{
-		if (line[tmp] == pair)
+		if (str[tmp] == pair)
 			return (0);
 		tmp++;
 	}

@@ -30,6 +30,7 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		}
 		set_detail_type(&(cmd));
+		ft_expension(&cmd);
 		ft_exec(cmd);
 		print_cmdline(&(cmd));
 		free_list(&(cmd));

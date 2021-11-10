@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/07 00:24:15 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/10 20:32:43 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void	ft_exec(t_cmd *cmd);
 void	ft_execmd(t_node *node, t_cmd *cmd_start);
 char	**get_arg(t_node *node);
 char	*get_path(char *str);
+char	*ft_strjoin_free(char *s1, char *s2);
 
 /* built_in */
 void	ft_built_in(t_node **cmd, t_cmd *cmd_start);
@@ -176,5 +177,10 @@ void	ft_update_last_env(char *path);
 int		ft_check_redir_str(char *str);
 int		ft_check_redir_type(t_node *node);
 int		ft_redir_passe_node(t_node **node);
+char	*ft_strjoin_free(char *s1, char *s2);
+
+/* expension */
+
+void	ft_expension(t_cmd **cmd);
 
 #endif

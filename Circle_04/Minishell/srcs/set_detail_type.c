@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_detail_type.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 03:36:35 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/04 03:36:36 by keulee           ###   ########.fr       */
+/*   Updated: 2021/11/09 05:52:07 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	first_cmd_type(t_cmd **cmd)
 	tmp = (*cmd)->cmd_start;
 	if (is_builtin(tmp->str))
 		tmp->type = BUILTIN_CMD;
+	else if (tmp->type == DOUQ || tmp->type == SINQ || tmp->type == DOLR)
+		return ;
 	else
 		tmp->type = CMD;
 }
