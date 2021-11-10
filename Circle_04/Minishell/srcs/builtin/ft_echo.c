@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/08 15:26:28 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/10 21:49:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,8 @@ void	ft_print_echo(t_node **cmd)
 		if (ft_not_type((*cmd)) && ft_not_type((*cmd)->prev)
 			&& (*cmd)->flag_nospace == 1)
 			ft_putstr("");
-		else if (ft_not_type(*cmd) && (*cmd)->next && (*cmd)->next->type != PIPE)
+		else if (ft_not_type(*cmd) && (*cmd)->next
+			&& (*cmd)->next->type != PIPE)
 			ft_putstr(" ");
 		if ((*cmd)->next)
 			(*cmd) = (*cmd)->next;

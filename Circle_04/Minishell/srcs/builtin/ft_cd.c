@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/08 14:50:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/10 21:49:38 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,14 @@ int	ft_get_path_home(char **path)
 	return (0);
 }
 
+void	ft_update_path_oldpath(char *path_env, char *old_pwd)
+{
+	ft_update_env(g_info.envp, path_env, "PWD");
+	ft_update_env(g_info.envp, old_pwd, "OLDPWD");
+	g_info.exit_code = 0;
+	g_info.flag_pwd = 0;
+}
+
 void	ft_exec_home(void)
 {
 	char	*path_env;
@@ -156,12 +164,7 @@ void	ft_exec_home(void)
 	{
 		path_env = ft_strjoin("PWD=", path);
 		old_pwd = ft_strjoin("OLDPWD=", old_path);
-		ft_update_env(g_info.envp, path_env, "PWD");
-		ft_update_env(g_info.envp, old_pwd, "OLDPWD");
-		free(path_env);
-		free(old_pwd);
-		g_info.exit_code = 0;
-		g_info.flag_pwd = 0;
+		ft_update_path_oldpath(path_env, old_pwd);
 	}
 	free(path);
 	free(old_path);
@@ -187,12 +190,7 @@ void	ft_exec_path(char *new_path)
 	{
 		path_env = ft_strjoin("PWD=", path);
 		old_pwd = ft_strjoin("OLDPWD=", old_path);
-		ft_update_env(g_info.envp, path_env, "PWD");
-		ft_update_env(g_info.envp, old_pwd, "OLDPWD");
-		free(path_env);
-		free(old_pwd);
-		g_info.exit_code = 0;
-		g_info.flag_pwd = 0;
+		ft_update_path_oldpath(path_env, old_pwd);
 	}
 	free(path);
 	free(old_path);

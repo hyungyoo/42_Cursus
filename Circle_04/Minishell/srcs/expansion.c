@@ -35,7 +35,7 @@ char	*replace_str(char *str, int *index)
 	free(exp);
 	free(rest);
 	*index = i;
-	printf("index:%d\n", *index);
+	//printf("index:%d\n", *index);
 	// printf("exp:%s\n", exp);
 	// printf("rest:%s\n", rest);
 	return (tmp);
@@ -61,13 +61,13 @@ void	replace_expansion_in_dquote(char **str)
 			// printf("string: |%s|\n", string);
 			// printf("i: %c", (*str)[i]);
 			tmp = replace_str(*str, &i);
-			printf("tmp: |%s|\n", tmp);
+			//printf("tmp: |%s|\n", tmp);
 			free(*str);
 			*str = ft_strjoin(string, tmp);
-			printf("str: |%s|\n", *str);
+			//printf("str: |%s|\n", *str);
 			free(string);
 			free(tmp);
-			printf("i== %d\n", i);
+			//printf("i== %d\n", i);
 		}
 		i++;
 	}
@@ -114,7 +114,7 @@ void	ft_delnode(t_node **node)
 		(*node)->prev->next = (*node)->next;
 		(*node)->next->prev = tmp;
 		free(node_to_free->str);
-		free(node_to_free);
+		//free(node_to_free);
 		// free(*node);
 	}
 	else
@@ -166,13 +166,13 @@ void	ft_expension(t_cmd **cmd)
 		/* when "$PWD" is in quote */
 		if ((ft_strchr((node->str), '$') && node->type == DOUQ && node->type != SINQ))
 		{
-			printf("expansion case double quote\n");
+			//printf("expansion case double quote\n");
 			replace_expansion_in_dquote(&node->str);
 		}
 		/* when $PWD is out of quote */
 		else if (node->type == DOLR && node->next && node->next->type == ARG)
 		{
-			printf("expansion case arg\n");
+			//printf("expansion case arg\n");
 			replace_expansion_as_arg(&node->str, &(node));
 			break ;
 		}

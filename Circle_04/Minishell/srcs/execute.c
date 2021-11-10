@@ -45,7 +45,7 @@ int	ft_left_fd(t_node **node, t_fd *fd)
 	return (1);
 }
 
-void	heredoc_child(t_fd *fd, int status)
+void	heredoc_parent(t_fd *fd, int status)
 {
 	close(fd->fd_heredoc_pipe[1]);
 	dup2(fd->fd_heredoc_pipe[0], 0);
@@ -54,10 +54,7 @@ void	heredoc_child(t_fd *fd, int status)
 	g_info.exit_code = WEXITSTATUS(status);
 }
 
-//////////////////////////////////////////////
-// check valgrind
-// ///////////////////////////////////////////
-void	heredoc_parent(t_fd *fd, t_cmd *cmd, t_node **node)
+void	heredoc_child(t_fd *fd, t_cmd *cmd, t_node **node)
 {
 	char	*line;
 
@@ -92,18 +89,11 @@ int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 		ft_putstr_fd("minishell: parse error near '\n'\n", 2);
 		return (0);
 	}
-	////////////////////
-	//else if (!ft_strcmp((*node)->next->str, "|"))
-	//{
-	//	ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
-	//	return (0);
-	//}
-	/////////////////////
 	(*node) = (*node)->next;
 	if (g_info.pid_child > 0)
-		heredoc_child(fd, status);
+		heredoc_parent(fd, status);
 	else if (g_info.pid_child == 0)
-		heredoc_parent(fd, cmd, node);
+		heredoc_child(fd, cmd, node);
 	return (1);
 }
 
@@ -267,19 +257,6 @@ int	ft_check_pipe_error(t_node *node)
 	return (1);
 }
 
-/* 
- * to do:
- * 1 execuve함수와 일반 빌트인함수에서 나오는 다이렉션 무시하고 할수있도록 해야함 즉 12인 arg만 읽도록 아니면 넘기도록
- */
-
-// void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
-// {
-// 	if ((*node)->type == BUILTIN_CMD)
-// 		ft_built_in_pipe(node, cmd);
-// 	else if ((*node)->type == CMD)
-// 		ft_execmd(*node, cmd);
-// }
-
 void		exec_child(t_node *node, t_node *next_cmd, t_cmd *cmd)
 {
 	if (g_info.pipe_flag)
@@ -340,7 +317,7 @@ void	ft_exec_pipe(t_node *node, t_cmd *cmd)
 	g_info.pipe_flag = count_pipe(node);
 	while (node)
 	{
-		execute_cmds_pipe(&node, cmd); //fork for built in aussi
+		execute_cmds_pipe(&node, cmd);
 		while (node->next && node->type != PIPE)
 			node = node->next;
 		if (g_info.pipe_flag)
@@ -359,17 +336,11 @@ void	ft_exec(t_cmd *cmd)
 	node = cmd->cmd_start;
 	if (!node)
 		return ;
-	/* type reorganized */
 	get_type_dir(node);
-	//printf("%d pipe = %d == cmd\n", count_pipe(node), count_cmd(node));
-	// echo str | < file 또한 에러로읽힌다. cmd가 아니기때문, 아니면, 한바퀴돌면서
-	// 파이프다음에 이것들중에 하나라도 없으면 에러?
 	if (!ft_check_pipe_error(node))
 		ft_error_message_exec();
 	else if (!count_pipe(node))
 		execute_cmds(&node, cmd);
-	////////////////////////////////////////////////
-	else if (count_pipe(node))	// fork all
+	else if (count_pipe(node))
 		ft_exec_pipe(node, cmd);
-	////////////////////////////////////////////////
 }
