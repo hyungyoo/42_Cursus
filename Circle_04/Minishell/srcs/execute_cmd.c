@@ -140,6 +140,28 @@ void	ft_error_message(char *path, char **argv, char **env, t_cmd *cmd_start)
 	ft_exit_minishell(127, &(cmd_start));
 }
 
+void	ft_error_message_path(char *path, char **argv, char **env, t_cmd *cmd_start)
+{
+	ft_putstr_fd("Minishell: ", 2);
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	free(path);
+	free_tab2(argv);
+	free_tab2(env);
+	ft_exit_minishell(127, &(cmd_start));
+}
+
+void	ft_error_message_pwd(char *path, char **argv, char **env, t_cmd *cmd_start)
+{
+	ft_putstr_fd("Minishell: ", 2);
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(": is a directory\n", 2);
+	free(path);
+	free_tab2(argv);
+	free_tab2(env);
+	ft_exit_minishell(126, &(cmd_start));
+}
+
 void	ft_error_message_no_path(char **argv, char **env, t_cmd *cmd_start)
 {
 	if (!ft_strncmp(argv[0], "/", 1))
@@ -181,7 +203,11 @@ void	ft_check_path_exec(t_node *node, t_cmd *cmd_start)
 	if (argv[0])
 		path = get_path(argv[0]);
 	flag_access = access(path, F_OK | X_OK);
-	if (flag_access == -1)
+	if (!ft_strcmp(ft_getenv(g_info.envp, "PWD"), path))
+		ft_error_message_pwd(path, argv, env, cmd_start);
+	else if (!ft_strcmp(ft_getenv(g_info.envp, "PATH"), path))
+		ft_error_message_path(path, argv, env, cmd_start);
+	else if (flag_access == -1)
 		ft_error_message(path, argv, env, cmd_start);
 	free_tab2(argv);
 	free_tab2(env);
