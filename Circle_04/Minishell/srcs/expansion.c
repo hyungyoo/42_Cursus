@@ -52,8 +52,16 @@ void	ft_reset_value(t_cmd *cmd, t_node **node)
 
 void	ft_reset_value_douq(t_cmd *cmd, t_node **node)
 {
+	char	*new_str;
+	int		i;
+	int		last;
+
 	(void)cmd;
-	(void)node;
+	i = 0;
+	new_str = NULL;
+	while (((*node)->str)[i])
+	{
+		while (((*node)->str)[last] && !(((*node)->str)[last] == ' ' || ((*node)->str)[last] == '$' || ((*node)->str)[last] == 39))
 }
 
 void	ft_expension(t_cmd **cmd)
