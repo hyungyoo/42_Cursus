@@ -1,11 +1,10 @@
-문제;
 
-bash-3.2$ echo$PWD
-bash: echo/Users/hyungyoo: No such file or directory
-bash-3.2$ echo$PATH
-bash: echo/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin: No such file or directory
-bash-3.2$
-즉, $ARG는 $후에, nospace ==1, next->type == ARG일떼, env값을 반환해야한다.
+$?
 
-minishell $> echo \n\n\n       ---> nnn 이어야함
-Minishell: Syntax error
+처음에 전체문장들을 돌리면서,
+
+1- $숫자 이건 삭제하고,
+2- $?는 exit_code로 대체
+3- 명령어가 /로 시작해서안되는명령어이면,
+	종료하도록? 해보기
+

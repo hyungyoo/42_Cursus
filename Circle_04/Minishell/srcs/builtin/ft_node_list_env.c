@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 15:46:59 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/07 16:31:30 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:31:57 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_check_redir_str(char *str)
 {
+	if (!str)
+		return (0);
 	if (!ft_strcmp(str, "<") || !ft_strcmp(str, "<<")
 		|| !ft_strcmp(str, ">") || !ft_strcmp(str, ">>"))
 		return (1);

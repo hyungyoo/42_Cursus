@@ -1,76 +1,73 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 18:19:44 by keulee            #+#    #+#             */
-/*   Updated: 2021/05/17 18:19:47 by keulee           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 
-int	ft_int_len(int n)
+static void	swap(char *arr, int a, int b)
+{
+	char	temp;
+
+	temp = arr[a];
+	arr[a] = arr[b];
+	arr[b] = temp;
+}
+
+static void	reverse(char *s, int len)
 {
 	int	i;
 
-	if (n < 0)
-		i = 1;
-	else
-		i = 0;
-	if (n < 0)
-		n = n * -1;
-	if (n == 0)
-		i = 1;
-	while (n > 0)
+	i = 0;
+	while (len / 2 > i)
 	{
-		n = n / 10;
+		swap(s, i, len - i - 1);
 		i++;
 	}
-	return (i);
 }
 
-void	ft_decide_mark(int n, int *mark)
+static void	itoa_(int n, char *p)
 {
+	int				i;
+	int				neg;
+	unsigned int	un;
+
+	i = 0;
+	neg = 0;
+	un = n;
 	if (n < 0)
-		*mark = 1;
-	else
-		*mark = 0;
+	{
+		neg = 1;
+		p[i++] = '-';
+		un = -n;
+	}
+	if (n == 0)
+		p[i++] = '0';
+	while (un)
+	{
+		p[i++] = (un % 10) + '0';
+		un /= 10;
+	}
+	p[i] = 0;
+	reverse(p + neg, i - neg);
 }
 
-char	*ft_malloc_str(char *str, int i)
+static int	count(int n)
 {
-	str = (char *)malloc(sizeof(char) * (i + 1));
-	if (!str)
-		return (NULL);
-	return (str);
+	int	result;
+
+	result = 0;
+	if (n <= 0)
+		result++;
+	while (n)
+	{
+		n /= 10;
+		result++;
+	}
+	return (result);
 }
 
 char	*ft_itoa(int n)
 {
-	int		i;
-	char	*str;
-	int		mark;
+	char	*p;
 
-	ft_decide_mark(n, &mark);
-	i = ft_int_len(n);
-	ft_malloc_str(str, i);
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n < 0)
-		n = n * -1;
-	str[i] = '\0';
-	if (n == 0)
-		str[0] = '0';
-	while (n > 0)
-	{
-		str[i - 1] = n % 10 + 48;
-		n = n / 10;
-		i--;
-	}
-	if (mark == 1)
-		str[0] = '-';
-	return (str);
+	p = malloc(count(n) + 1);
+	if (p)
+		itoa_(n, p);
+	return (p);
 }

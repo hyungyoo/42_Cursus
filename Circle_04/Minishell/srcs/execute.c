@@ -138,13 +138,13 @@ int	ft_fd_checker(t_node *node, t_fd *fd, t_cmd *cmd)
 	tmp = node->prev;
 	while (node != tmp && node->type != PIPE)
 	{
-		if (!strcmp(node->str, "<"))
+		if (node->str && !strcmp(node->str, "<"))
 			flag_exit = ft_left_fd(&node, fd);
-		else if (!strcmp(node->str, "<<"))
+		else if (node->str && !strcmp(node->str, "<<"))
 			flag_exit = ft_dleft_fd(&node, fd, cmd);
-		else if (!strcmp(node->str, ">"))
+		else if (node->str && !strcmp(node->str, ">"))
 			flag_exit = ft_right_fd(&node, fd);
-		else if (!strcmp(node->str, ">>"))
+		else if (node->str && !strcmp(node->str, ">>"))
 			flag_exit = ft_dright_fd(&node, fd);
 		if (!flag_exit)
 			return (0);
