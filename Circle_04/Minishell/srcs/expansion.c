@@ -143,11 +143,12 @@ void	ft_reset_value_douq(t_cmd *cmd, t_node **node)
 	tmp = (*node)->str;
 	while (((*node)->str)[i])
 	{
-		if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1] && ((*node)->str)[i + 1] != '?')
+		if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1] && ((*node)->str)[i + 1] && ((*node)->str)[i + 1] != '?'
+			&& ((*node)->str)[i + 1] != ' ')
 			ft_ajouter_dolr(&new_str, (*node)->str, &(i));
 		else if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1] && ((*node)->str)[i + 1] == '?')
 			ft_ajouter_exit_code(&new_str, &(i));
-		else if (((*node)->str)[i] != '$')
+		else //if (((*node)->str)[i] != '$')
 			ft_ajouter_char(&new_str, (((*node)->str)[i++]));
 	}
 	(*node)->str = new_str;
