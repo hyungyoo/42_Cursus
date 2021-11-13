@@ -39,7 +39,8 @@ void	get_type_dir(t_node *node)
 	{
 		if (ft_check_redir_str(node->str))
 			ft_change_type(&node);
-		else if (node->type != PIPE && flag_cmd == 0 && ft_strcmp(node->str, ""))
+		else if (node->type != PIPE && flag_cmd == 0 && ((ft_strcmp(node->str, "") && node->type != DOUQ)
+		|| (node->type == DOUQ)))
 		{
 			flag_cmd = 1;
 			ft_type_cmd(node);

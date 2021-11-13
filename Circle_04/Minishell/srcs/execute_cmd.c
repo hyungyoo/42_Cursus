@@ -218,8 +218,17 @@ void	ft_check_path_exec(t_node *node, t_cmd *cmd_start)
 	free(path);
 }
 
+void	ft_error_message_execmd(t_cmd *cmd_start)
+{
+	ft_putstr_fd("Minishell: ", 2);
+	ft_putstr_fd(": command not found\n", 2);
+	ft_exit_minishell(127, &(cmd_start));
+}
+
 void	ft_execmd(t_node *node, t_cmd *cmd_start)
 {
+	if (!ft_strcmp(node->str, ""))
+		ft_error_message_execmd(cmd_start);
 	ft_check_path_exec(node, cmd_start);
 	ft_execmd_child(node);
 }
