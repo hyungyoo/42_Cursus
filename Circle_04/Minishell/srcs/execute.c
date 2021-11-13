@@ -257,7 +257,7 @@ int	ft_check_pipe_error(t_node *node)
 	return (1);
 }
 
-void		exec_child(t_node *node, t_node *next_cmd, t_cmd *cmd)
+void	exec_child(t_node *node, t_node *next_cmd, t_cmd *cmd)
 {
 	if (g_info.pipe_flag)
 	{

@@ -116,9 +116,11 @@ char	**get_arg(t_node *node)
 	{
 		if ((ft_not_type(node)))
 		{
-			if (node->flag_nospace == 1 && node->next && ft_not_type(node->next))
+			if (node->flag_nospace == 1 && node->next
+				&& ft_not_type(node->next))
 				path_arg[i] = ft_arg(&node);
-			else if (node->flag_nospace == 0 || (node->flag_nospace == 1 && node->next && !ft_not_type(node->next)))
+			else if (node->flag_nospace == 0 || (node->flag_nospace == 1
+					&& node->next && !ft_not_type(node->next)))
 				path_arg[i] = ft_strdup(node->str);
 			i++;
 		}
@@ -140,7 +142,8 @@ void	ft_error_message(char *path, char **argv, char **env, t_cmd *cmd_start)
 	ft_exit_minishell(127, &(cmd_start));
 }
 
-void	ft_error_message_path(char *path, char **argv, char **env, t_cmd *cmd_start)
+void	ft_error_message_path(char *path, char **argv,
+	char **env, t_cmd *cmd_start)
 {
 	ft_putstr_fd("Minishell: ", 2);
 	ft_putstr_fd(path, 2);
@@ -151,7 +154,8 @@ void	ft_error_message_path(char *path, char **argv, char **env, t_cmd *cmd_start
 	ft_exit_minishell(127, &(cmd_start));
 }
 
-void	ft_error_message_pwd(char *path, char **argv, char **env, t_cmd *cmd_start)
+void	ft_error_message_pwd(char *path, char **argv,
+	char **env, t_cmd *cmd_start)
 {
 	ft_putstr_fd("Minishell: ", 2);
 	ft_putstr_fd(path, 2);
