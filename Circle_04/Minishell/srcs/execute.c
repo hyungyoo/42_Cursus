@@ -257,76 +257,51 @@ int	ft_check_pipe_error(t_node *node)
 	return (1);
 }
 
-void	exec_child(t_node *node, t_node *next_cmd, t_cmd *cmd)
-{
-	if (g_info.pipe_flag)
-	{
-		dup2(next_cmd->fd[1], STDOUT_FILENO);
-		close(next_cmd->fd[1]);
-	}
-	if (node->fd[0] != 0)
-	{
-		dup2(node->fd[0], STDIN_FILENO);
-		close(node->fd[0]);
-	}
-	execute_cmds(&node, cmd);
-	ft_exit_minishell(g_info.exit_code, &cmd);
-}
-
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 {
-	int		status;
-	t_node	*next_cmd;
+	//t_fd	fd;
+	t_node	*tmp;
 
-	next_cmd = (*node)->next;
-	while (next_cmd)
+    (void)cmd;
+	tmp = (*node)->prev;
+	//ft_set_fd(&fd);
+	//if (ft_fd_checker(*node, &fd, cmd))
+	//{
+    /*
+	while ((*node) != tmp)
 	{
-		if (next_cmd->type == PIPE)
-		{
-			next_cmd = next_cmd->next;
+		if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
 			break ;
-		}
-		if (next_cmd->next)
-			next_cmd = next_cmd->next;
+		if ((*node)->next)
+			(*node) = (*node)->next;
 		else
 			break ;
 	}
-	if (g_info.pipe_flag)
-		pipe(next_cmd->fd);
-	g_info.pid_child = fork();
-	if (g_info.pid_child == 0)
-		exec_child(*node, next_cmd, cmd);
-	else if (g_info.pid_child > 0)
-	{
-		waitpid(g_info.pid_child, &status, 0);
-		g_info.pid_child = 0;
-		g_info.exit_code = WEXITSTATUS(status);
-	}
-	else if (g_info.pid_child < 0)
-		return ;
-	if (g_info.pipe_flag)
-		close(next_cmd->fd[1]);
-	if ((*node)->fd[0] != 0)
-		close((*node)->fd[0]);
+	if ((*node)->type == BUILTIN_CMD)
+		ft_built_in(node, cmd);
+	else if ((*node)->type == CMD)
+		ft_execve_cmd(node, cmd);
+	//}
+    */
+	//ft_close_fd(&fd);
+	ft_move_to_last(node);
+	ft_update_last_env((*node)->str);
 }
-
-void	ft_exec_pipe(t_node *node, t_cmd *cmd)
+void    ft_exec_pipe(t_node *node, t_cmd *cmd)
 {
-	if (!node)
-		return ;
-	g_info.pipe_flag = count_pipe(node);
-	while (node)
-	{
-		execute_cmds_pipe(&node, cmd);
-		while (node->next && node->type != PIPE)
-			node = node->next;
-		if (g_info.pipe_flag)
-			g_info.pipe_flag--;
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
+    t_node  *tmp;
+
+    (void)cmd;
+    tmp = node->prev;
+    while (node != tmp)
+    {
+        execute_cmds_pipe(&node, cmd);
+        // derniere arg donc, avec pipe, on compte
+        if (node->next)
+            node = node->next;
+        else
+            return ;
+    }
 }
 
 void	ft_exec(t_cmd *cmd)
