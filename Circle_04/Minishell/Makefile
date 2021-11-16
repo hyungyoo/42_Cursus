@@ -12,6 +12,7 @@ SRCS = srcs/minishell.c \
 		srcs/parsing_arg_word.c \
 		srcs/set_detail_type.c \
 		srcs/execute.c \
+		srcs/execute_pipe.c \
 		srcs/execute_cmd.c \
 		srcs/get_type_dir.c \
 		srcs/builtin/ft_built_in.c \

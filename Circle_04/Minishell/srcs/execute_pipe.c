@@ -1,32 +1,6 @@
 #include "../includes/minishell.h"
 
-void	ft_move_to_last(t_node **node)
-{
-	if (!node || !*node || (*node)->type == PIPE)
-		return ;
-	while ((*node))
-	{
-		if ((*node)->type == PIPE)
-		{
-			(*node) = (*node)->prev;
-			return ;
-		}
-		if ((*node)->next)
-			(*node) = (*node)->next;
-		else
-			return ;
-	}
-}
-
-void	ft_error_message_left(char *str)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": No such file or directory", 2);
-	g_info.exit_code = 1;
-}
-
-int	ft_left_fd(t_node **node, t_fd *fd)
+int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd)
 {
 	if (!(*node)->next)
 	{
@@ -45,7 +19,7 @@ int	ft_left_fd(t_node **node, t_fd *fd)
 	return (1);
 }
 
-void	heredoc_parent(t_fd *fd, int status)
+void	heredoc_parent_pipe(t_fd_pipe *fd, int status)
 {
 	close(fd->fd_heredoc_pipe[1]);
 	dup2(fd->fd_heredoc_pipe[0], 0);
@@ -54,7 +28,7 @@ void	heredoc_parent(t_fd *fd, int status)
 	g_info.exit_code = WEXITSTATUS(status);
 }
 
-void	heredoc_child(t_fd *fd, t_cmd *cmd, t_node **node)
+void	heredoc_child_pipe(t_fd_pipe *fd, t_cmd *cmd, t_node **node)
 {
 	char	*line;
 
@@ -77,7 +51,7 @@ void	heredoc_child(t_fd *fd, t_cmd *cmd, t_node **node)
 	ft_exit_minishell(0, &cmd);
 }
 
-int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
+int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd)
 {
 	int	status;
 
@@ -91,13 +65,13 @@ int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 	}
 	(*node) = (*node)->next;
 	if (g_info.pid_child > 0)
-		heredoc_parent(fd, status);
+		heredoc_parent_pipe(fd, status);
 	else if (g_info.pid_child == 0)
-		heredoc_child(fd, cmd, node);
+		heredoc_child_pipe(fd, cmd, node);
 	return (1);
 }
 
-int	ft_right_fd(t_node **node, t_fd *fd)
+int	ft_right_fd_pipe(t_node **node, t_fd_pipe *fd)
 {
 	if (!(*node)->next)
 	{
@@ -113,7 +87,7 @@ int	ft_right_fd(t_node **node, t_fd *fd)
 	return (1);
 }
 
-int	ft_dright_fd(t_node **node, t_fd *fd)
+int	ft_dright_fd_pipe(t_node **node, t_fd_pipe *fd)
 {
 	if (!(*node)->next)
 	{
@@ -129,7 +103,7 @@ int	ft_dright_fd(t_node **node, t_fd *fd)
 	return (1);
 }
 
-int	ft_fd_checker(t_node *node, t_fd *fd, t_cmd *cmd)
+int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd)
 {
 	t_node	*tmp;
 	int		flag_exit;
@@ -139,13 +113,13 @@ int	ft_fd_checker(t_node *node, t_fd *fd, t_cmd *cmd)
 	while (node != tmp && node->type != PIPE)
 	{
 		if (node->str && !strcmp(node->str, "<"))
-			flag_exit = ft_left_fd(&node, fd);
+			flag_exit = ft_left_fd_pipe(&node, fd);
 		else if (node->str && !strcmp(node->str, "<<"))
-			flag_exit = ft_dleft_fd(&node, fd, cmd);
+			flag_exit = ft_dleft_fd_pipe(&node, fd, cmd);
 		else if (node->str && !strcmp(node->str, ">"))
-			flag_exit = ft_right_fd(&node, fd);
+			flag_exit = ft_right_fd_pipe(&node, fd);
 		else if (node->str && !strcmp(node->str, ">>"))
-			flag_exit = ft_dright_fd(&node, fd);
+			flag_exit = ft_dright_fd_pipe(&node, fd);
 		if (!flag_exit)
 			return (0);
 		if (node->next)
@@ -156,22 +130,7 @@ int	ft_fd_checker(t_node *node, t_fd *fd, t_cmd *cmd)
 	return (1);
 }
 
-void	ft_execve_cmd(t_node **node, t_cmd *cmd)
-{
-	int	status;
-
-	g_info.pid_child = fork();
-	if (g_info.pid_child == 0)
-		ft_execmd(*node, cmd);
-	else if (g_info.pid_child > 0)
-	{
-		waitpid(g_info.pid_child, &status, 0);
-		g_info.pid_child = 0;
-		g_info.exit_code = WEXITSTATUS(status);
-	}
-}
-
-void	ft_set_fd(t_fd *fd)
+void	ft_set_fd_pipe(t_fd_pipe *fd)
 {
 	fd->fd_std_in = dup(0);
 	fd->fd_std_out = dup(1);
@@ -179,7 +138,7 @@ void	ft_set_fd(t_fd *fd)
 	fd->fd_out = -1;
 }
 
-void	ft_close_fd(t_fd *fd)
+void	ft_close_fd_pipe(t_fd_pipe *fd)
 {
 	dup2(fd->fd_std_in, 0);
 	dup2(fd->fd_std_out, 1);
@@ -191,14 +150,14 @@ void	ft_close_fd(t_fd *fd)
 	close(fd->fd_std_out);
 }
 
-void	execute_cmds(t_node **node, t_cmd *cmd)
+void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 {
-	t_fd	fd;
+	t_fd_pipe	fd;
 	t_node	*tmp;
 
 	tmp = (*node)->prev;
-	ft_set_fd(&fd);
-	if (ft_fd_checker(*node, &fd, cmd))
+	ft_set_fd_pipe(&fd);
+	if (ft_fd_checker_pipe(*node, &fd, cmd))
 	{
 		while ((*node) != tmp)
 		{
@@ -212,63 +171,57 @@ void	execute_cmds(t_node **node, t_cmd *cmd)
 		if ((*node)->type == BUILTIN_CMD)
 			ft_built_in(node, cmd);
 		else if ((*node)->type == CMD)
-			ft_execve_cmd(node, cmd);
+            ft_execmd(*node, cmd);
 	}
-	ft_close_fd(&fd);
+	ft_close_fd_pipe(&fd);
 	ft_move_to_last(node);
 	ft_update_last_env((*node)->str);
 }
 
-int	count_pipe(t_node *node)
+void    execute_pipe(t_node **node, t_cmd *cmd)
 {
-	int		count_pipe;
-	t_node	*tmp;
+	int	status;
+    int pipe_fd[2];
 
-	count_pipe = 0;
-	tmp = node->prev;
-	while (node && node != tmp)
+    pipe(pipe_fd);
+	g_info.pid_child = fork();
+	if (g_info.pid_child == 0)
+    {
+        close(pipe_fd[0]);
+        dup2(pipe_fd[1], 1);
+		execute_cmds_pipe(node, cmd);
+    }
+	else if (g_info.pid_child > 0)
 	{
-		if (node->type == PIPE)
-			count_pipe++;
-		node = node->next;
+        close(pipe_fd[1]);
+        dup2(pipe_fd[0], 0);
+		waitpid(g_info.pid_child, &status, 0);
+		g_info.pid_child = 0;
+		g_info.exit_code = WEXITSTATUS(status);
 	}
-	return (count_pipe);
 }
 
-void	ft_error_message_exec(void)
+void    ft_exec_pipe(t_node *node, t_cmd *cmd)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected |\n", 2);
-}
+    t_node  *tmp;
+    int     i;
+    int     pipe_count;
+	t_fd	fd;
 
-int	ft_check_pipe_error(t_node *node)
-{
-	while (node)
-	{
-		if (node->type == PIPE)
-		{
-			if (!(node->next))
-				return (0);
-		}
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
-	return (1);
-}
-
-void	ft_exec(t_cmd *cmd)
-{
-	t_node	*node;
-
-	node = cmd->cmd_start;
-	if (!node)
-		return ;
-	get_type_dir(node);
-	if (!ft_check_pipe_error(node))
-		ft_error_message_exec();
-	else if (!count_pipe(node))
-		execute_cmds(&node, cmd);
-	else if (count_pipe(node))
-		ft_exec_pipe(node, cmd);
+    i = 0;
+	ft_set_fd(&fd);
+    pipe_count = count_pipe(node);
+    tmp = node->prev;
+    while (node != tmp && i < pipe_count)
+    {
+        execute_pipe(&node, cmd);
+        if (node->next && node->next->type == PIPE && i++)
+            node = node->next;
+        if (node->next)
+            node = node->next;
+        else
+            return ;
+    }
+	execute_cmds(&node, cmd);
+	ft_close_fd(&fd);
 }

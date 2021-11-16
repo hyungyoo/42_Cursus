@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/10 20:32:43 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/16 20:58:55 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,15 @@ typedef struct s_info
 	int				pipe_flag;
 }				t_info;
 
+typedef struct s_fd_pipe
+{
+	int	fd_in;
+	int	fd_out;
+	int	fd_std_in;
+	int	fd_std_out;
+	int	fd_heredoc_pipe[2];
+}               t_fd_pipe;
+
 typedef struct s_fd
 {
 	int	fd_in;
@@ -98,6 +107,15 @@ typedef struct s_fd
 
 /* one global variable */
 t_info	g_info;
+
+/* pipe */
+void    ft_exec_pipe(t_node *node, t_cmd *cmd);
+int     count_pipe(t_node *node);
+void	ft_error_message_left(char *str);
+void	execute_cmds(t_node **node, t_cmd *cmd);
+void	ft_set_fd(t_fd *fd);
+void	ft_close_fd(t_fd *fd);
+void	ft_move_to_last(t_node **node);
 
 void	ascii_logo_lol(void);
 
