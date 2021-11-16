@@ -1,4 +1,9 @@
 
 $숫자 
-"$asd$dwq" --> 명령어로 인식됨 vide
 
+ls | << end
+
+< Makefile  | cat
+
+< Makefile > file | ls
+--> cat file ==> ls list
