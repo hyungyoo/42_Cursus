@@ -295,8 +295,10 @@ void    ft_exec_pipe(t_node *node, t_cmd *cmd)
     tmp = node->prev;
     while (node != tmp)
     {
+        printf("node == %s\n", node->str);
         execute_cmds_pipe(&node, cmd);
-        // derniere arg donc, avec pipe, on compte
+        if (node->next && node->next->type == PIPE)
+            node = node->next;
         if (node->next)
             node = node->next;
         else
