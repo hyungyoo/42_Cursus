@@ -30,7 +30,21 @@ void	ft_type_cmd(t_node *node)
 		node->type = CMD;
 }
 
-void	get_type_dir(t_node *node)
+void    get_type_dir_file(t_node *node)
+{
+	while (node)
+	{
+        if (!ft_strcmp(node->str, "|") && node->type == FILE)
+            node->type = PIPE;
+		if (node->next)
+			node = node->next;
+		else
+			return ;
+	}
+
+}
+
+void	get_type_dir(t_node *node, t_cmd *cmd)
 {
 	int	flag_cmd;
 
@@ -52,6 +66,7 @@ void	get_type_dir(t_node *node)
 				flag_cmd = 0;
 		}
 		else
-			return ;
+			break ;
 	}
+    get_type_dir_file(cmd->cmd_start);
 }

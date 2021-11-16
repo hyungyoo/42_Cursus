@@ -264,7 +264,7 @@ void	ft_exec(t_cmd *cmd)
 	node = cmd->cmd_start;
 	if (!node)
 		return ;
-	get_type_dir(node);
+	get_type_dir(node, cmd);
 	if (!ft_check_pipe_error(node))
 		ft_error_message_exec();
 	else if (!count_pipe(node))

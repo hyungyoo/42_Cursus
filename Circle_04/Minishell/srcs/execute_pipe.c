@@ -22,7 +22,7 @@ int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd)
 void	heredoc_parent_pipe(t_fd_pipe *fd, int status)
 {
 	close(fd->fd_heredoc_pipe[1]);
-	dup2(fd->fd_heredoc_pipe[0], 0);
+	dup2(fd->fd_heredoc_pipe[0], 0);                /////////////////////////////////////
 	waitpid(g_info.pid_child, &status, 0);
 	g_info.pid_child = 0;
 	g_info.exit_code = WEXITSTATUS(status);
@@ -112,7 +112,6 @@ int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd)
 	tmp = node->prev;
 	while (node != tmp && node->type != PIPE)
 	{
-        ft_putstr_fd("here\n", 2);
 		if (node->str && !strcmp(node->str, "<"))
 			flag_exit = ft_left_fd_pipe(&node, fd);
 		else if (node->str && !strcmp(node->str, "<<"))
@@ -154,8 +153,11 @@ void	ft_close_fd_pipe(t_fd_pipe *fd)
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 {
 	t_node	*tmp;
+	t_fd_pipe	fd;
 
+	ft_set_fd_pipe(&fd);
 	tmp = (*node)->prev;
+	if (ft_fd_checker_pipe(*node, &fd, cmd)){
     while ((*node) != tmp)
 	{
 		if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
@@ -169,29 +171,9 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 		ft_built_in(node, cmd);
 	else if ((*node)->type == CMD)
         ft_execmd(*node, cmd);
+    }
+	ft_close_fd_pipe(&fd);
 }
-/*
-	t_fd_pipe	fd;
-	ft_set_fd_pipe(&fd);                ///////////////////////
-	if (ft_fd_checker_pipe(*node, &fd, cmd))
-	{
-		while ((*node) != tmp)
-		{
-			if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
-				break ;
-			if ((*node)->next)
-				(*node) = (*node)->next;
-			else
-				break ;
-		}
-		if ((*node)->type == BUILTIN_CMD)
-			ft_built_in(node, cmd);
-		else if ((*node)->type == CMD)
-            ft_execmd(*node, cmd);
-	}
-	ft_close_fd_pipe(&fd);              ///////////////////////////
-}
-*/
 
 void    execute_pipe(t_node **node, t_cmd *cmd)
 {

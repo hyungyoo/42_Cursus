@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/16 20:58:55 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/16 23:32:52 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	handler(int signum);
 
 void	ft_exit_minishell(int exit_code, t_cmd **cmd);
 void	ft_exit(int exit_code);
-void	get_type_dir(t_node *node);
+void	get_type_dir(t_node *node, t_cmd *cmd);
 
 void	copy_env(char **env);
 void	ft_initial_g(void);
