@@ -20,6 +20,23 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
         ft_execmd(*node, cmd);
 }
 
+int check_left(t_node *node)
+{
+    int ret_fd;
+
+    ret_fd = 0;
+    while (node)
+    {
+        if (node->type == LEFT)
+            ret_fd = open(node->next->str, O_RDONLY, 0666);
+        if (node->next)
+            node = node->next;
+        else
+            break ;
+    }
+    return (ret_fd);
+}
+
 void    execute_pipe(t_node **node, t_cmd *cmd)
 {
 	int	status;
@@ -32,14 +49,15 @@ void    execute_pipe(t_node **node, t_cmd *cmd)
         close(fd.pipe_fd[0]);
         dup2(fd.pipe_fd[1], 1);
 		execute_cmds_pipe(node, cmd);
+        close(fd.pipe_fd[1]);
         ft_exit_minishell(g_info.exit_code, &cmd);
     }
 	else if (g_info.pid_child > 0)
 	{
         close(fd.pipe_fd[1]);
-        // 있다면 0이 fd_file_out을 가르키면되지
         dup2(fd.pipe_fd[0], 0);
 		waitpid(g_info.pid_child, &status, 0);
+        close(fd.pipe_fd[0]);
 		g_info.pid_child = 0;
 		g_info.exit_code = WEXITSTATUS(status);
         ft_move_to_last(node);

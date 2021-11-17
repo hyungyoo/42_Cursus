@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/17 01:07:45 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/17 04:01:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,17 @@ void	ft_execmd(t_node *node, t_cmd *cmd_start);
 char	**get_arg(t_node *node);
 char	*get_path(char *str);
 char	*ft_strjoin_free(char *s1, char *s2);
+
+/* execute */
+void	ft_error_message_left(char *str);
+int     ft_left_fd(t_node **node, t_fd *fd);
+void	heredoc_child(t_fd *fd, t_cmd *cmd, t_node **node);
+int	    ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd);
+int	    ft_right_fd(t_node **node, t_fd *fd);
+int	    ft_dright_fd(t_node **node, t_fd *fd);
+int	    ft_fd_checker(t_node *node, t_fd *fd, t_cmd *cmd);
+void	ft_set_fd(t_fd *fd);
+void	ft_close_fd(t_fd *fd);
 
 /* built_in */
 void	ft_built_in(t_node **cmd, t_cmd *cmd_start);
