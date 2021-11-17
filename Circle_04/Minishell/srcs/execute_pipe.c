@@ -1,26 +1,6 @@
 #include "../includes/minishell.h"
 
-void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
-{
-	t_node	*tmp;
-
-	tmp = (*node)->prev;
-    while ((*node) != tmp)
-	{
-		if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
-			break ;
-		if ((*node)->next)
-			(*node) = (*node)->next;
-		else
-			break ;
-	}
-	if ((*node)->type == BUILTIN_CMD)
-		ft_built_in(node, cmd);
-	else if ((*node)->type == CMD)
-        ft_execmd(*node, cmd);
-}
-
-int	ft_left_fd_pipe(t_node **node, t_fd *fd)
+int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd)
 {
 	if (!(*node)->next || ((*node)->next && (*node)->next->type == PIPE))
 	{
@@ -39,7 +19,7 @@ int	ft_left_fd_pipe(t_node **node, t_fd *fd)
 	return (1);
 }
 
-void	heredoc_parent_pipe(t_fd *fd, int status)
+void	heredoc_parent_pipe(t_fd_pipe *fd, int status)
 {
 	close(fd->fd_heredoc_pipe[1]);
 	dup2(fd->fd_heredoc_pipe[0], 0);
@@ -48,7 +28,7 @@ void	heredoc_parent_pipe(t_fd *fd, int status)
 	g_info.exit_code = WEXITSTATUS(status);
 }
 
-void	heredoc_child_pipe(t_fd *fd, t_cmd *cmd, t_node **node)
+void	heredoc_child_pipe(t_fd_pipe *fd, t_cmd *cmd, t_node **node)
 {
 	char	*line;
 
@@ -71,7 +51,7 @@ void	heredoc_child_pipe(t_fd *fd, t_cmd *cmd, t_node **node)
 	ft_exit_minishell(0, &cmd);
 }
 
-int	ft_dleft_fd_pipe(t_node **node, t_fd *fd, t_cmd *cmd)
+int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd)
 {
 	int	status;
 
@@ -91,7 +71,7 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd *fd, t_cmd *cmd)
 	return (1);
 }
 
-int	ft_right_fd_pipe(t_node **node, t_fd *fd)
+int	ft_right_fd_pipe(t_node **node, t_fd_pipe *fd)
 {
 	if (!(*node)->next || ((*node)->next && (*node)->next->type == PIPE))
 	{
@@ -107,7 +87,7 @@ int	ft_right_fd_pipe(t_node **node, t_fd *fd)
 	return (1);
 }
 
-int	ft_dright_fd_pipe(t_node **node, t_fd *fd)
+int	ft_dright_fd_pipe(t_node **node, t_fd_pipe *fd)
 {
 	if (!(*node)->next || ((*node)->next && (*node)->next->type == PIPE))
 	{
@@ -123,7 +103,7 @@ int	ft_dright_fd_pipe(t_node **node, t_fd *fd)
 	return (1);
 }
 
-int	ft_fd_checker_pipe(t_node *node, t_fd *fd, t_cmd *cmd)
+int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd)
 {
 	t_node	*tmp;
 	int		flag_exit;
@@ -150,39 +130,79 @@ int	ft_fd_checker_pipe(t_node *node, t_fd *fd, t_cmd *cmd)
 	return (1);
 }
 
+void	ft_set_fd_pipe(t_fd_pipe *fd)
+{
+	fd->fd_std_in = dup(fd->pipe_fd[0]);
+	fd->fd_std_out = dup(fd->pipe_fd[1]);
+	fd->fd_in = -1;
+	fd->fd_out = -1;
+}
+
+void	ft_close_fd_pipe(t_fd_pipe *fd)
+{
+	dup2(fd->fd_std_in, 0);
+	dup2(fd->fd_std_out, 1);
+	if (fd->fd_in != -1)
+		close(fd->fd_in);
+	if (fd->fd_out != -1)
+		close(fd->fd_out);
+	close(fd->fd_std_in);
+	close(fd->fd_std_out);
+}
+
+void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
+{
+	t_node	*tmp;
+
+    ft_set_fd_pipe(fd);
+    if (ft_fd_checker_pipe(*node, fd, cmd))
+    {
+	tmp = (*node)->prev;
+    while ((*node) != tmp)
+	{
+		if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
+			break ;
+		if ((*node)->next)
+			(*node) = (*node)->next;
+		else
+			break ;
+	}
+	if ((*node)->type == BUILTIN_CMD)
+		ft_built_in(node, cmd);
+	else if ((*node)->type == CMD)
+        ft_execmd(*node, cmd);
+    }
+    ft_close_fd_pipe(fd);
+}
+
 void    execute_pipe(t_node **node, t_cmd *cmd)
 {
 	int	status;
-    t_fd_pipe   fd_pipe;
-    t_fd        fd;
+    t_fd_pipe   fd;
 
-    ft_set_fd(&fd);
-    if (ft_fd_checker_pipe(*node, &fd, cmd))
+    pipe(fd.pipe_fd);
+    g_info.pid_child = fork();
+    if (g_info.pid_child == 0)
     {
-        pipe(fd_pipe.pipe_fd);
-	    g_info.pid_child = fork();
-	    if (g_info.pid_child == 0)
-        {
-            close(fd_pipe.pipe_fd[0]);
-            dup2(fd_pipe.pipe_fd[1], 1);
-		    execute_cmds_pipe(node, cmd);
-            close(fd_pipe.pipe_fd[1]);
-            ft_exit_minishell(g_info.exit_code, &cmd);
-        }
-	    else if (g_info.pid_child > 0)
-	    {
-            close(fd_pipe.pipe_fd[1]);
-            dup2(fd_pipe.pipe_fd[0], 0);
-		    waitpid(g_info.pid_child, &status, 0);
-            close(fd_pipe.pipe_fd[0]);
-		    g_info.pid_child = 0;
-		    g_info.exit_code = WEXITSTATUS(status);
-            ft_move_to_last(node);
-            ft_update_last_env((*node)->str);
-	    }
-    //ft_close_fd(&fd);         // 지우면되는데, 이렇게되면 < Makefile | cat 또한 출력됨
+        close(fd.pipe_fd[0]);
+        dup2(fd.pipe_fd[1], 1);
+        execute_cmds_pipe(node, cmd, &fd);
+        close(fd.pipe_fd[1]);
+        ft_exit_minishell(g_info.exit_code, &cmd);
+    }
+    else if (g_info.pid_child > 0)
+    {
+        close(fd.pipe_fd[1]);
+        dup2(fd.pipe_fd[0], 0);
+        waitpid(g_info.pid_child, &status, 0);
+        close(fd.pipe_fd[0]);
+        g_info.pid_child = 0;
+        g_info.exit_code = WEXITSTATUS(status);
+        ft_move_to_last(node);
+        ft_update_last_env((*node)->str);	
     }
 }
+//ft_close_fd(&fd);         // 지우면되는데, 이렇게되면 < Makefile | cat 또한 출력됨
 
 void    ft_exec_pipe(t_node *node, t_cmd *cmd)
 {
