@@ -22,7 +22,7 @@ void	ft_error_message_left(char *str)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": No such file or directory", 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 	g_info.exit_code = 1;
 }
 

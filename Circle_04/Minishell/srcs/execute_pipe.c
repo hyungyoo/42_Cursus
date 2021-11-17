@@ -1,5 +1,19 @@
 #include "../includes/minishell.h"
 
+int check_cmd(t_node *node)
+{
+    while (node && node->type != PIPE)
+    {
+        if (node->type == CMD || node->type == BUILTIN_CMD)
+            return (1);
+        if (node->next)
+            node = node->next;
+        else
+            break ;
+    }
+    return (0);
+}
+
 int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd)
 {
 	if (!(*node)->next || ((*node)->next && (*node)->next->type == PIPE))
@@ -15,7 +29,9 @@ int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd)
 		ft_error_message_left((*node)->str);
 		return (0);
 	}
-	dup2(fd->fd_in, 0);
+    dup2(fd->fd_in, 0);
+	//fd->fd_in = dup(0); 같음
+	//dup2(fd->fd_in, fd->pipe_fd[1]);          ///////////////////////////////// cat에 아무것도안들어감
 	return (1);
 }
 
@@ -132,47 +148,57 @@ int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd)
 
 void	ft_set_fd_pipe(t_fd_pipe *fd)
 {
-	fd->fd_std_in = dup(fd->pipe_fd[0]);
-	fd->fd_std_out = dup(fd->pipe_fd[1]);
+	fd->fd_std_in_pipe = dup(fd->pipe_fd[0]);    /////////////////////
+	fd->fd_std_out_pipe = dup(fd->pipe_fd[1]);  /////////////////////
+    fd->fd_std_in = dup(0);
+    fd->fd_std_in = dup(1);
 	fd->fd_in = -1;
 	fd->fd_out = -1;
 }
 
 void	ft_close_fd_pipe(t_fd_pipe *fd)
 {
-	dup2(fd->fd_std_in, 0);
-	dup2(fd->fd_std_out, 1);
+	dup2(fd->fd_std_in_pipe, fd->fd_std_in);
+	dup2(fd->fd_std_out_pipe, fd->fd_std_out);
 	if (fd->fd_in != -1)
 		close(fd->fd_in);
 	if (fd->fd_out != -1)
 		close(fd->fd_out);
 	close(fd->fd_std_in);
 	close(fd->fd_std_out);
+	close(fd->fd_std_in_pipe);
+	close(fd->fd_std_out_pipe);
 }
 
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
 {
 	t_node	*tmp;
 
-    ft_set_fd_pipe(fd);
+    /*
+     * flag를 주어서 ft_fd_checker안에서 flag가 있을때만, dup2를 해주었더니, 파이프의 값이 넘어가지않는다.
+     * set fd 가 잚못된걸까?
+     */
+    if (!check_cmd(*node))
+        return ;
+    ft_set_fd_pipe(fd); // 파일생성을 하지않기때문에, 파일만만들어주는걸로? 또한 > | 명령어 같은경우 오류가나지않음
     if (ft_fd_checker_pipe(*node, fd, cmd))
     {
-	tmp = (*node)->prev;
-    while ((*node) != tmp)
-	{
-		if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
-			break ;
-		if ((*node)->next)
-			(*node) = (*node)->next;
-		else
-			break ;
-	}
-	if ((*node)->type == BUILTIN_CMD)
-		ft_built_in(node, cmd);
-	else if ((*node)->type == CMD)
-        ft_execmd(*node, cmd);
-    }
-    ft_close_fd_pipe(fd);
+	    tmp = (*node)->prev;
+        while ((*node) != tmp)
+    	{
+    		if ((*node)->type == CMD || (*node)->type == BUILTIN_CMD)
+    			break ;
+    		if ((*node)->next)
+    			(*node) = (*node)->next;
+    		else
+     			break ;
+    	}
+    	if ((*node)->type == BUILTIN_CMD)
+    		ft_built_in(node, cmd);
+    	else if ((*node)->type == CMD)
+            ft_execmd(*node, cmd);
+     }
+    ft_close_fd_pipe(fd);  //하나 안하나 같은데?
 }
 
 void    execute_pipe(t_node **node, t_cmd *cmd)
@@ -186,15 +212,16 @@ void    execute_pipe(t_node **node, t_cmd *cmd)
     {
         close(fd.pipe_fd[0]);
         dup2(fd.pipe_fd[1], 1);
+        // fd.pipe_fd[1] = dup(1); /////////////////////////// 이렇게하면, 파이프가연결되서 다음으로 안넘어감 ; 와같음
         execute_cmds_pipe(node, cmd, &fd);
         close(fd.pipe_fd[1]);
         ft_exit_minishell(g_info.exit_code, &cmd);
     }
     else if (g_info.pid_child > 0)
     {
+        waitpid(g_info.pid_child, &status, 0);
         close(fd.pipe_fd[1]);
         dup2(fd.pipe_fd[0], 0);
-        waitpid(g_info.pid_child, &status, 0);
         close(fd.pipe_fd[0]);
         g_info.pid_child = 0;
         g_info.exit_code = WEXITSTATUS(status);
