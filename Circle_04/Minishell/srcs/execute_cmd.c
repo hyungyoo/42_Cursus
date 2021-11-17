@@ -131,7 +131,7 @@ char	**get_arg(t_node *node)
 	return (path_arg);
 }
 
-void	ft_error_message(char *path, char **argv, char **env, t_cmd *cmd_start)
+void	ft_error_message(char *path, char **argv, char **env)
 {
 	ft_putstr_fd("Minishell: ", 2);
 	ft_putstr_fd(path, 2);
@@ -139,11 +139,11 @@ void	ft_error_message(char *path, char **argv, char **env, t_cmd *cmd_start)
 	free(path);
 	free_tab2(argv);
 	free_tab2(env);
-	ft_exit_minishell(127, &(cmd_start));
+    g_info.exit_code = 127;
 }
 
 void	ft_error_message_path(char *path, char **argv,
-	char **env, t_cmd *cmd_start)
+	char **env)
 {
 	ft_putstr_fd("Minishell: ", 2);
 	ft_putstr_fd(path, 2);
@@ -151,11 +151,11 @@ void	ft_error_message_path(char *path, char **argv,
 	free(path);
 	free_tab2(argv);
 	free_tab2(env);
-	ft_exit_minishell(127, &(cmd_start));
+    g_info.exit_code = 127;
 }
 
 void	ft_error_message_pwd(char *path, char **argv,
-	char **env, t_cmd *cmd_start)
+	char **env)
 {
 	ft_putstr_fd("Minishell: ", 2);
 	ft_putstr_fd(path, 2);
@@ -163,13 +163,13 @@ void	ft_error_message_pwd(char *path, char **argv,
 	free(path);
 	free_tab2(argv);
 	free_tab2(env);
-	ft_exit_minishell(126, &(cmd_start));
+    g_info.exit_code = 126;
 }
 
-void	ft_error_message_no_path(char **argv, char **env, t_cmd *cmd_start)
+int ft_error_message_no_path(char **argv, char **env)
 {
 	if (!ft_strncmp(argv[0], "/", 1))
-		return ;
+		return (0);
 	else if (!ft_getenv(g_info.envp, "PATH"))
 	{
 		ft_putstr_fd("Minishell: ", 2);
@@ -177,8 +177,10 @@ void	ft_error_message_no_path(char **argv, char **env, t_cmd *cmd_start)
 		ft_putstr_fd(": command not found\n", 2);
 		free_tab2(argv);
 		free_tab2(env);
-		ft_exit_minishell(127, &(cmd_start));
+        g_info.exit_code = 127;
+        return (1);
 	}
+    return (0);
 }
 
 void	ft_execmd_child(t_node *node)
@@ -193,7 +195,7 @@ void	ft_execmd_child(t_node *node)
 	execve(path, argv, env);
 }
 
-void	ft_check_path_exec(t_node *node, t_cmd *cmd_start)
+void	ft_check_path_exec(t_node *node)
 {
 	char	*path;
 	char	**argv;
@@ -203,16 +205,17 @@ void	ft_check_path_exec(t_node *node, t_cmd *cmd_start)
 	path = NULL;
 	env = ft_array_double_env();
 	argv = get_arg(node);
-	ft_error_message_no_path(argv, env, cmd_start);
+	if (ft_error_message_no_path(argv, env))
+        return ;
 	if (argv[0])
 		path = get_path(argv[0]);
 	flag_access = access(path, F_OK | X_OK);
 	if (!ft_strcmp(ft_getenv(g_info.envp, "PWD"), path))
-		ft_error_message_pwd(path, argv, env, cmd_start);
+		return (ft_error_message_pwd(path, argv, env));
 	else if (!ft_strcmp(ft_getenv(g_info.envp, "PATH"), path))
-		ft_error_message_path(path, argv, env, cmd_start);
+		return (ft_error_message_path(path, argv, env));
 	else if (flag_access == -1)
-		ft_error_message(path, argv, env, cmd_start);
+		return (ft_error_message(path, argv, env));
 	free_tab2(argv);
 	free_tab2(env);
 	free(path);
@@ -229,6 +232,7 @@ void	ft_execmd(t_node *node, t_cmd *cmd_start)
 {
 	if (!ft_strcmp(node->str, ""))
 		ft_error_message_execmd(cmd_start);
-	ft_check_path_exec(node, cmd_start);
+	ft_check_path_exec(node);
 	ft_execmd_child(node);
+    ft_exit_minishell(g_info.exit_code, &cmd_start);
 }
