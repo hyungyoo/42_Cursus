@@ -23,21 +23,22 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd)
 void    execute_pipe(t_node **node, t_cmd *cmd)
 {
 	int	status;
-    int pipe_fd[2];
+    t_fd_pipe   fd;
 
-    pipe(pipe_fd);
+    pipe(fd.pipe_fd);
 	g_info.pid_child = fork();
 	if (g_info.pid_child == 0)
     {
-        close(pipe_fd[0]);
-        dup2(pipe_fd[1], 1);
+        close(fd.pipe_fd[0]);
+        dup2(fd.pipe_fd[1], 1);
 		execute_cmds_pipe(node, cmd);
         ft_exit_minishell(g_info.exit_code, &cmd);
     }
 	else if (g_info.pid_child > 0)
 	{
-        close(pipe_fd[1]);
-        dup2(pipe_fd[0], 0);
+        close(fd.pipe_fd[1]);
+        // 있다면 0이 fd_file_out을 가르키면되지
+        dup2(fd.pipe_fd[0], 0);
 		waitpid(g_info.pid_child, &status, 0);
 		g_info.pid_child = 0;
 		g_info.exit_code = WEXITSTATUS(status);

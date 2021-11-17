@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/16 23:32:52 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/17 01:07:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,7 @@ typedef struct s_info
 
 typedef struct s_fd_pipe
 {
-	int	fd_in;
-	int	fd_out;
-	int	fd_std_in;
-	int	fd_std_out;
-	int	fd_heredoc_pipe[2];
+    int pipe_fd[2];
 }               t_fd_pipe;
 
 typedef struct s_fd
