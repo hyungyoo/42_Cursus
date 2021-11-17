@@ -1,5 +1,23 @@
 #include "../includes/minishell.h"
 
+/*
+void    open_file(t_node *node)
+{
+    while (node && node->type != PIPE)
+    {
+        if (node->type == RIGNT)
+        if (node->next)
+            node = node->next;
+        else
+            break ;
+    }
+}
+
+이걸 못만드는이유
+1. 이걸만들어서 파일을 만든다고해도, 결국에는 근본적인 문제해결이아님
+2. 파일이없는경우 에러메세지는 각 체크하는 함수에서 하기때문에 오류를 내보낼수가없다
+
+*/
 int check_cmd(t_node *node)
 {
     while (node && node->type != PIPE)
@@ -178,8 +196,10 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
      * flag를 주어서 ft_fd_checker안에서 flag가 있을때만, dup2를 해주었더니, 파이프의 값이 넘어가지않는다.
      * set fd 가 잚못된걸까?
      */
-    if (!check_cmd(*node))
-        return ;
+
+    //if (!check_cmd(*node))
+    //    return ;
+
     ft_set_fd_pipe(fd); // 파일생성을 하지않기때문에, 파일만만들어주는걸로? 또한 > | 명령어 같은경우 오류가나지않음
     if (ft_fd_checker_pipe(*node, fd, cmd))
     {
