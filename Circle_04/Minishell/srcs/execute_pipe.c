@@ -32,7 +32,7 @@ int check_cmd(t_node *node)
     return (0);
 }
 
-int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd)
+int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 {
 	if (!(*node)->next || ((*node)->next && (*node)->next->type == PIPE))
 	{
@@ -47,7 +47,10 @@ int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd)
 		ft_error_message_left((*node)->str);
 		return (0);
 	}
-    dup2(fd->fd_in, 0);
+    if (flag)
+        dup2(fd->fd_in, 0);
+    else
+        close(fd->fd_in);
 	//fd->fd_in = dup(0); 같음
 	//dup2(fd->fd_in, fd->pipe_fd[1]);          ///////////////////////////////// cat에 아무것도안들어감
 	return (1);
@@ -85,7 +88,7 @@ void	heredoc_child_pipe(t_fd_pipe *fd, t_cmd *cmd, t_node **node)
 	ft_exit_minishell(0, &cmd);
 }
 
-int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd)
+int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 {
 	int	status;
 
@@ -98,14 +101,17 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd)
 		return (0);
 	}
 	(*node) = (*node)->next;
-	if (g_info.pid_child > 0)
-		heredoc_parent_pipe(fd, status);
-	else if (g_info.pid_child == 0)
-		heredoc_child_pipe(fd, cmd, node);
+    if (flag)
+    {
+	    if (g_info.pid_child > 0)
+	    	heredoc_parent_pipe(fd, status);
+	    else if (g_info.pid_child == 0)
+	    	heredoc_child_pipe(fd, cmd, node);
+    }
 	return (1);
 }
 
-int	ft_right_fd_pipe(t_node **node, t_fd_pipe *fd)
+int	ft_right_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 {
 	if (!(*node)->next || ((*node)->next && (*node)->next->type == PIPE))
 	{
@@ -117,11 +123,14 @@ int	ft_right_fd_pipe(t_node **node, t_fd_pipe *fd)
 	fd->fd_out = open((*node)->str, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (fd->fd_out == -1)
 		return (0);
-	dup2(fd->fd_out, 1);
+    if (flag)
+	    dup2(fd->fd_out, 1);
+    else
+        close(fd->fd_out);
 	return (1);
 }
 
-int	ft_dright_fd_pipe(t_node **node, t_fd_pipe *fd)
+int	ft_dright_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 {
 	if (!(*node)->next || ((*node)->next && (*node)->next->type == PIPE))
 	{
@@ -133,11 +142,14 @@ int	ft_dright_fd_pipe(t_node **node, t_fd_pipe *fd)
 	fd->fd_out = open((*node)->str, O_CREAT | O_APPEND | O_RDWR, 0644);
 	if (fd->fd_out == -1)
 		return (0);
-	dup2(fd->fd_out, 1);
+    if (flag)
+	    dup2(fd->fd_out, 1);
+    else
+        close(fd->fd_out);
 	return (1);
 }
 
-int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd)
+int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 {
 	t_node	*tmp;
 	int		flag_exit;
@@ -147,13 +159,13 @@ int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd)
 	while (node != tmp && node->type != PIPE)
 	{
 		if (node->str && !strcmp(node->str, "<"))
-			flag_exit = ft_left_fd_pipe(&node, fd);
+			flag_exit = ft_left_fd_pipe(&node, fd, flag);
 		else if (node->str && !strcmp(node->str, "<<"))
-			flag_exit = ft_dleft_fd_pipe(&node, fd, cmd);
+			flag_exit = ft_dleft_fd_pipe(&node, fd, cmd, flag);
 		else if (node->str && !strcmp(node->str, ">"))
-			flag_exit = ft_right_fd_pipe(&node, fd);
+			flag_exit = ft_right_fd_pipe(&node, fd, flag);
 		else if (node->str && !strcmp(node->str, ">>"))
-			flag_exit = ft_dright_fd_pipe(&node, fd);
+			flag_exit = ft_dright_fd_pipe(&node, fd, flag);
 		if (!flag_exit)
 			return (0);
 		if (node->next)
@@ -201,7 +213,7 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
     //    return ;
 
     ft_set_fd_pipe(fd); // 파일생성을 하지않기때문에, 파일만만들어주는걸로? 또한 > | 명령어 같은경우 오류가나지않음
-    if (ft_fd_checker_pipe(*node, fd, cmd))
+    if (ft_fd_checker_pipe(*node, fd, cmd, check_cmd(*node)))
     {
 	    tmp = (*node)->prev;
         while ((*node) != tmp)
