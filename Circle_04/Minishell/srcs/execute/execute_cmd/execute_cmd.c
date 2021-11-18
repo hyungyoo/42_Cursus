@@ -5,39 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 12:43:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 12:43:42 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/11/18 15:14:36 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/11/18 15:14:59 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-char	*get_path(char *str)
-{
-	char	**split_path;
-	int		i;
-	char	*tmp1;
-	char	*tmp2;
-
-	i = -1;
-	if (str[0] == '/')
-		return (ft_strdup(str));
-	split_path = ft_split(ft_getenv(g_info.envp, "PATH"), ':');
-	while (split_path[++i])
-	{
-		tmp1 = ft_strjoin(split_path[i], "/");
-		tmp2 = ft_strjoin(tmp1, str);
-		free(tmp1);
-		if (access(tmp2, F_OK | X_OK) == 0)
-		{
-			free_tab2(split_path);
-			return (tmp2);
-		}
-		free(tmp2);
-	}
-	free_tab2(split_path);
-	return (ft_strdup(str));
-}
 
 int	count_arg(t_node *node)
 {
@@ -111,15 +84,26 @@ char	*ft_arg(t_node **node)
 	return (ret);
 }
 
+void	ft_set_path_arg(t_node **node, char ***path_arg, int *i)
+{
+	if ((*node)->flag_nospace == 1 && (*node)->next
+		&& ft_not_type((*node)->next))
+		(*path_arg)[*i] = ft_arg(node);
+	else if ((*node)->flag_nospace == 0 || ((*node)->flag_nospace == 1
+			&& (*node)->next && !ft_not_type((*node)->next)))
+		(*path_arg)[*i] = ft_strdup((*node)->str);
+	(*i)++;
+}
+
 char	**get_arg(t_node *node)
 {
 	char	**path_arg;
 	int		i;
 	int		num_arg;
 
-	i = 0;
 	if (!node)
 		return (NULL);
+	i = 0;
 	num_arg = count_arg(node);
 	path_arg = (char **)malloc(sizeof(char *) * (num_arg + 1));
 	if (!path_arg)
@@ -127,15 +111,7 @@ char	**get_arg(t_node *node)
 	while (node && i < num_arg)
 	{
 		if ((ft_not_type(node)))
-		{
-			if (node->flag_nospace == 1 && node->next
-				&& ft_not_type(node->next))
-				path_arg[i] = ft_arg(&node);
-			else if (node->flag_nospace == 0 || (node->flag_nospace == 1
-					&& node->next && !ft_not_type(node->next)))
-				path_arg[i] = ft_strdup(node->str);
-			i++;
-		}
+			ft_set_path_arg(&node, &path_arg, &i);
 		if (node->next)
 			node = node->next;
 	}

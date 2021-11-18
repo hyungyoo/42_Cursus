@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:16 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 12:44:17 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:14:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,31 @@ void	ft_execmd(t_node *node, t_cmd *cmd_start)
 	if (ft_check_path_exec(node))
 		ft_execmd_child(node);
 	ft_exit_minishell(g_info.exit_code, &cmd_start);
+}
+
+char	*get_path(char *str)
+{
+	char	**split_path;
+	int		i;
+	char	*tmp1;
+	char	*tmp2;
+
+	i = -1;
+	if (str[0] == '/')
+		return (ft_strdup(str));
+	split_path = ft_split(ft_getenv(g_info.envp, "PATH"), ':');
+	while (split_path[++i])
+	{
+		tmp1 = ft_strjoin(split_path[i], "/");
+		tmp2 = ft_strjoin(tmp1, str);
+		free(tmp1);
+		if (access(tmp2, F_OK | X_OK) == 0)
+		{
+			free_tab2(split_path);
+			return (tmp2);
+		}
+		free(tmp2);
+	}
+	free_tab2(split_path);
+	return (ft_strdup(str));
 }
