@@ -157,7 +157,7 @@ int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 }
 
 /*
- * 여기 다시보기
+ * 여기 다시보기 ///////////////////////////////////////////////
  */
 void	ft_set_fd_pipe(t_fd_pipe *fd)
 {
@@ -182,7 +182,9 @@ void	ft_close_fd_pipe(t_fd_pipe *fd)
 	close(fd->fd_std_in_pipe);
 	close(fd->fd_std_out_pipe);
 }
-
+/*
+   fd 
+*/
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
 {
 	t_node	*tmp;
@@ -205,7 +207,7 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
 		else if ((*node)->type == CMD)
 			ft_execmd(*node, cmd);
 	}
-	ft_close_fd_pipe(fd);
+	//ft_close_fd_pipe(fd);	\\\\\\\\\\\fd error 
 }
 
 void	execute_pipe(t_node **node, t_cmd *cmd)

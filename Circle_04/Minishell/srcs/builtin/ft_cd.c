@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/10 21:49:38 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 04:32:40 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,8 @@ void	ft_exec_home(void)
 		path_env = ft_strjoin("PWD=", path);
 		old_pwd = ft_strjoin("OLDPWD=", old_path);
 		ft_update_path_oldpath(path_env, old_pwd);
+		free(path_env);
+		free(old_pwd);
 	}
 	free(path);
 	free(old_path);
