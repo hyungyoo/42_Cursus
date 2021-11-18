@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 19:10:40 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 20:55:42 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,86 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
 	}
 }
 
+int	check_next_pipe_node(t_node **node)
+{
+	while (*node)
+	{
+		if ((*node)->type == PIPE)
+		{
+			if ((*node)->next)
+				(*node) = (*node)->next;
+			return (TRUE);
+		}
+		if ((*node)->next)
+			(*node) = (*node)->next;
+		else
+			break ;
+	}
+	return (FALSE);
+}
+
+int	check_dleft(t_node *node)
+{
+	int	flag_redir;
+
+	flag_redir = 0;
+	while (node)
+	{
+		if (node->type == LEFT)
+			flag_redir = LEFT;
+		else if (node->type == DLEFT)
+			flag_redir = DLEFT;
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	return (flag_redir);
+}
+
+int	check_dleft_next_cmd(t_node *node)
+{
+	int	flag_redir;
+
+	flag_redir = 0;
+	if (!check_next_pipe_node(&node))
+		return (0);
+	while (node)
+	{
+		if (node->type == LEFT)
+			flag_redir = LEFT;
+		else if (node->type == DLEFT)
+			flag_redir = DLEFT;
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	return (flag_redir);
+}
+
+int	check_dleft_file(t_node *node)
+{
+	int	flag_file;
+
+	flag_file = TRUE;
+	while (node)
+	{
+		if (node->type == DLEFT)
+		{
+			if (node->next && node->next->type == FILE)
+				flag_file = TRUE;
+			else
+				flag_file = FALSE;
+		}
+		if (node->next)
+			node = node->next;
+		else 
+			break ;
+	}
+	return (flag_file);
+}
+
 void	execute_pipe(t_node **node, t_cmd *cmd)
 {
 	int			status;
@@ -147,7 +227,8 @@ void	execute_pipe(t_node **node, t_cmd *cmd)
 	{
 		waitpid(g_info.pid_child, &status, 0);
 		close(fd.pipe_fd[1]);
-		dup2(fd.pipe_fd[0], 0);
+		if (!(check_dleft_next_cmd(*node) == DLEFT && check_dleft_file(*node) == TRUE))
+			dup2(fd.pipe_fd[0], 0);
 		close(fd.pipe_fd[0]);
 		g_info.pid_child = 0;
 		g_info.exit_code = WEXITSTATUS(status);

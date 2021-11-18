@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/18 18:10:07 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 21:06:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,7 @@ int				check_cmd(t_node *node);
 int				ft_left_fd_pipe(t_node **node, t_fd_pipe *fd, int flag);
 void			heredoc_parent_pipe(t_fd_pipe *fd, int status);
 void			heredoc_child_pipe(t_fd_pipe *fd, t_cmd *cmd, t_node **node);
+void			heredoc(t_cmd *cmd, t_node *node);
 int				ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd,
 					t_cmd *cmd, int flag);
 int				ft_right_fd_pipe(t_node **node, t_fd_pipe *fd, int flag);
@@ -246,6 +247,10 @@ void			ft_close_fd_pipe(t_fd_pipe *fd);
 void			execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd);
 void			execute_pipe(t_node **node, t_cmd *cmd);
 void			ft_exec_pipe(t_node *node, t_cmd *cmd);
+int				check_next_pipe_node(t_node **node);
+int				check_dleft_next_cmd(t_node *node);
+int				check_dleft(t_node *node);
+int				check_dleft_file(t_node *node);
 
 /* expansion.c */
 void			ft_del_list_one_node(t_cmd *cmd, t_node *node);

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 19:47:13 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 21:14:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,37 @@ void	heredoc_child_pipe(t_fd_pipe *fd, t_cmd *cmd, t_node **node)
 	ft_exit_minishell(0, &cmd);
 }
 
+void	heredoc(t_cmd *cmd, t_node *node)
+{
+	char	*line;
+
+	ft_putstr_fd("> ", 2);
+	while (get_next_line(0, &line) > 0)
+	{
+		if (!ft_strcmp(line, (node)->str))
+		{
+			free(line);
+			break ;
+		}
+		else
+			ft_putstr_fd("> ", 2);
+		ft_putstr_fd(line, 1);
+		ft_putstr_fd("\n", 1);
+		free(line);
+	}
+	ft_exit_minishell(0, &cmd);
+}
+
+/*
+ * < makefile << end | cat ==> 히얼독값나옴 
+ * < makefile << end cat | cat ==> makefile 값이나옴
+ * << end < makefile cat | cat ==> 히얼독값이나옴
+ * << end < makefile | cat ==> 히얼독값이나옴
+ *
+ * 즉, 전부다 뒤에 명령어가없다면, 보내지말고, 그냥 표기만하는것!
+ * 두번쨰, <가 제일뒤에있어야하며 아니라면 표기만하는것!
+ * 세번째, 
+ */
 int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 {
 	int	status;
@@ -91,11 +122,16 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 	}
 	(*node) = (*node)->next;
 	(void)flag;
-	pipe(fd->fd_heredoc_pipe);
-	g_info.pid_child = fork();
-	if (g_info.pid_child > 0)
-		heredoc_parent_pipe(fd, status);
-	else if (g_info.pid_child == 0)
-		heredoc_child_pipe(fd, cmd, node);
+	if (check_dleft(*node) == DLEFT)
+	{
+		pipe(fd->fd_heredoc_pipe);
+		g_info.pid_child = fork();
+		if (g_info.pid_child > 0)
+			heredoc_parent_pipe(fd, status);
+		else if (g_info.pid_child == 0)
+			heredoc_child_pipe(fd, cmd, node);
+	}
+	else
+		heredoc(cmd, *node);
 	return (1);
 }
