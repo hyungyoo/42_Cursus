@@ -162,7 +162,10 @@ void	ft_execve_cmd(t_node **node, t_cmd *cmd)
 
 	g_info.pid_child = fork();
 	if (g_info.pid_child == 0)
+    {
 		ft_execmd(*node, cmd);
+        ft_exit_minishell(g_info.exit_code, &cmd);
+    }
 	else if (g_info.pid_child > 0)
 	{
 		waitpid(g_info.pid_child, &status, 0);

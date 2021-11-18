@@ -23,14 +23,14 @@ int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 		return (0);
 	}
 	(*node) = (*node)->next;
-	if (!flag)
-		return (0);
 	fd->fd_in = open((*node)->str, O_RDONLY, 0644);
 	if (fd->fd_in == -1)
 	{
 		ft_error_message_left((*node)->str);
 		return (0);
 	}
+	if (!flag)
+		return (0);
 	dup2(fd->fd_in, 0);
 	return (1);
 }
