@@ -6,7 +6,7 @@
 /*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 03:39:15 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/11 02:46:17 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 13:03:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	get_listsize(t_node **node)
 
 void	print_cmdline(t_cmd **cmd)
 {
-	t_node *tmp;
-	int i;
+	t_node	*tmp;
+	int		i;
 
 	if (!cmd)
 		return ;

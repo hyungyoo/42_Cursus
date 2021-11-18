@@ -11,21 +11,39 @@ SRCS = srcs/minishell.c \
 		srcs/ft_free_exit.c \
 		srcs/parsing_arg_word.c \
 		srcs/set_detail_type.c \
-		srcs/execute.c \
-		srcs/execute_pipe.c \
-		srcs/execute_cmd.c \
+		srcs/execute/execute/execute.c \
+		srcs/execute/execute/execute2.c \
+		srcs/execute/execute/execute3.c \
+		srcs/execute/execute/execute4.c \
+		srcs/execute/execute_pipe/execute_pipe.c \
+		srcs/execute/execute_pipe/execute_pipe2.c \
+		srcs/execute/execute_cmd/execute_cmd.c \
+		srcs/execute/execute_cmd/execute_cmd2.c \
+		srcs/execute/execute_cmd/execute_cmd3.c \
 		srcs/get_type_dir.c \
 		srcs/builtin/ft_built_in.c \
 		srcs/builtin/ft_pwd.c \
-		srcs/builtin/ft_node_list_env.c \
+		srcs/builtin/list_env/ft_node_list_env.c \
+		srcs/builtin/list_env/ft_node_list_env2.c \
+		srcs/builtin/list_env/ft_node_list_env3.c \
 		srcs/builtin/ft_env.c \
-		srcs/builtin/ft_export.c \
+		srcs/builtin/export/ft_export.c \
+		srcs/builtin/export/ft_export2.c \
+		srcs/builtin/export/ft_export3.c \
+		srcs/builtin/export/ft_export4.c \
 		srcs/builtin/ft_unset.c \
-		srcs/builtin/ft_echo.c \
-		srcs/builtin/ft_cd.c \
+		srcs/builtin/echo/ft_echo.c \
+		srcs/builtin/echo/ft_echo2.c \
+		srcs/builtin/echo/ft_echo3.c \
+		srcs/builtin/cd/ft_cd.c \
+		srcs/builtin/cd/ft_cd2.c \
+		srcs/builtin/cd/ft_cd3.c \
 		srcs/builtin/ft_cd_util.c \
-		srcs/builtin/ft_exit.c \
-		srcs/expansion.c
+		srcs/builtin/exit/ft_exit.c \
+		srcs/builtin/exit/ft_exit2.c \
+		srcs/expansion/expansion.c \
+		srcs/expansion/expansion2.c \
+		srcs/expansion/expansion3.c \
 
 HEADER = ./includes/minishell.h
 

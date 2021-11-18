@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_type_dir.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/18 13:06:17 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/11/18 13:06:19 by hyungyoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	ft_change_type(t_node **node)
@@ -30,18 +42,17 @@ void	ft_type_cmd(t_node *node)
 		node->type = CMD;
 }
 
-void    get_type_dir_file(t_node *node)
+void	get_type_dir_file(t_node *node)
 {
 	while (node)
 	{
-        if (!ft_strcmp(node->str, "|") && node->type == FILE)
-            node->type = PIPE;
+		if (!ft_strcmp(node->str, "|") && node->type == FILE)
+			node->type = PIPE;
 		if (node->next)
 			node = node->next;
 		else
 			return ;
 	}
-
 }
 
 void	get_type_dir(t_node *node, t_cmd *cmd)
@@ -53,8 +64,9 @@ void	get_type_dir(t_node *node, t_cmd *cmd)
 	{
 		if (ft_check_redir_str(node->str))
 			ft_change_type(&node);
-		else if (node->type != PIPE && flag_cmd == 0 && ((ft_strcmp(node->str, "") && node->type != DOUQ)
-		|| (node->type == DOUQ)))
+		else if (node->type != PIPE && flag_cmd == 0
+			&& ((ft_strcmp(node->str, "") && node->type != DOUQ)
+				|| (node->type == DOUQ)))
 		{
 			flag_cmd = 1;
 			ft_type_cmd(node);
@@ -68,5 +80,5 @@ void	get_type_dir(t_node *node, t_cmd *cmd)
 		else
 			break ;
 	}
-    get_type_dir_file(cmd->cmd_start);
+	get_type_dir_file(cmd->cmd_start);
 }
