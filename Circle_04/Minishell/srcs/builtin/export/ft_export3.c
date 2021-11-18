@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 12:03:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:37:38 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,8 @@
 
 int	ft_check_num(char *str)
 {
-	int	i;
-	int	flag_lettre;
-
-	flag_lettre = 0;
-	i = 0;
-	while (str[i] && (str[i] != '='))
-	{
-		if (ft_is_lettre(str[i]))
-			flag_lettre = 1;
-		else if (ft_is_digit(str[i]) && flag_lettre == 0)
-		{
-			ft_error_message_export(str);
-			return (0);
-		}
-		i++;
-	}
+	if (ft_is_digit(str[0]))
+		return (0);
 	return (1);
 }
 
@@ -38,16 +24,13 @@ int	ft_check_str(char *str)
 	int	i;
 
 	if (str[0] == '=')
-	{
-		ft_error_message_export(str);
 		return (0);
-	}
 	else
 	{
 		i = 0;
 		while (str[i])
 		{
-			if (!(ft_is_digit(str[i]) || ft_is_lettre(str[i]) || str[i] == '='))
+			if (!(ft_is_digit(str[0]) || ft_is_lettre(str[i]) || str[i] == '='))
 				return (0);
 			i++;
 		}
