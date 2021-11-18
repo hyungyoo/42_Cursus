@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/18 18:01:14 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 18:10:07 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ void			ascii_logo_lol(void);
  * minishell
  */
 /* minishell */
-void			ft_signal(void);
-void			execute_minishell(t_cmd *cmd);
-void			minishell(void);
+void			execute_eof(t_cmd *cmd, char *line);
+void			execute_parsing(t_cmd *cmd, char *line);
+void			execute_minishell(t_cmd *cmd, char *line);
 int				main(int ac, char **av, char **env);
 
 /*
