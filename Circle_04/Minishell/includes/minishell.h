@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/18 12:50:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 18:01:14 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -362,6 +362,7 @@ void			ft_type_douq_with_quote(char *str);
 void			ft_type_douq_sans_espace(t_node **cmd);
 int				ft_not_type(t_node *node);
 void			ft_print_echo(t_node **cmd);
+int				check_pwd(t_node **cmd);
 void			ft_echo(t_node **cmd);
 
 #endif

@@ -35,6 +35,7 @@ SRCS = srcs/minishell.c \
 		srcs/builtin/echo/ft_echo.c \
 		srcs/builtin/echo/ft_echo2.c \
 		srcs/builtin/echo/ft_echo3.c \
+		srcs/builtin/echo/ft_echo4.c \
 		srcs/builtin/cd/ft_cd.c \
 		srcs/builtin/cd/ft_cd2.c \
 		srcs/builtin/cd/ft_cd3.c \

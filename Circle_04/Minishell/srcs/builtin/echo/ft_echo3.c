@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 11:58:59 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 18:01:33 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,16 @@ int	ft_not_type(t_node *node)
 	return (1);
 }
 
+/*
+//if ((*cmd)->type == DOLR)
+//	ft_echo_type_dolr(cmd);
+ */
 void	ft_print_echo(t_node **cmd)
 {
 	while (*cmd && ((*cmd)->type != PIPE))
 	{
-		if ((*cmd)->type == DOLR)
-			ft_echo_type_dolr(cmd);
+		if (check_pwd(cmd))
+			(*cmd) = (*cmd);
 		else if ((*cmd)->type == DOUQ)
 		{
 			if (ft_check_sans_espace((*cmd)->str) >= 1)
