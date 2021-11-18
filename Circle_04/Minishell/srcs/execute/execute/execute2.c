@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:41:48 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 12:41:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 19:48:49 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 	int	status;
 
 	status = 0;
-	pipe(fd->fd_heredoc_pipe);
-	g_info.pid_child = fork();
 	if (!(*node)->next)
 	{
-		ft_putstr_fd("minishell: parse error near '\n'\n", 2);
+		ft_putstr_fd("minishell: parse error near\n", 2);
 		return (0);
 	}
+	pipe(fd->fd_heredoc_pipe);
+	g_info.pid_child = fork();
 	(*node) = (*node)->next;
 	if (g_info.pid_child > 0)
 		heredoc_parent(fd, status);
