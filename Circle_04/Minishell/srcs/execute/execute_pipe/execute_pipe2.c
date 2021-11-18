@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 12:54:15 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 18:54:09 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,12 @@ int	ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 	return (ret);
 }
 
-/*
- * 여기 다시보기 ///////////////////////////////////////////////
- */
 void	ft_set_fd_pipe(t_fd_pipe *fd)
 {
 	fd->fd_std_in_pipe = dup(fd->pipe_fd[0]);
 	fd->fd_std_out_pipe = dup(fd->pipe_fd[1]);
 	fd->fd_std_in = dup(0);
-	fd->fd_std_in = dup(1);
+	fd->fd_std_out = dup(1);
 	fd->fd_in = -1;
 	fd->fd_out = -1;
 }
@@ -106,9 +103,6 @@ void	ft_close_fd_pipe(t_fd_pipe *fd)
 	close(fd->fd_std_out_pipe);
 }
 
-/*
-   fd 
-*/
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
 {
 	t_node	*tmp;
