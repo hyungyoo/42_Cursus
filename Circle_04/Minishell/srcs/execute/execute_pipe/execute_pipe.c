@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 18:52:44 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 19:03:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 		return (0);
 	}
 	(*node) = (*node)->next;
-	//if (!flag)
-	//	return (0);
 	(void)flag;
 	if (g_info.pid_child > 0)
 		heredoc_parent_pipe(fd, status);

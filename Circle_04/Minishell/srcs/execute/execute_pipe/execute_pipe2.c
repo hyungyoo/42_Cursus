@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 18:54:09 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 19:10:40 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
 	ft_set_fd_pipe(fd);
 	if (ft_fd_checker_pipe(*node, fd, cmd, check_cmd(*node)))
 	{
+		ft_close_fd_pipe(fd);
 		tmp = (*node)->prev;
 		while ((*node) != tmp)
 		{
@@ -125,7 +126,6 @@ void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
 		else if ((*node)->type == CMD)
 			ft_execmd(*node, cmd);
 	}
-	/* ft_close_fd_pipe(fd);	\\\\\\\\\\\fd error */
 }
 
 void	execute_pipe(t_node **node, t_cmd *cmd)
@@ -178,7 +178,7 @@ void	ft_exec_pipe(t_node *node, t_cmd *cmd)
 		if (node->next)
 			node = node->next;
 		else
-			break ; /////////리턴이었음 그래도상관없을듯
+			break ;
 	}
 	execute_cmds(&node, cmd);
 	ft_close_fd(&fd);
