@@ -3,14 +3,15 @@ NAME = minishell
 SRCS = srcs/minishell.c \
 		srcs/signal.c \
 		srcs/copy_env.c \
-		srcs/parsing.c \
 		srcs/list.c \
 		srcs/ascii_logo.c \
-		srcs/parsing_quote.c \
-		srcs/parsing_operation_word.c \
+		srcs/parsing/parsing_quote.c \
+		srcs/parsing/parsing.c \
+		srcs/parsing/parsing_operation_word.c \
+		srcs/parsing/get_type_dir.c \
+		srcs/parsing/parsing_arg_word.c \
+		srcs/parsing/set_detail_type.c \
 		srcs/ft_free_exit.c \
-		srcs/parsing_arg_word.c \
-		srcs/set_detail_type.c \
 		srcs/execute/execute/execute.c \
 		srcs/execute/execute/execute2.c \
 		srcs/execute/execute/execute3.c \
@@ -20,7 +21,6 @@ SRCS = srcs/minishell.c \
 		srcs/execute/execute_cmd/execute_cmd.c \
 		srcs/execute/execute_cmd/execute_cmd2.c \
 		srcs/execute/execute_cmd/execute_cmd3.c \
-		srcs/get_type_dir.c \
 		srcs/builtin/ft_built_in.c \
 		srcs/builtin/ft_pwd.c \
 		srcs/builtin/list_env/ft_node_list_env.c \

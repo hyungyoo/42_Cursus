@@ -6,11 +6,11 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 03:36:35 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/09 05:52:07 by keulee           ###   ########.fr       */
+/*   Updated: 2021/11/18 13:12:03 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	is_builtin(char *str)
 {

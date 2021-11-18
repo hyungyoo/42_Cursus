@@ -6,11 +6,11 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:58:32 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/09 03:39:58 by keulee           ###   ########.fr       */
+/*   Updated: 2021/11/18 13:10:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	parsing_quotes(char *str, int *index, t_cmd **cmd)
 {

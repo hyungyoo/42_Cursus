@@ -6,11 +6,11 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 13:06:17 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 13:06:19 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/18 13:11:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_change_type(t_node **node)
 {
