@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 18:37:13 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:58:51 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_export(t_node **cmd)
 	(*cmd) = (*cmd)->next;
 	all_str = ft_all_arg(cmd);
 	str = ft_split(all_str, ' ');
+	// 이거말고 ft_array_double_env를 이용해서, 만들기!
 	free(all_str);
 	if (!ft_check_all(str))
 		return ;
