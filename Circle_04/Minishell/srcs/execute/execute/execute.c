@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:41:43 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 17:37:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:05:04 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	ft_left_fd(t_node **node, t_fd *fd)
 		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
 	}
-	else if (check_redir(*node))
+	(*node) = (*node)->next;
+	if (check_redir(*node))
 	{
 		ft_putstr_fd("minisehll: syntax error near unexpected token `<'\n", 2);
 		return (0);
 	}
-	(*node) = (*node)->next;
 	fd->fd_in = open((*node)->str, O_RDONLY, 0644);
 	if (fd->fd_in == -1)
 	{
