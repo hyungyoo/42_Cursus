@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 18:37:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:45:22 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,4 @@ void	ft_export_set_node(char **str)
 		free(key_tmp);
 		i++;
 	}
-	g_info.exit_code = 0;
 }
