@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 19:06:40 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:50:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,18 @@ int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 		ft_putstr_fd("minisehll: syntax error near unexpected token `<'\n", 2);
 		return (0);
 	}
-	fd->fd_in = open((*node)->str, O_RDONLY, 0644);
-	if (fd->fd_in == -1)
+	if (check_dleft((*node)->prev) == LEFT)
 	{
-		ft_error_message_left((*node)->str);
-		return (0);
+		fd->fd_in = open((*node)->str, O_RDONLY, 0644);
+		if (fd->fd_in == -1)
+		{
+			ft_error_message_left((*node)->str);
+			return (0);
+		}
+		if (!flag)
+			return (0);
+		dup2(fd->fd_in, 0);
 	}
-	if (!flag)
-		return (0);
-	dup2(fd->fd_in, 0);
 	return (1);
 }
 
@@ -88,6 +91,7 @@ void	heredoc(t_cmd *cmd, t_node *node)
 {
 	char	*line;
 
+	(void)cmd;
 	ft_putstr_fd("> ", 2);
 	while (get_next_line(0, &line) > 0)
 	{
@@ -98,11 +102,8 @@ void	heredoc(t_cmd *cmd, t_node *node)
 		}
 		else
 			ft_putstr_fd("> ", 2);
-		ft_putstr_fd(line, 1);
-		ft_putstr_fd("\n", 1);
 		free(line);
 	}
-	ft_exit_minishell(0, &cmd);
 }
 
 /*
@@ -121,7 +122,7 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 	int	status;
 
 	status = 0;
-	if (!(*node)->next || ((*node)->next && (*node)->next->type == PIPE))
+	if (!(*node)->next)
 	{
 		ft_putstr_fd("minishell: parse error near\n", 2);
 		return (0);
@@ -132,8 +133,8 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 		ft_putstr_fd("minisehll: syntax error near unexpected token `<<'\n", 2);
 		return (0);
 	}
-	(void)flag;
-	if (check_dleft(*node) == DLEFT)
+	(void)flag;															////////////////필요없는지보기		 << end | cat
+	if (check_dleft((*node)->prev) == DLEFT)
 	{
 		pipe(fd->fd_heredoc_pipe);
 		g_info.pid_child = fork();

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:41:48 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 19:05:28 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:43:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 		ft_putstr_fd("minisehll: syntax error near unexpected token `<<'\n", 2);
 		return (0);
 	}
-	pipe(fd->fd_heredoc_pipe);
-	g_info.pid_child = fork();
-	if (g_info.pid_child > 0)
-		heredoc_parent(fd, status);
-	else if (g_info.pid_child == 0)
-		heredoc_child(fd, cmd, node);
+	if (check_dleft((*node)->prev) == DLEFT)
+	{
+		pipe(fd->fd_heredoc_pipe);
+		g_info.pid_child = fork();
+		if (g_info.pid_child > 0)
+			heredoc_parent(fd, status);
+		else if (g_info.pid_child == 0)
+			heredoc_child(fd, cmd, node);
+	}
+	else
+		heredoc(cmd, *node);
 	return (1);
 }
 
