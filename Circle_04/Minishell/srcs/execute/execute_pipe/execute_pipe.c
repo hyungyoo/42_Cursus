@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 19:50:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:56:59 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,10 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 		ft_putstr_fd("minisehll: syntax error near unexpected token `<<'\n", 2);
 		return (0);
 	}
-	(void)flag;															////////////////필요없는지보기		 << end | cat
-	if (check_dleft((*node)->prev) == DLEFT)
+	//(void)flag;															////////////////필요없는지보기		 << end | cat
+	////////////명령어가 있어서 그냥 끝어버린다면, 다음으로 넘어가는값이없어서, 에러가나는것같음 그냥 exit_minisehll을 더해줘야하ㄴ는듯
+	//
+	if (check_dleft((*node)->prev) == DLEFT && flag)
 	{
 		pipe(fd->fd_heredoc_pipe);
 		g_info.pid_child = fork();
@@ -143,7 +145,13 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 		else if (g_info.pid_child == 0)
 			heredoc_child_pipe(fd, cmd, node);
 	}
-	else
+	if (check_dleft((*node)->prev) == DLEFT && !flag)
+	{
+		///////////////////////// 뒤에 파일추가할게있을수도있기때문에, 그것만 추가하면됨
+		heredoc(cmd, *node);
+		ft_exit_minishell(g_info.exit_code, &cmd);
+	}
+	else if (check_dleft((*node)->prev) == LEFT)
 		heredoc(cmd, *node);
 	return (1);
 }
