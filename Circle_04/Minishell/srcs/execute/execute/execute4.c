@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:41:57 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 12:41:57 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:11:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_check_pipe_error(t_node *node)
 {
+	if (!node || (node->type == PIPE))
+		return (0);
 	while (node)
 	{
 		if (node->type == PIPE)

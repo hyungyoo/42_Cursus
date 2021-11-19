@@ -6,11 +6,19 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 13:06:17 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 13:11:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:28:58 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_redir(t_node *node)
+{
+	if ((!ft_strcmp((node)->str, "<")) || (!ft_strcmp((node)->str, ">"))
+		|| (!ft_strcmp((node)->str, "<<")) || (!ft_strcmp((node)->str, ">>")))
+		return (1);
+	return (0);
+}
 
 void	ft_change_type(t_node **node)
 {
@@ -27,7 +35,8 @@ void	ft_change_type(t_node **node)
 	if ((*node)->next)
 	{
 		(*node) = (*node)->next;
-		(*node)->type = FILE;
+		if (!check_redir(*node))
+			(*node)->type = FILE;
 	}
 }
 
@@ -47,6 +56,8 @@ void	get_type_dir_file(t_node *node)
 	while (node)
 	{
 		if (!ft_strcmp(node->str, "|") && node->type == FILE)
+			node->type = PIPE;
+		if (!ft_strcmp(node->str, "|"))
 			node->type = PIPE;
 		if (node->next)
 			node = node->next;

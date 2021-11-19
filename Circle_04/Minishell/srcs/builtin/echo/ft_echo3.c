@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 18:01:33 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:05:52 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,16 @@ void	ft_print_echo(t_node **cmd)
 	{
 		if (check_pwd(cmd))
 			(*cmd) = (*cmd);
-		else if ((*cmd)->type == DOUQ)
-		{
-			if (ft_check_sans_espace((*cmd)->str) >= 1)
-				ft_type_douq_sans_espace(cmd);
-			else
-				ft_echo_type_douq(cmd);
-		}
-		else if ((*cmd)->type == ARG || (*cmd)->type == SINQ)
-			ft_putstr((*cmd)->str);
+		//else if ((*cmd)->type == DOUQ)
+		//{
+	//		if (ft_check_sans_espace((*cmd)->str) >= 1)
+	//			ft_type_douq_sans_espace(cmd);
+	//		else
+	//			ft_echo_type_douq(cmd);
+	//	}
+	//	else if ((*cmd)->type == ARG || (*cmd)->type == SINQ)
+	//		ft_putstr((*cmd)->str);
+		ft_putstr((*cmd)->str);
 		if (ft_not_type((*cmd)) && ft_not_type((*cmd)->prev)
 			&& (*cmd)->flag_nospace == 1)
 			ft_putstr("");

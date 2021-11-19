@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:41:48 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 19:48:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:38:00 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 	if (!(*node)->next)
 	{
 		ft_putstr_fd("minishell: parse error near\n", 2);
+		return (0);
+	}	
+	else if (check_redir(*node))
+	{
+		ft_putstr_fd("minisehll: syntax error near unexpected token `<<'\n", 2);
 		return (0);
 	}
 	pipe(fd->fd_heredoc_pipe);
@@ -39,6 +44,11 @@ int	ft_right_fd(t_node **node, t_fd *fd)
 		ft_putstr_fd("minishell: syntax error ", 2);
 		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
+	}	
+	else if(check_redir(*node))
+	{
+		ft_putstr_fd("minisehll: syntax error near unexpected token `>'\n", 2);
+		return (0);
 	}
 	(*node) = (*node)->next;
 	fd->fd_out = open((*node)->str, O_CREAT | O_TRUNC | O_RDWR, 0644);
@@ -54,6 +64,11 @@ int	ft_dright_fd(t_node **node, t_fd *fd)
 	{
 		ft_putstr_fd("minishell: syntax error ", 2);
 		ft_putstr_fd("near unexpected token 'newline'\n", 2);
+		return (0);
+	}
+	else if (check_redir(*node))
+	{
+		ft_putstr_fd("minisehll: syntax error near unexpected token `>>'\n", 2);
 		return (0);
 	}
 	(*node) = (*node)->next;

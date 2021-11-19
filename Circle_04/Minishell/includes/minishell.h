@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/19 17:01:18 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:37:43 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ int				count_pipe(t_node *node);
 void			ft_error_message_exec(void);
 int				ft_check_pipe_error(t_node *node);
 void			ft_exec(t_cmd *cmd);
+int				check_redir(t_node *node);
 
 /* execute_cmd.c */
 char			*get_path(char *str);
