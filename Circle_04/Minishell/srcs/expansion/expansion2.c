@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 13:00:35 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:00:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ char	*tmp_key_expansion(char *str, int *i, int j)
 	return (tmp_key);
 }
 
+int	check_exit_char(char c)
+{
+	if (c == ' ' || c == '|' || c == 39 || c == '$' || c == '=')
+		return (1);
+	return (0);
+}
+
 void	ft_ajouter_dolr(char **new_str, char *str, int *i)
 {
 	int		j;
@@ -80,7 +87,7 @@ void	ft_ajouter_dolr(char **new_str, char *str, int *i)
 	j = *i;
 	while (str[*i])
 	{
-		if (str[*i] == ' ' || str[*i] == '|' || str[*i] == 39 || str[*i] == '$')
+		if (str[*i] == ' ' || str[*i] == '|' || str[*i] == 39 || str[*i] == '$' || str[*i] == '=')
 			break ;
 		(*i)++;
 	}

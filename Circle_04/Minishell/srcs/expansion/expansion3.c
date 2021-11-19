@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 13:00:47 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:03:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ void	ft_ajouter_dolr_code(char **new_str, int *i)
 	free(num);
 	(*i) = (*i) + 2;
 }
-
+/*
+if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1]
+			&& ((*node)->str)[i + 1] && ((*node)->str)[i + 1] != '?'
+			&& ((*node)->str)[i + 1] != '$' && ((*node)->str)[i + 1] != ' ')
+			ft_ajouter_dolr(&new_str, (*node)->str, &(i));
+*/
 void	ft_reset_value_douq(t_cmd *cmd, t_node **node)
 {
 	char	*new_str;
@@ -37,7 +42,7 @@ void	ft_reset_value_douq(t_cmd *cmd, t_node **node)
 	{
 		if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1]
 			&& ((*node)->str)[i + 1] && ((*node)->str)[i + 1] != '?'
-			&& ((*node)->str)[i + 1] != '$' && ((*node)->str)[i + 1] != ' ')
+			&& ((*node)->str)[i + 1] != '$' && !check_exit_char(((*node)->str)[i + 1]))
 			ft_ajouter_dolr(&new_str, (*node)->str, &(i));
 		else if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1]
 			&& ((*node)->str)[i + 1] == '?')

@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/18 21:06:32 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:01:18 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,7 @@ void			ft_ajouter_exit_code(char **new_str, int *i);
 void			ft_ajouter_dolr_code(char **new_str, int *i);
 void			ft_reset_value_douq(t_cmd *cmd, t_node **node);
 void			ft_expension(t_cmd **cmd);
+int				check_exit_char(char c);
 
 /*
  * built in
