@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe.c                                     :+:      :+:    :+:   */
+/*   execute_pipe2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 19:46:13 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:11:57 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,13 +160,13 @@ int	check_dleft(t_node *node)
 {
 	int	flag_redir;
 
-	flag_redir = 0;
-	while (node)
+	flag_redir = node->type;
+	if (node->next)
+		node = node->next;
+	while (node && node->type != PIPE)
 	{
-		if (node->type == LEFT)
-			flag_redir = LEFT;
-		else if (node->type == DLEFT)
-			flag_redir = DLEFT;
+		if (node->type == LEFT || node->type == DLEFT)
+			flag_redir = 0;
 		if (node->next)
 			node = node->next;
 		else
