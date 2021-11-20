@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/19 18:37:43 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:40:59 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ typedef struct s_info
 	int				exit_code;
 	int				flag_pwd;
 	char			*last_env_str;
-	int				pipe_flag;
 }				t_info;
 
 typedef struct s_fd_pipe
@@ -311,8 +310,7 @@ void			ft_export_env(void);
 void			ft_error_message_export(char *str);
 int				ft_check_num(char *str);
 int				ft_check_str(char *str);
-int				ft_check_all(char **str);
-char			*ft_all_arg(t_node **cmd);
+void			ft_check_all(char **str);
 void			ft_export_set_node(char **str);
 int				ft_check_arg(t_node *node);
 void			ft_export(t_node **cmd);
