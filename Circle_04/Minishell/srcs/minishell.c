@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 18:08:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/20 19:37:19 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/20 20:41:43 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	execute_parsing(t_cmd *cmd, char *line)
 void	execute_minishell(t_cmd *cmd, char *line)
 {
 	set_detail_type(&(cmd));
-
-	// 여기에 하기
-	// cmd돌면서 str에서 $숫자 하나빼기
 	ft_expension(&cmd);
 	ft_exec(cmd);
 	print_cmdline(&(cmd));
