@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/20 18:57:42 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/21 02:40:16 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	ft_check_arg(t_node *node)
 {
 	while (node && node->type != PIPE)
 	{
-		if (node->type == ARG || node->type == SINQ || node->type == DOUQ)
+		if (ft_strcmp(node->str, "") && (node->type == ARG
+			|| node->type == SINQ || node->type == DOUQ))
 			return (1);
 		if (node->next)
 			node = node->next;
