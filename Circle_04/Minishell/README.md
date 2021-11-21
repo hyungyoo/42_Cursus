@@ -29,6 +29,18 @@ $ + (arg: 1arg)
 
 '$1PATH'는 그냥둬도
 
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ $"PATH"
+bash: PATH: command not found
+bash-3.2$ echo $"PATH"
+PATH
+bash-3.2$ echo $PATH
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+bash-3.2$ echo $'PATH'
+PATH
+bash-3.2$ echo $PATH
 
 
 
