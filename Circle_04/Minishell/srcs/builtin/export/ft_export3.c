@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/21 02:46:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/21 02:53:19 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	ft_check_value(char *str)
 	tmp = envp->prev;
 	while (envp != tmp)
 	{
-		if (!ft_strcmp(envp->envp_value, str))
+		if (!ft_strcmp(envp->envp_value, str) && ft_strcmp(ft_getenv(g_info.envp, "USER"), str))
 			return (1);
 		envp = envp->next;
 	}
-	if (!ft_strcmp(envp->envp_value, str))
+	if (!ft_strcmp(envp->envp_value, str) && ft_strcmp(ft_getenv(g_info.envp, "USER"), str))
 		return (1);
 	return (0);
 }
