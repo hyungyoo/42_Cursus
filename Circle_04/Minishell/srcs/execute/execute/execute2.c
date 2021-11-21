@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:41:48 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 17:38:00 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:43:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,23 @@ int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 		ft_putstr_fd("minishell: parse error near\n", 2);
 		return (0);
 	}	
-	else if (check_redir(*node))
+	(*node) = (*node)->next;
+	if (check_redir(*node))
 	{
 		ft_putstr_fd("minisehll: syntax error near unexpected token `<<'\n", 2);
 		return (0);
 	}
-	pipe(fd->fd_heredoc_pipe);
-	g_info.pid_child = fork();
-	(*node) = (*node)->next;
-	if (g_info.pid_child > 0)
-		heredoc_parent(fd, status);
-	else if (g_info.pid_child == 0)
-		heredoc_child(fd, cmd, node);
+	if (check_dleft((*node)->prev) == DLEFT)
+	{
+		pipe(fd->fd_heredoc_pipe);
+		g_info.pid_child = fork();
+		if (g_info.pid_child > 0)
+			heredoc_parent(fd, status);
+		else if (g_info.pid_child == 0)
+			heredoc_child(fd, cmd, node);
+	}
+	else
+		heredoc(cmd, *node);
 	return (1);
 }
 
@@ -45,12 +50,12 @@ int	ft_right_fd(t_node **node, t_fd *fd)
 		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
 	}	
-	else if(check_redir(*node))
+	(*node) = (*node)->next;
+	if(check_redir(*node))
 	{
 		ft_putstr_fd("minisehll: syntax error near unexpected token `>'\n", 2);
 		return (0);
 	}
-	(*node) = (*node)->next;
 	fd->fd_out = open((*node)->str, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (fd->fd_out == -1)
 		return (0);
@@ -66,12 +71,12 @@ int	ft_dright_fd(t_node **node, t_fd *fd)
 		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
 	}
-	else if (check_redir(*node))
+	(*node) = (*node)->next;
+	if (check_redir(*node))
 	{
 		ft_putstr_fd("minisehll: syntax error near unexpected token `>>'\n", 2);
 		return (0);
 	}
-	(*node) = (*node)->next;
 	fd->fd_out = open((*node)->str, O_CREAT | O_APPEND | O_RDWR, 0644);
 	if (fd->fd_out == -1)
 		return (0);
