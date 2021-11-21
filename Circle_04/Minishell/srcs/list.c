@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 03:39:15 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/18 13:03:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/20 23:08:36 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,21 @@ void	print_cmdline(t_cmd **cmd)
 	printf("\n");
 	printf("\033[1;34m----------DEBUG---------\n");
 	printf("\n");
-	printf(" NODE | TYPE  |    STR(NOSPACE)    \n");
+	printf(" NODE | TYPE  |    STR(NOSPACE, EMPTYSTR)    \n");
 	while (tmp && i < (*cmd)->size)
 	{
 		printf("------|-------|-----------\n");
 		if (tmp->type >= CMD)
 		{
 			if (i >= 10)
-				printf("  %d  |   %d  | %s(%d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace);
+				printf("  %d  |   %d  | %s(%d, %d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace, tmp->flag_emptystr);
 			else
-				printf("  %d   |   %d  | %s(%d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace);
+				printf("  %d   |   %d  | %s(%d, %d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace, tmp->flag_emptystr);
 		}
 		else if (i >= 10)
-			printf("  %d  |   %d   | %s(%d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace);
+			printf("  %d  |   %d   | %s(%d, %d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace, tmp->flag_emptystr);
 		else
-			printf("  %d   |   %d   | %s(%d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace);
+			printf("  %d   |   %d   | %s(%d, %d) \n", i++, tmp->type, tmp->str, tmp->flag_nospace, tmp->flag_emptystr);
 		tmp = tmp->next;
 	}
 	printf("\n");

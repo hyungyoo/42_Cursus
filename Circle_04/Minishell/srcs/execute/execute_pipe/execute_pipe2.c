@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe2.c                                    :+:      :+:    :+:   */
+/*   execute_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/20 17:11:57 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:43:31 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	ft_right_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
 	}	
-	(*node) = (*node)->next;
-	if (check_redir(*node))
+	else if (check_redir(*node))
 	{
 		ft_putstr_fd("minisehll: syntax error near unexpected token `>'\n", 2);
 		return (0);
 	}
+	(*node) = (*node)->next;
 	fd->fd_out = open((*node)->str, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (fd->fd_out == -1)
 		return (0);
@@ -43,13 +43,13 @@ int	ft_dright_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 		ft_putstr_fd("minishell: syntax error ", 2);
 		ft_putstr_fd("near unexpected token 'newline'\n", 2);
 		return (0);
-	}
-	(*node) = (*node)->next;
-	if (check_redir(*node))
+	}	
+	else if (check_redir(*node))
 	{
 		ft_putstr_fd("minisehll: syntax error near unexpected token `>>'\n", 2);
 		return (0);
 	}
+	(*node) = (*node)->next;
 	fd->fd_out = open((*node)->str, O_CREAT | O_APPEND | O_RDWR, 0644);
 	if (fd->fd_out == -1)
 		return (0);
@@ -160,13 +160,13 @@ int	check_dleft(t_node *node)
 {
 	int	flag_redir;
 
-	flag_redir = node->type;
-	if (node->next)
-		node = node->next;
-	while (node && node->type != PIPE)
+	flag_redir = 0;
+	while (node)
 	{
-		if (node->type == LEFT || node->type == DLEFT)
-			flag_redir = 0;
+		if (node->type == LEFT)
+			flag_redir = LEFT;
+		else if (node->type == DLEFT)
+			flag_redir = DLEFT;
 		if (node->next)
 			node = node->next;
 		else

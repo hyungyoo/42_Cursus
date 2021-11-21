@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion3.c                                       :+:      :+:    :+:   */
+/*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/20 20:47:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:03:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	ft_reset_value_douq(t_cmd *cmd, t_node **node)
 	while (((*node)->str)[i])
 	{
 		if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1]
-			&& ((*node)->str)[i + 1] != '?' && ((*node)->str)[i + 1] != '$'
-				&& !check_exit_char(((*node)->str)[i + 1]))
+			&& ((*node)->str)[i + 1] && ((*node)->str)[i + 1] != '?'
+			&& ((*node)->str)[i + 1] != '$' && !check_exit_char(((*node)->str)[i + 1]))
 			ft_ajouter_dolr(&new_str, (*node)->str, &(i));
 		else if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1]
 			&& ((*node)->str)[i + 1] == '?')
@@ -65,7 +65,7 @@ void	ft_expension(t_cmd **cmd)
 	while (node)
 	{
 		if (node->type == DOLR && node->flag_nospace == 1 && node->next
-			&& node->next->type == ARG && (ft_strcmp(node->next->str, "?")
+			&& (ft_strcmp(node->next->str, "?")
 				&& ft_strcmp(node->next->str, "$")))
 			ft_reset_value(*cmd, &node);
 		else if (node->type == DOLR && node->flag_nospace == 1 && node->next
