@@ -66,7 +66,7 @@ bash: export: `/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/b
 bash-3.2$
 
 
-export $dw --> export
+export $dw --> export  --> export $PATH=d21같은경우도 되야함 즉, 안에 키가있다는게 문제임
 $로 시작되면 안되는데, 그래도 결국 $키 있는값이면 에러이고
 아니라면, 그냥무시
 
