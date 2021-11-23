@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/23 02:36:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:15:36 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,16 @@ void	ft_expension(t_cmd **cmd)
 {
 	t_node	*node;
 
-	printf("hello\n");
 	node = (*cmd)->cmd_start;
 	while (node)
 	{
 		if (node->type == DOLR && node->flag_nospace == 1 && node->next
 			&& node->next->type == ARG && (ft_strcmp(node->next->str, "?")
 				&& ft_strcmp(node->next->str, "$")))
+		{
 			ft_reset_value(*cmd, &node);
+			ft_reset_value_douq(*cmd, &node);
+		}
 		else if (node->type == DOLR && node->flag_nospace == 1 && node->next
 			&& (!ft_strcmp(node->next->str, "?")
 				|| !ft_strcmp(node->next->str, "$")))
@@ -78,6 +80,6 @@ void	ft_expension(t_cmd **cmd)
 		if (node->next)
 			node = node->next;
 		else
-			return ;
+			break ;
 	}
 }

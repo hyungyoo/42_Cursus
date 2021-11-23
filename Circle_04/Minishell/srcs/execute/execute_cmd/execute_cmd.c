@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:14:36 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 15:14:59 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 19:05:47 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*ft_arg(t_node **node)
 	ret = NULL;
 	if (!node || !*node)
 		return (NULL);
-	while (*node && (*node)->flag_nospace == 1)
+	while (*node && (*node)->flag_nospace == 1 && ft_not_type((*node)->next))
 	{
 		ret = ft_strjoin_free(ret, (*node)->str);
 		if ((*node)->next)

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/21 02:53:19 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 19:16:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	ft_check_all(char **str)
 		if (!ft_check_str(str[i]) || !ft_strcmp(str[i], "=")
 			|| !ft_check_egal(str[i]) || ft_check_value(str[i]))
 		{
-			ft_error_message_export(str[i]);
-			g_info.exit_code = 1;
+				ft_error_message_export(str[i]);
+				g_info.exit_code = 1;
 		}
 		i++;
 	}

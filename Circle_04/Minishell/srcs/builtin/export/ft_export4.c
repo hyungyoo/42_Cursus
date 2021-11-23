@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/21 02:40:16 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 19:23:16 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	**ft_array_double_export(t_node *cmd)
 	array_export[i] = NULL;
 	return (array_export);
 }
-
 // 1. array 만들기
 // 2. ft_check_all
 // 3. ft_export_set_node
@@ -89,14 +88,12 @@ void	ft_export(t_node **cmd)
 	str = ft_array_double_export(*cmd);
 	g_info.exit_code = 0;
 
-	/*
 	int	i = 0;
 	while (str[i])
 	{
 		printf("str %d eme est %s\n", i, str[i]);
-		i++;
+	i++;
 	}
-	*/
 	ft_check_all(str);
 	//ft_export_set_node(str);
 	free_tab2(str);
