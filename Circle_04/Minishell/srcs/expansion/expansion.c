@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 13:00:19 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 02:38:36 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ void	ft_reset_value_exit_code(t_cmd *cmd, t_node **node)
 	ft_del_list(cmd, next_node);
 }
 
+/*
+ * 여기 douq보고 고치기 douq 처럼해야함!!!!!
+ */
+///////////////////?!!! 여기임 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void	ft_reset_value(t_cmd *cmd, t_node **node)
 {
 	char	*tmp;

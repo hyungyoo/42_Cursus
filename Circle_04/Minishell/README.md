@@ -42,7 +42,28 @@ bash-3.2$ echo $'PATH'
 PATH
 bash-3.2$ echo $PATH
 
+bash: 1: command not found
+bash-3.2$ $"$Test"
+bash: : command not found
+bash-3.2$ $"$PATH"
+bash: /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin: No such file or directory
+bash-3.2$ $
+bash: $: command not found
+bash-3.2$ $1dw
+bash: dw: command not found
+bash-3.2$ $"dq"
+bash: dq: command not found
+bash-3.2$ $'dq'
+bash: dq: command not found
+bash-3.2$ export $PATH
+bash: export: `/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin': not a valid identifier
 
+
+bash-3.2$ export $PATH=d21     -->!!!!!!!!!!!!!!!!!!!!!!!!!  expansion 파일에서 71번쨰줄보기!!!!!!!!!!
+
+
+bash: export: `/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin=d21': not a valid identifier
+bash-3.2$
 
 
 export $dw --> export

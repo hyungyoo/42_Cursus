@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/20 20:47:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 02:36:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_expension(t_cmd **cmd)
 {
 	t_node	*node;
 
+	printf("hello\n");
 	node = (*cmd)->cmd_start;
 	while (node)
 	{
