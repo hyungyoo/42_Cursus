@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/23 20:01:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 21:17:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,19 @@ void	ft_export(t_node **cmd)
 	str = ft_array_double_export(*cmd);
 	g_info.exit_code = 0;
 
+	/*
+	////////////////////////////////////////////////////
+	printf("\n\narray_export arg\n");
 	int	i = 0;
 	while (str[i])
 	{
 		printf("str %d eme est %s\n", i, str[i]);
 		i++;
 	}
-	ft_check_all(str);
-	//ft_export_set_node(str);
-	// 이제 전부다 나옴 그렇기때문에, 여기에서 에러를찾기위해 고르는건 조금더 힘듬..
+	///////////////////////////////////////////////////
+*/
+	ft_check_all(str);      //$PATH=dwq 이라면 PATH만 고를수있다면
+	// ft_export3 에서, ft_check_value 45, =전까지만 strstr으로 확인한후에,  비교하기, 그리고 path는 왜 안되지?
+	ft_export_set_node(str);
 	free_tab2(str);
 }
