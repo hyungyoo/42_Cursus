@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/23 19:23:16 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:01:46 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_check_arg(t_node *node)
 	return (0);
 }
 
-int	ft_size_node_export(t_node *cmd)
+int	ft_size_array_export(t_node *cmd)
 {
 	int		ret;
 
@@ -36,35 +36,48 @@ int	ft_size_node_export(t_node *cmd)
 		return (-1);
 	while (cmd && cmd->type != PIPE)
 	{
-		if (cmd->next)
-		{
+		if (cmd->flag_nospace == 0 && ft_not_type(cmd))
 			ret++;
+		if (cmd->next)
 			cmd = cmd->next;
-		}
 		else
 			break ;
 	}
-	return (ret + 1);
+	return (ret);
 }
 
 char	**ft_array_double_export(t_node *cmd)
 {
 	char	**array_export;
 	int		i;
-	int		size_node;
+	int		size_array;
 
 	i = 0;
-	size_node = ft_size_node_export(cmd);
-	if (!cmd)
-		return (NULL);
-	array_export = (char **)malloc(sizeof(char *) * (size_node + 1));
+	size_array = ft_size_array_export(cmd);
+	array_export = (char **)malloc(sizeof(char *) * (size_array + 1));
 	if (!array_export)
 		return (NULL);
-	while (i < size_node)
+	while (i < size_array)
 	{
-		array_export[i] = ft_strdup(cmd->str);
-		cmd = cmd->next;
-		i++;
+		array_export[i] = NULL;
+		if (ft_not_type(cmd))
+		{
+			while (cmd && ft_not_type(cmd) && cmd->flag_nospace == 1)
+			{
+				array_export[i] = ft_strjoin_free(array_export[i], cmd->str);
+				if (cmd->next)
+					cmd = cmd->next;
+				else
+					break ;
+			}
+			if (cmd && ft_not_type(cmd))
+				array_export[i] = ft_strjoin_free(array_export[i], cmd->str);
+			i++;
+		}
+		if (cmd->next)
+			cmd = cmd->next;
+		else
+			break ;
 	}
 	array_export[i] = NULL;
 	return (array_export);
@@ -92,9 +105,10 @@ void	ft_export(t_node **cmd)
 	while (str[i])
 	{
 		printf("str %d eme est %s\n", i, str[i]);
-	i++;
+		i++;
 	}
 	ft_check_all(str);
 	//ft_export_set_node(str);
+	// 이제 전부다 나옴 그렇기때문에, 여기에서 에러를찾기위해 고르는건 조금더 힘듬..
 	free_tab2(str);
 }

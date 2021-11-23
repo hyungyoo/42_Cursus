@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 18:08:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/23 19:15:54 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:09:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@ void	ft_reset_num(t_cmd *cmd, t_node **node)
 	tmp = (*node)->str;
 	(*node)->str = ft_strdup(((*node)->next->str) + 1);
 	(*node)->type = ARG;
+	(*node)->flag_nospace = next_node->flag_nospace;
+	free(tmp);
+	ft_del_list(cmd, next_node);
+}
+
+void	ft_clear_dolr_quote(t_cmd *cmd, t_node **node)
+{
+	t_node	*next_node;
+	char	*tmp;
+
+	next_node = (*node)->next;
+	tmp = (*node)->str;
+	(*node)->str = ft_strdup(((*node)->next->str));
+	(*node)->type = next_node->type;
 	(*node)->flag_nospace = next_node->flag_nospace;
 	free(tmp);
 	ft_del_list(cmd, next_node);
@@ -82,13 +96,31 @@ void	ft_expension_num(t_cmd *cmd, t_node *node)
 	}
 }
 
-void	ft_expension_nospace_num(t_cmd *cmd)
+void	ft_expension_quote(t_cmd *cmd, t_node *node)
+{
+	(void)cmd;
+	while (node)
+	{
+		if (node->type == DOLR)
+		{
+			if (node->next && (node->next->type == DOUQ || node->next->type == SINQ))
+				ft_clear_dolr_quote(cmd, &node);
+		}
+		if (node->next)
+			node = node->next;
+		else
+			return ;
+	}
+}
+
+void	ft_expension_num_quote(t_cmd *cmd)
 {
 	t_node *node;
 	if (!cmd)
 		return ;
 	node = cmd->cmd_start;
 	ft_expension_num(cmd ,node);
+	ft_expension_quote(cmd ,node);
 }
 
 void	execute_eof(t_cmd *cmd, char *line)
@@ -110,7 +142,7 @@ void	execute_parsing(t_cmd *cmd, char *line)
 void	execute_minishell(t_cmd *cmd, char *line)
 {
 	set_detail_type(&(cmd));
-	ft_expension_nospace_num(cmd);
+	ft_expension_num_quote(cmd);
 	ft_expension(&cmd);
 	ft_exec(cmd);
 	print_cmdline(&(cmd));

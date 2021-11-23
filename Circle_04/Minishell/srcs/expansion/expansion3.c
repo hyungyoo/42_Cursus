@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/23 18:15:36 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:02:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ void	ft_ajouter_dolr_code(char **new_str, int *i)
 	free(num);
 	(*i) = (*i) + 2;
 }
-/*
-if (((*node)->str)[i] == '$' && ((*node)->str)[i + 1]
-			&& ((*node)->str)[i + 1] && ((*node)->str)[i + 1] != '?'
-			&& ((*node)->str)[i + 1] != '$' && ((*node)->str)[i + 1] != ' ')
-			ft_ajouter_dolr(&new_str, (*node)->str, &(i));
-*/
+
 void	ft_reset_value_douq(t_cmd *cmd, t_node **node)
 {
 	char	*new_str;
