@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 05:49:33 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:56:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	ft_check_str(char *str)
 {
 	int	i;
 
-
 	if (str[0] == '=' || ft_is_digit(str[0]))
 		return (0);
 	i = 0;
@@ -43,28 +42,28 @@ int	ft_check_str(char *str)
 	return (1);
 }
 
-// strstr == ft_strstr 
+/*
+ *&& !ft_strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
+ */
 int	ft_check_value(char *str)
 {
 	t_envp	*envp;
 	t_envp	*tmp;
 	char	*key_tmp;
 
-	//if (str[0] != '$')	--> for haha=1244 
-	//	return (0);
 	envp = g_info.envp;
 	tmp = envp->prev;
 	key_tmp = ft_key(str);
 	while (envp != tmp)
 	{
-		if (strstr(key_tmp, envp->envp_value) && !strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
+		if (ft_strstr(key_tmp, envp->envp_value))
 		{
 			free(key_tmp);
 			return (1);
 		}
 		envp = envp->next;
 	}
-	if (strstr(key_tmp, envp->envp_value) && !strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
+	if (ft_strstr(key_tmp, envp->envp_value))
 	{
 		free(key_tmp);
 		return (1);
@@ -73,34 +72,25 @@ int	ft_check_value(char *str)
 	return (0);
 }
 
-// ret == int for num of array
-void	ft_check_all(char **str)
+int	ft_check_all(char **str)
 {
 	int	i;
+	int	size;
 
+	size = ft_tab_size(str);
 	i = 0;
 	while (str[i])
 	{
 		if (!ft_check_str(str[i]) || !ft_strcmp(str[i], "=")
 			|| !ft_check_egal(str[i]) || ft_check_value(str[i]))
 		{
-
-				/* for check */
-				if (!ft_check_str(str[i]))
-					printf("check str\n");
-				if (!ft_strcmp(str[i], "="))
-					printf("check strcmp\n");
-				if (!ft_check_egal(str[i]))
-					printf("check egal\n");
-				if (ft_check_value(str[i]))
-					printf("check value\n");
-				/* for check */
-
-				ft_error_message_export(str[i]);
-				g_info.exit_code = 1;
+			ft_error_message_export(str[i]);
+			g_info.exit_code = 1;
+			size--;
 		}
 		i++;
 	}
+	return (size);
 }
 
 void	ft_export_set_node(char **str)

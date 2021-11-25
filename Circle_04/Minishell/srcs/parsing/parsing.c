@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:43:09 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/19 17:51:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:57:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,18 @@ void	insert_nospace_flag(t_cmd **cmd)
 	if (!*cmd)
 		return ;
 	node = (*cmd)->cmd_start;
-	while (node->next != NULL)
-		node = node->next;
-	node->flag_nospace = 1;
+	while (node)
+	{
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	if (node)
+		node->flag_nospace = 1;
 }
 
-static int	count_word(char *line)
+int	count_word(char *line)
 {
 	int	i;
 	int	count;
@@ -71,51 +77,38 @@ static int	count_word(char *line)
 	return (count);
 }
 
-char	*remove_quote(char *line)
+int	find_cmd_with_emptystr(char *line, char *cmd)
 {
-	char	*str;
-	int		i;
-	int		count;
-	int		j;
+	int	index;
 
-	count = count_word(line);
-	str = malloc(sizeof(char) * (count + 1));
-	i = 0;
-	j = 0;
-	while (line[i])
+	index = 0;
+	if (!line || !cmd)
+		return (0);
+	if (ft_strstr(line, cmd))
 	{
-		if (line[i] == '\"' && line[i + 1] == '\"')
+		index = ft_strstr(line, cmd) + 1;
+		if (line[index])
 		{
-			if (line[i + 1])
-				i = i + 1;
+			if (line[index + 1] == '\"' && line[index + 2] == '\"')
+				return (1);
 		}
-		else
-		{
-			str[j] = line[i];
-			j++;
-		}
-		i++;
 	}
-	str[j] = '\0';
-	return (str);
+	return (0);
 }
 
-int	ft_parsing(char *line, t_cmd **cmd)
+void	set_export_unset_flag(char *line, int *flag)
 {
-	int		i;
-	char	*str;
+	int	export;
+	int	unset;
 
-	i = -1;
-	str = remove_quote(line);
-	while (str[++i])
-	{
-		while (str[i] == ' ')
-			i++;
-		if (parsing_process(str, cmd, &i) == 1)
-			return (1);
-		if (str[i + 1] != ' ' && str[i + 1] != '\0')
-			insert_nospace_flag(cmd);
-	}
-	free(str);
-	return (0);
+	export = 0;
+	unset = 0;
+	export = find_cmd_with_emptystr(line, "export");
+	unset = find_cmd_with_emptystr(line, "unset");
+	if (export && !unset)
+		*flag = 1;
+	else if (!export && unset)
+		*flag = 2;
+	else if (export && unset)
+		*flag = 3;
 }

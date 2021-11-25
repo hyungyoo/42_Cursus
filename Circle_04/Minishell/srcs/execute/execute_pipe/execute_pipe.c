@@ -6,25 +6,11 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/20 17:14:47 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:44:54 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-int	check_cmd(t_node *node)
-{
-	while (node && node->type != PIPE)
-	{
-		if (node->type == CMD || node->type == BUILTIN_CMD)
-			return (1);
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
-	return (0);
-}
 
 int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 {
@@ -106,33 +92,13 @@ void	heredoc(t_cmd *cmd, t_node *node)
 	}
 }
 
-/*
- * < makefile << end | cat ==> 히얼독값나옴 
- * < makefile << end cat | cat ==> makefile 값이나옴
- * << end < makefile cat | cat ==> 히얼독값이나옴
- * << end < makefile | cat ==> 히얼독값이나옴
- *
- * 즉, 전부다 뒤에 명령어가없다면, 보내지말고, 그냥 표기만하는것!
- * 두번쨰, <가 제일뒤에있어야하며 아니라면 표기만하는것!
- * 세번째, 맨뒤에 메이크파일값이 나와야함
- * 네번쨰, 아무값도안나와야함
- */
 int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 {
 	int	status;
 
 	status = 0;
-	if (!(*node)->next)
-	{
-		ft_putstr_fd("minishell: parse error near\n", 2);
+	if (!check_dleft_error(node))
 		return (0);
-	}
-	(*node) = (*node)->next;
-	if (check_redir(*node))
-	{
-		ft_putstr_fd("minisehll: syntax error near unexpected token `<<'\n", 2);
-		return (0);
-	}
 	if (check_dleft((*node)->prev) == DLEFT && flag)
 	{
 		pipe(fd->fd_heredoc_pipe);

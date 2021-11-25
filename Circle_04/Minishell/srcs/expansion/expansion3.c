@@ -6,11 +6,18 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/23 20:02:02 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:48:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	check_exit_char(char c)
+{
+	if (c == ' ' || c == '|' || c == 39 || c == '$' || c == '=' || c == '!')
+		return (1);
+	return (0);
+}
 
 void	ft_ajouter_dolr_code(char **new_str, int *i)
 {

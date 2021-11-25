@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 03:08:27 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:36:42 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,14 @@ void	ft_unset(t_node **cmd)
 	if (!cmd || !(*cmd))
 		return ;
 	else if (!((*cmd)->next))
+	{
+		if ((*cmd)->flag_emptystr)
+		{
+			g_info.exit_code = 1;
+			empty_error_message("unset");
+		}
 		return ;
+	}
 	else if ((*cmd)->next->type == PIPE)
 		return ;
 	if (!ft_strcmp((*cmd)->next->str, "PWD"))

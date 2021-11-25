@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 03:36:35 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/19 17:29:31 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:30:10 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,6 @@ void	set_detail_type(t_cmd **cmd)
 	tmp = (*cmd)->cmd_start->next;
 	while (tmp)
 	{
-		//if (!is_operation_word(tmp))
-		//{
-		//	if (tmp->next)
-		//		tmp->next->type = FILE;
-		//}
 		if (tmp->type == DLEFT)
 		{
 			if (tmp->next)

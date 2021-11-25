@@ -6,7 +6,7 @@
 /*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:15:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/04 00:15:40 by keulee           ###   ########.fr       */
+/*   Updated: 2021/11/25 18:59:50 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int		ft_is_letter(char c);
 void	ft_putnbr_fd(int n, int fd);
 int		ft_is_digit(char c);
 int		get_next_line(int fd, char **line);
+int		ft_strstr(char *str, char *to_find);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/23 19:16:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:57:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 /*
 ** TYPE in s_pars
 */
-// # define WORD 		0
 # define SINQ 		1
 # define DOUQ 		2
 # define DOLR 		3
@@ -56,6 +55,7 @@ typedef struct s_node
 	char			*str;
 	int				flag_nospace;
 	int				fd[2];
+	int				flag_emptystr;
 	struct s_node	*prev;
 	struct s_node	*next;
 }				t_node;
@@ -83,6 +83,7 @@ typedef struct s_info
 	int				exit_code;
 	int				flag_pwd;
 	char			*last_env_str;
+	int				pipe_flag;
 }				t_info;
 
 typedef struct s_fd_pipe
@@ -130,8 +131,15 @@ int				main(int ac, char **av, char **env);
 /* parsing.c */
 int				parsing_process(char *str, t_cmd **cmd, int *i);
 void			insert_nospace_flag(t_cmd **cmd);
-char			*remove_quote(char *line);
+// char			*remove_quote(char *line);
+char			*remove_quote(char *line, int *flag);
 int				ft_parsing(char *line, t_cmd **cmd);
+void			init_emptystr_flag(t_cmd **cmd);
+void			put_emptystr_flag(t_cmd **cmd, int flag);
+char			*dquote_removed_str(char *line, int count);
+void			set_export_unset_flag(char *line, int *flag);
+int				find_cmd_with_emptystr(char *line, char *cmd);
+int				count_word(char *line);
 
 /* parsing_quote.c*/
 int				parsing_quotes(char *str, int *index, t_cmd **cmd);
@@ -227,8 +235,10 @@ int				ft_error_message(char *path, char **argv, char **env);
 int				ft_error_message_no_path(char **argv, char **env);
 void			ft_execmd_child(t_node *node);
 int				ft_check_path_exec(t_node *node);
+
 void			ft_error_message_execmd(t_cmd *cmd_start);
 void			ft_execmd(t_node *node, t_cmd *cmd_start);
+int				check_dleft_error(t_node **node);
 
 /* execute_pipe.c */
 int				check_cmd(t_node *node);
@@ -245,12 +255,13 @@ int				ft_fd_checker_pipe(t_node *node, t_fd_pipe *fd,
 void			ft_set_fd_pipe(t_fd_pipe *fd);
 void			ft_close_fd_pipe(t_fd_pipe *fd);
 void			execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd);
+int				check_next_pipe_node(t_node **node);
+int				check_dleft(t_node *node);
+int				check_dleft_next_cmd(t_node *node);
+int				check_dleft_file(t_node *node);
+int				check_heredoc_fd(t_node **node);
 void			execute_pipe(t_node **node, t_cmd *cmd);
 void			ft_exec_pipe(t_node *node, t_cmd *cmd);
-int				check_next_pipe_node(t_node **node);
-int				check_dleft_next_cmd(t_node *node);
-int				check_dleft(t_node *node);
-int				check_dleft_file(t_node *node);
 
 /* expansion.c */
 void			ft_del_list_one_node(t_cmd *cmd, t_node *node);
@@ -267,6 +278,13 @@ void			ft_ajouter_dolr_code(char **new_str, int *i);
 void			ft_reset_value_douq(t_cmd *cmd, t_node **node);
 void			ft_expension(t_cmd **cmd);
 int				check_exit_char(char c);
+void			ft_reset_num(t_cmd *cmd, t_node **node);
+void			ft_clear_dolr_quote(t_cmd *cmd, t_node **node);
+int				check_num_douq(char *str);
+void			ft_reset_num_douq(t_node *node);
+void			ft_expension_num(t_cmd *cmd, t_node *node);
+void			ft_expension_quote(t_cmd *cmd, t_node *node);
+void			ft_expension_num_quote(t_cmd *cmd);
 
 /*
  * built in
@@ -310,10 +328,17 @@ void			ft_export_env(void);
 void			ft_error_message_export(char *str);
 int				ft_check_num(char *str);
 int				ft_check_str(char *str);
-void			ft_check_all(char **str);
+int				ft_check_all(char **str);
+char			*ft_all_arg(t_node **cmd);
 void			ft_export_set_node(char **str);
 int				ft_check_arg(t_node *node);
 void			ft_export(t_node **cmd);
+int				ft_check_egal(char *str);
+int				ft_check_str(char *str);
+int				ft_check_value(char *str);
+void			empty_error_message(char *str);
+char			**ft_new_array_export(char **str, int size);
+char			**ft_array_double_export(t_node *cmd);
 
 /* ft_unset.c */
 int				ft_chercher_key(t_envp *envp, char *arg);

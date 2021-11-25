@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:41:48 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 19:43:20 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:35:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,8 @@ int	ft_dleft_fd(t_node **node, t_fd *fd, t_cmd *cmd)
 	int	status;
 
 	status = 0;
-	if (!(*node)->next)
-	{
-		ft_putstr_fd("minishell: parse error near\n", 2);
+	if (!check_dleft_error(node))
 		return (0);
-	}	
-	(*node) = (*node)->next;
-	if (check_redir(*node))
-	{
-		ft_putstr_fd("minisehll: syntax error near unexpected token `<<'\n", 2);
-		return (0);
-	}
 	if (check_dleft((*node)->prev) == DLEFT)
 	{
 		pipe(fd->fd_heredoc_pipe);
@@ -51,7 +42,7 @@ int	ft_right_fd(t_node **node, t_fd *fd)
 		return (0);
 	}	
 	(*node) = (*node)->next;
-	if(check_redir(*node))
+	if (check_redir(*node))
 	{
 		ft_putstr_fd("minisehll: syntax error near unexpected token `>'\n", 2);
 		return (0);

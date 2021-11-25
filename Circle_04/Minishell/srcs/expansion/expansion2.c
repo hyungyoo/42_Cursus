@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:59:28 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/23 02:36:54 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:48:55 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,6 @@ char	*tmp_key_expansion(char *str, int *i, int j)
 		tmp_key[k++] = str[j++];
 	tmp_key[k] = '\0';
 	return (tmp_key);
-}
-
-int	check_exit_char(char c)
-{
-	if (c == ' ' || c == '|' || c == 39 || c == '$' || c == '=' || c == '!')
-		return (1);
-	return (0);
 }
 
 void	ft_ajouter_dolr(char **new_str, char *str, int *i)

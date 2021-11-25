@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 11:58:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:22:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ int	ft_check_option(char *str)
 			return (0);
 	return (1);
 }
-
+/*
 void	ft_put_last_env(void)
 {
 	ft_putstr((g_info.last_env_str + 2));
 	ft_putstr("\n");
 }
-
+*/
+/*
 void	ft_echo_type_dolr(t_node **cmd)
 {
 	if ((*cmd)->flag_nospace == 0)
@@ -53,7 +54,6 @@ void	ft_echo_type_dolr(t_node **cmd)
 		}
 	}
 }
-
 void	ft_echo_type_douq(t_node **cmd)
 {
 	if (((*cmd)->str)[0] == '$')
@@ -87,3 +87,4 @@ int	ft_check_sans_espace(char *str)
 	}
 	return (count);
 }
+*/
