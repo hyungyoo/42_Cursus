@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 05:43:49 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 05:49:33 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,22 @@ int	ft_check_value(char *str)
 	//	return (0);
 	envp = g_info.envp;
 	tmp = envp->prev;
-	////// key
 	key_tmp = ft_key(str);
-	printf("key_tmp = %s\n", key_tmp);
-	//////////
 	while (envp != tmp)
 	{
-		if (strstr(str, envp->envp_value) && !strstr(str, ft_getenv(g_info.envp, "USER")))
-			printf("str == %s, envp_value == %s\n", str, envp->envp_value);
+		if (strstr(key_tmp, envp->envp_value) && !strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
+		{
+			free(key_tmp);
 			return (1);
 		}
 		envp = envp->next;
 	}
-	if (strstr(str, envp->envp_value) && !strstr(str, ft_getenv(g_info.envp, "USER")))
+	if (strstr(key_tmp, envp->envp_value) && !strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
+	{
+		free(key_tmp);
 		return (1);
+	}
+	free(key_tmp);
 	return (0);
 }
 
