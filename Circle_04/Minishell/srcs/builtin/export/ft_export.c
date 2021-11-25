@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/20 19:05:06 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 20:54:58 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_ajouter_value(char *str)
 	while (str[i] && str[i] != '=')
 		i++;
 	size_value = ft_strlen(str) - i;
+	if (!size_value)
+		return (ft_strdup(""));
 	ret = (char *)malloc(sizeof(char) * size_value + 1);
 	ft_strlcpy(ret, str + i + 1, size_value + 1);
 	return (ret);
