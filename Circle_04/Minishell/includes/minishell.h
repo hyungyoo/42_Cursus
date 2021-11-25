@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/25 18:57:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 20:30:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,6 +356,8 @@ void			ft_error_message_string_arg(t_node *node, t_cmd *cmd);
 void			ft_exit_builtin(t_node **cmd, t_cmd *cmd_start);
 
 /*  ft_cd.c */
+int				execute_cd_with_root(char *new_path, char *path_tmp,
+					char **split_new_path);
 void			ft_error_message_cd(char *new_path);
 int				ft_new_path(char **path, char *new_path);
 char			**ft_split_cd(char *new_path);

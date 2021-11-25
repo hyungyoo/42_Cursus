@@ -6,11 +6,11 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 18:26:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/10/23 17:01:51 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 20:17:29 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 char	*ft_strjoin_cd(char *s1, char *s2)
 {

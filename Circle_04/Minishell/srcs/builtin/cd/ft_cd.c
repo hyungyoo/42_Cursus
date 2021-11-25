@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 11:55:39 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 20:15:46 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ char	**ft_split_cd(char *new_path)
 	char	**ret;
 	char	*tmp;
 
-	tmp = NULL;
 	ret = NULL;
+	tmp = NULL;
 	if (ft_is_slash(new_path))
 		ret = ft_split(new_path, '/');
 	else

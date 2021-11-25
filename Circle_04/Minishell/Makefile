@@ -44,7 +44,7 @@ SRCS = srcs/minishell.c \
 		srcs/builtin/cd/ft_cd.c \
 		srcs/builtin/cd/ft_cd2.c \
 		srcs/builtin/cd/ft_cd3.c \
-		srcs/builtin/ft_cd_util.c \
+		srcs/builtin/cd/ft_cd_util.c \
 		srcs/builtin/exit/ft_exit.c \
 		srcs/builtin/exit/ft_exit2.c \
 		srcs/expansion/expansion.c \

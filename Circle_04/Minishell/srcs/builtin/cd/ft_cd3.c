@@ -6,11 +6,25 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/19 17:53:42 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 20:30:03 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+int	execute_cd_with_root(char *new_path, char *path_tmp,
+		char **split_new_path)
+{
+	if (chdir(new_path) == -1)
+	{
+		chdir(path_tmp);
+		free(path_tmp);
+		ft_error_message_cd(new_path);
+		free_tab2(split_new_path);
+		return (0);
+	}
+	return (1);
+}
 
 void	ft_exec_path(char *new_path)
 {
