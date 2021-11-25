@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/20 17:11:57 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 05:12:42 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ void	ft_close_fd_pipe(t_fd_pipe *fd)
 		close(fd->fd_in);
 	if (fd->fd_out != -1)
 		close(fd->fd_out);
-	close(fd->fd_std_in);
-	close(fd->fd_std_out);
-	close(fd->fd_std_in_pipe);
-	close(fd->fd_std_out_pipe);
+	//close(fd->fd_std_in);
+	//close(fd->fd_std_out);
+	//close(fd->fd_std_in_pipe);
+	//close(fd->fd_std_out_pipe);
 }
 
 void	execute_cmds_pipe(t_node **node, t_cmd *cmd, t_fd_pipe *fd)

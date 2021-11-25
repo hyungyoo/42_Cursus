@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/23 21:17:28 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/25 05:16:02 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	ft_export(t_node **cmd)
 	str = ft_array_double_export(*cmd);
 	g_info.exit_code = 0;
 
-	/*
 	////////////////////////////////////////////////////
 	printf("\n\narray_export arg\n");
 	int	i = 0;
@@ -111,9 +110,8 @@ void	ft_export(t_node **cmd)
 		i++;
 	}
 	///////////////////////////////////////////////////
-*/
 	ft_check_all(str);      //$PATH=dwq 이라면 PATH만 고를수있다면
 	// ft_export3 에서, ft_check_value 45, =전까지만 strstr으로 확인한후에,  비교하기, 그리고 path는 왜 안되지?
-	ft_export_set_node(str);
+	//ft_export_set_node(str);
 	free_tab2(str);
 }
