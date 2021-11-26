@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 18:08:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 20:55:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:01:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	execute_eof(t_cmd *cmd, char *line)
 {
-	ft_putendl_fd("\033[38;5;31mminishell exit \033[0m", 1);
+	ft_putendl_fd("exit", 1);
 	free(line);
 	line = NULL;
-	ft_exit_minishell(1, &(cmd));
+	ft_exit_minishell(0, &(cmd));
 }
 
 void	execute_parsing(t_cmd *cmd, char *line)
@@ -35,6 +35,7 @@ void	execute_minishell(t_cmd *cmd, char *line)
 	ft_expension_num_quote(cmd);
 	ft_expension(&cmd);
 	ft_exec(cmd);
+	print_cmdline(&(cmd));
 	free(line);
 	line = NULL;
 }
@@ -45,7 +46,7 @@ int	main(int ac, char **av, char **env)
 	t_cmd	*cmd;
 
 	ft_initial(env, ac, av);
-	ascii_logo_lol();
+	//ascii_logo_lol();
 	while (1)
 	{
 		signal(SIGINT, handler);

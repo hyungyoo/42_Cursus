@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 03:39:15 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/25 20:55:41 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:46:26 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	get_listsize(t_node **node)
 	}
 	return (size);
 }
-/*
+
 void	print_cmdline(t_cmd **cmd)
 {
 	t_node	*tmp;
@@ -117,4 +117,3 @@ void	print_cmdline(t_cmd **cmd)
 	printf("\n");
 	printf("----------DONE---------\n");
 }
-*/

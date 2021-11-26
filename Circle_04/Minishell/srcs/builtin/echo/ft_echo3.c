@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 17:20:56 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:01:50 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	ft_echo(t_node **cmd)
 	int	flag_option;
 
 	flag_option = 0;
+	g_info.exit_code = 0;
 	if (!cmd || !*cmd)
 		return ;
 	if (!((*cmd)->next))
@@ -91,5 +92,4 @@ void	ft_echo(t_node **cmd)
 	ft_print_echo(cmd);
 	if (!flag_option)
 		ft_putstr("\n");
-	g_info.exit_code = 0;
 }

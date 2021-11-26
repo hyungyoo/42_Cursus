@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 17:36:42 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:04:54 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	ft_unset(t_node **cmd)
 {
 	if (!cmd || !(*cmd))
 		return ;
-	else if (!((*cmd)->next))
+	g_info.exit_code = 0;
+	if (!((*cmd)->next))
 	{
 		if ((*cmd)->flag_emptystr)
 		{
@@ -87,5 +88,4 @@ void	ft_unset(t_node **cmd)
 		g_info.flag_pwd = 1;
 	else
 		ft_unset_exec(cmd);
-	g_info.exit_code = 0;
 }

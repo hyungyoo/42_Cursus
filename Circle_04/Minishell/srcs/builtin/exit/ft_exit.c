@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 12:00:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:55:31 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	ft_check_num_exit(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i])
 	{
-		if (i == 0 && str[i] == '-' && i++)
-			continue ;
-		else if (!ft_is_digit(str[i]))
+		if (!ft_is_digit(str[i]))
 			return (0);
 		i++;
 	}
@@ -76,6 +76,6 @@ int	ft_set_exit_code(char *str)
 
 void	ft_exit_with_message(t_cmd *cmd_start)
 {
-	ft_putendl_fd("\033[38;5;31mminishell exit \033[0m", 2);
+	ft_putendl_fd("\033[38;5;31mexit\033[0m", 2);
 	ft_exit_minishell(g_info.exit_code, &(cmd_start));
 }

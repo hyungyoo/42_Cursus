@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 20:30:03 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:55:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,15 @@ void	ft_cd(t_node **cmd)
 	if ((*cmd)->next && (*cmd)->next->type != PIPE)
 	{
 		(*cmd) = (*cmd)->next;
-		while ((*cmd) && (*cmd)->type != ARG)
-			(*cmd) = (*cmd)->next;
+		while ((*cmd) && !ft_not_type((*cmd)) && (*cmd)->type != PIPE)
+		{
+			if ((*cmd)->next)
+				(*cmd) = (*cmd)->next;
+			else
+				break ;
+		}
+		if (!(*cmd) || (*cmd)->type == PIPE || (*cmd)->type == FILE)
+			return ;
 		new_path = ft_strdup((*cmd)->str);
 		if (!ft_strcmp(new_path, "~"))
 			ft_exec_home();
