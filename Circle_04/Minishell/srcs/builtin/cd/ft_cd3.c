@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/26 16:55:45 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 21:26:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,18 @@ int	ft_num_arg_cd(t_node *cmd)
 	return (arg_count);
 }
 
+char	*ft_get_path(t_node *cmd)
+{
+	char	*ret;
+	char	**array;
+
+	ret = NULL;
+	array = ft_array_double_export(cmd);
+	ret = ft_strdup(array[0]);
+	free_tab2(array);
+	return (ret);
+}
+
 void	ft_cd(t_node **cmd)
 {
 	char	*new_path;
@@ -87,7 +99,7 @@ void	ft_cd(t_node **cmd)
 		}
 		if (!(*cmd) || (*cmd)->type == PIPE || (*cmd)->type == FILE)
 			return ;
-		new_path = ft_strdup((*cmd)->str);
+		new_path = ft_get_path(*cmd);
 		if (!ft_strcmp(new_path, "~"))
 			ft_exec_home();
 		else
