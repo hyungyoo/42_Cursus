@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 18:44:54 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:24:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ int	ft_left_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 
 void	heredoc_parent_pipe(t_fd_pipe *fd, int status)
 {
+	waitpid(g_info.pid_heredoc, &status, 0);
 	close(fd->fd_heredoc_pipe[1]);
 	dup2(fd->fd_heredoc_pipe[0], 0);
-	waitpid(g_info.pid_child, &status, 0);
 	g_info.pid_child = 0;
 	g_info.exit_code = WEXITSTATUS(status);
+	ft_exit_minishell(0, NULL);
 }
 
 void	heredoc_child_pipe(t_fd_pipe *fd, t_cmd *cmd, t_node **node)
@@ -102,10 +103,10 @@ int	ft_dleft_fd_pipe(t_node **node, t_fd_pipe *fd, t_cmd *cmd, int flag)
 	if (check_dleft((*node)->prev) == DLEFT && flag)
 	{
 		pipe(fd->fd_heredoc_pipe);
-		g_info.pid_child = fork();
-		if (g_info.pid_child > 0)
+		g_info.pid_heredoc = fork();
+		if (g_info.pid_heredoc > 0)
 			heredoc_parent_pipe(fd, status);
-		else if (g_info.pid_child == 0)
+		else if (g_info.pid_heredoc == 0)
 			heredoc_child_pipe(fd, cmd, node);
 	}
 	if (check_dleft((*node)->prev) == DLEFT && !flag)

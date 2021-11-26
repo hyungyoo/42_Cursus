@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 18:08:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 20:55:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:17:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ int	main(int ac, char **av, char **env)
 
 	ft_initial(env, ac, av);
 	ascii_logo_lol();
+	signal(SIGINT, handler);
+	signal(SIGQUIT, handler);
 	while (1)
 	{
-		signal(SIGINT, handler);
-		signal(SIGQUIT, handler);
+		//signal(SIGINT, handler);
+		//signal(SIGQUIT, handler);
 		line = readline("\033[38;5;41mminishell $> \033[0m");
 		cmd = init_cmd();
 		if (line == NULL)

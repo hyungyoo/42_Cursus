@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/25 20:30:06 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:30:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct s_info
 {
 	struct s_envp	*envp;
 	pid_t			pid_child;
+	pid_t			pid_child2;
+	pid_t			pid_heredoc;
 	int				exit_code;
 	int				flag_pwd;
 	char			*last_env_str;
