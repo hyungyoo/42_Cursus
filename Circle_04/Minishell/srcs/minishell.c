@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 18:08:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/26 18:01:32 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:05:27 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_minishell(t_cmd *cmd, char *line)
 	ft_expension_num_quote(cmd);
 	ft_expension(&cmd);
 	ft_exec(cmd);
-	print_cmdline(&(cmd));
+	//print_cmdline(&(cmd));
 	free(line);
 	line = NULL;
 }

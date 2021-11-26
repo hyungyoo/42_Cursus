@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/25 20:30:06 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:38:04 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,8 +351,8 @@ void			ft_free_cmd(t_node *cmd);
 int				ft_check_num_exit(char *str);
 int				ft_check_pipe_before_exit(t_cmd *cmd);
 int				ft_set_exit_code(char *str);
-void			ft_exit_with_message(t_cmd *cmd_start);
-void			ft_error_message_string_arg(t_node *node, t_cmd *cmd);
+void			ft_exit_with_message(t_cmd *cmd_start, char **str, int flag);
+void			ft_error_message_string_arg(t_node *node, t_cmd *cmd, char **str, int flag);
 void			ft_exit_builtin(t_node **cmd, t_cmd *cmd_start);
 
 /*  ft_cd.c */
