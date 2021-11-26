@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:16 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/26 20:29:31 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 21:32:46 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,19 @@ void	ft_error_no_path(char *str)
 	ft_putstr_fd(": No such file or directory\n", 2);
 }
 
+/*
+	//if (ft_getenv(g_info.envp, "PATH") == NULL)
+	//	return (ft_error_no_path(node->str));
+*/
 void	ft_execmd(t_node *node, t_cmd *cmd_start)
 {
 	if (!ft_strcmp(node->str, ""))
 		ft_error_message_execmd(cmd_start);
-	//if (ft_getenv(g_info.envp, "PATH") == NULL)
-	//	return (ft_error_no_path(node->str));
+	if (!ft_strcmp(node->str, "/"))
+	{
+		ft_putstr_fd("minishell: /: is a directory\n", 2);
+		ft_exit_minishell(126, &cmd_start);
+	}
 	if (ft_check_path_exec(node))
 		ft_execmd_child(node);
 	ft_exit_minishell(g_info.exit_code, &cmd_start);
