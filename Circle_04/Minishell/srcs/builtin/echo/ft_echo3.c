@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/26 20:37:51 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 18:21:24 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	ft_print_echo(t_node **cmd)
 	{
 		if (check_pwd(cmd))
 			(*cmd) = (*cmd);
-		if (ft_not_type((*cmd)))
+		if (ft_not_type((*cmd)) && !(g_info.flag_pwd == 1
+				&& !ft_strcmp((*cmd)->str, ft_getenv(g_info.envp, "PWD"))))
 			ft_putstr((*cmd)->str);
 		if (ft_not_type((*cmd)) && ft_not_type((*cmd)->prev)
 			&& (*cmd)->flag_nospace == 1)

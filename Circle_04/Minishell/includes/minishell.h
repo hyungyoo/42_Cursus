@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/26 20:44:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 19:31:39 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,14 +371,14 @@ void			ft_update_path_oldpath(char *path_env, char *old_pwd);
 void			ft_exec_home(void);
 void			ft_exec_path(char *new_path);
 int				ft_num_arg_cd(t_node *cmd);
-void			ft_cd(t_node **cmd);
-
-/* ft_cd_util.c */
 char			*ft_strjoin_cd(char *s1, char *s2);
 int				ft_strlen_avant_slash(char *path);
 void			ft_avant_path(char **path);
 void			ft_ajouter_path(char **path, char *add_path);
 void			ft_cd_exec(char **path, char *new_path);
+void			ft_cd(t_node **cmd);
+void			ft_exec_root_path(char *old_path);
+void			check_root_path(char **path, char *new_path);
 
 /* ft_echo.c */
 int				ft_check_option(char *str);

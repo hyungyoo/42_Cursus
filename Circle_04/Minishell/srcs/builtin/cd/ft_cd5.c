@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 18:26:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 20:17:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 19:12:26 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_ajouter_path(char **path, char *add_path)
 {
 	if (!path || !*path || !add_path)
 		return ;
-	if (!(!ft_strcmp(*path, "/") || (*path)[ft_strlen(*path) - 1] == '/'))
+	if ((*path)[ft_strlen(*path) - 1] != '/')
 		*path = ft_strjoin_cd(*path, "/");
 	*path = ft_strjoin_cd(*path, add_path);
 }

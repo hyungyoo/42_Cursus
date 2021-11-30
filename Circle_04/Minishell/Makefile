@@ -44,7 +44,8 @@ SRCS = srcs/minishell.c \
 		srcs/builtin/cd/ft_cd.c \
 		srcs/builtin/cd/ft_cd2.c \
 		srcs/builtin/cd/ft_cd3.c \
-		srcs/builtin/cd/ft_cd_util.c \
+		srcs/builtin/cd/ft_cd4.c \
+		srcs/builtin/cd/ft_cd5.c \
 		srcs/builtin/exit/ft_exit.c \
 		srcs/builtin/exit/ft_exit2.c \
 		srcs/expansion/expansion.c \
@@ -59,19 +60,19 @@ OBJS = $(SRCS:.c=.o)
 
 SRCS_DIR = ./srcs
 
-LI = -L. -lft -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib
-LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
+LIB = -L. -lft -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib
+LI = -L. -lft -lreadline -L /usr/local/opt/readline/lib
 #~/.brew/opt/readline/lib  // ecole42 complie
 #/usr/local/opt/readline/lib //keulee home complie
 
-IN = -I/Users/$(USER)/homebrew/opt/readline/include
-INC = -I /usr/local/opt/readline/include
+INC = -I/Users/$(USER)/homebrew/opt/readline/include
+IN = -I /usr/local/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 LIBFT = libft.a
 

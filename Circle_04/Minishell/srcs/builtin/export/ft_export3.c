@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/26 17:15:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 19:24:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,28 @@ int	ft_check_str(char *str)
 	return (1);
 }
 
+int	check_value_with_envp(char *key_tmp, t_envp *envp)
+{
+	if (ft_strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
+	{
+		if (ft_strstr(key_tmp, envp->envp_value)
+			&& ft_strcmp(envp->envp_value, ft_getenv(g_info.envp, "USER")))
+		{
+			free(key_tmp);
+			return (1);
+		}
+	}
+	else
+	{
+		if (ft_strstr(key_tmp, envp->envp_value))
+		{
+			free(key_tmp);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 /*
  *&& !ft_strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
  */
@@ -56,18 +78,12 @@ int	ft_check_value(char *str)
 	key_tmp = ft_key(str);
 	while (envp != tmp)
 	{
-		if (!ft_strcmp(key_tmp, envp->envp_value))
-		{
-			free(key_tmp);
+		if (check_value_with_envp(key_tmp, envp))
 			return (1);
-		}
 		envp = envp->next;
 	}
-	if (!ft_strcmp(key_tmp, envp->envp_value))
-	{
-		free(key_tmp);
+	if (check_value_with_envp(key_tmp, envp))
 		return (1);
-	}
 	free(key_tmp);
 	return (0);
 }
@@ -91,22 +107,4 @@ int	ft_check_all(char **str)
 		i++;
 	}
 	return (size);
-}
-
-void	ft_export_set_node(char **str)
-{
-	char	*key_tmp;
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		key_tmp = ft_key(str[i]);
-		if (ft_getenv(g_info.envp, key_tmp))
-			ft_update_env(g_info.envp, str[i], key_tmp);
-		else
-			ft_ajouter_node(&(g_info.envp), ft_new_node_env(str[i]));
-		free(key_tmp);
-		i++;
-	}
 }

@@ -6,11 +6,29 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 18:31:04 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 19:24:08 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+void	ft_export_set_node(char **str)
+{
+	char	*key_tmp;
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		key_tmp = ft_key(str[i]);
+		if (ft_getenv(g_info.envp, key_tmp))
+			ft_update_env(g_info.envp, str[i], key_tmp);
+		else
+			ft_ajouter_node(&(g_info.envp), ft_new_node_env(str[i]));
+		free(key_tmp);
+		i++;
+	}
+}
 
 void	empty_error_message(char *str)
 {

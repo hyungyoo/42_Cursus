@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 20:29:58 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 19:26:10 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	ft_exec_chdir(char **path, char *new_path, char *path_tmp,
 	int	i;
 
 	i = 0;
-	if (new_path[0] == '/')
-		return (execute_cd_with_root(new_path, path_tmp, split_new_path));
+	check_root_path(path, new_path);
 	while (split_new_path[i])
 	{
 		ft_cd_exec(path, split_new_path[i]);
@@ -43,8 +42,6 @@ int	ft_exec_dir(char **path, char *new_path)
 
 	split_new_path = NULL;
 	path_tmp = NULL;
-	if (!(ft_check_error(path, new_path)))
-		return (0);
 	split_new_path = ft_split_cd(new_path);
 	path_tmp = ft_strdup(*path);
 	if (!(ft_exec_chdir(path, new_path, path_tmp, split_new_path)))
