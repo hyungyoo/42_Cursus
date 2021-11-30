@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 18:53:38 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 20:16:08 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_new_path(char **path, char *new_path)
 	return (1);
 }
 
-static int	ft_is_slash(char *str)
+int	ft_is_slash(char *str)
 {
 	int	i;
 

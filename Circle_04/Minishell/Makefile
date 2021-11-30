@@ -25,6 +25,7 @@ SRCS = srcs/minishell.c \
 		srcs/execute/execute_cmd/execute_cmd.c \
 		srcs/execute/execute_cmd/execute_cmd2.c \
 		srcs/execute/execute_cmd/execute_cmd3.c \
+		srcs/execute/execute_cmd/execute_cmd4.c \
 		srcs/builtin/ft_built_in.c \
 		srcs/builtin/ft_pwd.c \
 		srcs/builtin/list_env/ft_node_list_env.c \
