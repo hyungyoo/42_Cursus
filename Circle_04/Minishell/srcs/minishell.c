@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 18:08:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 17:17:32 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 19:45:35 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	execute_minishell(t_cmd *cmd, char *line)
 	ft_expension_num_quote(cmd);
 	ft_expension(&cmd);
 	ft_exec(cmd);
-	print_cmdline(&(cmd));
 	free(line);
 	line = NULL;
 }
@@ -46,7 +45,7 @@ int	main(int ac, char **av, char **env)
 	t_cmd	*cmd;
 
 	ft_initial(env, ac, av);
-	//ascii_logo_lol();
+	ascii_logo_lol();
 	while (1)
 	{
 		signal(SIGINT, handler);
