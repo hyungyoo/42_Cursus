@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 18:44:54 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:04:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	heredoc_child_pipe(t_fd_pipe *fd, t_cmd *cmd, t_node **node)
 
 	close(fd->fd_heredoc_pipe[0]);
 	dup2(fd->fd_heredoc_pipe[1], 1);
-	ft_putstr_fd("> ", 2);
+	ft_putstr_fd("pipe heredoc> ", 2);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!ft_strcmp(line, (*node)->str))
@@ -65,7 +65,7 @@ void	heredoc_child_pipe(t_fd_pipe *fd, t_cmd *cmd, t_node **node)
 			break ;
 		}
 		else
-			ft_putstr_fd("> ", 2);
+			ft_putstr_fd("pipe heredoc> ", 2);
 		ft_putstr_fd(line, 1);
 		ft_putstr_fd("\n", 1);
 		free(line);
@@ -78,7 +78,7 @@ void	heredoc(t_cmd *cmd, t_node *node)
 	char	*line;
 
 	(void)cmd;
-	ft_putstr_fd("> ", 2);
+	ft_putstr_fd("pipe heredoc> ", 2);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!ft_strcmp(line, (node)->str))
@@ -87,7 +87,7 @@ void	heredoc(t_cmd *cmd, t_node *node)
 			break ;
 		}
 		else
-			ft_putstr_fd("> ", 2);
+			ft_putstr_fd("pipe heredoc> ", 2);
 		free(line);
 	}
 }
