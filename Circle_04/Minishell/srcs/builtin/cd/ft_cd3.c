@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 20:30:03 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 21:40:20 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	ft_exec_path(char *new_path)
 		path_env = ft_strjoin("PWD=", path);
 		old_pwd = ft_strjoin("OLDPWD=", old_path);
 		ft_update_path_oldpath(path_env, old_pwd);
+		free(path_env);
+		free(old_pwd);
 	}
 	free(path);
 	free(old_path);
@@ -71,6 +73,18 @@ int	ft_num_arg_cd(t_node *cmd)
 	return (arg_count);
 }
 
+char	*ft_get_path(t_node *cmd)
+{
+	char	*ret;
+	char	**array;
+
+	ret = NULL;
+	array = ft_array_double_export(cmd);
+	ret = ft_strdup(array[0]);
+	free_tab2(array);
+	return (ret);
+}
+
 void	ft_cd(t_node **cmd)
 {
 	char	*new_path;
@@ -78,9 +92,16 @@ void	ft_cd(t_node **cmd)
 	if ((*cmd)->next && (*cmd)->next->type != PIPE)
 	{
 		(*cmd) = (*cmd)->next;
-		while ((*cmd) && (*cmd)->type != ARG)
-			(*cmd) = (*cmd)->next;
-		new_path = ft_strdup((*cmd)->str);
+		while ((*cmd) && !ft_not_type((*cmd)) && (*cmd)->type != PIPE)
+		{
+			if ((*cmd)->next)
+				(*cmd) = (*cmd)->next;
+			else
+				break ;
+		}
+		if (!(*cmd) || (*cmd)->type == PIPE || (*cmd)->type == FILE)
+			return ;
+		new_path = ft_get_path(*cmd);
 		if (!ft_strcmp(new_path, "~"))
 			ft_exec_home();
 		else

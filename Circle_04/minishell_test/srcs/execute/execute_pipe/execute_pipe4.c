@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 23:43:55 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:32:19 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	execute_pipe(t_node **node, t_cmd *cmd)
 {
 	t_fd_pipe	fd;
 
+	g_info.pid_heredoc = 1;
 	pipe(fd.pipe_fd);
 	g_info.pid_child = fork();
 	if (g_info.pid_child == 0)
@@ -50,6 +51,8 @@ void	execute_pipe(t_node **node, t_cmd *cmd)
 	}
 	else if (g_info.pid_child > 0)
 	{
+		if (g_info.pid_heredoc)
+			waitpid(g_info.pid_child, NULL, 0);
 		close(fd.pipe_fd[1]);
 		if (check_heredoc_fd(node))
 			dup2(fd.pipe_fd[0], 0);

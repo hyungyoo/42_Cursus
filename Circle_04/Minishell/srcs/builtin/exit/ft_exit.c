@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/18 12:00:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/26 20:06:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,20 @@ int	ft_check_num_exit(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i])
 	{
-		if (i == 0 && str[i] == '-' && i++)
-			continue ;
-		else if (!ft_is_digit(str[i]))
+		if (!ft_is_digit(str[i]))
 			return (0);
 		i++;
+	}
+	if (ft_strlen(str) > 19)
+	{
+		if (str[0] == '+' || str[0] == '-')
+			if (ft_strlen(str) > 20)
+				return (0);
+		return (0);
 	}
 	return (1);
 }
@@ -74,8 +81,13 @@ int	ft_set_exit_code(char *str)
 	return (exit_code);
 }
 
-void	ft_exit_with_message(t_cmd *cmd_start)
+void	ft_exit_with_message(t_cmd *cmd_start, char **str, int flag)
 {
-	ft_putendl_fd("\033[38;5;31mminishell exit \033[0m", 2);
-	ft_exit_minishell(g_info.exit_code, &(cmd_start));
+	if (str)
+		free_tab2(str);
+	if (!flag)
+	{
+		ft_putendl_fd("\033[38;5;31mexit\033[0m", 2);
+		ft_exit_minishell(g_info.exit_code, &(cmd_start));
+	}
 }
