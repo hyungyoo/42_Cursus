@@ -6,7 +6,7 @@
 /*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:19:11 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/03 07:14:45 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 00:25:39 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,8 @@ int	get_next_line(int fd, char **line)
 	if (ret < 0)
 		return (-1);
 	value = ft_line(str, line, ret);
-	if (value == 1)
-		str = ft_rest(str);
-	if (value == 0)
-	{
-		free(str);
-		str = NULL;
-		return (0);
-	}
+	str = ft_rest(str);
+	free(str);
+	str = NULL;
 	return (1);
 }

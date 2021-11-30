@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:16 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 20:43:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 00:16:07 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_reset_cmd_path(char *str)
 	char	*ret_path;
 
 	ret_path = ft_get_relative_path(str);
-	if (access(ret_path, F_OK || X_OK) == 0)
+	if (access(ret_path, X_OK) == 0)
 		return (ret_path);
 	free(ret_path);
 	return (ft_strdup(str));

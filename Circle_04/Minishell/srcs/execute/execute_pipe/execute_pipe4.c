@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe2.c                                    :+:      :+:    :+:   */
+/*   execute_pipe4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 18:44:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 00:17:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	execute_pipe(t_node **node, t_cmd *cmd)
 	}
 	else if (g_info.pid_child > 0)
 	{
-		waitpid(g_info.pid_child, &status, 0);
+		//waitpid(g_info.pid_child, &status, 0);
 		close(fd.pipe_fd[1]);
 		if (check_heredoc_fd(node))
 			dup2(fd.pipe_fd[0], 0);
@@ -88,5 +88,6 @@ void	ft_exec_pipe(t_node *node, t_cmd *cmd)
 			break ;
 	}
 	execute_cmds(&node, cmd);
+	wait(NULL);
 	ft_close_fd(&fd);
 }
