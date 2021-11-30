@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:16 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 20:43:39 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 22:13:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	ft_check_path_exec(t_node *node)
 
 void	ft_error_message_execmd(t_cmd *cmd_start)
 {
-	ft_putstr_fd("Minishell: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(": command not found\n", 2);
 	ft_exit_minishell(127, &(cmd_start));
 }
 
 void	ft_error_no_path(char *str)
 {
-	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
 }

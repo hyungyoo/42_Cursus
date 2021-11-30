@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:01 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/21 01:46:30 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 22:14:40 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	ft_error_message_no_path(char **argv, char **env)
 		return (1);
 	if (!ft_strncmp(argv[0], "/", 1))
 		return (0);
-	else if (!ft_getenv(g_info.envp, "PATH"))
+	else if (!ft_getenv(g_info.envp, "PATH")
+		&& !ft_is_slash(argv[0]))
 	{
 		ft_putstr_fd("Minishell: ", 2);
 		ft_putstr_fd(argv[0], 2);

@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/30 20:44:50 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 22:19:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_fd
 }				t_fd;
 
 /* one global variable */
-t_info	g_info;
+extern t_info	g_info;
 
 /*
  * logo

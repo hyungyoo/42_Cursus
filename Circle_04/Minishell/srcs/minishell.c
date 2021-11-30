@@ -6,11 +6,13 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 18:08:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 19:45:35 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/11/30 22:06:22 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+t_info	g_info;
 
 void	execute_eof(t_cmd *cmd, char *line)
 {
