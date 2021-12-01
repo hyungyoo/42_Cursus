@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 18:03:38 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:11:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ int	check_heredoc_fd(t_node **node)
 	return (0);
 }
 
+int	check_only_heredoc(t_node *node)
+{
+	while (node && node->type != PIPE)
+	{
+		if (node->type == DLEFT)
+			return (1);
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	return (0);
+}
+
 void	execute_pipe(t_node **node, t_cmd *cmd, int i)
 {
 	int			status;
@@ -52,8 +66,9 @@ void	execute_pipe(t_node **node, t_cmd *cmd, int i)
 	else if (g_info.pid_pipe_child[i] > 0)
 	{
 		close(fd.pipe_fd[1]);
-		if (check_heredoc_fd(node))
-			dup2(fd.pipe_fd[0], 0);
+		dup2(fd.pipe_fd[0], 0);
+		if (check_only_heredoc(*node))
+			waitpid(g_info.pid_pipe_child[i], NULL, 0);
 		close(fd.pipe_fd[0]);
 		g_info.pid_child = 0;
 		g_info.exit_code = WEXITSTATUS(status);
@@ -74,33 +89,4 @@ void	wait_pid(int pipe_count)
 	while (i < pipe_count)
 		g_info.pid_pipe_child[i++] = 0;
 	g_info.pid_child = 0;
-}
-
-void	ft_exec_pipe(t_node *node, t_cmd *cmd)
-{
-	t_node	*tmp;
-	int		i;
-	int		pipe_count;
-	t_fd	fd;
-
-	i = 0;
-	ft_set_fd(&fd);
-	pipe_count = count_pipe(node);
-	tmp = node->prev;
-	while (node != tmp && i < pipe_count)
-	{
-		execute_pipe(&node, cmd, i);
-		if (node->next && node->next->type == PIPE)
-		{
-			i++;
-			node = node->next;
-		}
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
-	execute_cmds(&node, cmd);
-	ft_close_fd(&fd);
-	wait_pid(pipe_count);
 }

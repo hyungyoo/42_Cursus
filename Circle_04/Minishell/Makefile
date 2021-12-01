@@ -23,6 +23,7 @@ SRCS = srcs/minishell.c \
 		srcs/execute/execute_pipe/execute_pipe2.c \
 		srcs/execute/execute_pipe/execute_pipe3.c \
 		srcs/execute/execute_pipe/execute_pipe4.c \
+		srcs/execute/execute_pipe/execute_pipe5.c \
 		srcs/execute/execute_cmd/execute_cmd.c \
 		srcs/execute/execute_cmd/execute_cmd2.c \
 		srcs/execute/execute_cmd/execute_cmd3.c \

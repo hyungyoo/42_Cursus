@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 18:44:04 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:47:33 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ int	check_dleft_next_cmd(t_node *node)
 	int	flag_redir;
 
 	flag_redir = 0;
-	if (!check_next_pipe_node(&node))
-		return (0);
-	while (node)
+	while (node && node->type != PIPE)
 	{
 		if (node->type == LEFT)
 			flag_redir = LEFT;
