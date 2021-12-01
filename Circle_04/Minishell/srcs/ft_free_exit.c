@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:42:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/03 19:42:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:30:46 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ void	ft_exit(int exit_code)
 	ft_free_env(g_info.envp);
 	rl_clear_history();
 	exit(exit_code);
+}
+
+void	reset_pid(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < PID_MAX_LIMIT)
+		g_info.pid_pipe_child[i++] = 0;
+	g_info.pid_child = 0;
 }
 
 void	ft_exit_minishell(int exit_code, t_cmd **cmd)

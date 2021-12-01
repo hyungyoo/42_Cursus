@@ -8,6 +8,7 @@ SRCS = srcs/minishell.c \
 		srcs/parsing/parsing_quote.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing2.c \
+		srcs/parsing/parsing3.c \
 		srcs/parsing/parsing_operation_word.c \
 		srcs/parsing/get_type_dir.c \
 		srcs/parsing/parsing_arg_word.c \
@@ -37,7 +38,8 @@ SRCS = srcs/minishell.c \
 		srcs/builtin/export/ft_export3.c \
 		srcs/builtin/export/ft_export4.c \
 		srcs/builtin/export/ft_export5.c \
-		srcs/builtin/ft_unset.c \
+		srcs/builtin/unset/ft_unset.c \
+		srcs/builtin/unset/ft_unset2.c \
 		srcs/builtin/echo/ft_echo.c \
 		srcs/builtin/echo/ft_echo2.c \
 		srcs/builtin/echo/ft_echo3.c \

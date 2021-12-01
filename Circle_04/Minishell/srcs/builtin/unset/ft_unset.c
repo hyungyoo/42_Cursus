@@ -6,11 +6,11 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/26 17:04:54 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 16:06:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int	ft_chercher_key(t_envp *envp, char *arg)
 {
@@ -48,44 +48,45 @@ void	ft_free_one_node(t_envp *envp, char *arg)
 	}
 }
 
-void	ft_unset_exec(t_node **cmd)
+void	ft_error_message_unset(char *str)
 {
-	(*cmd) = (*cmd)->next;
-	while ((*cmd) && (*cmd)->type != PIPE)
-	{
-		if ((*cmd)->type == ARG)
-		{
-			if ((*cmd)->type == DOLR && (*cmd)->flag_nospace == 1)
-				(*cmd) = (*cmd)->next;
-			else if (ft_chercher_key(g_info.envp, (*cmd)->str))
-				ft_free_one_node(g_info.envp, (*cmd)->str);
-			g_info.exit_code = 0;
-		}
-		if ((*cmd)->next)
-			(*cmd) = (*cmd)->next;
-		else
-			return ;
-	}
+	ft_putstr_fd("minishell: unset: ", 2);
+	ft_putstr_fd("'", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+	g_info.exit_code = 1;
 }
 
-void	ft_unset(t_node **cmd)
+int	check_error_unset(char *str)
 {
-	if (!cmd || !(*cmd))
-		return ;
-	g_info.exit_code = 0;
-	if (!((*cmd)->next))
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if ((*cmd)->flag_emptystr)
+		if ((i == 0 && ft_is_digit(str[i])) || str[i] == '=')
 		{
-			g_info.exit_code = 1;
-			empty_error_message("unset");
+			ft_error_message_unset(str);
+			return (0);
 		}
-		return ;
+		i++;
 	}
-	else if ((*cmd)->next->type == PIPE)
-		return ;
-	if (!ft_strcmp((*cmd)->next->str, "PWD"))
-		g_info.flag_pwd = 1;
-	else
-		ft_unset_exec(cmd);
+	return (1);
+}
+
+void	ft_unset_exec(t_node **cmd)
+{
+	char	**split_arg;
+	int		i;
+
+	i = 0;
+	split_arg = ft_array_double_export(*cmd);
+	while (split_arg[i])
+	{
+		if (check_error_unset(split_arg[i])
+			&& ft_chercher_key(g_info.envp, split_arg[i]))
+			ft_free_one_node(g_info.envp, split_arg[i]);
+		i++;
+	}
+	free_tab2(split_arg);
 }

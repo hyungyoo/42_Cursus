@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:43:09 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/25 18:57:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:01:03 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ int	count_word(char *line)
 	return (count);
 }
 
+// int	is_emptystr(char *line)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (line)
+// }
+
 int	find_cmd_with_emptystr(char *line, char *cmd)
 {
 	int	index;
@@ -87,10 +95,14 @@ int	find_cmd_with_emptystr(char *line, char *cmd)
 	if (ft_strstr(line, cmd))
 	{
 		index = ft_strstr(line, cmd) + 1;
-		if (line[index])
+		while (line[index] && line[index] != '|')
 		{
-			if (line[index + 1] == '\"' && line[index + 2] == '\"')
+			if ((line[index] == '\"' && line[index + 1] == '\"') \
+			|| (line[index] == '\'' && line[index + 1] == '\''))
 				return (1);
+			index++;
+			if (line[index + 1] && line[index] == '|')
+				index++;
 		}
 	}
 	return (0);

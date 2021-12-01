@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 18:08:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 22:06:22 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:17:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	t_cmd	*cmd;
 
+	if (ac != 1)
+		return (0);
 	ft_initial(env, ac, av);
 	ascii_logo_lol();
 	while (1)

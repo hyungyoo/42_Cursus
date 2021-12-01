@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_cmd3.c                                     :+:      :+:    :+:   */
+/*   execute_cmd4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:16 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 22:13:41 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 16:03:42 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,21 @@ void	ft_execmd(t_node *node, t_cmd *cmd_start)
 {
 	if (!ft_strcmp(node->str, ""))
 		ft_error_message_execmd(cmd_start);
-	if (!ft_strcmp(node->str, "/"))
+	if (!ft_strcmp(node->str, "/") && node->flag_nospace == 0)
 	{
 		ft_putstr_fd("minishell: /: is a directory\n", 2);
 		ft_exit_minishell(126, &cmd_start);
+	}
+	if (!ft_strcmp(node->str, ".") && node->flag_nospace == 0)
+	{
+		ft_putstr_fd("minishell: .: filename argument required\n", 2);
+		ft_putstr_fd(".: usage: . filename [arguments]\n", 2);
+		ft_exit_minishell(2, &cmd_start);
+	}
+	if (!ft_strcmp(node->str, "..") && node->flag_nospace == 0)
+	{
+		ft_putstr_fd("minishell: ..: command not found\n", 2);
+		ft_exit_minishell(127, &cmd_start);
 	}
 	if (ft_check_path_exec(node))
 		ft_execmd_child(node);

@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/30 22:19:28 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:09:52 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 # include <unistd.h>
 # include <dirent.h>
 # include <errno.h>
+# include <limits.h>
+# include <sys/proc.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/sysctl.h>
 
 # include "../libft/libft.h"
 
@@ -44,6 +47,11 @@
 # define ARG		12
 # define FILE		13
 # define LIMITER	14
+
+# ifndef PID_MAX_LIMIT
+
+#  define PID_MAX_LIMIT 2147483647
+# endif
 
 # define TRUE 1
 # define FALSE 0
@@ -80,6 +88,7 @@ typedef struct s_info
 {
 	struct s_envp	*envp;
 	pid_t			pid_child;
+	pid_t			pid_pipe_child[PID_MAX_LIMIT];
 	int				exit_code;
 	int				flag_pwd;
 	char			*last_env_str;
@@ -131,11 +140,11 @@ int				main(int ac, char **av, char **env);
 /* parsing.c */
 int				parsing_process(char *str, t_cmd **cmd, int *i);
 void			insert_nospace_flag(t_cmd **cmd);
-// char			*remove_quote(char *line);
 char			*remove_quote(char *line, int *flag);
 int				ft_parsing(char *line, t_cmd **cmd);
 void			init_emptystr_flag(t_cmd **cmd);
 void			put_emptystr_flag(t_cmd **cmd, int flag);
+void			emptystr_managing(t_cmd **cmd, int flag);
 char			*dquote_removed_str(char *line, int count);
 void			set_export_unset_flag(char *line, int *flag);
 int				find_cmd_with_emptystr(char *line, char *cmd);
@@ -188,6 +197,7 @@ void			ft_initial(char **env, int ac, char **av);
 void			ft_free_env(t_envp *envp);
 void			ft_exit(int exit_code);
 void			ft_exit_minishell(int exit_code, t_cmd **cmd);
+void			reset_pid(void);
 
 /* 
  * list of cmd line
@@ -262,7 +272,7 @@ int				check_dleft(t_node *node);
 int				check_dleft_next_cmd(t_node *node);
 int				check_dleft_file(t_node *node);
 int				check_heredoc_fd(t_node **node);
-void			execute_pipe(t_node **node, t_cmd *cmd);
+void			execute_pipe(t_node **node, t_cmd *cmd, int i);
 void			ft_exec_pipe(t_node *node, t_cmd *cmd);
 
 /* expansion.c */

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 19:26:10 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:54:48 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	ft_exec_dir(char **path, char *new_path)
 
 int	ft_get_path_home(char **path)
 {
-	if (ft_getenv(g_info.envp, "HOME"))
+	if (ft_getenv(g_info.envp, "USER"))
 	{
-		(*path) = ft_strdup(ft_getenv(g_info.envp, "HOME"));
+		(*path) = ft_strjoin("/Users/", (ft_getenv(g_info.envp, "USER")));
 		return (1);
 	}
 	g_info.exit_code = 1;

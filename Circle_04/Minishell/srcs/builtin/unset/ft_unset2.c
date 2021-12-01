@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy_env.c                                         :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 18:49:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 16:44:24 by hyungyoo         ###   ########.fr       */
+/*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/12/01 18:03:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	copy_env(char **env)
+void	ft_unset(t_node **cmd)
 {
-	t_envp	*envp;
-
-	envp = NULL;
-	ft_node_list_env(&envp, env);
-	g_info.envp = envp;
-}
-
-void	ft_initial_g(void)
-{
-	g_info.envp = NULL;
-	g_info.pid_child = 0;
-	g_info.flag_pwd = 0;
-	g_info.last_env_str = NULL;
-}
-
-void	ft_initial(char **env, int ac, char **av)
-{
-	(void)ac;
-	(void)av;
-	ft_initial_g();
-	copy_env(env);
+	g_info.exit_code = 0;
+	if (!cmd || !(*cmd))
+		return ;
+	if ((*cmd)->flag_emptystr)
+	{
+		g_info.exit_code = 1;
+		empty_error_message("unset");
+	}
+	if (!((*cmd)->next))
+		return ;
+	else if ((*cmd)->next->type == PIPE)
+		return ;
+	if (!ft_strcmp((*cmd)->next->str, "PWD"))
+		g_info.flag_pwd = 1;
+	else
+		ft_unset_exec(cmd);
 }

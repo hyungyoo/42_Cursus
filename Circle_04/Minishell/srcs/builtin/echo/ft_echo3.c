@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   ft_echo3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 18:21:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 01:42:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,21 @@ void	ft_echo(t_node **cmd)
 	if (!cmd || !*cmd)
 		return ;
 	if (!((*cmd)->next))
-		return ;
+		return (ft_putstr("\n"));
 	(*cmd) = (*cmd)->next;
 	if (ft_check_option((*cmd)->str))
 	{
 		flag_option = 1;
-		if ((*cmd)->next)
-			(*cmd) = (*cmd)->next;
+		while ((*cmd) && ft_check_option((*cmd)->str))
+		{
+			if ((*cmd)->next)
+				(*cmd) = (*cmd)->next;
+			else
+				break ;
+		}
 	}
-	ft_print_echo(cmd);
+	if (!ft_check_option((*cmd)->str))
+		ft_print_echo(cmd);
 	if (!flag_option)
 		ft_putstr("\n");
 }

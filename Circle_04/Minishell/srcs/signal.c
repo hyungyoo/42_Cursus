@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:57:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/24 12:39:12 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:59:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,52 @@ void	hanlder_child_pid(int signum)
 	g_info.pid_child = 0;
 }
 
-void	handler(int signum)
-{
-	if (g_info.pid_child != 0)
-		hanlder_child_pid(signum);
-	else if (signum == SIGINT || signum == SIGQUIT)
+void	handler_sigquit(void)
+{	
+	if (g_info.pid_pipe_child[0] == 0)
 	{
 		ft_putstr("\r");
 		rl_on_new_line();
 		rl_redisplay();
 		ft_putstr("  \b\b");
-		if (signum == SIGINT)
-		{
-			ft_putstr("\n");
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
 	}
-	return ;
+	else if (g_info.pid_pipe_child[0] != 0)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
+}
+
+void	handler_sigint(void)
+{	
+	if (g_info.pid_pipe_child[0] != 0)
+	{
+		ft_putstr("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
+	else if (g_info.pid_pipe_child[0] == 0)
+	{
+		ft_putstr("\r");
+		rl_on_new_line();
+		rl_redisplay();
+		ft_putstr("  \b\b");
+		ft_putstr("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
+void	handler(int signum)
+{
+	if (g_info.pid_child != 0)
+		hanlder_child_pid(signum);
+	else
+	{
+		if (signum == SIGINT)
+			handler_sigint();
+		else if (signum == SIGQUIT)
+			handler_sigquit();
+	}
 }

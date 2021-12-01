@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe2.c                                    :+:      :+:    :+:   */
+/*   execute_pipe4.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 18:44:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:03:38 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int	check_heredoc_fd(t_node **node)
 	return (0);
 }
 
-void	execute_pipe(t_node **node, t_cmd *cmd)
+void	execute_pipe(t_node **node, t_cmd *cmd, int i)
 {
 	int			status;
 	t_fd_pipe	fd;
 
 	pipe(fd.pipe_fd);
-	g_info.pid_child = fork();
-	if (g_info.pid_child == 0)
+	g_info.pid_pipe_child[i] = fork();
+	if (g_info.pid_pipe_child[i] == 0)
 	{
 		close(fd.pipe_fd[0]);
 		dup2(fd.pipe_fd[1], 1);
@@ -49,9 +49,8 @@ void	execute_pipe(t_node **node, t_cmd *cmd)
 		close(fd.pipe_fd[1]);
 		ft_exit_minishell(g_info.exit_code, &cmd);
 	}
-	else if (g_info.pid_child > 0)
+	else if (g_info.pid_pipe_child[i] > 0)
 	{
-		waitpid(g_info.pid_child, &status, 0);
 		close(fd.pipe_fd[1]);
 		if (check_heredoc_fd(node))
 			dup2(fd.pipe_fd[0], 0);
@@ -61,6 +60,20 @@ void	execute_pipe(t_node **node, t_cmd *cmd)
 		ft_move_to_last(node);
 		ft_update_last_env((*node)->str);
 	}
+}
+
+void	wait_pid(int pipe_count)
+{
+	int	i;
+
+	i = 0;
+	while (i < pipe_count)
+		waitpid(g_info.pid_pipe_child[i++], NULL, 0);
+	waitpid(g_info.pid_child, NULL, 0);
+	i = 0;
+	while (i < pipe_count)
+		g_info.pid_pipe_child[i++] = 0;
+	g_info.pid_child = 0;
 }
 
 void	ft_exec_pipe(t_node *node, t_cmd *cmd)
@@ -76,7 +89,7 @@ void	ft_exec_pipe(t_node *node, t_cmd *cmd)
 	tmp = node->prev;
 	while (node != tmp && i < pipe_count)
 	{
-		execute_pipe(&node, cmd);
+		execute_pipe(&node, cmd, i);
 		if (node->next && node->next->type == PIPE)
 		{
 			i++;
@@ -89,4 +102,5 @@ void	ft_exec_pipe(t_node *node, t_cmd *cmd)
 	}
 	execute_cmds(&node, cmd);
 	ft_close_fd(&fd);
+	wait_pid(pipe_count);
 }

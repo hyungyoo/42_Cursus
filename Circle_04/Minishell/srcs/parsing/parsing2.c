@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:43:09 by keulee            #+#    #+#             */
-/*   Updated: 2021/11/25 18:56:58 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:06:37 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,46 +49,6 @@ char	*remove_quote(char *line, int *flag)
 	return (dquote_removed_str(line, count));
 }
 
-void	put_emptystr_flag(t_cmd **cmd, int flag)
-{
-	t_node	*node;
-
-	if (!(*cmd) || !cmd)
-		return ;
-	node = (*cmd)->cmd_start;
-	while (node)
-	{
-		if (!(ft_strcmp(node->str, "export")) && flag == 1)
-			node->flag_emptystr = 1;
-		else if (!(ft_strcmp(node->str, "unset")) && flag == 2)
-			node->flag_emptystr = 1;
-		else if (flag == 3 && (!(ft_strcmp(node->str, "export")) \
-			|| !ft_strcmp(node->str, "unset")))
-			node->flag_emptystr = 1;
-		else
-			node->flag_emptystr = 0;
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
-}
-
-void	init_emptystr_flag(t_cmd **cmd)
-{
-	t_node	*node;
-
-	node = (*cmd)->cmd_start;
-	while (node)
-	{
-		node->flag_emptystr = 0;
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
-}
-
 int	ft_parsing(char *line, t_cmd **cmd)
 {
 	int		i;
@@ -96,6 +56,11 @@ int	ft_parsing(char *line, t_cmd **cmd)
 	int		flag;
 
 	flag = 0;
+	if (!ft_strcmp(line, "\"\"") || !ft_strcmp(line, "\'\'"))
+	{
+		insert_node(cmd, ARG, ft_strdup(""));
+		return (0);
+	}
 	str = remove_quote(line, &flag);
 	i = -1;
 	while (str[++i])
@@ -107,9 +72,7 @@ int	ft_parsing(char *line, t_cmd **cmd)
 		if (str[i + 1] && str[i + 1] != ' ' && str[i + 1] != '\0')
 			insert_nospace_flag(cmd);
 	}
-	init_emptystr_flag(cmd);
-	if (flag)
-		put_emptystr_flag(cmd, flag);
+	emptystr_managing(cmd, flag);
 	free(str);
 	return (0);
 }
