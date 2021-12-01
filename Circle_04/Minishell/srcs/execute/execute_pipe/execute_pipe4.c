@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 21:11:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/02 00:15:41 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,45 +48,27 @@ int	check_only_heredoc(t_node *node)
 	return (0);
 }
 
-void	execute_pipe(t_node **node, t_cmd *cmd, int i)
+int	next_cmd_heredoc(t_node *node)
 {
-	int			status;
-	t_fd_pipe	fd;
-
-	pipe(fd.pipe_fd);
-	g_info.pid_pipe_child[i] = fork();
-	if (g_info.pid_pipe_child[i] == 0)
+	if (!check_next_pipe_node(&node))
+		return (0);
+	while (node && node->type != PIPE)
 	{
-		close(fd.pipe_fd[0]);
-		dup2(fd.pipe_fd[1], 1);
-		execute_cmds_pipe(node, cmd, &fd);
-		close(fd.pipe_fd[1]);
-		ft_exit_minishell(g_info.exit_code, &cmd);
+		if (node->type == DLEFT)
+			return (1);
+		if (node->next)
+			node = node->next;
+		else
+			break ;
 	}
-	else if (g_info.pid_pipe_child[i] > 0)
-	{
-		close(fd.pipe_fd[1]);
-		dup2(fd.pipe_fd[0], 0);
-		if (check_only_heredoc(*node))
-			waitpid(g_info.pid_pipe_child[i], NULL, 0);
-		close(fd.pipe_fd[0]);
-		g_info.pid_child = 0;
-		g_info.exit_code = WEXITSTATUS(status);
-		ft_move_to_last(node);
-		ft_update_last_env((*node)->str);
-	}
+	return (0);
 }
 
-void	wait_pid(int pipe_count)
+void	execute_pipe_child(t_node **node, t_cmd *cmd, t_fd_pipe *fd)
 {
-	int	i;
-
-	i = 0;
-	while (i < pipe_count)
-		waitpid(g_info.pid_pipe_child[i++], NULL, 0);
-	waitpid(g_info.pid_child, NULL, 0);
-	i = 0;
-	while (i < pipe_count)
-		g_info.pid_pipe_child[i++] = 0;
-	g_info.pid_child = 0;
+	close(fd->pipe_fd[0]);
+	dup2(fd->pipe_fd[1], 1);
+	execute_cmds_pipe(node, cmd, fd);
+	close(fd->pipe_fd[1]);
+	ft_exit_minishell(g_info.exit_code, &cmd);
 }

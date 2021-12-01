@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/12/01 21:13:52 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/02 00:14:45 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,10 @@ int				check_heredoc_fd(t_node **node);
 void			execute_pipe(t_node **node, t_cmd *cmd, int i);
 void			ft_exec_pipe(t_node *node, t_cmd *cmd);
 void			wait_pid(int pipe_count);
+void			execute_pipe_child(t_node **node, t_cmd *cmd,
+					t_fd_pipe *fd);
+int				check_only_heredoc(t_node *node);
+int				next_cmd_heredoc(t_node *node);
 
 /* expansion.c */
 void			ft_del_list_one_node(t_cmd *cmd, t_node *node);
@@ -325,6 +329,7 @@ char			*ft_getenv_pwd(void);
 void			ft_pwd(t_node **cmd);
 
 /* ft_env.c */
+void			ft_usleep(void);
 void			ft_update_last_env(char	*path);
 void			ft_env(t_node **cmd);
 

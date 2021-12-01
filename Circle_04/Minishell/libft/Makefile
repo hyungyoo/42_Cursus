@@ -6,7 +6,7 @@
 #    By: keulee <keulee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/19 17:00:13 by keulee            #+#    #+#              #
-#    Updated: 2021/11/25 15:31:46 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/12/01 22:16:51 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,17 +31,17 @@ RC = rc
 RMF = rm -f
 
 all: $(NAME)
-
+		@printf "\033[38;5;41m libft done!!!!!!!!!!!!!!! \033[0m"
 $(NAME):
-	$(CC) $(CFLAGS) -c $(SRC) -I $(INCLUDE)
-	$(AR) $(RC) $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(INCLUDE)
+	@$(AR) $(RC) $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
-	$(RMF) $(OBJ)
+	@$(RMF) $(OBJ)
 
 fclean: clean
-	$(RMF) $(NAME)
+	@$(RMF) $(NAME)
 
 re: fclean all
 

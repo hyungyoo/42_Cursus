@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 20:47:33 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/01 21:53:52 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	check_next_pipe_node(t_node **node)
 		if ((*node)->type == PIPE)
 		{
 			if ((*node)->next)
+			{
 				(*node) = (*node)->next;
-			return (TRUE);
+				return (TRUE);
+			}
 		}
 		if ((*node)->next)
 			(*node) = (*node)->next;
