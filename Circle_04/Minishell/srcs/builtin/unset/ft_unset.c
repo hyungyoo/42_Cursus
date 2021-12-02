@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:10:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 22:23:14 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/02 00:49:38 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ int	check_error_unset(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if ((i == 0 && ft_is_digit(str[i])) || str[i] == '=')
+		if ((i == 0 && ft_is_digit(str[i])) || !((str[i] >= 49
+					&& str[i] <= 57) || (str[i] >= 65 && str[i] <= 90)
+				|| (str[i] >= 97 && str[i] <= 122)))
 		{
 			ft_error_message_unset(str);
 			return (0);

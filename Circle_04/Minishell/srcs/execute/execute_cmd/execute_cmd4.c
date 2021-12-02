@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:16 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 16:03:42 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:39:14 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,41 @@ void	ft_error_no_path(char *str)
 	//if (ft_getenv(g_info.envp, "PATH") == NULL)
 	//	return (ft_error_no_path(node->str));
 */
-void	ft_execmd(t_node *node, t_cmd *cmd_start)
-{
-	if (!ft_strcmp(node->str, ""))
-		ft_error_message_execmd(cmd_start);
+
+void	execmd_error_check(t_node *node, t_cmd *cmd_start)
+{	
 	if (!ft_strcmp(node->str, "/") && node->flag_nospace == 0)
 	{
 		ft_putstr_fd("minishell: /: is a directory\n", 2);
 		ft_exit_minishell(126, &cmd_start);
 	}
-	if (!ft_strcmp(node->str, ".") && node->flag_nospace == 0)
+	else if (!ft_strcmp(node->str, ".") && node->flag_nospace == 0)
 	{
 		ft_putstr_fd("minishell: .: filename argument required\n", 2);
 		ft_putstr_fd(".: usage: . filename [arguments]\n", 2);
 		ft_exit_minishell(2, &cmd_start);
 	}
-	if (!ft_strcmp(node->str, "..") && node->flag_nospace == 0)
+	else if (!ft_strcmp(node->str, "..") && node->flag_nospace == 0)
 	{
 		ft_putstr_fd("minishell: ..: command not found\n", 2);
 		ft_exit_minishell(127, &cmd_start);
 	}
+	if (ft_getenv(g_info.envp, "HOME"))
+	{
+		if (!ft_strcmp(node->str, ft_getenv(g_info.envp, "HOME"))
+			&& node->flag_nospace == 0)
+		{	
+			ft_putstr_fd("minishell: /Users/hyungyoo: is a directory\n", 2);
+			ft_exit_minishell(126, &cmd_start);
+		}
+	}
+}
+
+void	ft_execmd(t_node *node, t_cmd *cmd_start)
+{
+	if (!ft_strcmp(node->str, ""))
+		ft_error_message_execmd(cmd_start);
+	execmd_error_check(node, cmd_start);
 	if (ft_check_path_exec(node))
 		ft_execmd_child(node);
 	ft_exit_minishell(g_info.exit_code, &cmd_start);

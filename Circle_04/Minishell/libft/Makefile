@@ -6,7 +6,7 @@
 #    By: keulee <keulee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/19 17:00:13 by keulee            #+#    #+#              #
-#    Updated: 2021/12/01 22:16:51 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/12/02 16:19:07 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = ft_putchar.c ft_putstr.c ft_strlen.c ft_strncmp.c \
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror -g3 -fsanitize=address
 INCLUDE = ./
 AR = ar
 RC = rc
