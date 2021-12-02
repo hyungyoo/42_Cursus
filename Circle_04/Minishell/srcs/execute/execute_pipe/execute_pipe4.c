@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/02 00:15:41 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/02 18:25:37 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	next_cmd_heredoc(t_node *node)
 {
 	if (!check_next_pipe_node(&node))
 		return (0);
-	while (node && node->type != PIPE)
+	while (node)
 	{
 		if (node->type == DLEFT)
 			return (1);
