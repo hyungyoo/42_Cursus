@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 00:18:37 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/12/02 18:46:47 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/12/03 01:21:31 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,13 +76,13 @@ OBJS = $(SRCS:.c=.o)
 
 SRCS_DIR = ./srcs
 
-LIB = -L. -lft -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib
-LI = -L. -lft -lreadline -L /usr/local/opt/readline/lib
+LI = -L. -lft -lreadline -L /Users/$(USER)/homebrew/opt/readline/lib
+LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
 #~/.brew/opt/readline/lib  // ecole42 complie
 #/usr/local/opt/readline/lib //keulee home complie
 
-INC = -I/Users/$(USER)/homebrew/opt/readline/include
-IN = -I /usr/local/opt/readline/include
+IN= -I/Users/$(USER)/homebrew/opt/readline/include
+INC = -I /usr/local/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie
 

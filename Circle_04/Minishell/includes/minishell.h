@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/12/02 00:14:45 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 01:21:55 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <dirent.h>
 # include <errno.h>
 # include <limits.h>
-# include <sys/proc.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
@@ -50,7 +49,7 @@
 
 # ifndef PID_MAX_LIMIT
 
-#  define PID_MAX_LIMIT 2147483647
+#  define PID_MAX_LIMIT 99999
 # endif
 
 # define TRUE 1
