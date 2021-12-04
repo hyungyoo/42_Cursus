@@ -18,4 +18,4 @@
 | 02     | [so_long](./2_so_long)             |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/so_long)](https://github.com/JaeSeoKim/badge42)		   | 2021-08-10 |
 | 03     | [philosophers](./3_philosophers)   |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Philosophers)](https://github.com/JaeSeoKim/badge42)     | 2021-08-24	|
 | 03     | [Exam Rank 03](./3_examrank02)     |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2021-08-31 |
-| 04     | [minishell](./4_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2021-12-04 |
+| 04     | [minishell](./4_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/minishell)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
