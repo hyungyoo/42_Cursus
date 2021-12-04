@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/12/03 22:06:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/04 16:29:47 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_info
 	int				flag_pwd;
 	char			*last_env_str;
 	char			*home;
-	int				pipe_flag;
 }				t_info;
 
 typedef struct s_fd_pipe
