@@ -1,4 +1,4 @@
-# MINISHELL
+# MINISHELL 🎯
 
 ## 구현 과정
 
