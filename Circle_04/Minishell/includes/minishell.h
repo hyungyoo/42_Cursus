@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 00:59:39 by keulee            #+#    #+#             */
-/*   Updated: 2021/12/03 01:21:55 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 22:06:21 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_info
 	int				exit_code;
 	int				flag_pwd;
 	char			*last_env_str;
+	char			*home;
 	int				pipe_flag;
 }				t_info;
 
@@ -250,6 +251,7 @@ int				check_dleft_error(t_node **node);
 void			ft_add_cmd_path(char **path, char *split_str);
 char			*ft_get_relative_path(char *str);
 char			*ft_reset_cmd_path(char *str);
+void			ft_error_message_home(t_cmd *cmd_start);
 
 /* execute_pipe.c */
 int				check_cmd(t_node *node);
@@ -328,7 +330,7 @@ char			*ft_getenv_pwd(void);
 void			ft_pwd(t_node **cmd);
 
 /* ft_env.c */
-void			ft_usleep(void);
+void			ft_usleep(int i);
 void			ft_update_last_env(char	*path);
 void			ft_env(t_node **cmd);
 
@@ -383,9 +385,9 @@ int				ft_check_error(char **path, char *new_path);
 int				ft_exec_chdir(char **path, char *new_path, char *path_tmp,
 					char **split_new_path);
 int				ft_exec_dir(char **path, char *new_path);
-int				ft_get_path_home(char **path);
+int				ft_get_path_home(char **path, char *str);
 void			ft_update_path_oldpath(char *path_env, char *old_pwd);
-void			ft_exec_home(void);
+void			ft_exec_home(char *str);
 void			ft_exec_path(char *new_path);
 int				ft_num_arg_cd(t_node *cmd);
 char			*ft_strjoin_cd(char *s1, char *s2);
@@ -397,6 +399,7 @@ void			ft_cd(t_node **cmd);
 void			ft_exec_root_path(char *old_path);
 void			check_root_path(char **path, char *new_path);
 int				ft_is_slash(char *str);
+void			ft_exec_old_path(void);
 
 /* ft_echo.c */
 int				ft_check_option(char *str);

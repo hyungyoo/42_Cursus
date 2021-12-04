@@ -6,19 +6,21 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 00:10:53 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 23:59:34 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 22:13:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_usleep(void)
+void	ft_usleep(int i)
 {
-	int	i;
+	int	j;
+	int	tmp;
 
-	i = 0;
-	while (i < 10000000)
-		i++;
+	tmp = 10000000 * i;
+	j = 0;
+	while (j < tmp)
+		j++;
 }
 
 void	ft_update_last_env(char	*path)
@@ -40,7 +42,7 @@ void	ft_env(t_node **cmd)
 		g_info.exit_code = 1;
 		return ;
 	}
-	ft_usleep();
+	ft_usleep(3);
 	ft_print_env(g_info.envp);
 	g_info.exit_code = 0;
 }

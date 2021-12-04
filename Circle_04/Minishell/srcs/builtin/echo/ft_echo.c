@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 17:22:27 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 09:34:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_check_option(char *str)
 	int	i;
 
 	i = 0;
+	if (!str[1])
+		return (0);
 	if (str[i++] != '-')
 		return (0);
 	while (str[i])

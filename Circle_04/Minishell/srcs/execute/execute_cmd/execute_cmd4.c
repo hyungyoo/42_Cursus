@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:16 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/02 16:39:14 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:47:05 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,13 @@ void	execmd_error_check(t_node *node, t_cmd *cmd_start)
 		ft_putstr_fd("minishell: ..: command not found\n", 2);
 		ft_exit_minishell(127, &cmd_start);
 	}
-	if (ft_getenv(g_info.envp, "HOME"))
+	else if (!ft_strcmp(node->str, "~"))
+		ft_error_message_home(cmd_start);
+	else if (ft_getenv(g_info.envp, "HOME"))
 	{
 		if (!ft_strcmp(node->str, ft_getenv(g_info.envp, "HOME"))
 			&& node->flag_nospace == 0)
-		{	
-			ft_putstr_fd("minishell: /Users/hyungyoo: is a directory\n", 2);
-			ft_exit_minishell(126, &cmd_start);
-		}
+			ft_error_message_home(cmd_start);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:19:11 by keulee            #+#    #+#             */
-/*   Updated: 2021/12/02 18:17:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 12:15:04 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ char	*ft_rest(char *str)
 		while (str[i] != '\0' && str[i] != '\n')
 			i++;
 	}
+	else if (str == NULL)
+		return (ft_strdup(""));
 	if (str[i] == '\n' && str != NULL)
 	{
 		tmp = str;

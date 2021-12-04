@@ -6,14 +6,14 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 00:18:37 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/12/03 01:21:31 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/12/04 02:04:42 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRCS = srcs/minishell.c \
-		srcs/signal.c \
+		srcs/signal/signal.c \
 		srcs/copy_env.c \
 		srcs/list.c \
 		srcs/ascii_logo.c \
@@ -81,7 +81,7 @@ LIB = -L. -lft -lreadline -L /usr/local/opt/readline/lib
 #~/.brew/opt/readline/lib  // ecole42 complie
 #/usr/local/opt/readline/lib //keulee home complie
 
-IN= -I/Users/$(USER)/homebrew/opt/readline/include
+IN = -I/Users/$(USER)/homebrew/opt/readline/include
 INC = -I /usr/local/opt/readline/include
 #~/.brew/opt/readline/include // ecole42 complie
 #/usr/local/opt/readline/include //keulee home complie

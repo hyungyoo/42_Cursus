@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/30 19:26:55 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 10:53:16 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,13 @@ void	ft_cd(t_node **cmd)
 		(*cmd) = (*cmd)->next;
 		new_path = ft_get_path(*cmd);
 		if (!ft_strcmp(new_path, "~"))
-			ft_exec_home();
+			ft_exec_home("~");
+		else if (!ft_strcmp(new_path, "-"))
+			ft_exec_old_path();
 		else
 			ft_exec_path(new_path);
 		free(new_path);
 	}
 	else
-		ft_exec_home();
+		ft_exec_home(NULL);
 }

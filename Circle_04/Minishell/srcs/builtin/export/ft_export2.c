@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 23:59:00 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 22:08:32 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_export_env(void)
 	int		i;
 
 	i = 0;
-	ft_usleep();
+	ft_usleep(3);
 	env_sort = ft_array_double_env();
 	ft_sort_env(env_sort);
 	while (env_sort[i])

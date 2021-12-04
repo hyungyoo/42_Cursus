@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/26 20:28:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:06:19 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	ft_error_message_string_arg(t_node *node, t_cmd *cmd,
 	if (!flag)
 		ft_putendl_fd("\033[38;5;31mexit\033[0m", 2);
 	ft_putstr_fd("minishell: exit: ", 2);
-	ft_putstr_fd((node)->str, 2);
+	if (ft_strcmp((node)->str, "~"))
+		ft_putstr_fd((node)->str, 2);
+	else
+		ft_putstr_fd(g_info.home, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
 	g_info.exit_code = 255;
 	if (!flag)

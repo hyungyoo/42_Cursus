@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 15:00:19 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/26 20:06:12 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:08:44 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	ft_check_num_exit(char *str)
 	int	i;
 
 	i = 0;
+	if (str[0] == '#')
+		return (1);
+	if (!ft_strcmp(str, "+") || !ft_strcmp(str, "-") || !ft_strcmp(str, "~"))
+		return (0);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i])

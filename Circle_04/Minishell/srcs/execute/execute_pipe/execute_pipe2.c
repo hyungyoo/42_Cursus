@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:45:50 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 18:43:29 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 22:06:08 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	ft_right_fd_pipe(t_node **node, t_fd_pipe *fd, int flag)
 	if (fd->fd_out == -1)
 		return (0);
 	if (flag)
+	{
+		ft_usleep(5);
 		dup2(fd->fd_out, 1);
+	}
 	else
 		close(fd->fd_out);
 	return (1);

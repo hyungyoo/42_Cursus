@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 19:42:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 17:30:46 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 09:39:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	reset_pid(void)
 void	ft_exit_minishell(int exit_code, t_cmd **cmd)
 {
 	ft_free_env(g_info.envp);
+	free(g_info.home);
+	g_info.home = NULL;
 	free_list(cmd);
 	rl_clear_history();
 	exit(exit_code);

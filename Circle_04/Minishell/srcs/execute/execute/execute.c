@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:41:43 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/29 16:03:50 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 12:30:11 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	heredoc_child(t_fd *fd, t_cmd *cmd, t_node **node)
 
 	close(fd->fd_heredoc_pipe[0]);
 	dup2(fd->fd_heredoc_pipe[1], 1);
-	ft_putstr_fd("heredoc> ", 2);
+	ft_putstr_fd("> ", 2);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!ft_strcmp(line, (*node)->str))
@@ -88,8 +88,10 @@ void	heredoc_child(t_fd *fd, t_cmd *cmd, t_node **node)
 			free(line);
 			break ;
 		}
+		else if (!ft_strcmp(line, ""))
+			break ;
 		else
-			ft_putstr_fd("heredoc> ", 2);
+			ft_putstr_fd("> ", 2);
 		ft_putstr_fd(line, 1);
 		ft_putstr_fd("\n", 1);
 		free(line);

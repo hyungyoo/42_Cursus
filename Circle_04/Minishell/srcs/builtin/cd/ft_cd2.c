@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:54:30 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 15:54:48 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 10:54:28 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,19 @@ int	ft_exec_dir(char **path, char *new_path)
 	return (1);
 }
 
-int	ft_get_path_home(char **path)
+int	ft_get_path_home(char **path, char *str)
 {
-	if (ft_getenv(g_info.envp, "USER"))
+	if (!str && (!ft_getenv(g_info.envp, "HOME")
+			|| !ft_strcmp(ft_getenv(g_info.envp, "HOME"), "")))
 	{
-		(*path) = ft_strjoin("/Users/", (ft_getenv(g_info.envp, "USER")));
-		return (1);
+		g_info.exit_code = 1;
+		if (!ft_chercher_key(g_info.envp, "HOME"))
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		return (0);
 	}
-	g_info.exit_code = 1;
-	ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-	return (0);
+	g_info.exit_code = 0;
+	*path = ft_strdup(g_info.home);
+	return (1);
 }
 
 void	ft_update_path_oldpath(char *path_env, char *old_pwd)
@@ -71,7 +74,7 @@ void	ft_update_path_oldpath(char *path_env, char *old_pwd)
 	g_info.flag_pwd = 0;
 }
 
-void	ft_exec_home(void)
+void	ft_exec_home(char *str)
 {
 	char	*path_env;
 	char	*path;
@@ -80,13 +83,13 @@ void	ft_exec_home(void)
 
 	path_env = NULL;
 	path = NULL;
-	if (!ft_get_path_home(&path))
+	if (!ft_get_path_home(&path, str))
 		return ;
 	if (g_info.flag_pwd == 1)
 		old_path = ft_strdup("");
 	else
 		old_path = ft_strdup(ft_getenv(g_info.envp, "PWD"));
-	if (chdir(path) == -1)
+	if ((chdir(path)) == -1)
 		ft_error_message_cd(path);
 	else
 	{

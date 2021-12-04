@@ -6,18 +6,18 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:57:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 17:59:21 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 12:34:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	hanlder_child_pid(int signum)
 {
 	if (signum == SIGINT)
 	{
 		g_info.exit_code = 130;
-		ft_putstr("\n");
+		ft_putstr_fd("\n", 2);
 	}
 	else if (signum == SIGQUIT)
 	{

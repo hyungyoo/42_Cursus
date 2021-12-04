@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/11/25 20:54:58 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 10:30:58 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,19 @@ char	*ft_ajouter_value(char *str)
 
 void	ft_update_env(t_envp *envp, char *str, char *key)
 {
+	t_envp	*tmp;
+
 	if (ft_getenv(g_info.envp, key))
 	{
 		while (envp)
 		{
 			if (!ft_strcmp((envp)->envp_key, key))
 			{
-				free((envp)->envp_value);
-				envp->envp_value = NULL;
-				(envp)->envp_value = ft_ajouter_value(str);
-				free((envp)->envp_str);
+				tmp = envp;
+				free((tmp)->envp_value);
+				tmp->envp_value = NULL;
+				(tmp)->envp_value = ft_ajouter_value(str);
+				free((tmp)->envp_str);
 				envp->envp_str = NULL;
 				(envp)->envp_str = ft_strdup(str);
 				return ;

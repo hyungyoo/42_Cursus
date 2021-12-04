@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:44:16 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 00:16:07 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 01:32:22 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*ft_get_relative_path(char *str)
 	split_str = ft_split(str, '/');
 	while (split_str[i])
 		ft_add_cmd_path(&ret, split_str[i++]);
+	free_tab2(split_str);
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:49:22 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 16:44:24 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 09:38:56 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_initial_g(void)
 	g_info.envp = NULL;
 	g_info.pid_child = 0;
 	g_info.flag_pwd = 0;
+	g_info.home = ft_strdup(getenv("HOME"));
 	g_info.last_env_str = NULL;
 }
 

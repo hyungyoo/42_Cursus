@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 02:26:25 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/01 01:42:41 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/03 22:48:11 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	ft_print_echo(t_node **cmd)
 	{
 		if (check_pwd(cmd))
 			(*cmd) = (*cmd);
-		if (ft_not_type((*cmd)) && !(g_info.flag_pwd == 1
+		if (ft_not_type((*cmd)) && !ft_strcmp((*cmd)->str, "~")
+			&& (*cmd)->flag_nospace == 0)
+			ft_putstr(g_info.home);
+		else if (ft_not_type((*cmd)) && !(g_info.flag_pwd == 1
 				&& !ft_strcmp((*cmd)->str, ft_getenv(g_info.envp, "PWD"))))
 			ft_putstr((*cmd)->str);
 		if (ft_not_type((*cmd)) && ft_not_type((*cmd)->prev)
@@ -80,11 +83,11 @@ void	ft_echo(t_node **cmd)
 
 	flag_option = 0;
 	g_info.exit_code = 0;
-	if (!cmd || !*cmd)
-		return ;
 	if (!((*cmd)->next))
 		return (ft_putstr("\n"));
 	(*cmd) = (*cmd)->next;
+	if (!ft_strcmp((*cmd)->str, ""))
+		return (ft_putstr("\n"));
 	if (ft_check_option((*cmd)->str))
 	{
 		flag_option = 1;
