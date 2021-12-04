@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:35:32 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/02 16:13:33 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/04 02:19:09 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,22 @@ int	ft_check_str(char *str)
 
 int	check_value_with_envp(char *key_tmp, t_envp *envp)
 {
-	if (ft_getenv(g_info.envp, "USER"))
+	if (ft_getenv(g_info.envp, "USER")
+		&& ft_strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
 	{
-		if (ft_strstr(key_tmp, ft_getenv(g_info.envp, "USER")))
-		{
-			if (ft_strstr(key_tmp, envp->envp_value)
-				&& ft_strcmp(envp->envp_value, ft_getenv(g_info.envp, "USER")))
-			{
-				free(key_tmp);
-				return (1);
-			}
-		}
-	}
-	else
-	{
-		if (ft_strstr(key_tmp, envp->envp_value))
+		if (ft_strstr(key_tmp, envp->envp_value)
+			&& ft_strcmp(envp->envp_value, ft_getenv(g_info.envp, "USER")))
 		{
 			free(key_tmp);
 			return (1);
 		}
+		else
+			return (0);
+	}
+	if (ft_strstr(key_tmp, envp->envp_value))
+	{
+		free(key_tmp);
+		return (1);
 	}
 	return (0);
 }
