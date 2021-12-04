@@ -38,12 +38,12 @@ unset 함수는인자에서 특정한 몇가지 에러상황을 제외하면 env
 > access함수로, path를 받고, path를 이용하여 execuve함수를 실행한다
 
 ### 6. redirection
->  > 와 >>는 STD_OUT으로 나오는 출력값을 파일에 저장함
-> >  >는 file을 만듬.
-> >  >>는 file을 만들지만, apppend 적용
->  < 와 <<< 는 STD_IN으로 파일, heredoc값을 전송한다.
-> > < 는 파일을 STD_IN값으로 받는다.
-> > <<는 heredoc으로서, EOF가 나올떄까지의 값을 저정한 후에, STD_IN으로 받는다.
+####  와 >>는 STD_OUT으로 나오는 출력값을 파일에 저장함
+>   >는 file을 만듬.
+  >>는 file을 만들지만, apppend 적용
+#### < 와 <<< 는 STD_IN으로 파일, heredoc값을 전송한다.
+>  < 는 파일을 STD_IN값으로 받는다.
+  <<는 heredoc으로서, EOF가 나올떄까지의 값을 저정한 후에, STD_IN으로 받는다.
 
 ### 7. pipe
 > pipe를 구현할때,
