@@ -1,97 +1,94 @@
 #include "../so_long.h"
 
-int	ft_line(char *str, char **line, int ret)
+char	*ft_get_line(char *save)
 {
 	int		i;
+	char	*s;
 
 	i = 0;
-	if (str != NULL)
+	if (!save[i])
+		return (NULL);
+	while (save[i] && save[i] != '\n')
+		i++;
+	s = (char *)malloc(sizeof(char) * (i + 2));
+	if (!s)
+		return (NULL);
+	i = 0;
+	while (save[i] && save[i] != '\n')
 	{
-		while (str[i] != '\0' && str[i] != '\n')
-			i++;
+		s[i] = save[i];
+		i++;
 	}
-	if (str != NULL && str[i] == '\n')
-		*line = ft_substr(str, 0, i);
-	if (ret == 0 && str == NULL)
+	if (save[i] == '\n')
 	{
-		*line = ft_strdup("");
-		return (0);
+		s[i] = save[i];
+		i++;
 	}
-	if (ret == 0 && str[i] == '\0')
-	{
-		*line = ft_strdup(str);
-		return (0);
-	}
-	return (1);
+	s[i] = '\0';
+	return (s);
 }
 
-char	*ft_rest(char *str)
+char	*ft_save(char *save)
 {
 	int		i;
-	int		str_len;
-	char	*tmp;
+	int		c;
+	char	*s;
 
 	i = 0;
-	tmp = NULL;
-	str_len = ft_strlen(str);
-	if (str != NULL)
+	while (save[i] && save[i] != '\n')
+		i++;
+	if (!save[i])
 	{
-		while (str[i] != '\0' && str[i] != '\n')
-			i++;
+		free(save);
+		return (NULL);
 	}
-	if (str[i] == '\n' && str != NULL)
-	{
-		tmp = str;
-		str = ft_substr(str, i + 1, str_len - i - 1);
-		free(tmp);
-		tmp = NULL;
-	}
-	return (str);
+	s = (char *)malloc(sizeof(char) * (ft_strlen(save) - i + 1));
+	if (!s)
+		return (NULL);
+	i++;
+	c = 0;
+	while (save[i])
+		s[c++] = save[i++];
+	s[c] = '\0';
+	free(save);
+	return (s);
 }
 
-char	*ft_read_line(char *str, int fd, int *ret)
+char	*ft_read_and_save(int fd, char *save)
 {
-	char	buf[BUFFER_SIZE + 1];
-	char	*tmp;
+	char	*buff;
+	int		read_bytes;
 
-	*ret = read(fd, buf, BUFFER_SIZE);
-	while ((*ret) > 0)
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
+	read_bytes = 1;
+	while (!ft_strchr(save, '\n') && read_bytes != 0)
 	{
-		buf[*ret] = '\0';
-		if (str == NULL)
-			str = ft_strdup(buf);
-		else
+		read_bytes = read(fd, buff, BUFFER_SIZE);
+		if (read_bytes == -1)
 		{
-			tmp = str;
-			str = ft_strjoin(str, buf);
-			free(tmp);
+			free(buff);
+			return (NULL);
 		}
-		if (ft_strchr(str, '\n') == 1)
-			break ;
-		*ret = read(fd, buf, BUFFER_SIZE);
+		buff[read_bytes] = '\0';
+		save = ft_strjoin(save, buff);
 	}
-	return (str);
+	free(buff);
+	return (save);
 }
 
-int	get_next_line(int fd, char **line)
+char	*get_next_line(int fd)
 {
-	int				ret;
-	static char		*str;
-	int				value;
+	char		*line;
+	static char	*save;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE == 0)
-		return (-1);
-	str = ft_read_line(str, fd, &ret);
-	if (ret < 0)
-		return (-1);
-	value = ft_line(str, line, ret);
-	if (value == 1)
-		str = ft_rest(str);
-	if (value == 0)
-	{
-		free(str);
-		str = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	}
-	return (1);
+	save = ft_read_and_save(fd, save);
+	if (!save)
+		return (NULL);
+	line = ft_get_line(save);
+	save = ft_save(save);
+	return (line);
 }
