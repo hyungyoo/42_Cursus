@@ -79,3 +79,90 @@ int	main(void)
 }
 ```
 
+### static
+> 얼마나 많은 인스턴스를 만들어냈는지 기록가능
+
+``` cpp
+
+class Sample
+{
+	public:
+		Sample(void);
+		~Sample(void);
+
+		static int		getNbInstance(void);
+
+	private:
+		static int		_nbInstance;
+};
+
+// class.cpp
+
+Sample::Sample(void)					//생성자
+{
+	std::cout << "Constructor called" << std::endl;
+	Sample::_nbInstance += 1;
+}
+
+Sample::~Sample(void)					//소멸자
+{
+	std::cout << "Destructor called" << std::endl;
+	Sample::_nbInstance -= 1;
+}
+
+int		Sample::getNbInstance(void)
+{
+	return (Sample::_nbInstance);
+}
+
+int		Sample::_nbInstance = 0;		//static 초기화
+
+```
+
+### Pointer to members
+
+``` cpp::sample.hpp
+
+#ifndef	SAMPLE_CLASS_H
+# define SMAPLE_CLASS_H
+
+class	Sample
+{
+	public:
+		int	foo;
+
+		Sample(void);
+		~Sample(void);
+		
+		void	bar(void) const;
+};
+
+#endif
+
+``` cpp::sample.cpp
+
+#include <iostream>
+#include "sample.hpp"
+
+int	main(void)
+{
+	Sample		instance;
+	Smaple		*instance_p = &instance;
+
+	int	Sample::*p	= NULL;
+	p = &Sample::foo;
+
+	std::cout << "Value of member foo: " << instance.foo << std::endl;		//value of member foo: 0
+	instance.*p = 21;
+	std::cout << "Value of member foo: " << instance.foo << std::endl;		//value of member foo: 21
+	instance_p->*p = 42;
+	std::cout << "Value of member foo: " << instance.foo << std::endl;		//value of member foo: 42
+
+	void	(Sample::*f)(void) const;
+	f = &Sample::bar;
+
+	(instance.*f)();														// member function bar called
+	(instance_p->f)();														// member function bar called
+
+	return (0);
+}
