@@ -9,7 +9,7 @@
 
 사용법
 
-''' C
+'''
 
 namespace A;
 
