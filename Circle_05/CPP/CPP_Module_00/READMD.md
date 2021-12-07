@@ -9,7 +9,7 @@
 
 사용법
 
-'''
+```c
 
 namespace A;
 
@@ -20,4 +20,4 @@ int	main(void)
 	return (0);
 }
 
-'''
+```
