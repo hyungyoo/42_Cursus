@@ -65,5 +65,17 @@ int	 Sample::compare(Sample *other) const
 	else
 		return (1);
 }
+
+// in main
+
+int	main(void)
+{
+	Sample instance_1(42);
+	Sample instance_2(-42);
+
+	if (!instace_1.compare(&instace_2))
+		std::cout << "instance_1 and instance_2 are structually equa" << std::endl;
+	return (0);
+}
 ```
 
