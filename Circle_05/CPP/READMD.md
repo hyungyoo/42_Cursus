@@ -139,7 +139,6 @@ class	Sample
 
 #endif
 
-``` cpp::sample.cpp
 
 #include <iostream>
 #include "sample.hpp"
@@ -166,3 +165,5 @@ int	main(void)
 
 	return (0);
 }
+
+```
