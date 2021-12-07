@@ -1,7 +1,19 @@
-#include <iostream>	//	for std::cout
-#include <cctype>	//	for toupper()
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/07 18:53:35 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/12/07 18:54:34 by hyungyoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static char	*capitalize_string(char *str)
+#include <iostream>
+#include <cctype>
+
+char	*toupper_str(char *str)
 {
 	for (int i = 0; str[i]; ++i)
 		str[i] = toupper(str[i]);
@@ -10,13 +22,13 @@ static char	*capitalize_string(char *str)
 
 int	main(int argc, char **argv)
 {
-	if (argc < 2)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	else
+	if (argc > 1)
 	{
 		for (int i = 1; argv[i]; ++i)
-			std::cout << capitalize_string(argv[i]);
+			std::cout << toupper_str(argv[i]);
 	}
+	else
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 	std::cout << "\n";
 	return (0);
 }
