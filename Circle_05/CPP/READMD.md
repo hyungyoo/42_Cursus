@@ -32,5 +32,21 @@ int	main(void)
 > 1. 문법의 일관성 : 함수로만 멤버에 접근시, "멤버", '멤버'.. 등등 문법적고민이 필요없다.
 2. 접근제어 : 접근 권한을 컨트롤할수있다.
 3. 캡슐화 : 내부 데이터접근시 카운팅, 알람 팝업, 접근시 메세지전달... 등등
+> 이렇게 선언된 private 변수는 accessors 함수를 이용하여 접근가능
+``` cpp
+class Sample {
 
+	public:
+		Sample(void);
+		~Samplie (void);
 
+		int		getfoo(void) const;
+		void	setfoo(void);
+
+	private:
+
+		int	foo;
+}
+
+### 왜 struct가 아닌, classe (c++ 에서는 struct에 함수를 선언할수있다)
+> private가 없다. struct에서는 모든 멤버가 public으로 선언된다. (접근 지시 제어자 없음)
