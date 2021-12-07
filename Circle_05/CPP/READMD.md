@@ -47,6 +47,23 @@ class Sample {
 
 		int	foo;
 }
+```
 
 ### 왜 struct가 아닌, classe (c++ 에서는 struct에 함수를 선언할수있다)
 > private가 없다. struct에서는 모든 멤버가 public으로 선언된다. (접근 지시 제어자 없음)
+
+### Comparaisons C++
+> 다른 인스턴스를 가져와서 비교할수있다.
+``` cpp
+
+int	 Sample::compare(Sample *other) const
+{
+	if (this->foo > other->getFoo())
+		return (-1);
+	else if (this->foo < other->getFoo())
+		return (0);
+	else
+		return (1);
+}
+```
+
