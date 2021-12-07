@@ -11,7 +11,13 @@
 
 ```c
 
-namespace A;
+namespace A
+{
+	inline int ADD(int a, int b)
+	{
+		return (a + b);
+	}
+}
 
 int	main(void)
 {
