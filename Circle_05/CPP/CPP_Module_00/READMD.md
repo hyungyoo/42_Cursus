@@ -9,7 +9,7 @@
 
 사용법
 
-```c
+```cpp
 
 namespace A
 {
