@@ -1,14 +1,11 @@
-SRCS			= megaphone.cpp
-
+SRCS			= main.cpp Annuaire.cpp Contact.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
 CXX				= clang++
-
 RM				= rm -f
-
 CXXFLAGS		= -Wall -Wextra -Werror -I.
 
-NAME			= megaphone
+NAME			= directory
 
 all:			$(NAME)
 
