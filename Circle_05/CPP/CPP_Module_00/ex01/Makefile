@@ -1,16 +1,29 @@
-SRCS			= main.cpp Annuaire.cpp Contact.cpp
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/12/10 19:42:55 by hyungyoo          #+#    #+#              #
+#    Updated: 2021/12/11 00:21:16 by hyungyoo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS			= main.cpp phonebook.class.cpp contact.class.cpp
+
 OBJS			= $(SRCS:.cpp=.o)
 
-CXX				= clang++
+C				= clang++
 RM				= rm -f
-CXXFLAGS		= -Wall -Wextra -Werror -I.
+CFLAGS		= -Wall -Wextra -Werror -I. #-g3 -fsanitize=address
 
-NAME			= directory
+NAME			= phonebook
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+				$(C) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 				$(RM) $(OBJS)
