@@ -6,4 +6,4 @@
 > input/output string
 
 #### ex01
-> class
+> class, function (length, size, substr, append, empty, isdigit, stoi..etc)
