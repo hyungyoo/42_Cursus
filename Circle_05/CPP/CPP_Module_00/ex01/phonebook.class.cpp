@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 02:13:10 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/11 03:05:25 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/11 03:11:06 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	Phonebook::PutContactInfo(std::string str) const
 
 void	Phonebook::SearchContact(void) const
 {
-	int			i;
+	int			i(0);
 	std::string	str;
 
 	if (NewContact[0].GetFirstName().empty())
@@ -153,7 +153,6 @@ void	Phonebook::SearchContact(void) const
 		return ;
 	}
 	PutHeaderSearch();
-	i = 0;
 	while (i < 8)
 	{
 		if (!NewContact[i].GetFirstName().empty())
