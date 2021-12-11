@@ -15,27 +15,27 @@ Contact::~Contact()
 	//std::cout << "Closed new Contact" << std::endl;
 }
 
-std::string	Contact::GetFirstName(void)
+std::string	Contact::GetFirstName(void) const
 {
 	return (this->first_name);
 }
 
-std::string	Contact::GetLastName(void)
+std::string	Contact::GetLastName(void) const
 {
 	return (this->last_name);
 }
 
-std::string	Contact::GetNickName(void)
+std::string	Contact::GetNickName(void) const
 {
 	return (this->nick_name);
 }
 
-std::string	Contact::GetPhoneNumber(void)
+std::string	Contact::GetPhoneNumber(void) const
 {
 	return (this->phone_number);
 }
 
-std::string	Contact::GetDarkestSecret(void)
+std::string	Contact::GetDarkestSecret(void) const
 {
 	return (this->darkest_secret);
 }

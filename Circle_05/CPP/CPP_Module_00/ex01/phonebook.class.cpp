@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   phonebook.class.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/11 02:13:10 by hyungyoo          #+#    #+#             */
+/*   Updated: 2021/12/11 02:18:11 by hyungyoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 /*
@@ -17,9 +29,22 @@ Phonebook::~Phonebook()
 }
 
 /*
- * ADD
+ * //////////////////////////////////////////////ADD//////////////////////////////////
  * contruct --> non, parceque l'on a deja fait construct for 8
  */
+std::string	Phonebook::CheckValue(std::string question) const
+{
+	std::string	ret;
+
+	while (ret.empty())
+	{
+		std::cout << question;
+		if (std::getline(std::cin, ret).eof())
+			std::exit(0);
+	}
+	return (ret);
+}
+
 void	Phonebook::AddContact(int	*NumContact)
 {
 	std::string	first_name;
@@ -28,24 +53,22 @@ void	Phonebook::AddContact(int	*NumContact)
 	std::string	phone_number;
 	std::string	darkest_secret;
 
-	std::cout << "first_name: ";
-	std::getline(std::cin, first_name);
-	std::cout << "last_name: ";
-	std::getline(std::cin, last_name);
-	std::cout << "nick_name: ";
-	std::getline(std::cin, nick_name);
-	std::cout << "phone number: ";
-	std::getline(std::cin, phone_number);
-	std::cout << "darkest secret: ";
-	std::getline(std::cin, darkest_secret);
+	first_name = CheckValue("first_name: ");
+	last_name = CheckValue("last name: ");
+	nick_name = CheckValue("nick name: ");
+	phone_number = CheckValue("phone number: ");
+	darkest_secret = CheckValue("darkest secret: ");
 	NewContact[*NumContact % CONTACT_MAX].SetContact(first_name, last_name, nick_name, phone_number, darkest_secret);
 	*NumContact += 1;
 }
 
 /*
- * SEARCH
+ * ///////////////////////////////////SEARCH////////////////////////////////////
  */
-std::string	Phonebook::GetFirstName(Contact EachContact)
+/*
+ * get value
+ */
+std::string	Phonebook::GetFirstName(Contact EachContact) const
 {
 	if (EachContact.GetFirstName().length() >= 10)
 		return (EachContact.GetFirstName().substr(0, 9).append("."));
@@ -53,7 +76,7 @@ std::string	Phonebook::GetFirstName(Contact EachContact)
 		return (EachContact.GetFirstName());
 }
 
-std::string	Phonebook::GetLastName(Contact EachContact)
+std::string	Phonebook::GetLastName(Contact EachContact) const
 {
 	if (EachContact.GetLastName().length() >= 10)
 		return (EachContact.GetLastName().substr(0, 9).append("."));
@@ -61,15 +84,17 @@ std::string	Phonebook::GetLastName(Contact EachContact)
 		return (EachContact.GetLastName());
 }
 
-std::string	Phonebook::GetNickName(Contact EachContact)
+std::string	Phonebook::GetNickName(Contact EachContact) const
 {
 	if (EachContact.GetNickName().length() >= 10)
 		return (EachContact.GetNickName().substr(0, 9).append("."));
 	else
 		return (EachContact.GetNickName());
 }
-
-void	Phonebook::PutHeaderSearch(void)
+/*
+ * for search
+ */
+void	Phonebook::PutHeaderSearch(void) const
 {
 	std::cout << "|";
 	std::cout << std::setw(10) << "index";
@@ -82,7 +107,7 @@ void	Phonebook::PutHeaderSearch(void)
 	std::cout << "|" << std::endl;
 }
 
-void	Phonebook::PutAllInfo(Contact EachContact, int index)
+void	Phonebook::PutAllInfo(Contact EachContact, int index) const
 {
 	std::cout << "|";
 	std::cout << std::setw(10) << index;
@@ -95,17 +120,20 @@ void	Phonebook::PutAllInfo(Contact EachContact, int index)
 	std::cout << "|" << std::endl;
 }
 
-bool	Phonebook::CheckIndex(std::string str)
+bool	Phonebook::CheckIndex(std::string str) const
 {
 	if (str.length() >= 2)
 		return (0);
 	if (std::isdigit(str[0]))
-		if (!NewContact[std::stoi(str)].GetFirstName().empty())
-			return (1);
+	{
+		if (stoi(str) >= 0 && stoi(str) <= 7)
+			if (!NewContact[std::stoi(str)].GetFirstName().empty())
+				return (1);
+	}
 	return (0);
 }
 
-void	Phonebook::PutContactInfo(std::string str)
+void	Phonebook::PutContactInfo(std::string str) const
 {
 	int	index;
 
@@ -117,7 +145,7 @@ void	Phonebook::PutContactInfo(std::string str)
 	std::cout << "darkest secret: " << NewContact[index].GetDarkestSecret() << std::endl;
 }
 
-void	Phonebook::SearchContact(void)
+void	Phonebook::SearchContact(void) const
 {
 	int			i;
 	std::string	str;
@@ -150,7 +178,7 @@ void	Phonebook::SearchContact(void)
 }
 
 /*
- * main for EXIT, ADD and SEARCH
+ * //////////////////////////////////main for EXIT, ADD and SEARCH///////////////////////////////
  */
 void	Phonebook::loop()
 {
