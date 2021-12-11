@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 02:13:10 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/12/11 02:18:11 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2021/12/11 03:05:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ Phonebook::~Phonebook()
 }
 
 /*
- * //////////////////////////////////////////////ADD//////////////////////////////////
+ * ///////////////////////////////////ADD////////////////////////////////////////
  * contruct --> non, parceque l'on a deja fait construct for 8
  */
 std::string	Phonebook::CheckValue(std::string question) const
@@ -41,23 +41,20 @@ std::string	Phonebook::CheckValue(std::string question) const
 		std::cout << question;
 		if (std::getline(std::cin, ret).eof())
 			std::exit(0);
+		if (!ret.empty())
+			break ;
 	}
 	return (ret);
 }
 
 void	Phonebook::AddContact(int	*NumContact)
 {
-	std::string	first_name;
-	std::string	last_name;
-	std::string	nick_name;
-	std::string	phone_number;
-	std::string	darkest_secret;
+	std::string	first_name(CheckValue("first_name: "));
+	std::string	last_name(CheckValue("last name: "));
+	std::string	nick_name(CheckValue("nick name: "));
+	std::string	phone_number(CheckValue("phone number: "));
+	std::string	darkest_secret(CheckValue("darkest secret: "));
 
-	first_name = CheckValue("first_name: ");
-	last_name = CheckValue("last name: ");
-	nick_name = CheckValue("nick name: ");
-	phone_number = CheckValue("phone number: ");
-	darkest_secret = CheckValue("darkest secret: ");
 	NewContact[*NumContact % CONTACT_MAX].SetContact(first_name, last_name, nick_name, phone_number, darkest_secret);
 	*NumContact += 1;
 }
@@ -167,7 +164,7 @@ void	Phonebook::SearchContact(void) const
 	}
 	while (42)
 	{
-		std::cout << "Enter index! :" << std::endl;	
+		std::cout << "Enter index: ";	
 		if (std::getline(std::cin, str).eof())
 			std::exit(0);
 		else if (CheckIndex(str))
