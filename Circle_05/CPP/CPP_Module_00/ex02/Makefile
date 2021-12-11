@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 19:42:55 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/12/11 02:28:21 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/12/11 03:59:16 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ C				= clang++
 RM				= rm -f
 CFLAGS		= -Wall -Wextra -Werror -I. #-g3 -fsanitize=address
 
-NAME			= phonebook
+NAME			= test
 
 all:			$(NAME)
 
