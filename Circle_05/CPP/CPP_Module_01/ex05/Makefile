@@ -6,11 +6,11 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 19:42:55 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/12/15 18:30:29 by hyungyoo         ###   ########.fr        #
+#    Updated: 2021/12/15 22:28:13 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+SRCS			= main.cpp Karen.cpp
 
 OBJS			= $(SRCS:.cpp=.o)
 
@@ -18,7 +18,7 @@ C				= clang++
 RM				= rm -f
 CFLAGS		= -Wall -Wextra -Werror -I. -std=c++98  #-g3 -fsanitize=address
 
-NAME			= BraiiiiiiinnnzzzZ
+NAME			= Karen_2.0
 
 all:			$(NAME)
 

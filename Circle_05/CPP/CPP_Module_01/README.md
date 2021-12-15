@@ -1,10 +1,47 @@
-### Mudule01
+## Mudule01
 
-### 과제
+## 과제
 > 
-#### ex00
-new와 delete를 이용한 동적할당과 메모리해제!
-#### ex01
+### ex00
+## new와 delete를 이용한 동적할당과 메모리해제!
+> malloc / free 와는 다르다.
+new와 delete는 메모리를 할당하고 해제하지만, 생성자와 소멸자를 호출한다.
+
+### ex01
+## new[] 와 delete[] 의 사용
+> new / delete, new[] / delete[] 를 맞춰서 써야한다.
+-  new와 delete의 수행방식
+> 
+(test *)malloc(4);
+test *t1 = new test;
+--> new가 test의 객체의 크기를 추론하여, malloc에 넘겨준다.  malloc은 os에 해당크기만큼의 메모리 할당을 요청한다.
+os가 유효한 주소를 넘겨주고, heap manager는 어느주소에 얼마의 크기를 할당해주었는지 기록한다.
+주소를 받은 malloc()은 객체 포인터에게 주소값을 반환한다.
+new가 할당받은 곳에 객체의 생성자를 호출
+
+free(t1);
+delete t1;
+--> delete가 객체소멸자를 호출하고, free에게 포인터를 넘겨줌.
+free는 heap manager에게 t1의 주소로 메모리 해제요청을 준다.
+
+- new[] 와 delete[]의 수행방식
+> (test *)malloc(20 + 4);	// 24 bytes = 20 for 5 * 4 + 4(객체의 개수)
+test *t1 = new test[5];
+
+free(t1 - 4);
+delete[]
+delete[]가 t1 -4 의 주소를 넘겨준다
+
+### ex02
+#### 참조자와 포인터의 구분
+
+### ex03
+#### 참조자와 포인터의 사용
+> 참조자는 초기화를 꼭해야한다. *또는 &를 사용할필요가없으며, alias의 역활을 하기때문에, 메모리 자원을 쓰지않는다.
+그러나, 꼭 초기화를해야하므로, null로 초기화될 경우에는 포인터를 사용해준다.
+HumanA는 참조자, HumanB는 포인터
+
+### ex04
 
 ### 참조형 변수 (Reference variable)
 > 지금까지는 c언어에서 일반변수, 그리고 포인터 두가지의 변수타입이 있었다.
