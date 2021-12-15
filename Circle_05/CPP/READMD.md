@@ -166,4 +166,54 @@ int	main(void)
 	return (0);
 }
 
+### iterator
+
+#### iterator를 사용하지않을때
+```cpp
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int	main(void)
+{
+	int ary[] = {1, 2, 3, 4};
+	int	*p_begin, *p_end;
+	p_begin = ary;
+	p_end = ary + 4;
+
+	for (int *p_iter = p_begin; p_iter != p_end; p_iter++)
+	{
+		// ...
+	}
+	return (0);
+}
+
+```
+
+#### iterator 사용
+
+```cpp
+
+#include <isstream>
+#include <vector>
+#include <list>
+
+using namespace std;
+
+int	main(void)
+{
+	vector<int> v{10, 20, 30, 40};
+	for (auto inter=begin(v); iter != end(v); iter++)
+	{
+		// ...
+	}
+	return (0);
+}
+
+/*
+* 여기서 auto를 선언해준것은, begin함수에 인풋에 따라 변화하는 
+* iterator의 객체자료형이 다르기때문에, 자동으로 이 자료형을 인지할수있는 auto를 선언해준것
+*/
 ```
