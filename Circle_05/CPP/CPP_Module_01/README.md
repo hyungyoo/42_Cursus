@@ -42,6 +42,30 @@ delete[]가 t1 -4 의 주소를 넘겨준다
 HumanA는 참조자, HumanB는 포인터
 
 ### ex04
+#### 파일 입출력 스트림
+> 파일입출력은 ifstream, ofstream 두가지를 이용한다.
+1. 파일 입력 (ifstream)
+	인자로 받은 파일이름과 "./"를 합쳐, 경로를 만든다.
+	std의 함수이므로, std::ifstream ifs로 객체를 생성한후, ifs.open(파일경로)로 파일 오픈. 에러는 ils.fail()로 확인
+2. 파일 출력 (ofstream)
+	in file과 마찬가지로, std::ofstream ofs = outfile; 로 선언한다.
+
+#### 구현과정
+
+3. s1 과 s2의 replace
+	find함수와 std::string::npos를 이용한다.
+	getline으로 파일입력 스트림에서 한 줄씩 받아온다. (std::getline(ifs, str);
+	받아온 str을 find함수를 이용하여, s1을 찾는다. 만약에 있다면, 즉, pos값이 (find리턴값) npos와 같지않다면, 성공
+	이때, 찾았다면(str에 s1이 존재), erase함수와 insert함수를 이용하여, 교체
+	그 다음 pos값은 pos = str.find(str, pos); 와 같은 형태로 찾는다. pos는 find의 리턴값이자, s1의 인덱스값이므로,
+	두번째부터는 찾은 다음 pos를 찾아야하기때문에, 인자로 넣어준다.
+	마지막은 ofs << str !!
+
+
+### ex05
+#### 멤버함수 포인
+
+## 함수 사용 및 이론
 
 ### 참조형 변수 (Reference variable)
 > 지금까지는 c언어에서 일반변수, 그리고 포인터 두가지의 변수타입이 있었다.
