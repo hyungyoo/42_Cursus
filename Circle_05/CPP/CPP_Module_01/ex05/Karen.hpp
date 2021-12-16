@@ -1,25 +1,36 @@
 #ifndef KAREN_HPP
 # define KAREN_HPP
 
-#include <iostream>
-#include <string>
+# include <iostream>
 
-class Karen
+# define DEBUG 0
+# define INFO 1
+# define WARNING 2
+# define ERROR 3
+# define TOTAL_NUM_OF_LEVEL 4
+
+class Karen;
+
+typedef struct s_complain
 {
-	typedef void (Karen::*f)(void)const;
+	std::string	level;
+	void (Karen::*func_ptr)(void);
+} t_complain;
 
-	public:
+class Karen {
 
-		Karen(void);
-		~Karen(void);
-		void	complain(std::string level);
+private:
+	t_complain	complain_list[TOTAL_NUM_OF_LEVEL];
+	void debug( void );
+	void info( void );
+	void warning( void );
+	void error( void );
 
-	private:
+public:
+	Karen( void );
+	void complain( std::string level );
+	~Karen( void );
 
-		void	debug(void);
-		void	info(void);
-		void	warning(void);
-		void	error(void);
 };
 
-#endif 
+#endif

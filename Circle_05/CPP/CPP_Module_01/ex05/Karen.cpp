@@ -1,11 +1,18 @@
 #include "./Karen.hpp"
 
-Karen::Karen(void)
+Karen::Karen()
 {
-	return ;
+	complain_list[DEBUG].level = "DEBUG";
+	complain_list[DEBUG].func_ptr = &Karen::debug;
+	complain_list[INFO].level = "INFO";
+	complain_list[INFO].func_ptr = &Karen::info;
+	complain_list[WARNING].level = "WARNING";
+	complain_list[WARNING].func_ptr = &Karen::warning;
+	complain_list[ERROR].level = "ERROR";
+	complain_list[ERROR].func_ptr = &Karen::error;
 }
 
-Karen::~Karen(void)
+Karen::~Karen()
 {
 	return ;
 }
@@ -30,7 +37,11 @@ void	Karen::error(void)
 	std::cout << "This is unacceptable, I want to speak to the manager now." << std::endl;
 }
 
-void	Karen::complain(std::string	level)
+void	Karen::complain( std::string level )
 {
-	std::cout << "hello world" << std::endl;
+	for (int i = 0; i < TOTAL_NUM_OF_LEVEL; i++)
+	{
+		if (complain_list[i].level == level)
+			return (this->*complain_list[i].func_ptr)();
+	}
 }
