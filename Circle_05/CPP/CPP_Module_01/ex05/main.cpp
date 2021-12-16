@@ -3,7 +3,6 @@
 int	main()
 {
 	Karen karen = Karen();
-	void	(Karen::*test_ptr)( std::string str );
 
 	std::cout << "--------------------DEBUG------------------" << std::endl;
 	std::cout << std::endl;
