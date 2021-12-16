@@ -128,6 +128,7 @@ int		main(void)
 	std::cout << "Value of y: " << y << std::endl;				// value of y : 12
 																																				// this->_n 은 앞에있는것
 	std::cout << "Value of z: " << z << std::endl;								// value of z : 0
+
 	z = x + y;																	// Addition operator called with 30 and 12		//in x instance
 																				// Constructor called with value 42
 																				// Assignation operator called from 0 to 42
