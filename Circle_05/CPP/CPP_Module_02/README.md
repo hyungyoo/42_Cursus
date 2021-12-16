@@ -51,4 +51,98 @@ double 	add(double a, int b);
 > 오버로딩은 이항연산자를 사칙연산으로 오버로딩하거나, 단항연산자인 증가연산자++를 전치형 또는 후치형으로 오버로딩한다.
 전치형 -- operator++(){}
 후치형 -- operator++(int random){}
-		
+
+예)
+```cpp
+
+class Interger
+{
+	public:
+		Interger(int const n);
+		~Interger(void);
+
+		int		getValue(void) const;
+
+		Interger & operator=(Interger const & rhs);
+		Interger  operator+(Interger const & rhs) const;
+	
+	private:
+		int	_n;
+
+};
+
+std::ostream & operator<<(std::ostream &o, Interger const & rhs);
+
+Interger::Interger(int const n) : _n(n)
+{
+	std::cout << "Constructor called with value" << n << std::endl;
+}
+
+Interger::~Interger(void)
+{
+	std::cout << "Destructor called with value " << this->_n << std::endl;
+	return ;
+}
+
+int		Interger::getValue(void) const
+{
+	return (this->_n);
+}
+
+Interger	&Interger::operator=(Interger cosnt & rhs)
+{
+	std::cout << "Assignation operator called from " << this->_n;
+	std::cout << " to " << rhs.getValue() << std::endl;
+
+	this->_n = rhs.getValue();
+	return (*this);
+}
+
+Interger	Interger::operator+(Interger const & rhs) const
+{
+	std::cout << "Addition operator called with " << this->_n;
+	std::cout << " and " << rhs.getValue() << std::endl;
+
+	return (Interger(this->_n + this.getValue()));
+}
+
+std::ostream	&operator<<(std::ostream &0, interger const &rhs)
+{
+	o << rhs.getValue();
+	reutrn (o);
+}
+
+/* resultat */
+int		main(void)
+{
+	Interger	x(30);			// Constructor called with value 30
+	Interger	y(10);			// Constructor called with value 10
+	Interger	z(0);			// Constructor called with value 0
+
+	std::cout << "Value of x: " << x << std::endl;		// Value of x : 30
+	std::cout << "Value of y: " << y << std::endl;		// Value of y : 10
+
+	y = Interger(12);											// Constructor called with value 12
+																// Assignation operator called from 10 to 12
+																// Destructor called with value 12
+	std::cout << "Value of y: " << y << std::endl;				// value of y : 12
+																																				// this->_n 은 앞에있는것
+	std::cout << "Value of z: " << z << std::endl;								// value of z : 0
+	z = x + y;																	// Addition operator called with 30 and 12		//in x instance
+																				// Constructor called with value 42
+																				// Assignation operator called from 0 to 42
+																				// Destructor called with value 42
+	std::cout << "Value of z: " << z << std::endl;								// value of z : 42
+																		
+																						// Destructor called with value 42
+																						// Destructor called with value 12
+																						// Destructor called with value 30
+
+	return (0);
+}
+
+
+
+
+
+```
