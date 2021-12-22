@@ -6,6 +6,9 @@
 cppㄴ는 엄격한 자료형을 가지고있지만, 오버로드를 사용할수있다.
 하나의 함수에 여러개의 형태를 부여한다는 뜻으로 다형성이라고 한다. 다형성의 장점은
 어떤함수를 부를것인지 컴파일러가 결정한다는것이다.
+> ad-hor polymorphism에는 두가지가있다.
+1. Function overloading
+2. Operator overloading
 
 ```cpp
 
@@ -146,4 +149,106 @@ int		main(void)
 
 
 
+```
+
+## 연산자 오버로딩에서 주의할점
+
+####> 1. 단항연산자
+```cpp
+
+class Point
+{
+	private;
+		int	x;
+		int	y;
+
+	public:
+		
+		Point(int i, int j)
+		{
+			x = i;
+			y = j;
+		}
+		
+		void	upPrint()
+		{
+			++x;
+			++y;
+			std::cout << x << y << std::endl;
+		}
+
+		Point	up()
+		{
+			++x;
+			++y;
+			return (*this);	/* 리턴형값 Point, 즉 클래스의 자료형이라고한다면, 그 클래스의 모든 멤버 변수들을 "다" 리턴한다는뜻 */
+		}
+
+		/* 여기서, up함수는 모든 멤버의 변수들을 다 ++해주는것, 즉 단항 연산자 중첩과 같다 */
+
+		Point operator++()			// 또는 Point operator++(int);
+		{
+			++x;
+			++y;
+			return (*this);
+		}
+
+}
+
+/* main */
+
+int	main(void)
+{
+	Point	p1(2, 3);
+
+	++p1;		// Point operator++(); == Point up(); 
+				// operator++ == up
+
+	p1++;
+	return (0);
+}
+```
+
+#### 2. 이항연산자
+> 이항연산자 중첩에서는 한개의 매개변수가 필요하다.
+연산자의 왼쪽 피 연산자가 연산자 함수의 주체가된다! 오른쪽 피연산자만 있으면 되기떄문이다.
+즉, 1 + 2는 연산에서 왼쪽 피 연산자 1 이 "+"연산자의 주체이다.
+a = 1 + (2);
+
+```cpp
+
+class Point
+{
+	private:
+		int	x, y;
+	public:
+		Point()
+		{
+			x = 0;
+			y = 0;
+		}
+		Point(int xx, int yy)	// 생성자 오버로딩
+		{
+			x = xx;
+			y = yy;
+		}
+		Point operator+(Point ob)		// ob == ob2;
+		{
+			Point temp;
+			temp.x = x + ob.x;
+			temp.y = y + ob.y;
+			return (temp);
+		}
+}
+
+
+int	main(void)
+{
+	Point ob1(3, 5);	
+	Point ob2(4, 6);	
+	Point ob3();
+
+	ob3 = ob1 + ob2;
+	return (0);
+}
 ```
