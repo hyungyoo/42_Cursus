@@ -138,7 +138,7 @@ Fixed	Fixed::operator--(int)
 /* min max */
 Fixed const	&Fixed::min(Fixed const &a, Fixed const &b)
 {
-	if (a > b)
+	if (a < b)
 		return (a);
 	else
 		return (b);
@@ -146,7 +146,7 @@ Fixed const	&Fixed::min(Fixed const &a, Fixed const &b)
 
 Fixed 	&Fixed::min(Fixed  &a, Fixed  &b)
 {
-	if (a > b)
+	if (a < b)
 		return (a);
 	else
 		return (b);
