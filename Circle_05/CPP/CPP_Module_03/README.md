@@ -102,3 +102,103 @@ int	main(void)
 ## 부모와 자식 포인터 접근
 A   =   [ A ][   ]  --> A * 가능, B * 상향접근이라 오류  (B로 접근할수있는 메모리가 비어있음, 세그폴트)
 b   =   [ A ][ B ]  --> A * , B * 둘다 접근가능
+
+
+## 가상함수
+> '미래'를 호출한다.
+메서드 : 1. 일반
+		 2. 가상 : 3. 순수가상함수
+
+### 일반가상함수와 순수가상함수의 차이
+> 순수가상함수는 '선언'(컴파일)만 있다. 정의(링크)는 없다(함수의 바디구현부분)
+접근 형식 (포인터, 참조자..) , 실형식
+
+"일반 메서드는 참조형식을 따른다. 가상함수는 실형식을 따른다"
+
+예) A * ptr   = new B;
+	접근형식 = 실형식
+
+이러한 상황에서;
+
+```cpp
+
+class A
+{
+	int	TestFuc();
+};
+
+class B : public A
+{
+	int	TestFunc() --> 재정의
+};
+
+int	main(void)
+{
+	A *pdata = new B;
+
+	pdata->TestFunc(); -->이때의 TestFunc는 A의 TestFunc이다.
+
+	return (0);
+}	
+
+```
+
+
+```cpp
+
+class A
+{
+	virtual int	TestFuc();
+};
+
+class B : public A
+{
+	int	TestFunc() --> 재정의
+};
+
+int	main(void)
+{
+	A *pdata = new B;
+
+	pdata->TestFunc(); -->이때의 TestFunc는 B의 TestFunc이다.
+
+	return (0);
+}	
+
+```
+
+## 상속에서의 소멸자
+
+```cpp
+
+class A
+{
+};
+
+class A : public B
+{
+};
+
+int main(void)
+{
+	A *pdata = new B;
+	delete pdata;		//호출되는 소멸자는? 접근형식이기에 A가 불린다. 실형식의 B의 소멸자는 호출이 되지않는다. 실형식을 호출하려면 A의 소멸자에 virtual을 붙인다.
+						// 소멸자는 실행순서와 호출순서가 같다. 그래서 B 다음에 A가 호출된다.
+
+	return (0);
+}
+
+```
+
+## 순서가상 함수
+> 선언은 있다. 하지만 정의는 없다. (함수의 바디부분이 없다)
+	c언어에서는 링크오류가 발생한다. 
+	예를 들면, 동물이라는 부모 클래스에, 자식클래스들은 각각의 동물로서 부모클래스를 상속받는다.
+	여기서 순수 가상함수는 울음 이라는 함수이며, 동물이라는 클래스에서 구체적으로 구현할수있는 울음 이라는 메소드는 없기때문에,
+	순수 가상함수로서 선언만 하게된다.
+
+```cpp
+
+virtual int GetData(void) const = 0;	//선언 방
+
+```
