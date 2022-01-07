@@ -1,3 +1,5 @@
+https://bigpel66.oopy.io/library/42/inner-circle/14
+
 # 상속
 
 ## 상속 코드 예

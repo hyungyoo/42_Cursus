@@ -13,18 +13,14 @@ class ClapTrap
 		~ClapTrap(void);
 		ClapTrap	&operator=(ClapTrap const &rhs);
 
-		void	attack(std::string const &target);
+		std::string getName(void) const;
+		// heritage en considerant de "up casting" --> pointer parent = new ScavTrap obet
+		virtual void	attack(std::string const &target);
 		void 	takeDamage(unsigned int amount);
 		void 	beRepaired(unsigned int amount);
-	
-		std::string		getName(void) const;
-		unsigned int 	getHitPoints(void) const;
-		unsigned int 	getEnergyPoint(void) const;
-		unsigned int 	getAttackDamage(void) const;
 
-		void			setEnergyPoint(unsigned int newEnergy);
-
-	private:
+	// pas de "private" pour heritage
+	protected:
 		std::string		 _name;
 		unsigned int	 _hitPoints;
 		unsigned int	 _energyPoint;
