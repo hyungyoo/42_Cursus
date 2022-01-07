@@ -1,6 +1,6 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void)
+ScavTrap::ScavTrap(void) : ClapTrap()
 {
 	this->_name = "no name";
 	this->_hitPoints = 100;
@@ -10,7 +10,8 @@ ScavTrap::ScavTrap(void)
 	std::cout << "constructor defalut with [no name] ScavTrap is born" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string const name)
+// si on mets pas de "ClapTrap(name)", automatiquement, il appele "constructor no name"
+ScavTrap::ScavTrap(std::string const name) : ClapTrap(name)
 {
 	this->_name = name;
 	this->_hitPoints = 100;
@@ -31,14 +32,15 @@ ScavTrap::~ScavTrap(void)
 	std::cout << "destructor ScavTrap [" << this->_name << "]" << std::endl;
 }
 
+
 ScavTrap	&ScavTrap::operator=(ScavTrap const &rhs)
 {
-	//this->_name = rhs._name;
-	//this->_hitPoints = rhs._hitPoints;
-	//this->_energyPoint = rhs._energyPoint;
-	//this->_attackDamage = rhs._attackDamage;
-	ClapTrap::operator=(rhs);
 	std::cout << "ScavTrap assignment operator! " << std::endl;
+	//ClapTrap::operator=(rhs);
+	this->_name = rhs._name;
+	this->_hitPoints = rhs._hitPoints;
+	this->_energyPoint = rhs._energyPoint;
+	this->_attackDamage = rhs._attackDamage;
 	this->_gate_keeper_mode = rhs._gate_keeper_mode;
 	return (*this);
 }

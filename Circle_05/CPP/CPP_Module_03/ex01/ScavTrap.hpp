@@ -10,7 +10,7 @@ class ScavTrap : public ClapTrap
 			ScavTrap(std::string  const name);
 			ScavTrap(ScavTrap const &scavtrap_copy);
 			~ScavTrap(void);
-			ScavTrap	&operator=(ClapTrap const &rhs);
+			ScavTrap	&operator=(ScavTrap const &rhs);
 
 			// overloading function attack from class parent
 			void	attack(std::string const &target);

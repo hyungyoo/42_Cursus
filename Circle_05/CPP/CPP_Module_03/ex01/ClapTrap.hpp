@@ -14,6 +14,9 @@ class ClapTrap
 		ClapTrap	&operator=(ClapTrap const &rhs);
 
 		std::string getName(void) const;
+		unsigned int	getHitPoints(void) const;
+		unsigned int	getEnergyPoint(void) const;
+		unsigned int	getAttackDamage(void) const;
 		// heritage en considerant de "up casting" --> pointer parent = new ScavTrap obet
 		virtual void	attack(std::string const &target);
 		void 	takeDamage(unsigned int amount);

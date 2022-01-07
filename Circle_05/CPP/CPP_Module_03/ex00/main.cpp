@@ -10,9 +10,9 @@ int main(void)
     ClapTrap test3(test1);
     std::cout << "------------ GAME ----------" << std::endl;
     std::cout << "----------- attack ----------" << std::endl;
-    test1.attack("chat");
-    test2.attack("chien");
-    test3.attack("lapin");
+    test1.attack("A");
+    test2.attack("B");
+    test3.attack("C");
     std::cout << "----------- take damage ----------" << std::endl;
     test1.takeDamage(20);
     test2.takeDamage(0);
@@ -23,4 +23,5 @@ int main(void)
     test3.beRepaired(5);
     std::cout << "test2 is called " << test2.getName() << std::endl;
     std::cout << "----------- DESTRUCTION ----------" << std::endl;
+	return (0);
 }
