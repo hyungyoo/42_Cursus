@@ -74,12 +74,18 @@ int main(void)
 	std::cout << "hit poit == " << test9.getHitPoints() << std::endl;
 	std::cout << "energy pointt == " << test9.getEnergyPoint() << std::endl;
 	std::cout << "attack damage == " << test9.getAttackDamage() << std::endl;
+	
+	// pour up casting, il va montrer la raison pour virtual
+	//ClapTrap *pClap = new FragTrap("up_casting");
 
 	std::cout << std::endl << "----------- attack ----------" << std::endl;
     test7.attack("A");
     test8.attack("B");
     test9.attack("C");
-    std::cout << std::endl << "----------- take damage ----------" << std::endl;
+	
+	//pClap->attack("[target 'for up_casting']");
+    
+	std::cout << std::endl << "----------- take damage ----------" << std::endl;
     std::cout << "----------- damage methode from ClapTrap----------" << std::endl;
     test7.takeDamage(20);
     test8.takeDamage(0);
@@ -90,7 +96,12 @@ int main(void)
     test8.beRepaired(0);
     test9.beRepaired(5);
 
-    std::cout << "----------- DESTRUCTION ----------" << std::endl;
+    std::cout << std::endl << "----------- high fives ----------" << std::endl;
+	test7.highFivesGuys();
+	test8.highFivesGuys();
+	test9.highFivesGuys();
+    
+	std::cout << "----------- DESTRUCTION ----------" << std::endl;
     std::cout << "----------- destruction dans l'ordre de stack ----------" << std::endl;
 	return (0);
 	}

@@ -34,11 +34,11 @@ FragTrap::~FragTrap(void)
 FragTrap	&FragTrap::operator=(FragTrap const &rhs)
 {
 	std::cout << "FragTrap assignment operator! " << std::endl;
-	//ClapTrap::operator=(rhs);
-	this->_name = rhs._name;
-	this->_hitPoints = rhs._hitPoints;
-	this->_energyPoint = rhs._energyPoint;
-	this->_attackDamage = rhs._attackDamage;
+	ClapTrap::operator=(rhs);
+	//this->_name = rhs._name;
+	//this->_hitPoints = rhs._hitPoints;
+	//this->_energyPoint = rhs._energyPoint;
+	//this->_attackDamage = rhs._attackDamage;
 	return (*this);
 }
 

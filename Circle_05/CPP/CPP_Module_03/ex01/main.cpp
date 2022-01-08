@@ -24,7 +24,6 @@ int main(void)
      test1.beRepaired(20);
     test2.beRepaired(0);
     test3.beRepaired(5);
-    std::cout << "test2 is called " << test2.getName() << std::endl;
 
 
     std::cout <<std::endl << std::endl << "-----------  ScavTrap  ----------" << std::endl << std::endl;
@@ -58,7 +57,12 @@ int main(void)
     test5.beRepaired(0);
     test6.beRepaired(5);
 
-    std::cout << "----------- DESTRUCTION ----------" << std::endl;
+    std::cout << std::endl << "----------- guard gate ----------" << std::endl;
+	test4.guardGate();
+	test5.guardGate();
+	test6.guardGate();
+    
+	std::cout << "----------- DESTRUCTION ----------" << std::endl;
     std::cout << "----------- destruction dans l'ordre de stack ----------" << std::endl;
 	return (0);
 	}
