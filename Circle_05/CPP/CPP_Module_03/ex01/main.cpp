@@ -3,6 +3,7 @@
 
 int main(void)
 {
+	/*
     std::cout << "----------- CONSTRUCTION ----------" << std::endl << std::endl;
 	std::cout << "contructor" << std::endl;
 	ClapTrap test1("test1");
@@ -25,6 +26,7 @@ int main(void)
     test2.beRepaired(0);
     test3.beRepaired(5);
 
+	*/
 
     std::cout <<std::endl << std::endl << "-----------  ScavTrap  ----------" << std::endl << std::endl;
 

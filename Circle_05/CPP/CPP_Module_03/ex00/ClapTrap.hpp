@@ -14,7 +14,7 @@ private:
 public:
 	ClapTrap(void);
 	ClapTrap(std::string const name);
-	ClapTrap(ClapTrap const &clapTrap_copy);
+	ClapTrap(const ClapTrap &clapTrap_copy);
 	~ClapTrap(void);
 	ClapTrap	&operator=(ClapTrap const &rhs);
 

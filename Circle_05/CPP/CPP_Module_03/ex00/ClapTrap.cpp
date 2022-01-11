@@ -10,7 +10,7 @@ ClapTrap::ClapTrap(std::string const name) : _name(name), _hitPoints(10), _energ
 	std::cout << "constructor with name: [" << name << "] is born" << std::endl;
 }
 
-ClapTrap::ClapTrap(ClapTrap const &clapTrap_copy)
+ClapTrap::ClapTrap(const ClapTrap &clapTrap_copy)
 {
 	(*this) = clapTrap_copy;
 	std::cout << "constructor copy [" << this->getName() << "] is born"  <<std::endl;
