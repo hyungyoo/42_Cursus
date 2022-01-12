@@ -106,26 +106,42 @@ int main(void)
 
 	std::cout << "----------- DiamondTrap  ----------" << std::endl << std::endl;
 	std::cout << "----------- CONSTRUCTION ----------" << std::endl << std::endl;
-	std::cout << "contructor" << std::endl;
+	std::cout << "===contructor with name===" << std::endl;
 	DiamondTrap test10("test10");
-	std::cout << "contructor" << std::endl;
+	std::cout << "===contructor without name===" << std::endl;
 	DiamondTrap test11;
-	std::cout << "contructor" << std::endl;
+	std::cout << "===contructor copy===" << std::endl;
 	DiamondTrap test12(test10);
+	std::cout << std::endl;
+
+	std::cout << "profil de test 10 and 12" << std::endl;
+	std::cout << "name = " << test10.getName() << std::endl;
+	std::cout << "hit point = " << test10.getHitPoints() << std::endl;
+	std::cout << "energy point =  = " << test10.getEnergyPoint() << std::endl;
+	std::cout << "attack damage = " << test10.getAttackDamage() << std::endl;
+
+	std::cout << "profil de test 12" << std::endl << std::endl;
+	std::cout << "name = " << test12.getName() << std::endl;
+	std::cout << "hit point = " << test12.getHitPoints() << std::endl;
+	std::cout << "energy point =  = " << test12.getEnergyPoint() << std::endl;
+	std::cout << "attack damage = " << test12.getAttackDamage() << std::endl;
 
 	std::cout << "------------ GAME ----------" << std::endl;
 	std::cout << "----------- attack ----------" << std::endl;
-	test10.attack("A");
-	test11.attack("B");
-	test12.attack("C");
+	test10.attack("A diamond");
+	test11.attack("B diamond");
+	test12.attack("C diamond");
 	std::cout << "----------- take damage ----------" << std::endl;
-	test10.takeDamage(20);
-	test11.takeDamage(0);
-	test12.takeDamage(5);
+	test10.takeDamage(2000);
+	test11.takeDamage(11);
+	test12.takeDamage(50);
 	std::cout << "----------- be repaired ----------" << std::endl;
+	std::cout << "+20" << std::endl;
 	test10.beRepaired(20);
-	test11.beRepaired(0);
-	test12.beRepaired(5);
+	std::cout << "+5" << std::endl;
+	test11.beRepaired(5);
+	std::cout << "+11" << std::endl;
+	test12.beRepaired(11);
 
 	std::cout << "----------- who am i ----------" << std::endl;
 	test10.whoAmI();

@@ -21,9 +21,9 @@ ScavTrap::ScavTrap(std::string const name) : ClapTrap(name)
 	std::cout << "constructor with name [" << name << "] ScavTrap is born" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &scavtrap_copy)
+ScavTrap::ScavTrap(const ScavTrap &scavtrap_copy) : ClapTrap(scavtrap_copy)
 {
-	(*this) = scavtrap_copy;
+	//(*this) = scavtrap_copy;
 	std::cout << "constructor copy [" << this->_name << "] ScavTrap is born" << std::endl;
 }
 
@@ -35,8 +35,8 @@ ScavTrap::~ScavTrap(void)
 
 ScavTrap	&ScavTrap::operator=(ScavTrap const &rhs)
 {
-	std::cout << "ScavTrap assignment operator! " << std::endl;
 	ClapTrap::operator=(rhs);
+	std::cout << "ScavTrap assignment operator! " << std::endl;
 	//this->_name = rhs._name;
 	//this->_hitPoints = rhs._hitPoints;
 	//this->_energyPoint = rhs._energyPoint;
