@@ -2,7 +2,6 @@
 
 ScavTrap::ScavTrap(void) : ClapTrap()
 {
-	this->_name = "no name";
 	this->_hitPoints = 100;
 	this->_energyPoint = 50;
 	this->_attackDamage = 20;
@@ -13,7 +12,6 @@ ScavTrap::ScavTrap(void) : ClapTrap()
 // si on mets pas de "ClapTrap(name)", automatiquement, il appele "constructor no name"
 ScavTrap::ScavTrap(std::string const name) : ClapTrap(name)
 {
-	//this->_name = name;
 	this->_hitPoints = 100;
 	this->_energyPoint = 50;
 	this->_attackDamage = 20;
@@ -21,9 +19,9 @@ ScavTrap::ScavTrap(std::string const name) : ClapTrap(name)
 	std::cout << "constructor with name [" << name << "] ScavTrap is born" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap  &scavtrap_copy)
+ScavTrap::ScavTrap(const ScavTrap  &scavtrap_copy) : ClapTrap(scavtrap_copy)
 {
-	(*this) = scavtrap_copy;
+	//(*this) = scavtrap_copy;
 	std::cout << "constructor copy [" << this->_name << "] ScavTrap is born" << std::endl;
 }
 
@@ -35,9 +33,9 @@ ScavTrap::~ScavTrap(void)
 
 ScavTrap	&ScavTrap::operator=(ScavTrap const &rhs)
 {
-	std::cout << "ScavTrap assignment operator! " << std::endl;
 	// appel operator de class parent
 	ClapTrap::operator=(rhs);
+	std::cout << "ScavTrap assignment operator! " << std::endl;
 	//this->_name = rhs._name;
 	//this->_hitPoints = rhs._hitPoints;
 	//this->_energyPoint = rhs._energyPoint;

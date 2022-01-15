@@ -73,7 +73,7 @@ void			ClapTrap::takeDamage(unsigned int amount)
 
 void			ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->_energyPoint == 0)
+	if (this->_energyPoint <= 0)
 		std::cout << "ClapTrap is dead, so no longer be repaired" << std::endl;
 	else
 	{

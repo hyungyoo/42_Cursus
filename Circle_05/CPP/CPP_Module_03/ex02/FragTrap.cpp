@@ -19,9 +19,9 @@ FragTrap::FragTrap(std::string const name) : ClapTrap(name)
 	std::cout << "constructor with name [" << name << "] FragTrap is born" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &fragtrap_copy)
+FragTrap::FragTrap(const FragTrap &fragtrap_copy) : ClapTrap(fragtrap_copy)
 {
-	(*this) = fragtrap_copy;
+	//(*this) = fragtrap_copy;
 	std::cout << "constructor copy [" << this->_name << "] FragTrap is born" << std::endl;
 }
 
@@ -33,12 +33,10 @@ FragTrap::~FragTrap(void)
 
 FragTrap	&FragTrap::operator=(FragTrap const &rhs)
 {
-	std::cout << "FragTrap assignment operator! " << std::endl;
 	ClapTrap::operator=(rhs);
-	//this->_name = rhs._name;
-	//this->_hitPoints = rhs._hitPoints;
-	//this->_energyPoint = rhs._energyPoint;
-	//this->_attackDamage = rhs._attackDamage;
+	/* pas de besoin rhs */
+	//(void)rhs;
+	std::cout << "FragTrap assignment operator! " << std::endl;
 	return (*this);
 }
 

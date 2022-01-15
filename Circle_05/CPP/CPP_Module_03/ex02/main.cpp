@@ -4,6 +4,7 @@
 
 int main(void)
 {
+	/*
     std::cout << "----------- CONSTRUCTION ----------" << std::endl << std::endl;
 	std::cout << "contructor" << std::endl;
 	ClapTrap test1("test1");
@@ -59,7 +60,8 @@ int main(void)
     test5.beRepaired(0);
     test6.beRepaired(5);
 
-     std::cout <<std::endl << std::endl << "-----------  FrapTrap  ----------" << std::endl << std::endl;
+	*/
+    std::cout <<std::endl << std::endl << "-----------  FrapTrap  ----------" << std::endl << std::endl;
 
     std::cout << "----------- CONSTRUCTION ----------" << std::endl;
     std::cout << "----------- construction dans l'ordre de contreverse de stack ----------" << std::endl;
@@ -87,14 +89,17 @@ int main(void)
     
 	std::cout << std::endl << "----------- take damage ----------" << std::endl;
     std::cout << "----------- damage methode from ClapTrap----------" << std::endl;
-    test7.takeDamage(20);
-    test8.takeDamage(0);
+    test7.takeDamage(200);
+    test8.takeDamage(10);
     test9.takeDamage(5);
     std::cout << std::endl << "----------- be repaired ----------" << std::endl;
     std::cout << "----------- be repaired methode from ClapTrap----------" << std::endl;
+    std::cout << "+20" << std::endl;
     test7.beRepaired(20);
-    test8.beRepaired(0);
-    test9.beRepaired(5);
+    std::cout << "+5" << std::endl;
+    test8.beRepaired(5);
+    std::cout << "+1" << std::endl;
+    test9.beRepaired(1);
 
     std::cout << std::endl << "----------- high fives ----------" << std::endl;
 	test7.highFivesGuys();

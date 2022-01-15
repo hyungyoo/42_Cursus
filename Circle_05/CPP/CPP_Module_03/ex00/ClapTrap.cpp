@@ -23,7 +23,7 @@ ClapTrap::~ClapTrap(void)
 
 ClapTrap	&ClapTrap::operator=(ClapTrap const &rhs)
 {
-	//std::cout << "ClapTrap assignation operator! " << std::endl;
+	std::cout << "ClapTrap assignation operator! " << std::endl;
 	this->_name = rhs.getName();
 	this->_hitPoints = rhs.getHitPoints();
 	this->_energyPoint = rhs.getEnergyPoint();
@@ -78,7 +78,7 @@ void			ClapTrap::takeDamage(unsigned int amount)
 
 void			ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->getEnergyPoint() == 0)
+	if (this->getEnergyPoint() <= 0)
 		std::cout << "ClapTrap is dead, so no longer be repaired" << std::endl;
 	else
 	{
