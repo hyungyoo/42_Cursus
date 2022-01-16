@@ -2,7 +2,7 @@ NAME			=	Polymorphism
 CC				=	clang++
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 #-g -fsanitize=address
 RM				=	rm -rf
-SRCS			=	./main.cpp ./Animal.cpp
+SRCS			=	./main.cpp ./Animal.cpp ./Dog.cpp
 
 OBJS 			=	${SRCS:.cpp=.o}
 
@@ -12,7 +12,7 @@ OBJS 			=	${SRCS:.cpp=.o}
 all:				$(NAME)
 
 $(NAME):			$(OBJS)
-				 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+				 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 					$(RM) ${OBJS}

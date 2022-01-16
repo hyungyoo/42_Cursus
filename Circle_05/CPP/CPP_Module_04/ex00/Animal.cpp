@@ -1,24 +1,25 @@
 #include "Animal.hpp"
 
-Animal::Animal(void)
+Animal::Animal(void) : _type("Animal")
 {
-	std::cout << "animal constuctor" << std::endl;
+	std::cout << "animal [" << this->getType() << "] constuctor" << std::endl;
 }
 
-Animal::Animal(const Animal &copy)
+Animal::Animal(Animal const &copy)
 {
 	(*this) = copy;
-	std::cout << "animal copy constructor" << std::endl;
+	std::cout << "animal copy [" << this->getType() << "] constructor" << std::endl;
 }
 
 Animal::~Animal(void)
 {
-	std::cout << "animal destructor" << std::endl;
+	std::cout << "animal [" << this->getType() << "] destructor" << std::endl;
 }
 
-Animal	&Animal::operator=(const Animal &rhs)
+Animal	&Animal::operator=(Animal const &rhs)
 {
 	this->_type = rhs.getType();
+	std::cout << "animal operator" << std::endl;
 	return (*this);
 }
 

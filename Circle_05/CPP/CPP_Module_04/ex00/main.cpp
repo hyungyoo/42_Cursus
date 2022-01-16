@@ -1,8 +1,9 @@
+#include "Dog.hpp"
 #include "Animal.hpp"
 
 int	main(void)
 {
-	Animal test;
-	test.makeSound();
+	//Animal test;
+	//test.makeSound();
 	return (0);
 }
