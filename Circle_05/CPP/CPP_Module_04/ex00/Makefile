@@ -2,7 +2,7 @@ NAME			=	Polymorphism
 CC				=	clang++
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 #-g -fsanitize=address
 RM				=	rm -rf
-SRCS			=	./main.cpp ./Animal.cpp ./Dog.cpp
+SRCS			=	./main.cpp ./Animal.cpp ./Dog.cpp ./Cat.cpp
 
 OBJS 			=	${SRCS:.cpp=.o}
 

@@ -25,7 +25,7 @@ Animal	&Animal::operator=(Animal const &rhs)
 
 void	Animal::makeSound(void) const
 {
-	std::cout << "class" << this->getType() << "make sound like -------" << std::endl;
+	std::cout << "class [" << this->getType() << "] make sound like -------" << std::endl;
 }
 
 std::string	Animal::getType(void) const
