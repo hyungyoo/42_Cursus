@@ -1,8 +1,8 @@
-NAME			=	Polymorphism
+NAME			=	I_dont_want_to_set_the_world_on_fire
 CC				=	clang++
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 #-g -fsanitize=address
 RM				=	rm -rf
-SRCS			=	./main.cpp ./Animal.cpp ./Dog.cpp ./Cat.cpp ./WrongAnimal.cpp ./WrongDog.cpp ./WrongCat.cpp
+SRCS			=	./main.cpp ./Animal.cpp ./Dog.cpp ./Cat.cpp ./Brain.cpp
 
 OBJS 			=	${SRCS:.cpp=.o}
 
