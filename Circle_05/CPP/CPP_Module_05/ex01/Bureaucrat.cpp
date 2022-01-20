@@ -76,6 +76,23 @@ const std::string Bureaucrat::getName(void) const
 	return (this->_name);
 }
 
+void	Bureaucrat::signForm(Form &form)
+{
+	std::string reason(this->getName());
+
+	if (form.getIsSign())
+		reason.append(" already sign!");
+	else if (form.getGradeRequiredSign() < this->getGrade())
+		reason.append(", grade is too low");
+	else
+	{
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+		form.beSigned(*this);
+		return ;
+	}
+	std::cout << this->getName() << " couldn’t sign " << form.getName() << " becuase : " << reason << std::endl;
+}
+
 std::ostream	&operator<<(std::ostream &o, Bureaucrat const &rhs)
 {
 	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();

@@ -21,6 +21,27 @@ void	changeGrade(Bureaucrat &bc, int cmd)
 
 int	main(void)
 {
+	std::cout << "==============constructor Too low================" << std::endl;
+	try
+	{
+		Bureaucrat L("too low", 155);
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << "==============constructor Too high================" << std::endl;
+	try
+	{
+		Bureaucrat H("too high", 0);
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "==============A and B for throw try catch================" << std::endl;
 	std::cout << "==============constructor A================" << std::endl;
 	Bureaucrat A("A", 149);
 	std::cout << "==============constructor B================" << std::endl;
