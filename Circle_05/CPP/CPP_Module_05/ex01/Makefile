@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 19:42:55 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/01/20 16:56:04 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/01/20 18:12:41 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ C				= clang++
 RM				= rm -f
 CFLAGS		= -Wall -Wextra -Werror -I. -std=c++98  #-g3 -fsanitize=address
 
-NAME			= ex00
+NAME			= ex01
 
 all:			$(NAME)
 

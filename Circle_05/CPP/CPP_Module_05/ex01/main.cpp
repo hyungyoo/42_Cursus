@@ -84,6 +84,8 @@ int	main(void)
 	Bureaucrat D("C", 65);
 	
 	std::cout << std::endl;
+
+	std::cout << "==============function  signForm print error================" << std::endl;
 	std::cout << "==============A sign form================" << std::endl;
 	B.signForm(A1);
 	std::cout << "==============B sign form================" << std::endl;
@@ -93,6 +95,7 @@ int	main(void)
 
 
 	std::cout << std::endl;
+	std::cout << "==============function  besigned throw error================" << std::endl;
 	std::cout << "==============for A================" << std::endl;
 	try
 	{
