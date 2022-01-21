@@ -1,43 +1,36 @@
-#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(void) : Form("RobotomyRequestForm", 72, 45)
+PresidentialPardonForm::PresidentialPardonForm(void) : Form("PresidentialPardonForm", 25, 5)
 {
-	std::cout << "RobotomyRequestForm constructor" << std::endl;
+	std::cout << "PresidentialPardonForm constructor" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string target) : Form("ShrubberyCreationForm", 72, 45, target)
+PresidentialPardonForm::PresidentialPardonForm(const std::string target) : Form("PresidentialPardonForm", 25, 5, target)
 {
-	std::cout << "RobotomyRequestForm constructor with target" << std::endl;
+	std::cout << "PresidentialPardonForm constructor with target" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy) : Form(copy)
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &copy) : Form(copy)
 {
-	std::cout << "RobotomyRequestForm constructor copy" << std::endl;
+	std::cout << "PresidentialPardonForm constructor copy" << std::endl;
 }
 
-RobotomyRequestForm::~RobotomyRequestForm(void)
+PresidentialPardonForm::~PresidentialPardonForm(void)
 {
-	std::cout << "RobotomyRequestForm destructor" << std::endl;
+	std::cout << "PresidentialPardonForm destructor" << std::endl;
 }
 
-RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const &rhs)
+PresidentialPardonForm	&PresidentialPardonForm::operator=(PresidentialPardonForm const &rhs)
 {
 	Form::operator=(rhs);
-	std::cout << "RobotomyRequestForm operator" << std::endl;
+	std::cout << "PresidentialPardonForm operator" << std::endl;
 	return (*this);
 }
 
-void	RobotomyRequestForm::execute(Bureaucrat const &executor)
+void	PresidentialPardonForm::execute(Bureaucrat const &executor)
 {
-	srand(time(NULL));
-	int	random_int(rand() % 10);
-
 	//std::cout << random_int << " == random "  << std::endl;
 	(void)executor;
 	Form::execute(executor);
-	std::cout << "Drill: ZZZZZZZZZZZZZZZZZ" << std::endl;
-	if (random_int % 2)
-		std::cout << this->getTarget() << " has been robotomized" << std::endl;
-	else
-		std::cout << this->getTarget() << " fail to robotomized" << std::endl;
+	std::cout << executor.getName() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
