@@ -6,11 +6,11 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 19:42:55 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/01/20 18:12:41 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/01/21 15:13:21 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= ./main.cpp ./Bureaucrat.cpp ./Form.cpp
+SRCS			= ./main.cpp ./Bureaucrat.cpp ./Form.cpp ./ShrubberyCreationForm.cpp
 
 OBJS			= $(SRCS:.cpp=.o)
 
@@ -18,7 +18,7 @@ C				= clang++
 RM				= rm -f
 CFLAGS		= -Wall -Wextra -Werror -I. -std=c++98  #-g3 -fsanitize=address
 
-NAME			= ex01
+NAME			= ex02
 
 all:			$(NAME)
 
@@ -27,6 +27,7 @@ $(NAME):		$(OBJS)
 
 clean:
 				$(RM) $(OBJS)
+				$(RM) target_A_shrubbey
 
 fclean:			clean
 				$(RM) $(NAME)

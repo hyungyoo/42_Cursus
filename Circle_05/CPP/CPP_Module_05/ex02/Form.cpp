@@ -1,16 +1,32 @@
 #include "Form.hpp"
 
+Form::GradeTooHighException::GradeTooHighException(void) : _message("grade too high")
+{
+}
+
+Form::GradeTooLowException::GradeTooLowException(void) : _message("grade too low")
+{
+}
+
+Form::GradeTooHighException::GradeTooHighException(const char *message) : _message(message)
+{
+}
+
+Form::GradeTooLowException::GradeTooLowException(const char *message) : _message(message)
+{
+}
+
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return ("Grade is too high");
+	return (this->_message);
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return ("Grade is too low");
+	return (this->_message);
 }
 
-Form::Form(void): _name("no name"), _isSigned(false), _gradeRequiredSign(150), _gradeRequiredExecute(150)
+Form::Form(void): _name("no name"), _isSigned(false), _gradeRequiredSign(150), _gradeRequiredExecute(150), _target("defaut")
 {
 	std::cout << "Form constructor default" << std::endl;
 }
@@ -19,25 +35,41 @@ Form::Form(const std::string name, int gradeRequiredSign, int gradeRequiredExecu
 _name(name),
 _gradeRequiredSign(gradeRequiredSign),
 _gradeRequiredExecute(gradeRequiredExecute),
+_target("Default_target"),
 _isSigned(false)
 {
 	if (gradeRequiredSign > 150  || gradeRequiredExecute > 150)
 		throw (Form::GradeTooLowException());
 	else if (gradeRequiredSign < 1  || gradeRequiredExecute < 1)
 		throw (Form::GradeTooHighException());
+	std::cout << "Form constructor" << std::endl;
+}
+
+Form::Form(const std::string name, int gradeRequiredSign, int gradeRequiredExecute, const std::string target) :
+_name(name),
+_gradeRequiredSign(gradeRequiredSign),
+_gradeRequiredExecute(gradeRequiredExecute),
+_target(target),
+_isSigned(false)
+{
+	if (gradeRequiredSign > 150  || gradeRequiredExecute > 150)
+		throw (Form::GradeTooLowException());
+	else if (gradeRequiredSign < 1  || gradeRequiredExecute < 1)
+		throw (Form::GradeTooHighException());
+	std::cout << "Form constructor" << std::endl;
 }
 
 Form::~Form(void)
 {
-	std::cout << "deconstructor Form : " << this->getName() << std::endl;
+	std::cout << "deconstructor Form" << std::endl;
 }
 
 Form::Form(Form const &copy) :
 _name(copy.getName()),
 _isSigned(copy.getIsSign()),
 _gradeRequiredSign(copy.getGradeRequiredSign()),
-_gradeRequiredExecute(copy.getGradeRequiredExecute())
-
+_gradeRequiredExecute(copy.getGradeRequiredExecute()),
+_target(copy.getTarget())
 {
 	std::cout << "Form copy constructor" << std::endl;
 }
@@ -52,6 +84,11 @@ Form	&Form::operator=(Form const &rhs)
 const std::string &Form::getName(void) const
 {
 	return (this->_name);
+}
+
+const std::string &Form::getTarget(void) const
+{
+	return (this->_target);
 }
 
 bool	Form::getIsSign(void) const
@@ -82,6 +119,18 @@ void	Form::beSigned(Bureaucrat	const &rhs)
 	{
 		std::cout << rhs.getName() << " is sign [called by besigned function]" << std::endl;
 		this->_isSigned = true;
+	}
+}
+
+void	Form::execute(Bureaucrat const &executor)
+{
+	if (!(this->getIsSign()))
+	{
+		throw (Form::GradeTooLowException("not signed"));
+	}
+	else if (executor.getGrade() > this->getGradeRequiredExecute())
+	{
+		throw (Form::GradeTooLowException());
 	}
 }
 
