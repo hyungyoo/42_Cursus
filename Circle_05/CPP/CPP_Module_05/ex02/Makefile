@@ -6,12 +6,12 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 19:42:55 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/01/21 16:39:30 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/01/21 16:58:16 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			= ./main.cpp ./Bureaucrat.cpp ./Form.cpp ./ShrubberyCreationForm.cpp \
-				  ./RobotomyRequestForm.cpp
+				  ./RobotomyRequestForm.cpp ./PresidentialPardonForm.cpp
 
 OBJS			= $(SRCS:.cpp=.o)
 

@@ -2,6 +2,7 @@
 #include "Form.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int	main(void)
 {
@@ -76,6 +77,44 @@ int	main(void)
 		std::cout << "==============bru_60 sign for execute==================" << std::endl;
 		bru.signForm(*ptrShr);
 		std::cout << "==============bru_60 executing==================" << std::endl;
+		bru.executeForm(*ptrShr);
+		std::cout << "==============destructor with delete==================" << std::endl;
+		delete ptrShr;
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << "==========================PresidentialPardonForm=================================" << std::endl;
+	{
+		std::cout << "==============PresidentialPardonForm upcasting from Form with grade 1==================" << std::endl;
+		Form *ptrShr = new PresidentialPardonForm("target_A");
+		//Form *ptrShr2 = new ShrubberyCreationForm("target_B");
+		std::cout << "==============PresidentialPardonForm profile==================" << std::endl;
+		std::cout << *ptrShr;
+		std::cout << "==============Bureaucrat ==================" << std::endl;
+		Bureaucrat bru("bru_1", 1);
+		std::cout << "==============try catch with function execute but not signed==================" << std::endl;
+		bru.executeForm(*ptrShr);
+		std::cout << "==============bru_1 sign for execute==================" << std::endl;
+		bru.signForm(*ptrShr);
+		std::cout << "==============bru_1 executing==================" << std::endl;
+		bru.executeForm(*ptrShr);
+		std::cout << "==============destructor with delete==================" << std::endl;
+		delete ptrShr;
+	}
+	std::cout << std::endl;
+	{
+		std::cout << "==============PresidentialPardonForm upcasting from Form with grade 30==================" << std::endl;
+		Form *ptrShr = new PresidentialPardonForm("target_B");
+		//Form *ptrShr2 = new ShrubberyCreationForm("target_B");
+		std::cout << "==============PresidentialPardonForm profile==================" << std::endl;
+		std::cout << *ptrShr;
+		std::cout << "==============Bureaucrat ==================" << std::endl;
+		Bureaucrat bru("bru_30", 30);
+		std::cout << "==============try catch with function execute but not signed==================" << std::endl;
+		bru.executeForm(*ptrShr);
+		std::cout << "==============bru_30 sign for execute==================" << std::endl;
+		bru.signForm(*ptrShr);
+		std::cout << "==============bru_30 executing==================" << std::endl;
 		bru.executeForm(*ptrShr);
 		std::cout << "==============destructor with delete==================" << std::endl;
 		delete ptrShr;
