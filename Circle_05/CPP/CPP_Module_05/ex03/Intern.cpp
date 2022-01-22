@@ -26,19 +26,29 @@ Form	*Intern::makeForm(const std::string form, const std::string target) const
 {
 	std::string	arrayForm[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	Form	*generatorForm[3] = {new ShrubberyCreationForm(target), new RobotomyRequestForm(target), new PresidentialPardonForm(target)};
+	Form	*rrf = NULL;
 	int	i(0);
 	while (i < 3)
 	{
-		if (form.compare(arrayForm[i]))
+		if (!(form.compare(arrayForm[i])))
+		{
+			std::cout << "Intern creates " << form << std::endl;
+			rrf = generatorForm[i];
 			break ;
+		}
 		i++;
 	}
-	std::cout << i << std::endl;
+	int	j(0);
+	while (j < 3)
+	{
+		if (j != i)
+			delete generatorForm[j];
+		j++;
+	}
 	if (i == 3)
 	{
-		throw (std::runtime_error("Intern can't create Form"));
-		return (NULL);
+		std::cout << "Intern can't create Form" << std::endl;
+		return (rrf);
 	}
-	std::cout << "Intern creates " << form << std::endl;
-	return (generatorForm[i]);
+	return (rrf);
 }

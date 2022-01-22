@@ -28,7 +28,7 @@ const char *Form::GradeTooLowException::what() const throw()
 
 Form::Form(void): _name("no name"), _isSigned(false), _gradeRequiredSign(150), _gradeRequiredExecute(150), _target("defaut")
 {
-	std::cout << "Form constructor default" << std::endl;
+	//std::cout << "Form constructor default" << std::endl;
 }
 
 Form::Form(const std::string name, int gradeRequiredSign, int gradeRequiredExecute) :
@@ -42,7 +42,7 @@ _isSigned(false)
 		throw (Form::GradeTooLowException());
 	else if (gradeRequiredSign < 1  || gradeRequiredExecute < 1)
 		throw (Form::GradeTooHighException());
-	std::cout << "Form constructor" << std::endl;
+	//std::cout << "Form constructor" << std::endl;
 }
 
 Form::Form(const std::string name, int gradeRequiredSign, int gradeRequiredExecute, const std::string target) :
@@ -56,12 +56,12 @@ _isSigned(false)
 		throw (Form::GradeTooLowException());
 	else if (gradeRequiredSign < 1  || gradeRequiredExecute < 1)
 		throw (Form::GradeTooHighException());
-	std::cout << "Form constructor" << std::endl;
+	//std::cout << "Form constructor" << std::endl;
 }
 
 Form::~Form(void)
 {
-	std::cout << "deconstructor Form" << std::endl;
+	//std::cout << "deconstructor Form" << std::endl;
 }
 
 Form::Form(Form const &copy) :
@@ -71,12 +71,12 @@ _gradeRequiredSign(copy.getGradeRequiredSign()),
 _gradeRequiredExecute(copy.getGradeRequiredExecute()),
 _target(copy.getTarget())
 {
-	std::cout << "Form copy constructor" << std::endl;
+	//std::cout << "Form copy constructor" << std::endl;
 }
 
 Form	&Form::operator=(Form const &rhs)
 {
-	std::cout << "Form operator" << std::endl;
+	//std::cout << "Form operator" << std::endl;
 	this->_isSigned = rhs.getIsSign();
 	return (*this);
 }

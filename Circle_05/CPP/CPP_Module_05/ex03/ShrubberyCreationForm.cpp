@@ -2,28 +2,28 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("ShrubberyCreationForm", 145, 137)
 {
-	std::cout << "ShrubberyCreationForm constructor" << std::endl;
+//	std::cout << "ShrubberyCreationForm constructor" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) : Form("ShrubberyCreationForm", 145, 137, target)
 {
-	std::cout << "ShrubberyCreationForm constructor with target" << std::endl;
+//	std::cout << "ShrubberyCreationForm constructor with target" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &copy) : Form(copy)
 {
-	std::cout << "ShrubberyCreationForm constructor copy" << std::endl;
+//	std::cout << "ShrubberyCreationForm constructor copy" << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
 {
-	std::cout << "ShrubberyCreationForm destructor" << std::endl;
+//	std::cout << "ShrubberyCreationForm destructor" << std::endl;
 }
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm const &rhs)
 {
 	Form::operator=(rhs);
-	std::cout << "ShrubberyCreationForm operator" << std::endl;
+//	std::cout << "ShrubberyCreationForm operator" << std::endl;
 	return (*this);
 }
 

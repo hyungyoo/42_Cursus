@@ -2,28 +2,28 @@
 
 RobotomyRequestForm::RobotomyRequestForm(void) : Form("RobotomyRequestForm", 72, 45)
 {
-	std::cout << "RobotomyRequestForm constructor" << std::endl;
+//	std::cout << "RobotomyRequestForm constructor" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target) : Form("ShrubberyCreationForm", 72, 45, target)
 {
-	std::cout << "RobotomyRequestForm constructor with target" << std::endl;
+//	std::cout << "RobotomyRequestForm constructor with target" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy) : Form(copy)
 {
-	std::cout << "RobotomyRequestForm constructor copy" << std::endl;
+//	std::cout << "RobotomyRequestForm constructor copy" << std::endl;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(void)
 {
-	std::cout << "RobotomyRequestForm destructor" << std::endl;
+//	std::cout << "RobotomyRequestForm destructor" << std::endl;
 }
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(RobotomyRequestForm const &rhs)
 {
 	Form::operator=(rhs);
-	std::cout << "RobotomyRequestForm operator" << std::endl;
+//	std::cout << "RobotomyRequestForm operator" << std::endl;
 	return (*this);
 }
 
