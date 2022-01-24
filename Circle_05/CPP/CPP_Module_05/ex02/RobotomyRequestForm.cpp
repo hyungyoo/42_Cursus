@@ -5,7 +5,7 @@ RobotomyRequestForm::RobotomyRequestForm(void) : Form("RobotomyRequestForm", 72,
 	std::cout << "RobotomyRequestForm constructor" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string target) : Form("ShrubberyCreationForm", 72, 45, target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string target) : Form("RobotomyRequestForm", 72, 45, target)
 {
 	std::cout << "RobotomyRequestForm constructor with target" << std::endl;
 }
