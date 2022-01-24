@@ -1,10 +1,10 @@
-https://bigpel66.oopy.io/library/42/inner-circle/14
-
 # 상속
 
 ## 상속 코드 예
 ```cpp
 
+// 오버라이딩의 예 (함수의 재정의)
+// 그러나 다형성(부모클래스의 포인트)로 접근하기위해서는 가상함수를 선언
 class CTest
 {
 	public:

@@ -30,7 +30,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat &copy)
 {
 	/* const std::string, donc error */
 	//this->_name = copy.getName();
-	this->_grade = copy.getGrade();
+	//this->_grade = copy.getGrade();
+	(*this) = copy;
 	std::cout << "Bureaucrat copy constructor" << std::endl;
 }
 

@@ -39,6 +39,7 @@ _gradeRequiredSign(copy.getGradeRequiredSign()),
 _gradeRequiredExecute(copy.getGradeRequiredExecute())
 
 {
+	//(*this) = copy;
 	std::cout << "Form copy constructor" << std::endl;
 }
 
