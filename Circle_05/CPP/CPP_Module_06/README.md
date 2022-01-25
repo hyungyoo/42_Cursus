@@ -53,4 +53,8 @@ int &ex = 42;			// 안됨, 변수로 만든후에 넣어줘야함.
 2. double이 8바이트이므로, 오버플로가 발생하지않도록, input을 double로 바꿔준다.
 (생성자에서 바꿔서 num을 초기화해줘야함)
 3. 다른숫자들도 다 그렇게 바꿔준다.
-4. ostream을 이용하여 출력
+4. 4.0과 같이 .0으로 끝나는 수들은, cout에서 .0을 제외하고 출력한다. 그러므로, static_cast<int>(num)의 값과 float 또는 double 값을 확인하여, .0으로 끝난다면, double은 .0, float는 .0f를 붙여준다. 
+5. nan, inf값은 isnan 또는 isinf 함수로확인가능하다. <cmath> 헤더 참조
+6. try, catch는 char의 변형에서만 사용해도 충분하다.
+7. setprecision을 사용해서 double과 float를 출력한다. <iomanip> 헤더 참조
+8. ostream을 이용하여 출력
