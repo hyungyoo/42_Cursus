@@ -118,7 +118,7 @@ double	Convert::convertToDouble(void) const
 
 void	Convert::printFloat(std::ostream &o) const
 {
-	if (static_cast<int>(this->getNum()) == this->convertToFloat())
+	if (static_cast<int64_t>(this->getNum()) == this->convertToFloat())
 		o << "float: " << this->convertToFloat() << ".0f" << std::endl;
 	else
 		o << "Float: " << std::setprecision(std::numeric_limits<float>::digits10) << this->convertToFloat() << "f" << std::endl;
@@ -126,7 +126,7 @@ void	Convert::printFloat(std::ostream &o) const
 
 void	Convert::printDouble(std::ostream &o) const
 {
-	if (static_cast<int>(this->getNum()) == this->convertToDouble())
+	if (static_cast<int64_t>(this->getNum()) == this->convertToDouble())
 		o << "double: " << this->convertToDouble() << ".0" << std::endl;
 	else
 		o << "double: " << std::setprecision(std::numeric_limits<double>::digits10) << this->convertToDouble() << std::endl;

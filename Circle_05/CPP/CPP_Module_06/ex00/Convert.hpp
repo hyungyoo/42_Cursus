@@ -2,7 +2,7 @@
 # define CONVERT_HPP
 
 # include <iostream>
-# include <string>
+# include <cstring>
 # include <iomanip>
 # include <limits>
 # include <cmath>
