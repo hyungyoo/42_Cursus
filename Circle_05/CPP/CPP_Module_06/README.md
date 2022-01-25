@@ -63,4 +63,11 @@ int &ex = 42;			// 안됨, 변수로 만든후에 넣어줘야함.
 >  uintptr_t 는 uintptr_t 는 데이터 포인터를 저장할 수있는 부호없는 정수 유형이다.
 reinterpret cast를uintptr에 저장한다. (Serialization), 반대는 deserialize
 
+## ex02 : dynamic_cast
+> dynamic_cast는 부모클래스 포인터에서 자식클래스 포인터로 다운캐스팅을 할때, 주로 사용된다. 또한 런타임에 실행된다.
+너무나도 당연하게, 부모클래스의 포인터가 자식의 클래스를 업캐스팅한다는건, 가상함수를 가진것이며, 이것은 다형성의 형태이다.
+그렇다면, 런타임에 정말로 다운캐스팅하려는 자식클래스가, 정말로 부모가 업캐스팅하고있던 자식클래스인지 확실하게 알아야한다.
+이떄 사용하는게 dynamic_cast이며, 안전하다. 왜? 다운캐스팅이 잘못된다면, null을 반환한다.
 
+#### 실패할 경우(new_type = pointer) : null pointer
+#### 실패할 경우(new_type = reference) : bad_cast (exception 처리)
