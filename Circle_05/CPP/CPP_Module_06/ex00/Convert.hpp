@@ -3,13 +3,15 @@
 
 # include <iostream>
 # include <string>
+# include <iomanip>
+# include <limits>
+# include <cmath>
 
 class Convert
 {
 	private:
 		std::string _input;
 		double	_num;
-		bool	_isError;
 
 	public:
 		Convert(void);
@@ -18,18 +20,23 @@ class Convert
 		Convert	&operator=(Convert const &copy);
 		Convert(Convert const &rhs);
 
-		bool	getError(void) const;
 		std::string	getInput(void) const;
 		double	getNum(void) const;
 
-		void	setError(bool isError);
+		void	initialNum(void);
+
 		void	setInput(std::string input);
 		void	setNum(double num);
 
-		char	ConvertToChar(void);
-		int		ConvertToInt(void);
-		float	ConvertToFloat(void);
-		double	ConvertToDouble(void);
+		char	convertToChar(void) const;
+		int		convertToInt(void) const;
+		float	convertToFloat(void) const;
+		double	convertToDouble(void) const;
+
+		void	printChar(std::ostream &o) const;
+		void	printInt(std::ostream &o) const;
+		void	printFloat(std::ostream &o) const;
+		void	printDouble(std::ostream &o) const;
 
 		class	ErrorMessage : public std::exception
 		{
