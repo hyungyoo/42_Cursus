@@ -20,9 +20,10 @@ Convert::Convert(void)
 
 Convert::Convert(const std::string input) : 
 _input(input),
-_num(0.0),
-_isError(false)
+_num(0.0),	//initial with strtod
+_isError(false)	//intial after check input
 {
+	// num initial
 	std::cout << "Convert constructor with input" << std::endl;
 }
 
