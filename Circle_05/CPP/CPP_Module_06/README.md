@@ -58,3 +58,9 @@ int &ex = 42;			// 안됨, 변수로 만든후에 넣어줘야함.
 6. try, catch는 char의 변형에서만 사용해도 충분하다.
 7. setprecision을 사용해서 double과 float를 출력한다. <iomanip> 헤더 참조
 8. ostream을 이용하여 출력
+
+## ex01 : reinterpret_cast, uintptr_t
+>  uintptr_t 는 uintptr_t 는 데이터 포인터를 저장할 수있는 부호없는 정수 유형이다.
+reinterpret cast를uintptr에 저장한다. (Serialization), 반대는 deserialize
+
+
