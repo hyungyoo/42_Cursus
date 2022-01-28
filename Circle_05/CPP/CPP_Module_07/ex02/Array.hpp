@@ -44,7 +44,7 @@ class	Array
 			if (this->_arr)
 				delete[] this->_arr;
 		}
-		T	&operator[](unsigned int index)
+		T	&operator[](unsigned int const index)
 		{
 			if (index >= this->size())
 				throw (OutOfBound());

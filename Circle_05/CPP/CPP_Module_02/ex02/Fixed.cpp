@@ -54,30 +54,36 @@ float	Fixed::toFloat(void) const
 /* operator for > >= < <= == != */
 bool	Fixed::operator>(Fixed const &rhs) const
 {
+	std::cout << "operator > " << std::endl;
 	return (this->_point_fix > rhs.getRawBits());
 }
 
 bool	Fixed::operator<(Fixed const &rhs) const
 {
+	std::cout << "operator < " << std::endl;
 	return (this->_point_fix < rhs.getRawBits());
 }
 
 bool	Fixed::operator>=(Fixed const &rhs) const
 {
+	std::cout << "operator >= " << std::endl;
 	return (this->_point_fix >= rhs.getRawBits());
 }
 
 bool	Fixed::operator<=(Fixed const &rhs) const
 {
+	std::cout << "operator <= " << std::endl;
 	return (this->_point_fix <= rhs.getRawBits());
 }
 
 bool	Fixed::operator==(Fixed const &rhs) const
 {
+	std::cout << "operator == " << std::endl;
 	return (this->_point_fix == rhs.getRawBits());
 }
 bool	Fixed::operator!=(Fixed const &rhs) const
 {
+	std::cout << "operator != " << std::endl;
 	return (this->_point_fix != rhs.getRawBits());
 }
 
@@ -138,6 +144,7 @@ Fixed	Fixed::operator--(int)
 /* min max */
 Fixed const	&Fixed::min(Fixed const &a, Fixed const &b)
 {
+	std::cout << "min with operator < " << std::endl;
 	if (a < b)
 		return (a);
 	else
@@ -146,6 +153,7 @@ Fixed const	&Fixed::min(Fixed const &a, Fixed const &b)
 
 Fixed 	&Fixed::min(Fixed  &a, Fixed  &b)
 {
+	std::cout << "min with operator < " << std::endl;
 	if (a < b)
 		return (a);
 	else
@@ -154,6 +162,7 @@ Fixed 	&Fixed::min(Fixed  &a, Fixed  &b)
 
 Fixed const	&Fixed::max(Fixed const &a, Fixed const &b)
 {
+	std::cout << "max with operator >" << std::endl;
 	if (a > b)
 		return (a);
 	else
@@ -162,6 +171,7 @@ Fixed const	&Fixed::max(Fixed const &a, Fixed const &b)
 
 Fixed 	&Fixed::max(Fixed  &a, Fixed  &b)
 {
+	std::cout << "max with operator >" << std::endl;
 	if (a > b)
 		return (a);
 	else
