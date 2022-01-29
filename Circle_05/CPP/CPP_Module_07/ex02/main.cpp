@@ -143,7 +143,7 @@ int main(int, char**)
 				std::cerr << e.what() << std::endl;
 			}
 		}
-		std::cout << "==============non const array============" << std::endl;
+		std::cout << "==============const array============" << std::endl;
 		const Array<int> con(nCon);
 		for (unsigned int j = 0;j < con.size(); j++)
 		{
@@ -156,8 +156,8 @@ int main(int, char**)
 				std::cerr << e.what() << std::endl;
 			}
 		}
-		/*
-		std::cout << "=====add 5 for const array=====" << std::endl;
+		/*	ca complie pas
+		std::cout << "=====add 5 for array=====" << std::endl;
 		for (unsigned int i = 0;i < con.size(); i++)
 		{
 			con[i] += 5;
