@@ -9,6 +9,8 @@
 # include <iterator>
 # include <numeric>
 # include <cmath>
+# include <cstdlib>
+# include <ctime>
 
 class Span
 {
@@ -33,6 +35,8 @@ class Span
 		~Span(void);
 
 		const std::vector<int>	&getVector(void) const;
+
+		void	randomVector(void);
 
 		unsigned int	shortestSpan(void) const;
 		unsigned int	longestSpan(void) const;
