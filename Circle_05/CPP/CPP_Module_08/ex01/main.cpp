@@ -2,6 +2,21 @@
 
 int	main(void)
 {
+	std::cout << "===========exemple==========" << std::endl;
+	{
+		Span sp = Span(5);
+		sp.addNumber(6);
+		sp.addNumber(3);
+		sp.addNumber(17);
+		sp.addNumber(9);
+		sp.addNumber(11);
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+		std::cout << "Should output:" << std::endl;
+		std::cout << "$> ./ex01" << std::endl;
+		std::cout << "2" << std::endl;
+		std::cout << "14" << std::endl; 
+	}
 	std::cout << "===========Span with 0, add number, catch error===========" << std::endl;
 	{
 		Span	A(0);
@@ -31,6 +46,15 @@ int	main(void)
 		std::cout << A.shortestSpan() << std::endl;
 		std::cout << "=====A longestSpan=====" << std::endl;
 		std::cout << A.longestSpan() << std::endl;
+		std::cout << "===========B copy = Span B(A)===========" << std::endl;
+		std::cout << "=====B=====" << std::endl;
+		Span B(A);
+		std::cout << B;
+		std::cout << "===========deep copy===========" << std::endl;
+		if (&(A.getVector()[0]) == &(B.getVector()[0]))
+			std::cout << "no deep copy" << std::endl;
+		else
+			std::cout << "deep copy" << std::endl;
 	}
 	std::cout << "===========Span with 3, add seconde number, catch error===========" << std::endl;
 	{
