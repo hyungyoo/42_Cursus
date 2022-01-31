@@ -31,3 +31,31 @@ Insertion or removal of elements - linear O(n)
 ## set
 1. red-black structure
 2. sorted
+
+
+## ex00
+> easyfind라는 함수를 만든다. 함수의 리턴값은 iterator이다.
+즉, vector, deque, array등등의 iterator를 받아야하므로, 반환값은 "typename T::iterator" 로 한다.
+```cpp
+
+template<typename T>
+typename T::iterator easyfind(T &c, int v)
+{
+	// 반환값을 선연할떄는 typename T::iterator로 선언
+	// typename이 없다면, error: missing 'typename' prior to dependent type name 'T::iterator'
+	// std::vector<T>::iterator is a dependent name, so you need a typename here to specify that it refers to a type. 
+	// Otherwise it is assumed to refer to a non-type:	
+	...
+}
+
+
+```
+
+## ex01
+> Span 클래스를 만들고, 각 벡터내부의 리스트중를 이용하여, shortestSpan 그리고 longestSpan을 만든다.
+전혀 어렵지않음
+1. try, throw and catch
+2. vector with begin(), end(), sort(), copy(), max_element, min_element...
+
+## ex02
+
