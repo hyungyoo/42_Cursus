@@ -6,11 +6,11 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 19:42:55 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/01/29 22:12:38 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/01/31 16:42:01 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			= ./main.cpp
+SRCS			= ./main.cpp ./Span.cpp
 
 OBJS			= $(SRCS:.cpp=.o)
 
