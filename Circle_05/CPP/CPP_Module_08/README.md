@@ -58,4 +58,15 @@ typename T::iterator easyfind(T &c, int v)
 2. vector with begin(), end(), sort(), copy(), max_element, min_element...
 
 ## ex02
+> stack은 컨테이너에 대한 접근을 제어하는 목적으로 사용된다. 즉, iterator를 제공하지않는다.
+이번과제에서는 iterator를 받아야한다.(begin(), end())
+
+template< class T, class Container = std::deque<T>
+ class stack;
+
+ 즉, stack은 deque를 기반으로만들어졌고, stack에는 c라는 container 변수가있다.
+
+ 우리는 iterator에 접근하기위해, c변수(deque)를 이용하여, iterator에 접근할수있다.
+ MutantStack은 stack으로부터 상속받는다.
+
 
