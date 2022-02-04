@@ -8,7 +8,7 @@
 
 | CIRCLE | PROJECT                            | TOPICS | STATUS                                                                                                               | Date of Completion |
 | ------ | ---------------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| 00     | [Libft](./0_libft)                 |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Libft)](https://github.com/JaeSeoKim/badge42)            | 2020-01-20 |
+| 00     | [Libft](./0_libft)                 |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Libft)](https://github.com/JaeSeoKim/badge42)            | 2021-01-20 |
 | 01     | [netwhat]                          |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/netwhat)](https://github.com/JaeSeoKim/badge42)          | 2021-02-27 |
 | 01     | [get_next_line](./1_get_next_line) |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/get_next_line)](https://github.com/JaeSeoKim/badge42)    | 2021-01-25 |
 | 01     | [ft_printf](./1_ft_printf)         |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/ft_printf)](https://github.com/JaeSeoKim/badge42)        | 2021-02-17 |
