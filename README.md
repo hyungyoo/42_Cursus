@@ -19,13 +19,13 @@
 | 03     | [philosophers](./3_philosophers)   |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Philosophers)](https://github.com/JaeSeoKim/badge42)     | 2021-08-24	|
 | 03     | [Exam Rank 03](./3_examrank03)     |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2021-08-31 |
 | 03     | [minishell](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 00](./4_CPP_Module_00)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 01](./4_CPP_Module_01)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 02](./4_CPP_Module_02)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 03](./4_CPP_Module_03)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 04](./4_CPP_Module_04)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 05](./4_CPP_Module_05)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 06](./4_CPP_Module_06)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 07](./4_CPP_Module_07)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [CPP Module 08](./4_CPP_Module_08)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
-| 04     | [Exam Rank 04](./4_examrank04)     |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2021-08-31 |
+| 04     | [CPP Module 00](./4_CPP_Module_00)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-11 |
+| 04     | [CPP Module 01](./4_CPP_Module_01)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-16 |
+| 04     | [CPP Module 02](./4_CPP_Module_02)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-28 |
+| 04     | [CPP Module 03](./4_CPP_Module_03)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-13 |
+| 04     | [CPP Module 04](./4_CPP_Module_04)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-18 |
+| 04     | [CPP Module 05](./4_CPP_Module_05)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-25 |
+| 04     | [CPP Module 06](./4_CPP_Module_06)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-25 |
+| 04     | [CPP Module 07](./4_CPP_Module_07)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-28 |
+| 04     | [CPP Module 08](./4_CPP_Module_08)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-31 |
+| 04     | [Exam Rank 04](./4_examrank04)     |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2022-02-04 |
