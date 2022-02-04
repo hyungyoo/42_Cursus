@@ -19,3 +19,12 @@
 | 03     | [philosophers](./3_philosophers)   |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Philosophers)](https://github.com/JaeSeoKim/badge42)     | 2021-08-24	|
 | 03     | [Exam Rank 03](./3_examrank02)     |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2021-08-31 |
 | 03     | [minishell](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 00](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 01](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 02](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 03](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 04](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 05](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 06](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 07](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
+| 04     | [CPP Module 08](./3_minishell)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2021-12-04 |
