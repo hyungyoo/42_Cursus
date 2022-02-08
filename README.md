@@ -28,4 +28,4 @@
 | 04     | [CPP Module 06](./4_CPP_Module_06)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-25 |
 | 04     | [CPP Module 07](./4_CPP_Module_07)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-28 |
 | 04     | [CPP Module 08](./4_CPP_Module_08)     	  |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) 	   | 2022-01-31 |
-| 04     | [Exam Rank 04](./4_examrank04)     |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/Exam%20Rank%2002)](https://github.com/JaeSeoKim/badge42) | 2022-02-04 |
+| 04     | [cub3d 04](./4_cub3d)                      |        | [![Score](https://badge42.herokuapp.com/api/project/hyungyoo/cub3d)](https://github.com/JaeSeoKim/badge42)     | 2022-02-08 |
