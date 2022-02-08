@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seyun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 19:56:29 by seyun             #+#    #+#             */
-/*   Updated: 2021/11/30 19:57:25 by seyun            ###   ########.fr       */
+/*   Created: 2022/01/13 21:14:17 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/01/25 15:38:13 by ytak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strcpy(char *dst, char *src, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	if (dst == 0 && src == 0)
 		return (dst);

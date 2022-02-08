@@ -1,7 +1,19 @@
-NAME = cub3d
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/02/08 16:30:52 by hyungyoo          #+#    #+#              #
+#    Updated: 2022/02/08 17:44:24 by ytak             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = cub3D
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 INCS = -I./srcs -I./libft -I./mlx
 INCLIB = -Lmlx -lmlx -framework OpenGL -framework Appkit -Llibft -lft
@@ -10,15 +22,17 @@ LIBFT_D = ./libft
 LIBFT_A = ./libft/libft.a
 LIBFT_M = ./mlx
 
-FILES = cub3d.c \
-		01_read_info.c \
-		02_validate_info_map.c \
-		03_read_map.c \
-		04_rearrange_game.c \
-		05_run_game.c \
-		06_execute_ray.c \
-		07_set_background.c \
-		08_ray_background.c
+FILES = main.c \
+		read_map.c \
+		check_map.c \
+		validate_map.c \
+		allocate_map.c	\
+		keycode.c		\
+		arrange_game.c  \
+		execute_game.c  \
+		ray_casting.c	\
+		strip_texture_color.c \
+		ft_strexit.c \
 
 SRCS = $(addprefix srcs/, $(FILES))
 OBJS = $(SRCS:.c=.o)

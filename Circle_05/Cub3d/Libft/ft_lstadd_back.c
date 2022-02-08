@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/19 17:13:59 by seyun             #+#    #+#             */
-/*   Updated: 2021/12/02 16:52:29 by seyun            ###   ########.fr       */
+/*   Created: 2022/01/13 21:10:30 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/01/25 15:07:05 by ytak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 		return ;
 	}
 	tmp = ft_lstlast(*alst);
-	//new->next = tmp->next;
+	new->next = tmp->next;
 	tmp->next = new;
 }

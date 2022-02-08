@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/19 17:04:38 by seyun             #+#    #+#             */
-/*   Updated: 2021/12/02 16:39:37 by seyun            ###   ########.fr       */
+/*   Created: 2022/01/13 21:11:53 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/01/25 15:07:27 by ytak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_lstsize(t_list *lst)
 {
 	size_t	size;
-	t_list *tmp;
+	t_list	*tmp;
 
 	size = 0;
 	tmp = lst;

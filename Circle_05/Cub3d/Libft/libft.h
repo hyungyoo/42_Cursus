@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/17 21:43:23 by seyun             #+#    #+#             */
-/*   Updated: 2021/12/03 15:12:23 by seyun            ###   ########.fr       */
+/*   Created: 2022/01/13 21:17:13 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/02/08 14:10:22 by ytak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <fcntl.h>
+# include <stdlib.h>
 
 # define OPEN_MAX 32
 # define BUFFER_SIZE 1
-# define NL 1
-# define _EOF 0
-# define ERROR -1
+
+struct	s_gnl_list;
 
 typedef struct s_list
 {
@@ -70,7 +71,6 @@ void		ft_strexit(char *str);
 void		ft_free_double(char **str);
 int			ft_longest_node_len(t_list *lst);
 int			ft_isset(char c, char *str);
-int			get_next_line(int fd, char **line);
 int			ft_strcmp(const char *s1, const char *s2);
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **alst, t_list *new);
@@ -84,5 +84,20 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_only_digit(char *str);
 char		*ft_strndup(char *s1, size_t size);
 char		*ft_strcpy(char *dst, char *src, size_t n);
+
+//get_next_line
+typedef struct s_gnl_list
+{
+	int					fd;
+	char				buffer[BUFFER_SIZE + 1];
+	int					buf_index;
+	struct s_gnl_list	*next;
+}	t_gnl_list;
+
+int			get_next_line(int fd, char **line);
+char		*ft_strdup_gnl(const char *s, size_t size);
+size_t		ft_strlen_gnl(const char *s, char c);
+t_gnl_list	*ft_lstadd_back_gnl(t_gnl_list **alst, int fd);
+void		ft_lstdelone_gnl(t_gnl_list *begin, int fd);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strexit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:31:24 by seyun             #+#    #+#             */
-/*   Updated: 2021/11/30 19:18:18 by seyun            ###   ########.fr       */
+/*   Created: 2022/01/13 21:14:48 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/02/07 22:50:23 by ytak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_strexit(char *str)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
 	write(1, str, len);

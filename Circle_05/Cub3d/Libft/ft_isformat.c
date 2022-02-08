@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isformat.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:24:49 by seyun             #+#    #+#             */
-/*   Updated: 2021/11/08 13:29:33 by seyun            ###   ########.fr       */
+/*   Created: 2022/01/13 21:09:48 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/01/25 15:03:49 by ytak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_isformat(char *str, char *format)
 {
-	int	len_str;
-	int len_format;
-	char *fmt_str;
+	int		len_str;
+	int		len_format;
+	char	*fmt_str;
 
 	len_str = ft_strlen(str);
 	len_format = ft_strlen(format);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seyun <seyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:24:15 by seyun             #+#    #+#             */
-/*   Updated: 2021/12/03 15:20:45 by seyun            ###   ########.fr       */
+/*   Created: 2022/01/13 21:10:01 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/01/25 15:04:20 by ytak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_isset(char c, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (c == str[i])
 			return (1);
