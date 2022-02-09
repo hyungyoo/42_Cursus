@@ -58,3 +58,6 @@ side_x, side_y는 초기값은 ray가 첫 x또는 y의 좌표와 만났을경우
 2. texture.xpm 이미지로의 전환
 3. key값 받아서, player 위치 옮기기
 4. leaks 확인
+
+## 참고
+> https://github.com/365kim/raycasting_tutorial
