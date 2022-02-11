@@ -4,6 +4,7 @@
 #include <map>
 #include "ATarget.hpp"
 #include "ASpell.hpp"
+#include "SpellBook.hpp"
 
 class Warlock
 {
@@ -11,12 +12,13 @@ class Warlock
 		std::string name;
 		std::string title;
 
-		std::map<std::string, ASpell *>	arr;
 
 		Warlock();
 		Warlock(Warlock const &copy);
 		Warlock &operator=(Warlock const &rhs);
-	
+		
+		SpellBook	book;	
+
 	public:
 		Warlock(std::string const &name, std::string const &title);
 		~Warlock();
@@ -29,5 +31,5 @@ class Warlock
 
 		void	learnSpell(ASpell *spell);
 		void	forgetSpell(std::string name_spell);
-		void	launchSpell(std::string name, ATarget const &target);
+		void	launchSpell(std::string nam, ATarget const &target);
 };
