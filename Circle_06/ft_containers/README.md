@@ -8,5 +8,5 @@ Generic Programming은
 2. 템플릿을 사용하면 타입에 제약읇 받지 않는 로직을 기술할수있다.
 Generic Programming을 하기위해서는 템플릿이 꼭 필요하다. 그런데 STL은 무엇으로 만들어졌는가?
 바로 템플릿이다. 
-*STL은 Generic Programming으로 만들어진 가장 대표적인 예다.
+#### STL은 Generic Programming으로 만들어진 가장 대표적인 예다.
 
