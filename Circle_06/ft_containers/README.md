@@ -55,4 +55,83 @@ template <> const double &max(const double &a, const double &b)
 2. 템플릿 함수와 맞는지 검사한다.
 3. 일반 함수와 맞는지 검사한다.
 
+## 클래스 템플릿
+> 클래스 템플릿을 사용하는방법
+
+```cpp
+
+template <typename T>
+class	A
+{
+};
+
+int	main(void)
+{
+	A<int> a;
+	A<double> b;
+	...
+	return (0);
+}
+
+```
+
+## non-type 파라미터의 사용
+
+```cpp
+
+template <typename T, int Size>
+class	A
+{
+	private:
+		_a;
+	
+	public:
+		a(void)
+		{
+			_a = 20;
+		}
+
+		a_a(void)
+		{
+			_a += Size;
+		}
+
+};
+
+// non-type 파라미터값을 디폴트로 저장
+template <typename T, int Size=100>
+class	A
+{
+	private:
+		_a;
+	
+	public:
+		a(void)
+		{
+			_a = 20;
+		}
+
+		a_a(void)
+		{
+			_a += Size;
+		}
+
+};
+
+int	main(void)
+{
+	A<double, 100> a; // or A<double> a;
+	a.a_a();
+	// a == 20 + Size == 120;
+	return (0);
+}
+```
+
+# List
+
+
+## list의 자료구조
+> list는 자료구조중 "연결리스트"를 템플릿으로 구현한것이다.
+1. 고정길이인 배열에 비해 길이가 가변적이다.
+2. 중간에 데이터삽입, 삭제가 용이하다.
 
