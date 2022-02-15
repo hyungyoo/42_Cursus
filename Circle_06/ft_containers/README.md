@@ -78,7 +78,6 @@ int	main(void)
 ## non-type 파라미터의 사용
 
 ```cpp
-
 template <typename T, int Size>
 class	A
 {
@@ -129,9 +128,43 @@ int	main(void)
 
 # List
 
-
 ## list의 자료구조
 > list는 자료구조중 "연결리스트"를 템플릿으로 구현한것이다.
 1. 고정길이인 배열에 비해 길이가 가변적이다.
 2. 중간에 데이터삽입, 삭제가 용이하다.
+
+
+## list.insert
+>
+1. 원하는 위치에 지정한 데이터를 삽입한다.
+list.insert( iterInsertPos, 100);
+
+2. 지정한 위치에 데이터를 횟수만큼 삽입한다.
+list.insert( iterInsertPos, 5, 100); // 100을 5번 삽입한다.
+
+3. 지정할 위치에 복사할 list의 시작과 끝의 iterator를 삽입한다.
+list.insert( iterInsertPos, list_test.begin(), list_test.end());
+
+## list.erase
+>
+1. 지정된 iterator의 값을 삭제한다.
+list.erase(iterErasePos);
+
+2. 지정된 범위의 데이터를 삭제한다.
+list.erase( iterErasePos_begin, iterErasePos_end);
+
+## list.remove
+> 
+1. iterator가 아닌, 삭제를 원하는 값을 넣어서 삭제한다.
+```cpp
+// 값을 넣어서 삭제
+list.remove(20);
+
+// 포인터를 넣어서 삭제
+list< Item * > Itemlist;
+Item * PtrItem1 = new Item( 10, 100);
+Itemlist.push_back( PtrItem1);
+Itemlist.remove( PtrItem1);
+```
+
 
