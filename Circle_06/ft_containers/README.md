@@ -167,4 +167,7 @@ Itemlist.push_back( PtrItem1);
 Itemlist.remove( PtrItem1);
 ```
 
+# 아니 시발.. 다 하고보니 list는 구현대상이 아니네?
+
+
 
