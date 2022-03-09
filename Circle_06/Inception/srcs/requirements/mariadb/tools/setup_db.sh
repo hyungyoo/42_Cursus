@@ -8,4 +8,6 @@ echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD
 echo "GRANT ALL ON $MYSQL_DATABASE .* TO '$MYSQL_USER'@'%'" | mysql -u root
 
 service mysql stop
+
+# on peut lancer mysql deamon avec mysqld ou bien mysqld_safe (pour securite)
 exec /usr/sbin/mysqld -u root

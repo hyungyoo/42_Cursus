@@ -47,4 +47,52 @@ nginx는 프록시(proxy)로도 사용할수있다.
 도커 네트워크
 하이퍼바이저
 도커 / 가상머신 차이
-포트는 받는쪽₩
+포트는 받는쪽
+
+## SHELL SCRIPT 작성법
+
+### https://hand-over.tistory.com/32
+
+
+## 초기 설정
+
+### mysql 과 nginx 종료
+> 
+sudo systemctl disable nginx
+sudo systemctl disable mysql
+
+### 종료확인
+>
+sudo service nginx status
+sudo service mysql status
+
+### docker socket에러
+> sudo chmod 777 /var/run/docker.sock
+
+### 각 컨테이너에서, mysqld socket에러
+> service mysql start
+
+
+
+## mariadb 체크리스트
+1. mysql
+2. show databases; // wp_db가 있는지 확인
+3. use mysql;
+4. select user, host from user; // root 유저 확
+5. hostname -i // mariadb_ip (wordpress와 연동을 확인하기위해서)
+
+## wordpress 체크리스트
+1. mysql -u root -p1234 -h "mariadb_ip" // wp_db 연동확인
+2. wp user list --allow-root // user 확인 (administartor, author)
+
+## 에러발생시 확인
+> docker logs CONTAINER_ID
+
+## 볼륨연결 확인
+> docker volume inspect CONTAINER_ID
+
+## 데이터 연동 확인
+> 
+1. comment 입력
+2. hyungyoo.42.fr/wp-admin 접속
+3. comment 확

@@ -11,8 +11,10 @@ RUN			apt-get install -y \
 				dumb-init \
 				tar	\
 				mariadb-server 
-
+# pour "porte 9000"
 RUN			echo "listen = 9000" >> /etc/php/7.3/fpm/pool.d/www.conf
+
+
 RUN			curl -LO https://wordpress.org/latest.tar.gz
 RUN			tar xzvf latest.tar.gz
 
