@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+
+    mariadb_service:
+        container_name: mariadb
+        build: ./requirements/mariadb
+        restart: always
+        networks:
+         - inception_net
+        volumes:
+         - db_vol:/var/lib/mysql/
+        env_file: .env
+
+    nginx_service:
+        container_name: nginx
+        build: ./requirements/nginx/
+        depends_on:
+         - wordpress_service
+        ports:
+         - "443:443"
+        restart: always
+        networks:
+         - inception_net
+        volumes:
+         - wp_vol:/var/www/
+
+    wordpress_service:
+        container_name: wordpress
+        build: ./requirements/wordpress/
+        depends_on:
+         - mariadb_service
+        restart: always
+        networks:
+         - inception_net
+        volumes:
+         - wp_vol:/var/www/
+        env_file: .env
+
+networks:
+     inception_net:
+
+volumes:
+     wp_vol:
+         driver: local
+         driver_opts:
+             type: 'none'
+             o: 'bind'
+             device: '/home/hyungyoo/data/wordpress'
+     db_vol:
+         driver: local
+         driver_opts:
+             type: 'none'
+             o: 'bind'
+             device: '/home/hyungyoo/data/database'
