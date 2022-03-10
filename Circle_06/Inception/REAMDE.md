@@ -43,36 +43,45 @@ nginx는 프록시(proxy)로도 사용할수있다.
 
 결과: NGINX는 HTTP 서버, 프록시 기능을 가진 웹서버 소프트웨어이다.
 
-도커볼륨
-도커 네트워크
-하이퍼바이저
-도커 / 가상머신 차이
-포트는 받는쪽
+## 도커란, 도커와 VM의 차이, 도커와 도커엔진 (소켓의관계)
+> https://www.youtube.com/watch?v=LXJhA3VWXFA
+
+## 도커파일, 도커컴포즈, 네트워크 참고 사이트
+>
+https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a
+https://epicarts.tistory.com/159?category=887103
+
+## nginx config파일 작성 및 ssl인증서 설치 메뉴
+>
+http://nginx.org/en/docs/http/configuring_https_servers.html
+https://cert.crosscert.com/nginx-ssl%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%84%A4%EC%B9%98-%EB%A7%A4%EB%89%B4%EC%96%BC/
 
 ## SHELL SCRIPT 작성법
+> https://hand-over.tistory.com/32
 
-### https://hand-over.tistory.com/32
-
-
-## 초기 설정
-
-### mysql 과 nginx 종료
+## mysql 과 nginx 종료
 > 
 sudo systemctl disable nginx
 sudo systemctl disable mysql
 
-### 종료확인
+## 종료확인
 >
 sudo service nginx status
 sudo service mysql status
 
-### docker socket에러
+## docker socket에러
 > sudo chmod 777 /var/run/docker.sock
 
-### 각 컨테이너에서, mysqld socket에러
-> service mysql start
+## 각 컨테이너에서, mysqld socket에러
+> 
+https://stackoverflow.com/questions/11990708/error-cant-connect-to-local-mysql-server-through-socket-var-run-mysqld-mysq
+명령어 service mysql start
 
+## YAML file 
+> https://youtu.be//1uFVr15xDGg
 
+## .env 파일 설정
+> 변수값(r value)이 중복되지않도록 설정해야한다.
 
 ## mariadb 체크리스트
 1. mysql
