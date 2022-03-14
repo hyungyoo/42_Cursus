@@ -43,6 +43,10 @@ nginx는 프록시(proxy)로도 사용할수있다.
 
 결과: NGINX는 HTTP 서버, 프록시 기능을 가진 웹서버 소프트웨어이다.
 
+# 도커를 쓰는 이유
+>
+https://www.youtube.com/watch?v=tPjpcsgxgWc
+
 ## 도커란, 도커와 VM의 차이, 도커와 도커엔진 (소켓의관계)
 > https://www.youtube.com/watch?v=LXJhA3VWXFA
 
