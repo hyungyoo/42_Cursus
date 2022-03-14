@@ -6,6 +6,8 @@ services:
         container_name: mariadb
         build: ./requirements/mariadb
         restart: always
+        ports:
+         - "3306:3306"
         networks:
          - inception_net
         volumes:
@@ -31,6 +33,8 @@ services:
         depends_on:
          - mariadb_service
         restart: always
+        ports:
+         - "9000:9000"
         networks:
          - inception_net
         volumes:
