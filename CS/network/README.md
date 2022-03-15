@@ -80,5 +80,38 @@ L1
 2. F/W : 보안
 3. IPS : 보안
 
-### 공유기도 스위치일까? 그렇다면 어떤 레이어에 위치할까?
+# IP 주소와 Net-mask
+
+![Screen Shot 2022-03-15 at 2 19 47 AM](https://user-images.githubusercontent.com/71254925/158287193-f75eba54-88e6-43c4-99a6-e172d3baaf66.png)
+
+### IP 주소 : Internet Protocol
+> HOST에 대한 식별자 : Network에서의 각각의 HOST를 식별하는 주소
+1. IPv4 : 주소길이가 32 비트 : 2의 32승 : 43억개
+2. IPv6 : 주소길이가 128 비트
+
+![Screen Shot 2022-03-15 at 2 28 56 AM](https://user-images.githubusercontent.com/71254925/158287994-db139a25-c166-4202-837d-6177f7cb5b20.png)
+
+### IP주소는 Network ID 와 HOST ID로 나뉜다.
+> IP주소에서 Network ID의 주소 길이를 나타내는게, subnet mask이다.
+
+
+![Screen Shot 2022-03-15 at 2 28 56 AM](https://user-images.githubusercontent.com/71254925/158287994-db139a25-c166-4202-837d-6177f7cb5b20.png)
+
+즉, IP주소에 서브넷마스크를 and연산 한다면, 연산의 결과는 network ID 이다.
+
+![Screen Shot 2022-03-15 at 2 34 52 AM](https://user-images.githubusercontent.com/71254925/158288510-e0ba4b32-b852-4698-972b-17350dec932d.png)
+
+192.168.60.14 이고, 서브넷마스크가 255.255.255.0이라면,
+and연산의 결과는 192.168.60.0 이며, 이는 network ID이다.
+또한 192.168.60.14/24 로 나타낼수있다.
+
+# 개발자 입장에서의 Port 번호 : Process 식별자, service, interface...
 > 
+Port 번호는 16bit이다. 대략, 0 ~ 65535 (0과 65535는 사용하지않는다) 
+또한 port 번호는 socket에 바인딩 된다.
+
+![Screen Shot 2022-03-15 at 2 43 18 AM](https://user-images.githubusercontent.com/71254925/158289330-1725749a-6b4d-4bfb-a005-a026f784f915.png)
+
+
+
+
