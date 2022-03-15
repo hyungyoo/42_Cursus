@@ -241,4 +241,40 @@ web-server는 처리를 하는 요소를 통해, 데이터베이스에 특정 �
 https://blog.naver.com/hj_kim97/222309537552
 https://blueyikim.tistory.com/2177
 
+### RESTful API
+> UI의 종류 (안드로이드, 애플, pc 등등)가 많아짐에따라, html을 읽을수있는 방법도 너무 많아졌다. 그렇기때문에,
+web-client부분에서 데이터만을 web-server로 전송한다. (json)
+web-client부분에서, 데이터를가지고, html을 생성한다. 그러한 프레임워크가 react.js, vue.js...
+CRUD의 기능을 call하는것 -> RESTful API.
 
+![Screen Shot 2022-03-15 at 6 44 41 AM](https://user-images.githubusercontent.com/71254925/158314585-b771be5f-7d5e-4993-b0f9-6813b9244262.png)
+
+참고:
+https://velog.io/@somday/RESTful-API-%EC%9D%B4%EB%9E%80
+https://declan.tistory.com/8
+https://mangkyu.tistory.com/46
+http://www.incodom.kr/RestFul_API
+
+### 전체 스크린샷
+![Screen Shot 2022-03-15 at 6 51 59 AM](https://user-images.githubusercontent.com/71254925/158315498-89066014-e484-46dd-ac8e-78dd3971dc9a.png)
+
+### 보안
+1. IPS
+2. SSL
+3. WAF
+
+
+# LAN 과 WAN
+> local, wide
+
+하드워드로 설명되는 네트워크가 LAN (access 계층) -> MAC주소로 식별되는 네트워크이다.
+브로드 캐스트가 적용되는 범위 또한 LAN이다.
+=  MAC 주소가 중요한 네트워크는 LAN
+논리로 설명되는 네트워크가 WAN -> IP주소로 식별되는 네트워크
+=  IP 주소가 중요한 네트워크는 WAN
+
+![Screen Shot 2022-03-15 at 7 04 01 AM](https://user-images.githubusercontent.com/71254925/158316900-dd6e1212-a2fe-4534-a0df-4f0584864fe6.png)
+
+
+# 패킷의 생성원리
+https://www.youtube.com/watch?v=Bz-K-DPfioE&list=PLXvgR_grOs1BFH-TuqFsfHqbh-gpMbFoy&index=14
