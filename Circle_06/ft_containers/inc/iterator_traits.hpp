@@ -10,7 +10,7 @@ namespace ft
 	// ft namespace안에서 새롭게 생성.
 	struct input_iterator_tag {};
 	struct output_iterator_tag {};
-	struct forward_iterator_tag : public output_iterator_tag {};
+	struct forward_iterator_tag : public input_iterator_tag {};
 	struct bidirectional_iterator_tag : public forward_iterator_tag {};
 	struct random_access_iterator_tag : public bidirectional_iterator_tag {};
 
@@ -74,6 +74,13 @@ namespace ft
 		typedef Pointer		pointer;
 		typedef Reference	reference;
 	};
+
+	template<typename Iter>
+	inline typename iterator_traits<Iter>::iterator_category
+	iterator_category(const Iter&)
+	{
+		return typename iterator_traits<Iter>::iterator_categoty();
+	}
 
 }
 
