@@ -10,10 +10,11 @@ namespace ft
 	// ft namespace안에서 새롭게 생성.
 	struct input_iterator_tag {};
 	struct output_iterator_tag {};
-	struct forward_iterator_tag : public input_iterator_tag, output_iterator_tag {};
+	struct forward_iterator_tag : public output_iterator_tag {};
 	struct bidirectional_iterator_tag : public forward_iterator_tag {};
 	struct random_access_iterator_tag : public bidirectional_iterator_tag {};
 
+	//https://www.cplusplus.com/reference/iterator/iterator_traits/
 	// standard iterator traits
 	// reverse_iterator를 위한 iterator_traits
 	template<class Iter> 
@@ -61,8 +62,10 @@ namespace ft
 	};
 
 
+	// https://www.cplusplus.com/reference/iterator/iterator/?kw=iterator
 	// iterator
-	template<class Category, class T, class Distance = ptrdiff_t, class Pointer = T*, class Reference = T&>
+	template <class Category, class T, class Distance = ptrdiff_t,
+		           class Pointer = T*, class Reference = T&>
 	struct iterator
 	{
 		typedef Category	iterator_category;
@@ -71,40 +74,6 @@ namespace ft
 		typedef Pointer		pointer;
 		typedef Reference	reference;
 	};
-
-	/*
-	// reverse_iterator
-	// https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator
-	template <typename Iter>
-	class reverse_iterator
-	{
-		// iterator_traits를 이용하여, 컴파일타임에 타입을 알아낼수있다.
-		public:
-			typedef Iter													iterator_type;
-			typedef typename	iterator_traits<Iter>::iterator_category	iterator_category;
-			typedef typename	iterator_traits<Iter>::value_type			value_type;
-			typedef typename	iterator_traits<Iter>::difference_type		difference_type;
-			typedef typename	iterator_traits<Iter>::pointer				pointer;
-			typedef typename	iterator_traits<Iter>::reference			reference;
-
-		protected:
-			iterator_tyape	_base;
-
-		public:
-			// 생성자
-			
-			// default
-			
-			// initialization
-			
-			// copy / type-cast
-
-			*/
-
-
-
-
-
 
 }
 
