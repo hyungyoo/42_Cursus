@@ -3,76 +3,161 @@
 #include "../inc/utils.hpp"
 #include "../inc/iterator_traits.hpp"
 #include <vector>
-//#include <iterator>
+#include <iterator>
 
-
-typedef std::vector<int>::iterator iter_type;
-typedef ft::reverse_iterator<iter_type> rIter;
-
-static void	constructor(rIter rev_from, rIter rev_until)
+void	reverse_iterator(void)
 {
-	std::cout << "myvector avec mon reverse_iterator:";
-	while (rev_from != rev_until)
+	std::cout << "=====Constructor=====" << std::endl;;
 	{
-		std::cout << ' ' << *rev_from;
-		rev_from++;
+		std::vector<int> myvector;
+		for (int i=0; i<10; i++) myvector.push_back(i);
+
+		typedef std::vector<int>::iterator iter_type;
+		iter_type from (myvector.begin());                     //   ^
+		iter_type until (myvector.end());                      //                       ^
+		std::reverse_iterator<iter_type> rev_until (from);     // ^
+		std::reverse_iterator<iter_type> rev_from (until);     //                     ^
+		std::cout << "stdRverse_iterator:";
+		while (rev_from != rev_until)
+			std::cout << ' ' << *rev_from++;
+		std::cout << '\n';
 	}
-	std::cout << '\n';
+	{
+		std::vector<int> myvector;
+		for (int i=0; i<10; i++) myvector.push_back(i);
+
+		typedef std::vector<int>::iterator iter_type;
+                                                         // ? 0 1 2 3 4 5 6 7 8 9 ?
+		iter_type from (myvector.begin());                     //   ^
+                                                         //         ------>
+		iter_type until (myvector.end());                      //                       ^
+                                                         //
+		ft::reverse_iterator<iter_type> rev_until (from);     // ^
+                                                         //         <------
+		ft::reverse_iterator<iter_type> rev_from (until);     //                     ^
+
+		 std::cout << "myReverse_iterator:";
+		while (rev_from != rev_until)
+			std::cout << ' ' << *rev_from++;
+		std::cout << '\n';
+	}
+}
+
+void	base(void)
+{
+	std::cout << "===== base =====" << std::endl;
+	{
+		  std::vector<int> myvector;
+		 for (int i=0; i<10; i++) myvector.push_back(i);
 	
-	std::cout << "myvector avec std reverse_iterator:";
-	std::cout << " 9 8 7 6 5 4 3 2 1 0" << std::endl;
+		  typedef std::vector<int>::iterator iter_type;
+
+		  std::reverse_iterator<iter_type> rev_end (myvector.begin());
+		  std::reverse_iterator<iter_type> rev_begin (myvector.end());
+
+		  std::cout << "std base:";
+		for (iter_type it = rev_end.base(); it != rev_begin.base(); ++it)
+			std::cout << ' ' << *it;
+		 std::cout << '\n';
+
+	}
+	{
+		std::vector<int> myvector;
+		for (int i=0; i<10; i++) myvector.push_back(i);
+
+		typedef std::vector<int>::iterator iter_type;
+
+		ft::reverse_iterator<iter_type> rev_end (myvector.begin());
+		ft::reverse_iterator<iter_type> rev_begin (myvector.end());
+
+		std::cout << "ft base:";
+		 for (iter_type it = rev_end.base(); it != rev_begin.base(); ++it)
+			std::cout << ' ' << *it;
+		std::cout << '\n';
+
+	}
 }
 
-static void base(rIter rev_begin, rIter rev_end)
+void	printName(std::string const str)
 {
-	std::cout << "myvector avec mon reverse_iterator:";
-	for (iter_type it = rev_end.base(); it != rev_begin.base(); ++it)
-		std::cout << ' ' << *it;
-	std::cout << '\n';
-	std::cout << "myvector avec std reverse_iterator:";
-	std::cout << " 0 1 2 3 4 5 6 7 8 9" << std::endl;
+	std::cout << "=====" << str << "=====" << std::endl;
 }
 
-void	printTestname(std::string const s)
+void	operator_etoile(std::string const str)
 {
-	std::cout << "=====";
-	std::cout << s;
-	std::cout << "=====" << std::endl;
+	printName(str);
+	{
+		std::vector<int> myvector;
+		for (int i=0; i<10; i++) 
+			myvector.push_back(i);
+
+		typedef std::vector<int>::iterator iter_type;
+                                                         // ? 9 8 7 6 5 4 3 2 1 0 ?
+		iter_type from (myvector.begin());                     //   ^
+                                                         //         ------>
+		iter_type until (myvector.end());                      //                       ^
+                                                         //
+		std::reverse_iterator<iter_type> rev_until (from);     // ^
+                                                         //         <------
+		std::reverse_iterator<iter_type> rev_from (until);     //                     ^
+
+		std::cout << "std_vector:";
+		while (rev_from != rev_until)
+			std::cout << ' ' << *rev_from++;
+		 std::cout << '\n';
+	}
+
+	{
+		std::vector<int> myvector;
+		for (int i=0; i<10; i++) myvector.push_back(i);
+
+		typedef std::vector<int>::iterator iter_type;
+                                                         // ? 9 8 7 6 5 4 3 2 1 0 ?
+		iter_type from (myvector.begin());                     //   ^
+                                                         //         ------>
+		iter_type until (myvector.end());                      //                       ^
+                                                         //
+		ft::reverse_iterator<iter_type> rev_until (from);     // ^
+                                                         //         <------
+		ft::reverse_iterator<iter_type> rev_from (until);     //                     ^
+
+		std::cout << "ft_vector:";
+		while (rev_from != rev_until)
+			std::cout << ' ' << *rev_from++;
+		 std::cout << '\n';
+	}
 }
 
-#include <map>
-void	operator_flesh(void)
+void	operator_plus(std::string str)
 {
-	std::map<int,std::string> numbers;
-	numbers.insert (std::make_pair(1,"one"));
-	numbers.insert (std::make_pair(2,"two"));
-	numbers.insert (std::make_pair(3,"three"));
+	printName(str);
+	{
+		std::vector<int> myvector;
 
-	typedef std::map<int,std::string>::iterator map_iter;
-	ft::reverse_iterator<map_iter> rev_end (numbers.begin());
-	ft::reverse_iterator<map_iter> rev_iterator (numbers.end());
-	for ( ; rev_iterator != rev_end ; ++rev_iterator )
-		std::cout << rev_iterator->first << ' ' << rev_iterator->second << '\n';
+		for (int i = 0;i < 10; i++)
+			myvector.push_back(i);
+		typedef std::vector<int>::iterator iter_type;
+		std::reverse_iterator<iter_type> rev_it;
+		rev_it = myvector.rbegin() + 3;
+		std::cout << "std 4th element from the end is: " << *rev_it << std::endl;
+	}
+	{
+		std::vector<int> myvector;
 
+		for (int i = 0;i < 10; i++)
+			myvector.push_back(i);
+		typedef std::vector<int>::iterator iter_type;
+		ft::reverse_iterator<iter_type> rev_it(myvector.end());
+		rev_it += 3;
+		std::cout << "ft 4th element from the end is: " << *rev_it << std::endl;
+	}
 }
 
 void	test_reverse_iterator(void)
 {
-	std::vector<int> myvector;
-	for (int i=0; i<10; i++) myvector.push_back(i);
-	iter_type from (myvector.begin());
-	iter_type until (myvector.end());
-	
-	rIter	rev_until (from);
-	rIter	 rev_from (until);
-
-	printTestname("constructor, operator *-+--++...");
-	constructor(rev_from, rev_until);
-	printTestname("base");
-	base(rev_from, rev_until);
-	printTestname("operator[]");
-
-	std::reverse_iterator<iter_type> rev_iterator = myvector.rbegin();
-	std::cout << "The fourth element from the end is: " << rev_iterator[3] << '\n';
-	operator_flesh();
+	std::cout << "========== reverse_iterator ==========" << std::endl;
+	reverse_iterator();
+	base();
+	operator_etoile("operator *");
+	operator_plus("opeator +");
 }

@@ -75,12 +75,14 @@ namespace ft
 		typedef Reference	reference;
 	};
 
+	/*
 	template<typename Iter>
 	inline typename iterator_traits<Iter>::iterator_category
 	iterator_category(const Iter&)
 	{
 		return typename iterator_traits<Iter>::iterator_categoty();
 	}
+	*/
 
 }
 
