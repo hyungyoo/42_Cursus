@@ -3,64 +3,46 @@
 
 namespace ft
 {
-	template<bool Cond, class T = void>
-	struct enable_if {};
+		//********************	enable_if **********************//
+	//	B가 true일때, type을 생성.
+	//	아닐경우, 컴파일 하지않고, 오버로딩 대상을 찾음.
 
-	template<class T>
+	// typename T = void
+	// client code를 위한 더미 파라미터
+	template <bool cond, typename T = void>
+	struct enable_if {
+	};
+
+	template <typename T>
 	struct enable_if<true, T> {
 		typedef T type;
 	};
 
-    template <bool is_integral, typename T>
-    struct is_integral_res
-    {
-        typedef T type;
-        static const bool value = is_integral;
-    };
+	//********************	is_integral**********************//
+	// intergral type에 해당하는 자료형이 아닌경우 (특수화한 타입의 인자)
+	// false 출력
+	// true 일경우, SFINAE에 따라, 오버로딩후 type 생성
+	template <typename T>
+	struct is_integral {
+		static const bool value = false;
+	};
 
-    template<typename>
-    struct is_integral_type : public is_integral_res<false, bool> {};
+	// integral type에 해당하는 자료형 타입을 위한 템플릿 특수화
+	template <> struct is_integral<bool> { static const bool value = true; };
+	template <> struct is_integral<char> { static const bool value = true; };
+	template <> struct is_integral<wchar_t> { static const bool value = true; };
+	template <> struct is_integral<signed char> { static const bool value = true; };
+	template <> struct is_integral<short int> { static const bool value = true; };
+	template <> struct is_integral<int> { static const bool value = true; };
+	template <> struct is_integral<long int> { static const bool value = true; };
+	template <> struct is_integral<long long int> { static const bool value = true; };
+	template <> struct is_integral<unsigned char> { static const bool value = true; };
+	template <> struct is_integral<unsigned short int> { static const bool value = true; };
+	template <> struct is_integral<unsigned int> { static const bool value = true; };
+	template <> struct is_integral<unsigned long int> { static const bool value = true; };
+	template <> struct is_integral<unsigned long long int> { static const bool value = true; };
 
-    template<>
-    struct is_integral_type<bool>: public is_integral_res<true, bool> {};
-
-    template<>
-    struct is_integral_type<char>: public is_integral_res<true, char> {};
-
-    template<>
-    struct is_integral_type<signed char>: public is_integral_res<true, signed char> {};
-
-    template<>
-    struct is_integral_type<short int>: public is_integral_res<true, short int> {};
-
-    template<>
-    struct is_integral_type<int>: public is_integral_res<true, int> {};
-
-    template<>
-    struct is_integral_type<long int>: public is_integral_res<true, long int> {};
-
-    template<>
-    struct is_integral_type<long long int>: public is_integral_res<true, long long int> {};
-
-    template<>
-    struct is_integral_type<unsigned char>: public is_integral_res<true, unsigned char> {};
-
-    template<>
-    struct is_integral_type<unsigned short int>: public is_integral_res<true, unsigned short int> {};
-
-    template<>
-    struct is_integral_type<unsigned int>: public is_integral_res<true, unsigned int> {};
-
-    template<>
-    struct is_integral_type<unsigned long int>: public is_integral_res<true, unsigned long int> {};
-
-    template<>
-    struct is_integral_type<unsigned long long int>: public is_integral_res<true, unsigned long long int> {};
-
-    template <class T>
-    struct is_integral : public is_integral_type<T> {};
-
-	// lexicographical_compare ================================ //
+	//********************	lexicographical_compare **********************//
 	/* first1(포함)부터 last1 바로 앞까지와 first2(포함)부터 last2 까지를 비교. */
 	/* first2 ~ last2사이 데이터들이 사전적으로 fisrt1 ~ last1 사이의 데이터들보다 뒤에 있다면 true, 아니라면 false 리턴 */
 	/* If both sequences compare equal until one of them ends, the shorter sequence is lexicographically less than the longer one.*/
@@ -81,22 +63,6 @@ namespace ft
 			++first2;
 		}
 		return (first2 != last2);
-	}
-
-	// custom
-	template <class InputIterator1, class InputIterator2, class Compare>
-	bool lexicographical_compare (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, Compare comp) {
-		while (first1 != last1)
-		{
-			if (comp(*first2, *first1))
-				return (false);
-			else if (comp(*first1, *first2))
-				return (true);
-			++first1;
-			++first2;
-		}
-		return (first2 != last2);
-
 	}
 
 	template <class T1, class T2>
