@@ -8,18 +8,14 @@ namespace ft {
 // https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator
 // https://wetodev.rd.tuni.fi/wetoextra/cpp/en/cpp/iterator/reverse_iterator.html
 
-	/*
+
 template <class Iterator>
 class reverse_iterator : public ft::iterator<
-                           typename ft::iterator_traits<Iterator>::iterator_category,
-                           typename ft::iterator_traits<Iterator>::value_type,
-                           typename ft::iterator_traits<Iterator>::difference_type,
-                           typename ft::iterator_traits<Iterator>::pointer,
-                           typename ft::iterator_traits<Iterator>::reference >
-
-						   */
-template<class Iterator>
-class reverse_iterator
+						 typename ft::iterator_traits<Iterator>::iterator_category,
+						 typename ft::iterator_traits<Iterator>::value_type,
+						 typename ft::iterator_traits<Iterator>::difference_type,
+						 typename ft::iterator_traits<Iterator>::pointer,
+						 typename ft::iterator_traits<Iterator>::reference>
 {
 	public:
 		typedef Iterator													iterator_type;
@@ -68,7 +64,7 @@ class reverse_iterator
 				// _current이 가르키는곳은 begin이므로, end iterator ('5?')에서 하나 뒤로가야한다.
 				iterator_type tmp = _current;
 				tmp--;
-				return (*tmp);	// iterator안에있는 *operator 사용
+				return (*tmp);
 			}
 			
 			reverse_iterator operator+(difference_type n) const 
