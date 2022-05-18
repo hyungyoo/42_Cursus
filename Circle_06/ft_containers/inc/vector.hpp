@@ -32,18 +32,18 @@ namespace ft
 			typedef size_t size_type; // vector의 요소 수를 계산하는 형식
 
 		private:
-			pointer m_head;
-			size_type m_size;
-			size_type m_capacity;
-			allocator_type m_alloc;
+			pointer _head;
+			size_type _size;
+			size_type _capacity;
+			allocator_type _alloc;
 
 		public:
 		  // default constructor (1)
 			// 요소 없는 빈 vector 생성
 			explicit vector(const allocator_type& alloc = allocator_type())
-				: m_size(0), m_capacity(1), m_alloc(alloc)
+				: _size(0), _capacity(1), _alloc(alloc)
 			{
-				m_head = m_alloc.allocate(1);
+				_head = _alloc.allocate(1);
 			}
 
 			// constructor overloading (2)
@@ -52,11 +52,11 @@ namespace ft
 				size_type n,
 				const value_type& val = value_type(),
 				const allocator_type& alloc = allocator_type())
-				: m_size(n), m_capacity(n), m_alloc(alloc)
+				: _size(n), _capacity(n), _alloc(alloc)
 			{
-				this->m_head = m_alloc.allocate(this->m_capacity);
-				for (size_type i = 0; i < m_size; i++)
-					m_alloc.construct(&m_head[i], val);
+				this->_head = _alloc.allocate(this->_capacity);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.construct(&_head[i], val);
 			}
 
 			// constructor overloading (3)
@@ -67,7 +67,7 @@ namespace ft
 				InputIterator last,
 				const allocator_type& alloc = allocator_type(),
 				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = 0)
-			: m_size(0), m_capacity(0), m_alloc(alloc)
+			: _size(0), _capacity(0), _alloc(alloc)
 			{
 				this->assign(first, last);
 			}
@@ -75,32 +75,32 @@ namespace ft
 			// constructor overloading (4)
 			// 복사생성자, vector x의 요소를 그대로 복사
 			vector(const vector& x)
-			: m_size(x.m_size), m_capacity(x.m_size), m_alloc(x.m_alloc)
+			: _size(x._size), _capacity(x._size), _alloc(x._alloc)
 			{
-				m_head = m_alloc.allocate(m_capacity);
-				for (size_type i = 0; i < m_capacity; i++)
-					m_alloc.construct(&m_head[i], x.m_head[i]);
+				_head = _alloc.allocate(_capacity);
+				for (size_type i = 0; i < _capacity; i++)
+					_alloc.construct(&_head[i], x._head[i]);
 			}
 
 			// destructor
 			~vector()
 			{
-				for (size_type i = 0; i < m_size; i++)
-					m_alloc.destroy(&m_head[i]);
-				if (m_capacity)
-					m_alloc.deallocate(m_head, m_capacity);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(&_head[i]);
+				if (_capacity)
+					_alloc.deallocate(_head, _capacity);
 			}
 
 			// asign operator
 			vector& operator=(const vector& x)
 			{
-				m_size = x.m_size;
-				if (m_capacity)
-					m_alloc.deallocate(m_head, m_capacity);
-				m_head = m_alloc.allocate(m_size);
-				for (size_type i = 0; i < m_size; i++)
-					m_alloc.construct(&m_head[i], x.m_head[i]);
-				m_capacity < m_size ? m_capacity = m_size : 0;
+				_size = x._size;
+				if (_capacity)
+					_alloc.deallocate(_head, _capacity);
+				_head = _alloc.allocate(_size);
+				for (size_type i = 0; i < _size; i++)
+					_alloc.construct(&_head[i], x._head[i]);
+				_capacity < _size ? _capacity = _size : 0;
 
 				return (*this);
 			}
@@ -108,22 +108,22 @@ namespace ft
 			// iterators
 			iterator begin() // vector의 첫번째 요소를 가리키는 iterator 반환
 			{
-				return (iterator(m_head));
+				return (iterator(_head));
 			}
 
 			const_iterator begin() const
 			{
-				return (const_iterator(m_head));
+				return (const_iterator(_head));
 			}
 
 			iterator end() // vector의 마지막 요소를 가리키는 iterator 반환
 			{
-				return (iterator(m_head + m_size));
+				return (iterator(_head + _size));
 			}
 
 			const_iterator end() const
 			{
-				return (const_iterator(m_head + m_size));
+				return (const_iterator(_head + _size));
 			}
 
 			reverse_iterator rbegin() // vector의 첫번째 요소를 가리키는 reverse_iterator 반환
@@ -149,85 +149,85 @@ namespace ft
 			// capacity
 			size_type size() const // vector에 있는 요소 수를 반환
 			{
-				return (m_size);
+				return (_size);
 			}
 
 			size_type max_size() const // vector의 최대 길이를 반환
 			{
-				return (m_alloc.max_size());
+				return (_alloc.max_size());
 			}
 
 			void resize(size_type n, value_type val = value_type()) // vector의 새 크기를 지정
 			{
-				if (n > m_capacity)
-					reallocate((n > m_size * 2) ? n : m_size * 2);
-				while (n > m_size)
+				if (n > _capacity)
+					reallocate((n > _size * 2) ? n : _size * 2);
+				while (n > _size)
 					push_back(val);
-				while (n < m_size)
+				while (n < _size)
 					pop_back();
 			}
 
 			size_type capacity() const // vector가 현재 상태에서 포함할 수 있는 최대 요소 수를 반환
 			{
-				return (m_capacity);
+				return (_capacity);
 			}
 
 			bool empty() const // vector가 비어있는 상태인지 확인
 			{
-				return (m_size == 0);
+				return (_size == 0);
 			}
 
 			void reserve(size_type n) // vector의 저장 공간을 확정, 필요하면 재할당
 			{
 				if (n > this->max_size())
 					throw std::length_error("vector reserve error");
-				if (n > m_capacity)
+				if (n > _capacity)
 					reallocate(n);
 			}
 
 			// element access operator
 			reference operator[](size_type n) // vector의 지정된 위치의 요소에 대한 참조를 반환
 			{
-				return (m_head[n]);
+				return (_head[n]);
 			}
 
 			const_reference operator[](size_type n) const
 			{
-				return (m_head[n]);
+				return (_head[n]);
 			}
 
 			reference at(size_type n) // vector의 지정된 위치의 요소에 대한 참조를 반환
 			{
-				if (n >= m_size)
+				if (n >= _size)
 					throw std::out_of_range("vector out-of-range");
-				return (m_head[n]);
+				return (_head[n]);
 			}
 
 			const_reference at(size_type n) const
 			{
-				if (n >= m_size)
+				if (n >= _size)
 					throw std::out_of_range("vector out-of-range");
-				return (m_head[n]);
+				return (_head[n]);
 			}
 
 			reference front() // vector의 첫번째 요소에 대한 참조를 반환
 			{
-				return(m_head[0]);
+				return(_head[0]);
 			}
 
 			const_reference front() const
 			{
-				return(m_head[0]);
+				return(_head[0]);
 			}
 
 			reference back() // vector의 마지막 요소에 대한 참조를 반환
 			{
-				return(m_head[m_size - 1]);
+				return(_head[_size - 1]);
 			}
 
 			const_reference back() const
 			{
-				return(m_head[m_size - 1]);
+				return(_head[_size - 1]);
 			}
 
 			// modifiers
@@ -262,21 +262,21 @@ namespace ft
 
 			void push_back(const value_type& val) // vector의 끝에 요소를 추가
 			{
-				if (m_size == m_capacity)
-					reallocate(extend(m_size + 1));
-				m_alloc.construct(&m_head[m_size++], val);
+				if (_size == _capacity)
+					reallocate(extend(_size + 1));
+				_alloc.construct(&_head[_size++], val);
 			}
 
 			void pop_back() // vector의 끝에 있는 요소를 삭제
 			{
-				m_alloc.destroy(&m_head[--m_size]);
+				_alloc.destroy(&_head[--_size]);
 			}
 
 			iterator insert(iterator position, const value_type& val) // vector의 position에 val을 삽입
 			{
 				difference_type shift = (position - this->begin());
-				if (m_size + 1 > m_capacity)
-					reallocate(extend(m_size + 1));
+				if (_size + 1 > _capacity)
+					reallocate(extend(_size + 1));
 				this->insert(iterator(this->begin() + shift), 1, val);
 				return (iterator(this->begin() + shift));
 			}
@@ -287,7 +287,7 @@ namespace ft
 					return;
 				difference_type shift = position - this->begin();
 				difference_type tmp = this->end() - this->begin();
-				this->resize(this->m_size + n);
+				this->resize(this->_size + n);
 				iterator end = this->end();
 				position = this->begin() + shift;
 				iterator tmp_end = this->begin() + tmp;
@@ -314,18 +314,18 @@ namespace ft
 					++tmp;
 					++n;
 				}
-				if (m_size == 0)
-					reallocate(m_size + n);
-				if ((m_size + n) > m_capacity)
-					reallocate((m_size + n > m_size * 2) ? m_size + n : m_size * 2);
-				m_size += n;
-				iterator it(&m_head[m_size - n]);
-				iterator insert_pos(&m_head[shift]);
+				if (_size == 0)
+					reallocate(_size + n);
+				if ((_size + n) > _capacity)
+					reallocate((_size + n > _size * 2) ? _size + n : _size * 2);
+				_size += n;
+				iterator it(&_head[_size - n]);
+				iterator insert_pos(&_head[shift]);
 				iterator it_end = this->end();
 				while (it >= insert_pos)
 					*--it_end = *--it;
 				while (first != last)
-					m_alloc.construct(&(*insert_pos++), *first++);
+					_alloc.construct(&(*insert_pos++), *first++);
 			}
 
 			iterator erase(iterator position) // vector에서 position의 요소를 삭제
@@ -343,35 +343,35 @@ namespace ft
 				while (last != this->end())
 					*(first++) = *(last++);
 				while (n--)
-					m_alloc.destroy(&m_head[--m_size]);
+					_alloc.destroy(&_head[--_size]);
 				return (ret);
 			}
 
 			void swap(vector& x) // 동일한 유형의 다른 vector의 요소를 이 vector의 요소로 교체
 			{
-				swap(m_size, x.m_size);
-				swap(m_capacity, x.m_capacity);
-				swap(m_alloc, x.m_alloc);
-				swap(m_head, x.m_head);
+				swap(_size, x._size);
+				swap(_capacity, x._capacity);
+				swap(_alloc, x._alloc);
+				swap(_head, x._head);
 			}
 
 			void clear() // vector의 모든 요소를 삭제
 			{
-				for (size_t i = 0; i < m_size; ++i)
-					m_alloc.destroy(&m_head[i]);
-				m_size = 0;
+				for (size_t i = 0; i < _size; ++i)
+					_alloc.destroy(&_head[i]);
+				_size = 0;
 			}
 
 			allocator_type get_allocator() const // vector 생성에 필요한 할당자의 복사본을 반환
 			{
-				return (m_alloc);
+				return (_alloc);
 			}
 
 		private:
 			// new_size 와 기존 capacity 비교 후 용량 늘릴지 여부 결정
 			size_type extend(size_type new_size)
 			{
-				size_type	new_capacity = (m_capacity > 0 ? m_capacity : 1);
+				size_type	new_capacity = (_capacity > 0 ? _capacity : 1);
 
 				while (new_capacity < new_size)
 					new_capacity *= 2;
@@ -381,17 +381,17 @@ namespace ft
 			// 배열에 capacity 만큼 할당하고 값 복사
 			void reallocate(size_type new_capacity)
 			{
-				pointer new_vector = m_alloc.allocate(new_capacity);
+				pointer new_vector = _alloc.allocate(new_capacity);
 
-				for (size_type i = 0; i < m_size; i++)
+				for (size_type i = 0; i < _size; i++)
 				{
-					m_alloc.destroy(&m_head[i]);
-					m_alloc.construct(&new_vector[i], m_head[i]);
+					_alloc.destroy(&_head[i]);
+					_alloc.construct(&new_vector[i], _head[i]);
 				}
-				if (m_capacity)
-					m_alloc.deallocate(m_head, m_capacity);
-				m_head = new_vector;
-				m_capacity = new_capacity;
+				if (_capacity)
+					_alloc.deallocate(_head, _capacity);
+				_head = new_vector;
+				_capacity = new_capacity;
 			}
 
 			template<class U>
