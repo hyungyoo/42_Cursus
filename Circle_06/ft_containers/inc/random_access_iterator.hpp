@@ -3,6 +3,8 @@
 
 # include "iterator_traits.hpp"
 
+// https://www.cplusplus.com/reference/iterator/RandomAccessIterator/
+
 namespace ft {
 	
 template <typename T>
@@ -30,9 +32,9 @@ class random_access_iterator
 			*this = x; 
 		}
 		
-		operator random_access_iterator<value_type const>() const 
+		operator const_iterator() const 
 		{ 
-			return random_access_iterator<value_type const>(_ptr); 
+			return const_iterator(_ptr); 
 		}
 		
 		random_access_iterator &operator=(const random_access_iterator &x) 
@@ -77,7 +79,7 @@ class random_access_iterator
 			
 		iterator operator++(int) 
 		{
-			iterator tmp = *this;
+			iterator tmp(*this);
 			++_ptr;
 			return (tmp);
 		}
@@ -90,21 +92,19 @@ class random_access_iterator
 
 		iterator operator--(int) 
 		{
-			iterator tmp = *this;
+			iterator tmp(*this);
 			--_ptr;
 			return (tmp);
 		}
 
 		iterator operator+(difference_type n) const 
 		{
-			iterator res = _ptr + n;
-			return (res);
+			return iterator(_ptr + n);
 		}			
 
 		difference_type operator+(const iterator &rhs) const 
 		{
-			difference_type res = _ptr + rhs._ptr;
-			return (res);
+			return s(_ptr + rhs._ptr);
 		}
 
 		iterator operator-(const difference_type &n) const 
