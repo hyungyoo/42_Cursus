@@ -15,21 +15,21 @@ namespace ft
 	class vector
 	{
 		public:
-			typedef T value_type; // vector에 저장된 데이터 형식을 나타내는 형식
-			typedef Alloc allocator_type; // vector 개체의 allocator 클래스를 나타내는 형식
+			typedef T value_type; 
+			typedef Alloc allocator_type; 
 
-			typedef typename allocator_type::reference reference; // vector에 저장된 요소에 대한 참조를 제공하는 형식
-			typedef typename allocator_type::const_reference const_reference; // 위와 동일, 하지만 요소의 변경을 원하지 않는 경우 사용
-			typedef typename allocator_type::pointer pointer; // vector에 저장된 요소에 대한 포인터를 제공하는 형식
-			typedef typename allocator_type::const_pointer const_pointer; // 위와 동일, 하지만 요소의 변경을 원하지 않는 경우 사용
+			typedef typename allocator_type::reference reference; 
+			typedef typename allocator_type::const_reference const_reference; 
+			typedef typename allocator_type::pointer pointer; 
+			typedef typename allocator_type::const_pointer const_pointer; 
 
-			typedef ft::random_access_iterator<T> iterator; // vector에 있는 모든 요소를 읽거나 수정할 수 있는 반복자를 제공하는 형식
-			typedef ft::random_access_iterator<const T> const_iterator; // 위와 동일, 하지만 요소의 변경을 원하지 않는 경우 사용
-			typedef ft::reverse_iterator<iterator> reverse_iterator; // vector에 있는 모든 요소를 읽거나 수정할 수 있는 역반복자를 제공하는 형식
-			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator; // 위와 동일, 하지만 요소의 변경을 원하지 않는 경우 사용
+			typedef ft::random_access_iterator<T> iterator; 
+			typedef ft::random_access_iterator<const T> const_iterator; 
+			typedef ft::reverse_iterator<iterator> reverse_iterator; 
+			typedef ft::reverse_iterator<const_iterator> const_reverse_iterator; 
 
-			typedef ptrdiff_t difference_type; // vector 개체 내에서 두 요소 주소의 차이를 제공하는 형식
-			typedef size_t size_type; // vector의 요소 수를 계산하는 형식
+			typedef ptrdiff_t difference_type; 
+			typedef size_t size_type; 
 
 		private:
 			pointer _head;
