@@ -65,6 +65,18 @@ namespace ft
 		return (first2 != last2);
 	}
 
+	template <class InputIterator1, class InputIterator2>
+	bool equal (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2) {
+		while (first1!=last1)
+		{
+			if (!(*first1 == *first2))   // or: if (!pred(*first1,*first2)), for version 2
+				return false;
+			++first1;
+			++first2;
+		}
+  		return true;
+	}
+
 	template <class T1, class T2>
 	struct pair {
 		public:
@@ -124,24 +136,6 @@ namespace ft
 	template <class T1, class T2>
 	pair<T1,T2> make_pair (T1 x, T2 y) {
 		return (pair<T1, T2>(x, y));
-	}
-
-	// equal ================================ //
-	/* Compares the elements in the range [first1,last1) with those in the range beginning at first2, */
-	/* and returns true if all of the elements in both ranges match. */
-
-	/* first1, last1: Input iterators to the initial and final positions of the first sequence. */
-	/* first2: Input iterator to the initial position of the second sequence.  */
-	template <class InputIterator1, class InputIterator2>
-	bool equal (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2) {
-		while (first1!=last1)
-		{
-			if (!(*first1 == *first2))   // or: if (!pred(*first1,*first2)), for version 2
-				return false;
-			++first1;
-			++first2;
-		}
-  		return true;
 	}
 
 	/* pred: Binary function that accepts two elements as argument (one of each of the two sequences, in the same order), */
