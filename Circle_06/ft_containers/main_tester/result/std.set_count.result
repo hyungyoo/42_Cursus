@@ -1,0 +1,15 @@
+myset = { 3, 6, 9, 12 }
+
+0 is not an element of myset.
+1 is not an element of myset.
+2 is not an element of myset.
+3 is an element of myset.
+number of 3 in myset: 1
+4 is not an element of myset.
+5 is not an element of myset.
+6 is an element of myset.
+number of 6 in myset: 1
+7 is not an element of myset.
+8 is not an element of myset.
+9 is an element of myset.
+number of 9 in myset: 1

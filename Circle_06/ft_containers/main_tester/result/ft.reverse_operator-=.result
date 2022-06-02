@@ -1,0 +1,9 @@
+
+#####################
+#    operator a-=   #
+#####################
+
+rl_vector: 0 1 2 3 4 5 6 7 8 9 
+rev_iterator points to rl_vector.rend(): which is before 0
+after rev_iterator -= 4...
+rev_iterator now points to: 3

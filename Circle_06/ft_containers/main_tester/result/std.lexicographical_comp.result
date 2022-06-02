@@ -1,0 +1,5 @@
+foo: Apple
+bar: apartment
+Comparing foo and bar lexicographically (foo<bar):
+Using default comparison (operator<): true
+Using mycomp as comparison object (using tolower): false

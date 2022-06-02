@@ -1,25 +1,26 @@
+NAME = go_main_tester
 
-NAME	=	fucking_container
+SRCS = main.cpp
+ 
+CXX = c++
 
-SRCS	=	main.cpp	\
+OBJS = $(SRCS:.cpp=.o)
 
-OBJS	=	$(SRCS:.cpp=.o)
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
 
-INC		=	-I	./inc
+RM = rm -f
 
-CC		=	clang++
+all: $(NAME)
 
-FLAG	=	-std=c++98 -Wall -Wextra -Werror #-fsanitize=address -g3
-
-$(NAME):
-	$(CC) $(FLAG) $(SRCS) -o $(NAME) $(INC)
-
-all:	$(NAME)
+$(NAME): $(OBJS)
+		$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
 clean:
-	rm -rf $(OBJS)
+		$(RM) $(OBJS)
 
-fclean:	clean
-	rm -rf $(NAME)
+fclean: clean
+		$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

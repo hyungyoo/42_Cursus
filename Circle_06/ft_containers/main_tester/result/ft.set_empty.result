@@ -1,0 +1,3 @@
+myset contains: 10 20 30
+Initially, numbers.empty(): true
+After adding elements, numbers.empty(): false

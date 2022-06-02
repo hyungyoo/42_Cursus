@@ -1,0 +1,9 @@
+
+#####################
+#    operator a-   #
+#####################
+
+rl_vector: 0 1 2 3 4 5 6 7 8 9 
+rl_vector.rend() points to the theoretical element preceding the first element in the vector (before 0)
+rl_vector.rend() - 3 points to: 2
+

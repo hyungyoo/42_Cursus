@@ -1,0 +1,4 @@
+foo = make_pair(10, 20)
+bar = make_pair(10.5, 'A')
+foo: 10, 20
+bar: 10, 65

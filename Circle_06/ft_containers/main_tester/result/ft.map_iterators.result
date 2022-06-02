@@ -1,0 +1,8 @@
+Map contains following elements with begin/end
+a => 200
+b => 100
+c => 300
+Map contains following elements with rbegin/rend
+z => 300
+y => 200
+x => 100

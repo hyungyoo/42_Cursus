@@ -1,0 +1,6 @@
+ * before vector push back * 
+empty?	: 1
+
+ * after vector push back * 
+empty?	: 0
+vector contains: 0 1 2 3 4 

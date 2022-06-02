@@ -1,0 +1,3 @@
+myset = { 10, 20, 30, 40, 50 }
+the lower bound points to: 30
+the upper bound points to: 40

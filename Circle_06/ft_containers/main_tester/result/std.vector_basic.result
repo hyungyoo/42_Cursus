@@ -1,0 +1,15 @@
+Testing dynamic size
+-------
+Size is : 1
+Size is : 2
+-------
+Are const iterator and iterators comparable ? 1
+-------
+Dyamic reallocation system : 
+-------
+Capacity is 2
+Capacity is 2
+Capacity is 8
+-------
+Pour tester les iterateurs voir les tests plus complets.
+-------

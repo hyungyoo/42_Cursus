@@ -1,0 +1,6 @@
+myset = { 10, 20, 30, 40, 50, 60, 70, 80, 90 }
+put myset.begin() on iterator and do ++it
+erase it
+erase '40'
+myset.find(60) and put it on iterator it and myset.erase(it, myset.end()
+myset contains: 10 30 50

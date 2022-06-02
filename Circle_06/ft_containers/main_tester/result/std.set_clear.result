@@ -1,0 +1,4 @@
+myset contains: 100 200 300
+myset.clear()
+myset insert 1101, 2202
+myset contains: 1101 2202

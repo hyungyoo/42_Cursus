@@ -1,0 +1,29 @@
+alice contains
+1 : a
+2 : b
+3 : c
+
+bob contains
+7 : Z
+8 : Y
+9 : X
+10 : W
+
+eve contains
+1 : a
+2 : b
+3 : c
+
+alice == bob returns false
+alice != bob returns true
+alice <  bob returns true
+alice <= bob returns true
+alice >  bob returns false
+alice >= bob returns false
+
+alice == eve returns true
+alice != eve returns false
+alice <  eve returns false
+alice <= eve returns true
+alice >  eve returns false
+alice >= eve returns true

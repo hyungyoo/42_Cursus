@@ -1,0 +1,8 @@
+mymap contains
+a : 10
+b : 20
+c : 30
+
+ret = mymap.equal_range('b') => lower_bound in ret.first(b), upper_bound in ret.second(c)
+lower bound points to => b : 20
+upper bound points to => c : 30

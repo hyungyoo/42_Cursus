@@ -1,0 +1,17 @@
+before swap
+foo contains:
+x => 100
+y => 200
+bar contains:
+a => 11
+b => 22
+c => 33
+
+after swap
+foo contains:
+a => 11
+b => 22
+c => 33
+bar contains:
+x => 100
+y => 200
