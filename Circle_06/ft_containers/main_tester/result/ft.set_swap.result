@@ -1,6 +1,0 @@
-myints contains: 12 75 10 32 20 25 
-first = { 10, 12, 75 }
-second = { 20, 25, 32 }
-first.swap(second)
-first contains: 20 25 32
-second contains: 10 12 75

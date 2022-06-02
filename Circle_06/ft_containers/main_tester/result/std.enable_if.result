@@ -1,5 +1,0 @@
-template <class T>
-typename ft::enable_if<ft::is_integral<T>::value, bool>::type
-is_odd(T i) { return bool(i % 2); }
->> this enable if check that type is integral or not. if argument isn't integral, code doesn't complie
-i is odd: true

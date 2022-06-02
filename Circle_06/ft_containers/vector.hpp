@@ -39,7 +39,6 @@ namespace ft {
 			pointer 				_array;		//Pointer on an array of T values
 		
 		// tool
-		private:
 			void	reallocate(size_type n) {
 				value_type	*tmp = _alloc.allocate(n, &_array);
 				for (size_type i = 0; i < _size; i++)
@@ -50,7 +49,6 @@ namespace ft {
 			}
 
 		// getter, setter
-		public:
 			size_type	get_size(void) const {
 				return (_size);
 			}

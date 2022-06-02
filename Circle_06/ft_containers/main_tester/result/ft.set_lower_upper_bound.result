@@ -1,5 +1,0 @@
-myset = { 10, 20, 30, 40, 50, 60, 70, 80, 90 }
-itlow = myset.lower_bound(30)
-itup = myset.upper_bound(60)
-myset.erase(itlow, itup)
-myset contains: 10 20 70 80 90

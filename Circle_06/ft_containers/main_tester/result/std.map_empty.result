@@ -1,7 +1,0 @@
-a => 10
-b => 20
-c => 30
-Map is empty
-Map is not empty
-Initially, numbers.empty(): true
-After adding elements, numbers.empty(): false
