@@ -1,26 +1,13 @@
-NAME = go_main_tester
 
-SRCS = main.cpp
- 
-CXX = c++
+all :
+	@cd main_tester && bash ./test.sh
 
-OBJS = $(SRCS:.cpp=.o)
+re:	all
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
-
-RM = rm -f
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-		$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+fclean:
+	@printf "pas besoin de fclean\n"
 
 clean:
-		$(RM) $(OBJS)
+	@printf "pas besoin de clean\n"
 
-fclean: clean
-		$(RM) $(NAME)
-
-re: fclean all
-
-.PHONY: all clean fclean re
+.PHONY: all re fclean clean
