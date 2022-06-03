@@ -86,7 +86,9 @@ function check_compile {
 
 
 function check_speed {
-	printf "std:  $time_std, ft: $time_ft"
+	std_t=$(echo $std_time | cut -d s -f 1 | cut -d . -f 2)
+	ft_t=$(echo $ft_time | cut -d s -f 1 | cut -d . -f 2)
+	printf "   std : $std_t's, ft : $ft_t's"
 }
 
 function complie_container {
@@ -103,6 +105,7 @@ function complie_container {
 	check_compile
 	chmod 777 ./a.out #>/dev/null 2>&1
 	./a.out > ./diff/std_$title #>/dev/null 2>&1
+	std_time="$(time (./a.out) 2>&1 1>/dev/null)"
 	rm ./a.out >/dev/null 2>&1
 
 
@@ -112,6 +115,7 @@ function complie_container {
 	check_compile
 	chmod 777 ./a.out #>/dev/null 2>&1
         ./a.out > ./diff/ft_$title #>/dev/null 2>&1
+	ft_time="$(time (./a.out) 2>&1 1>/dev/null)"
 	rm ./a.out >/dev/null 2>&1
 
 
@@ -125,7 +129,7 @@ function complie_container {
 	#speed, diff_speed
 	#line for ok, ko
 	# check time
-	#check_speed $time_std $time_ft
+	check_speed $std_time $ft_time
 
 	printf "\n"
 }

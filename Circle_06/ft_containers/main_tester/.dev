@@ -1,0 +1,5 @@
+In file included from test_main_folder/map/map_operator=.cpp:4:
+test_main_folder/map/../main.hpp:1:2: error: unterminated conditional directive
+#ifndef MAIN_HPP
+ ^
+1 error generated.
