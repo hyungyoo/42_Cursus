@@ -90,36 +90,43 @@ function check_speed {
 }
 
 function complie_container {
-	## 1 est ft, 2 est std pour NAMESPACE 
 
-	# for test file name
+
+	####################### for test file name #######################
 	title=$(echo $line | cut -d / -f 2  | sed 's/\.cpp//' )
 	printf "$title"
 	
-	# for complie and stream out in each file
+
+	###################### complie for std ############################
 	c++ -std=c++98 -Wall -Wextra -Werror $test_folder/$test_name/$line \
 		-D NAMESPACE=$std #>/dev/null 2>&1
 	check_compile
 	chmod 777 ./a.out #>/dev/null 2>&1
 	./a.out > ./diff/std_$title #>/dev/null 2>&1
+	rm ./a.out >/dev/null 2>&1
 
+
+	# complie for fd
 	c++ -std=c++98 -Wall -Wextra -Werror $test_folder/$test_name/$line \
 		-D NAMESPACE=$ft #>/dev/null 2>&1
 	check_compile
 	chmod 777 ./a.out #>/dev/null 2>&1
         ./a.out > ./diff/ft_$title #>/dev/null 2>&1
+	rm ./a.out >/dev/null 2>&1
 
-	# check_diff
+
+
+	############################# check_diff ########################
 	check_diff $title
 
-	#######################################################!!!
+
+	################################################################
 	#to do
 	#speed, diff_speed
 	#line for ok, ko
 	# check time
 	#check_speed $time_std $time_ft
 
-	rm ./a.out >/dev/null 2>&1
 	printf "\n"
 }
 
