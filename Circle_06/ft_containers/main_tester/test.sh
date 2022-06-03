@@ -78,7 +78,7 @@ function check_diff {
 
 function check_compile {
 	if [ "$?" == 0 ]; then
-		printf "$GREEN		ok $RESET"
+		printf "$GREEN			ok $RESET"
 	else
 		printf "$RED		ko $RESET"
 	fi
@@ -96,7 +96,7 @@ function complie_container {
 
 	####################### for test file name #######################
 	title=$(echo $line | cut -d / -f 2  | sed 's/\.cpp//' )
-	printf "$title"
+	printf "$title\r"
 	
 
 	###################### complie for std ############################
@@ -161,13 +161,13 @@ do_test() {
 	printf "$BOLD$BLUE test file \
 	compile for std	\
 	complie for ft	\
-	diff	\
+		diff	\
 	speed $RESET\n"
 
 	for i in {0..3}
 	do
 		printf "\n$BOLD$YELLOW		\
-		${ARRAY_TEST[i]} test	$RESET\n\n"
+			${ARRAY_TEST[i]} test	$RESET\n\n"
 		test_container ${ARRAY_TEST[i]}
 	done
 }

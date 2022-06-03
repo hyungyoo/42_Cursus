@@ -5,11 +5,19 @@
 	namespace ft {}
 	using namespace ft;
 #else
-	namespace ft {}
-	using namespace ft;
+	namespace std {}
+	using namespace std;
 #endif
 
-#include "../.././stack.hpp"
-#include "../.././vector.hpp"
-#include "../.././map.hpp"
-#include "../.././set.hpp"
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <stack>
+#include <map>
+#include <set>
+#include "../../vector.hpp"
+#include "../../stack.hpp"
+#include "../../map.hpp"
+#include "../../set.hpp"
+
+#endif
