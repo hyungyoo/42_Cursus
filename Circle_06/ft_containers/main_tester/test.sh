@@ -174,12 +174,12 @@ do_test() {
 
 make_folder() {
 	# make diff_folder
-	mkdir -p diff_folder
+	mkdir -p diff >/dev/null 2>&1
 }
 
 remove_folder() {
 	# reset diff_folder
-	rm -rf diff_folder >/dev/null 2>&1
+	rm -rf diff >/dev/null 2>&1
 }
 
 
