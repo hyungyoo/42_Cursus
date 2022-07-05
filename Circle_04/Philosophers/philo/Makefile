@@ -6,13 +6,11 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/21 18:30:11 by hyungyoo          #+#    #+#              #
-#    Updated: 2021/08/24 14:12:00 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/07/05 19:29:55 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo
-
-PHI_BONUS	= philo_bonus
 
 SRCS = ./src/main.c \
 	   ./src/display.c \
@@ -23,16 +21,8 @@ SRCS = ./src/main.c \
 	   ./src/thread.c \
 	   ./src/thread2.c \
 
-SRCS_BONUS =./bonus/main.c \
-			./bonus/display.c \
-			./bonus/init.c \
-			./bonus/util.c \
-			./bonus/process.c \
-
 OBJS 		= ${SRCS:.c=.o}
-OBJS_B		= ${SRCS_BONUS:.c=.o}
 
-CCG			= gcc -g -fsanitize=address
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -pthread
 RM			= rm -f
@@ -44,12 +34,8 @@ all: 		${NAME}
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME): 	$(OBJS)
-			${CC} $(CFLAGS) -o $(NAME) $(OBJS)
+			${CC} $(CFLAGS) -g -fsanitize=thread -o $(NAME) $(OBJS)
 
-$(PHI_BONUS):${OBJS_B}
-			${CC} ${CFLAGS} -o ${PHI_BONUS} ${OBJS_B}
-
-bonus:		re $(PHI_BONUS)
 
 clean:
 			${RM} ${OBJS}  

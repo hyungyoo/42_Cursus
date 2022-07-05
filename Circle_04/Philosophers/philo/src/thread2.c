@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:31:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/24 14:25:47 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:32:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_eat_1(t_philo *philo)
 	if (philo->l_fork == philo->r_fork)
 	{
 		ft_sleep(all->time_death * 2);
+	    pthread_mutex_unlock(&(all->fork[philo->l_fork]));
 		return ;
 	}
 	pthread_mutex_lock(&(all->fork[philo->r_fork]));
