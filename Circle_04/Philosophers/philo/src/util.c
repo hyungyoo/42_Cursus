@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/21 18:31:13 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/21 18:31:16 by hyungyoo         ###   ########.fr       */
+/*   Created: 2022/07/06 21:45:30 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/07/06 21:45:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(char *nbr)
 {
-	int	neg;
-	int	res;
+	int		neg;
+	long	res;
 
 	neg = 1;
 	res = 0;
@@ -30,5 +30,8 @@ int	ft_atoi(char *nbr)
 		res = res * 10 + (*nbr - '0');
 		nbr++;
 	}
-	return (res * neg);
+	res = res * neg;
+	if (res < -2147483648 || res > 2147483647)
+		return (-1);
+	return (res);
 }

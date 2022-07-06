@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/21 18:30:11 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/07/06 20:37:46 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/07/06 21:49:24 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,11 @@ SRCS = ./src/main.c \
 	   ./src/sleep.c \
 	   ./src/thread.c \
 	   ./src/thread2.c \
+	   ./src/mutex_lock.c \
 
 OBJS 		= ${SRCS:.c=.o}
 
-CC			= gcc -g -fsanitize=thread
+CC			= gcc #-g -fsanitize=thread
 CFLAGS		= -Wall -Wextra -Werror -pthread
 RM			= rm -f
 NAME		= philo

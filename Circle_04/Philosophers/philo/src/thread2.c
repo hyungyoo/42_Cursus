@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/21 18:31:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/06 20:55:39 by hyungyoo         ###   ########.fr       */
+/*   Created: 2022/07/06 21:28:00 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/07/06 22:09:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,6 @@ void	ft_mutex_unlock_fork(t_info *all, t_philo *philo, int philo_id)
 		pthread_mutex_unlock(&(all->fork[philo->r_fork]));
 		pthread_mutex_unlock(&(all->fork[philo->l_fork]));
 	}
-}
-
-void	ft_mutex_eat(t_philo *philo)
-{
-	pthread_mutex_lock(&(philo->all->eat));
-	philo->last_eat = ft_get_time();
-	pthread_mutex_unlock(&(philo->all->eat));
 }
 
 void	ft_eat(t_philo *philo)
@@ -82,7 +75,7 @@ void	*ft_philo(void *philo_ptr)
 	philo = (t_philo *)philo_ptr;
 	all = philo->all;
 	if (philo->id % 2)
-		usleep(15000);
+		usleep(400);
 	while (!(ft_flag_die(all, READ)))
 	{
 		ft_eat(philo);

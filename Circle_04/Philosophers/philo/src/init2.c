@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/21 18:30:53 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/21 19:18:55 by hyungyoo         ###   ########.fr       */
+/*   Created: 2022/07/06 21:46:00 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/07/06 21:46:00 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_arg(int argc, char **argv)
 		{
 			if (!ft_digit(argv[i][j]))
 			{
-				if (argv[i][j] == '-')
+				if (argv[i][0] == '-')
 					return (ft_print_error("Error : range of values"));
 				else
 					return (ft_print_error("Error only nbr for arg"));
