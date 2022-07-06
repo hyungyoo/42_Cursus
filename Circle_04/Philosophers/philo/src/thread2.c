@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:31:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/06 20:43:17 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/06 20:55:39 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	ft_mutex_unlock_fork(t_info *all, t_philo *philo, int philo_id)
 	}
 }
 
-void    ft_mutex_eat(t_philo *philo)
+void	ft_mutex_eat(t_philo *philo)
 {
-    pthread_mutex_lock(&(philo->all->eat));
-    philo->last_eat = ft_get_time();
-    pthread_mutex_unlock(&(philo->all->eat));
+	pthread_mutex_lock(&(philo->all->eat));
+	philo->last_eat = ft_get_time();
+	pthread_mutex_unlock(&(philo->all->eat));
 }
 
 void	ft_eat(t_philo *philo)
@@ -59,11 +59,8 @@ void	ft_eat(t_philo *philo)
 	ft_display(philo->id, "is eating", all);
 	ft_mutex_eat(philo);
 	pthread_mutex_unlock(&(all->checker));
-
-	//philo->count_eat += 1;
 	ft_count_eat(philo, WRITE);
-
-    ft_sleep(all->time_eat);
+	ft_sleep(all->time_eat);
 	ft_mutex_unlock_fork(all, philo, philo->id);
 }
 

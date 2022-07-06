@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:31:37 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/06 20:48:36 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/06 20:54:58 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_flag_die(t_info *all, int flag)
 	return (ret);
 }
 
-int ft_flag_eat(t_info *all, int flag)
+int	ft_flag_eat(t_info *all, int flag)
 {
 	int	ret;
 
@@ -139,7 +139,7 @@ void	ft_free_thread(t_info *all)
 	while (i < all->num_philo)
 	{
 		pthread_join(all->philo[i].thread_id, NULL);
-        pthread_mutex_destroy(&(all->philo[i].m_count_eat));
+		pthread_mutex_destroy(&(all->philo[i].m_count_eat));
 		i++;
 	}
 	pthread_mutex_destroy(&(all->msg));

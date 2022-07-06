@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
+/*																			*/
+/*														:::	  ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/21 18:30:23 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/06 20:42:37 by hyungyoo         ###   ########.fr       */
-/*                                                                            */
+/*													+:+ +:+		 +:+	 */
+/*   By: hyungyoo <marvin@42.fr>					+#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2021/08/21 18:30:23 by hyungyoo		  #+#	#+#			 */
+/*   Updated: 2022/07/06 20:52:51 by hyungyoo         ###   ########.fr       */
+/*																			*/
 /* ************************************************************************** */
 
 #ifndef PHILO_H
@@ -29,15 +29,15 @@ struct	s_info;
 
 typedef struct s_philo
 {
-	int			    	id;
-	int			    	count_eat;
-	int			    	r_fork;
-	int			    	l_fork;
-	pthread_t		    thread_id;
-	long long		    last_eat;
+	int					id;
+	int					count_eat;
+	int					r_fork;
+	int					l_fork;
+	pthread_t			thread_id;
+	long long			last_eat;
 	pthread_mutex_t		m_count_eat;
-	struct s_info	*all;
-}				t_philo;
+	struct s_info		*all;
+}	t_philo;
 
 typedef struct s_info
 {
@@ -97,5 +97,5 @@ void		ft_sleep(long long time);
 int			ft_flag_die(t_info *all, int flag);
 int			ft_flag_eat(t_info *all, int flag);
 int			ft_count_eat(t_philo *philo, int flag);
-void        ft_mutex_eat(t_philo *philo);
+void		ft_mutex_eat(t_philo *philo);
 #endif
