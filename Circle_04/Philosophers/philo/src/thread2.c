@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:28:00 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/06 22:09:53 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/06 22:36:34 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_eat(t_philo *philo)
 	if (philo->l_fork == philo->r_fork)
 	{
 		pthread_mutex_unlock(&(all->fork[philo->l_fork]));
-		ft_sleep(all->time_death * 2);
+		ft_sleep(all->time_death * 2, all->num_philo);
 		return ;
 	}
 	ft_mutex_lock_fork(philo, all, SECOND);
@@ -53,7 +53,7 @@ void	ft_eat(t_philo *philo)
 	ft_mutex_eat(philo);
 	pthread_mutex_unlock(&(all->checker));
 	ft_count_eat(philo, WRITE);
-	ft_sleep(all->time_eat);
+	ft_sleep(all->time_eat, all->num_philo);
 	ft_mutex_unlock_fork(all, philo, philo->id);
 }
 
@@ -63,7 +63,7 @@ void	ft_sleep_think(t_philo *philo)
 
 	all = philo->all;
 	ft_display(philo->id, "is sleeping", all);
-	ft_sleep(all->time_sleep);
+	ft_sleep(all->time_sleep, all->num_philo);
 	ft_display(philo->id, "is thinking", all);
 }
 

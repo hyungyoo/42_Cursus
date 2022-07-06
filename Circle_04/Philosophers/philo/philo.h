@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>					+#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2021/08/21 18:30:23 by hyungyoo		  #+#	#+#			 */
-/*   Updated: 2022/07/06 20:52:51 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/06 22:35:12 by hyungyoo         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int			ft_atoi(char *nbr);
  * sleep.c
  */
 long long	ft_get_time(void);
-void		ft_sleep(long long time);
+void		ft_sleep(long long time, int num_philo);
 
 /*
 * mutex_lock.c
