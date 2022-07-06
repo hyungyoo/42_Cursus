@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:30:45 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/21 20:42:50 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/06 20:41:25 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int	ft_init_philo(t_info *all)
 		all->philo[i].r_fork = (i + 1) % all->num_philo;
 		all->philo[i].last_eat = 0;
 		all->philo[i].all = all;
+	    if (pthread_mutex_init(&(all->philo[i].m_count_eat), NULL))
+        {
+	    	return (ft_print_error("Error initialize mutex"));
+        }
 		i++;
 	}
 	return (1);
@@ -60,6 +64,12 @@ int	ft_init_mutex(t_info *all)
 	if (pthread_mutex_init(&(all->msg), NULL))
 		return (ft_print_error("Error initialize mutex"));
 	if (pthread_mutex_init(&(all->checker), NULL))
+		return (ft_print_error("Error initialize mutex"));
+	if (pthread_mutex_init(&(all->die), NULL))
+		return (ft_print_error("Error initialize mutex"));
+	if (pthread_mutex_init(&(all->eat), NULL))
+		return (ft_print_error("Error initialize mutex"));
+	if (pthread_mutex_init(&(all->m_flag_eat), NULL))
 		return (ft_print_error("Error initialize mutex"));
 	return (1);
 }

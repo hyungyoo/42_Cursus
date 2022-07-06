@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:31:46 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/06 19:32:05 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/06 20:43:17 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ void	ft_mutex_unlock_fork(t_info *all, t_philo *philo, int philo_id)
 	}
 }
 
+void    ft_mutex_eat(t_philo *philo)
+{
+    pthread_mutex_lock(&(philo->all->eat));
+    philo->last_eat = ft_get_time();
+    pthread_mutex_unlock(&(philo->all->eat));
+}
+
 void	ft_eat(t_philo *philo)
 {
 	t_info	*all;
@@ -43,16 +50,20 @@ void	ft_eat(t_philo *philo)
 	ft_mutex_lock_fork(philo, all, FIRST);
 	if (philo->l_fork == philo->r_fork)
 	{
+		pthread_mutex_unlock(&(all->fork[philo->l_fork]));
 		ft_sleep(all->time_death * 2);
 		return ;
 	}
 	ft_mutex_lock_fork(philo, all, SECOND);
 	pthread_mutex_lock(&(all->checker));
 	ft_display(philo->id, "is eating", all);
-	philo->last_eat = ft_get_time();
+	ft_mutex_eat(philo);
 	pthread_mutex_unlock(&(all->checker));
-	philo->count_eat += 1;
-	ft_sleep(all->time_eat);
+
+	//philo->count_eat += 1;
+	ft_count_eat(philo, WRITE);
+
+    ft_sleep(all->time_eat);
 	ft_mutex_unlock_fork(all, philo, philo->id);
 }
 
@@ -75,10 +86,10 @@ void	*ft_philo(void *philo_ptr)
 	all = philo->all;
 	if (philo->id % 2)
 		usleep(15000);
-	while (!(all->flag_die))
+	while (!(ft_flag_die(all, READ)))
 	{
 		ft_eat(philo);
-		if (all->flag_eat == 1)
+		if (ft_flag_eat(all, READ))
 			break ;
 		ft_sleep_think(philo);
 	}
