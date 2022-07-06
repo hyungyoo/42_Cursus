@@ -6,9 +6,12 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 22:40:37 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/07/06 22:41:52 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/07/06 22:55:33 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# --tool=helgrind
+# -g -fsanitize=thread
 
 NAME	= philo
 
@@ -32,19 +35,19 @@ NAME		= philo
 all: 		${NAME}
 
 .c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+			@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME): 	$(OBJS)
-			${CC} $(CFLAGS) -o $(NAME) $(OBJS)
-
+			@${CC} $(CFLAGS) -o $(NAME) $(OBJS)
+			@echo "complie!"
 
 clean:
-			${RM} ${OBJS}  
-			${RM} ${OBJS_B}
+			@${RM} ${OBJS}  
+			@${RM} ${OBJS_B}
 
 fclean: 	clean
-			${RM} ${NAME}
-			${RM} ${PHI_BONUS}
+			@${RM} ${NAME}
+			@${RM} ${PHI_BONUS}
 
 re: 		fclean all
 
