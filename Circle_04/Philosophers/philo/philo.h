@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:30:23 by hyungyoo          #+#    #+#             */
-/*   Updated: 2021/08/21 19:13:09 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/06 19:24:15 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+
+# define FIRST 1
+# define SECOND 0
 
 struct	s_info;
 

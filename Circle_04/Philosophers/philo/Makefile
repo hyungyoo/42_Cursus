@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/21 18:30:11 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/07/05 19:29:55 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/07/06 17:35:43 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = ./src/main.c \
 
 OBJS 		= ${SRCS:.c=.o}
 
-CC			= gcc
+CC			= gcc -g -fsanitize=thread
 CFLAGS		= -Wall -Wextra -Werror -pthread
 RM			= rm -f
 NAME		= philo
@@ -34,7 +34,7 @@ all: 		${NAME}
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME): 	$(OBJS)
-			${CC} $(CFLAGS) -g -fsanitize=thread -o $(NAME) $(OBJS)
+			${CC} $(CFLAGS) -o $(NAME) $(OBJS)
 
 
 clean:
