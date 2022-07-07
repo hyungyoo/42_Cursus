@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sleep.c                                            :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 21:46:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/07 21:59:51 by hyungyoo         ###   ########.fr       */
+/*   Created: 2022/07/06 21:45:30 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/07/06 21:45:30 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-long long	ft_get_time(void)
+int	ft_atoi(char *nbr)
 {
-	struct timeval	now;
+	int		neg;
+	long	res;
 
-	gettimeofday(&now, NULL);
-	return ((now.tv_sec * 1000) + (now.tv_usec / 1000));
-}
-
-void	ft_sleep(long long time, int num_philo)
-{
-	long long	time_cmp;
-
-	time_cmp = ft_get_time();
-	while ((ft_get_time() - time_cmp) < time)
+	neg = 1;
+	res = 0;
+	if (*nbr == '-' || *nbr == '+')
 	{
-		if (num_philo < 50)
-			usleep(time / 10);
-		else
-			usleep(1000);
+		if (*nbr == '-')
+			neg = -1;
+		nbr++;
 	}
+	while (*nbr)
+	{
+		res = res * 10 + (*nbr - '0');
+		nbr++;
+	}
+	res = res * neg;
+	if (res < -2147483648 || res > 2147483647)
+		return (-1);
+	return (res);
 }

@@ -1,35 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sleep.c                                            :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 21:46:21 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/07 21:59:51 by hyungyoo         ###   ########.fr       */
+/*   Created: 2022/07/06 21:45:52 by hyungyoo          #+#    #+#             */
+/*   Updated: 2022/07/06 21:45:53 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-long long	ft_get_time(void)
+void	ft_putchar(char c)
 {
-	struct timeval	now;
-
-	gettimeofday(&now, NULL);
-	return ((now.tv_sec * 1000) + (now.tv_usec / 1000));
+	write(1, &c, 1);
 }
 
-void	ft_sleep(long long time, int num_philo)
+void	ft_putstr(char *str)
 {
-	long long	time_cmp;
+	int	i;
 
-	time_cmp = ft_get_time();
-	while ((ft_get_time() - time_cmp) < time)
+	i = 0;
+	while (str[i])
 	{
-		if (num_philo < 50)
-			usleep(time / 10);
-		else
-			usleep(1000);
+		ft_putchar(str[i]);
+		i++;
 	}
+}
+
+void	ft_display(int id, char *str, t_info *all)
+{
+	pthread_mutex_lock(&(all->msg));
+	if (!(ft_flag_die(all, READ)))
+		printf("%lld %d %s\n", ft_get_time() - all->time_start, id + 1, str);
+	pthread_mutex_unlock(&(all->msg));
+}
+
+int	ft_print_error(char *str)
+{
+	printf("%s\n", str);
+	return (0);
 }
