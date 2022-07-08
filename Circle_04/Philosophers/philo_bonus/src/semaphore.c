@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:46:33 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/08 05:30:01 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/08 05:36:16 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,13 @@ void	ft_monitor_philo(t_philo *philo)
 	}
 	pthread_join(philo->loop_thread, NULL);
 	if (ft_flag_die(philo, READ))
+	{
+		free(all->philo);
 		exit(1);
-	ft_free_semaphore(all);
+	}
 	pthread_mutex_destroy(&(philo->m_die));
+	free(all->philo);
+	ft_free_semaphore(all);
 	exit(0);
 	//exit(ret);
 
