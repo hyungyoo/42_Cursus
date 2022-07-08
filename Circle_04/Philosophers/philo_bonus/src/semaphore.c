@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:46:33 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/08 06:38:19 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/08 07:00:12 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	*ft_loop_checker(void *phi)
 		{
 			ft_display(philo->id, "died", philo);
 			ft_flag_die(philo, WRITE);
-			usleep(1000);	// for die directe
+		//	usleep(1000);	// for die directe
 			sem_post(all->checker);
 			break ;
 		}
@@ -116,9 +116,9 @@ void	ft_free_semaphore(t_info *all)
 void	ft_monitor_philo(t_philo *philo)
 {
 	t_info	*all;
-	//int		ret;
+	int		ret;
 
-	//ret = 1;
+	ret = 0;
 	all = philo->all;
 	if (pthread_mutex_init(&(philo->m_die), NULL))
 		return ;
@@ -132,22 +132,20 @@ void	ft_monitor_philo(t_philo *philo)
 		ft_eat(philo);
 		if (all->limit_eat != -1 && ft_flag_eat_count(philo, READ) >= all->limit_eat)
 			break ;
-		if (ft_flag_die(philo, READ))
-			break ;
+		//if (ft_flag_die(philo, READ))
+		//	break ;
 		ft_display(philo->id, "is sleeping", philo);
 		ft_sleep(all->time_sleep, all->num_philo);
 		ft_display(philo->id, "is thinking", philo);
 	}
+
 	pthread_join(philo->loop_thread, NULL);
 	if (ft_flag_die(philo, READ))
-	{
-		free(all->philo);
-		exit(1);
-	}
-	pthread_mutex_destroy(&(philo->m_die));
-	free(all->philo);
-	ft_free_semaphore(all);
-	exit(0);
+		ret = 1;
+	//ft_free_all(philo);
+	ft_free_semaphore(philo->all);
+	free(all->philo);	// here
+	exit(ret);
 	//exit(ret);
 
 }
@@ -167,11 +165,12 @@ void	ft_waitpid_philo(t_info *all)
 			while (++i < all->num_philo)
 				kill((all->philo)[i].philo_pid, 15);
 			ft_free_semaphore(all);
-			return ;
+			break ;
 		}
 	}
 	ft_free_semaphore(all);
-	printf("all philosophers have eaten\n");
+	if (ret == 0)
+		printf("all philosophers have eaten\n");
 }
 
 
