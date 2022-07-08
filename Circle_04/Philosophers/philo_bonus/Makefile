@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/08 00:54:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/07/08 03:51:20 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/07/08 05:37:10 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS = ./src/main.c \
 
 OBJS 		= ${SRCS:.c=.o}
 
-CC			= gcc #-g -fsanitize=thread
+CC			= gcc -g -fsanitize=thread
 CFLAGS		= -Wall -Wextra -Werror -pthread
 RM			= rm -f
 

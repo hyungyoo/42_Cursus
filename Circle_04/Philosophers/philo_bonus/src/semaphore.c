@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:46:33 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/08 05:36:16 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/08 05:41:33 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ int	ft_flag_die(t_philo *philo, int flag)
 	return (ret);
 }
 
+
+int	ft_flag_eat_count(t_philo *philo, int flag)
+{
+	int	ret;
+
+	ret = 0;
+	if (flag == WRITE)
+	{
+		pthread_mutex_lock(&(philo->m_eat));
+		philo->count_eat += 1;
+		pthread_mutex_unlock(&(philo->m_eat));
+	}
+	else
+	{
+		pthread_mutex_lock(&(philo->m_eat));
+		if (philo->count_eat)
+			ret = philo->count_eat;
+		pthread_mutex_unlock(&(philo->m_eat));
+	}
+	return (ret);
+}
+
 void	ft_eat(t_philo *philo)
 {
 	t_info	*all;
@@ -47,7 +69,7 @@ void	ft_eat(t_philo *philo)
 	ft_display(philo->id, "is eating", philo);
 	sem_post(all->checker);
 	ft_sleep(all->time_eat, all->num_philo);
-	philo->count_eat++;
+	ft_flag_eat_count(philo, WRITE);
 	sem_post(all->fork);
 	sem_post(all->fork);
 }
@@ -73,7 +95,7 @@ void	*ft_loop_checker(void *phi)
 		if (ft_flag_die(philo, READ))
 			break ;
 		usleep(1000);
-		if (philo->count_eat != -1 && philo->count_eat >= all->limit_eat)
+		if (ft_flag_eat_count(philo, READ) != -1 && ft_flag_eat_count(philo, READ) >= all->limit_eat)
 			break ;
 	}
 	return (NULL);
@@ -97,6 +119,8 @@ void	ft_monitor_philo(t_philo *philo)
 	//ret = 1;
 	all = philo->all;
 	if (pthread_mutex_init(&(philo->m_die), NULL))
+		return ;
+	if (pthread_mutex_init(&(philo->m_eat), NULL))
 		return ;
 	pthread_create(&(philo->loop_thread), NULL, ft_loop_checker, (void *)philo);
 	if (philo->id % 2)

@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>					+#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2021/08/21 18:30:23 by hyungyoo		  #+#	#+#			 */
-/*   Updated: 2022/07/08 04:32:20 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/08 05:38:09 by hyungyoo         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	//pthread_t			thread_id;
 	long long			last_eat;
 	pthread_mutex_t		m_die;
+	pthread_mutex_t		m_eat;
 	pthread_t			loop_thread;
 	pid_t				philo_pid;
 	int					flag_die;
