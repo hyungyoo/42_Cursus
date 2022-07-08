@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:46:33 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/08 05:41:33 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/08 06:38:19 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void	ft_eat(t_philo *philo)
 	ft_display(philo->id, "has taken a fork", philo);
 	sem_wait(all->checker);
 	philo->last_eat = ft_get_time();
-	ft_display(philo->id, "is eating", philo);
+	//ft_display(philo->id, "is eating", philo);
 	sem_post(all->checker);
+	ft_display(philo->id, "is eating", philo);
 	ft_sleep(all->time_eat, all->num_philo);
 	ft_flag_eat_count(philo, WRITE);
 	sem_post(all->fork);
@@ -88,14 +89,15 @@ void	*ft_loop_checker(void *phi)
 		{
 			ft_display(philo->id, "died", philo);
 			ft_flag_die(philo, WRITE);
-			//sem_post(all->checker);
-			exit(1);
+			usleep(1000);	// for die directe
+			sem_post(all->checker);
+			break ;
 		}
 		sem_post(all->checker);
-		if (ft_flag_die(philo, READ))
-			break ;
-		usleep(1000);
-		if (ft_flag_eat_count(philo, READ) != -1 && ft_flag_eat_count(philo, READ) >= all->limit_eat)
+		//if (ft_flag_die(philo, READ))
+		//	break ;
+		//usleep(1000);
+		if (all->limit_eat != -1 && ft_flag_eat_count(philo, READ) >= all->limit_eat)
 			break ;
 	}
 	return (NULL);
@@ -128,7 +130,7 @@ void	ft_monitor_philo(t_philo *philo)
 	while (!(ft_flag_die(philo, READ)))
 	{
 		ft_eat(philo);
-		if (all->limit_eat != -1 && philo->count_eat >= all->limit_eat)
+		if (all->limit_eat != -1 && ft_flag_eat_count(philo, READ) >= all->limit_eat)
 			break ;
 		if (ft_flag_die(philo, READ))
 			break ;
@@ -191,7 +193,7 @@ int	ft_create_process(t_info *all)
 		}
 	//	usleep(1000);
 	}
-	ft_waitpid_philo(all);
+	//ft_waitpid_philo(all);
 	return (1);
 }
 
@@ -199,4 +201,5 @@ void	ft_semaphore(t_info *all)
 {
 	if (!(ft_create_process(all)))
 		printf("Error fork\n");
+	ft_waitpid_philo(all);
 }
