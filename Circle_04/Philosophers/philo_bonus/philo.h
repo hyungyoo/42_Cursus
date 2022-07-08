@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>					+#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2021/08/21 18:30:23 by hyungyoo		  #+#	#+#			 */
-/*   Updated: 2022/07/06 22:35:12 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/08 04:32:20 by hyungyoo         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <pthread.h>
+# include <semaphore.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # define FIRST 1
 # define SECOND 0
@@ -31,11 +35,14 @@ typedef struct s_philo
 {
 	int					id;
 	int					count_eat;
-	int					r_fork;
-	int					l_fork;
-	pthread_t			thread_id;
+	//int					r_fork;
+	//int					l_fork;
+	//pthread_t			thread_id;
 	long long			last_eat;
-	pthread_mutex_t		m_count_eat;
+	pthread_mutex_t		m_die;
+	pthread_t			loop_thread;
+	pid_t				philo_pid;
+	int					flag_die;
 	struct s_info		*all;
 }	t_philo;
 
@@ -47,55 +54,51 @@ typedef struct s_info
 	int					time_eat;
 	int					time_sleep;
 	int					flag_eat;
-	int					flag_die;
 	long long			time_start;
 	t_philo				*philo;
-	pthread_mutex_t		*fork;
-	pthread_mutex_t		msg;
-	pthread_mutex_t		checker;
-	pthread_mutex_t		die;
-	pthread_mutex_t		eat;
-	pthread_mutex_t		m_flag_eat;
+	sem_t				*fork;
+	sem_t				*msg;
+	sem_t				*checker;
+	//pthread_mutex_t		die;
+	//pthread_mutex_t		eat;
+	//pthread_mutex_t		m_flag_eat;
 }				t_info;
 
 /*
- * thread.c
+ * semaphore.c
  */
-void		ft_thread(t_info *all);
-void		ft_eat(t_philo *philo);
-void		ft_sleep_think(t_philo *philo);
-void		*ft_philo(void	*philo_ptr);
-/*
- * init.c
- */
-int			ft_init(int argc, char **argv, t_info *all);
-int			ft_digit(char c);
-int			ft_arg(int argc, char **argv);
-int			ft_init_all1(int argc, char **argv, t_info *all);
-int			ft_init_all2(char **argv, t_info *all);
+ int			ft_flag_die(t_philo *philo, int flag);
+ void			*ft_loop_checker(void *phi);
+ void			ft_monitor_philo(t_philo *philo);
+ void			ft_waitpid_philo(t_info *all);
+ int			ft_create_process(t_info *all);
+ void			ft_semaphore(t_info *all);
 
-/*
+ /*
  * display.c
  */
-int			ft_print_error(char *str);
-void		ft_display(int id, char *str, t_info *all);
+ void			ft_display(int id, char *str, t_philo *philo);
+ int			ft_print_error(char *str);
 
-/*
- * util.c
+ /*
+ * init.c init2.c
  */
-int			ft_atoi(char *nbr);
+void			ft_init_info(t_info *all);
+int				ft_init_philo(t_info *all);
+int				ft_init_semaphore(t_info *all);
+int				ft_init(int argc, char **argv, t_info *all);
+int				ft_init_all1(int argc, char **argv, t_info *all);
+int				ft_init_all2(char **argv, t_info *all);
+int				ft_arg(int argc, char **argv);
 
 /*
- * sleep.c
- */
-long long	ft_get_time(void);
-void		ft_sleep(long long time, int num_philo);
-
-/*
-* mutex_lock.c
+* util.c
 */
-int			ft_flag_die(t_info *all, int flag);
-int			ft_flag_eat(t_info *all, int flag);
-int			ft_count_eat(t_philo *philo, int flag);
-void		ft_mutex_eat(t_philo *philo);
+int				ft_atoi(char *nbr);
+
+/*
+* sleep.c
+*/
+long long		ft_get_time(void);
+void			ft_sleep(long long time, int num_philo);
 #endif

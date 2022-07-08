@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/08 00:54:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/07/08 00:54:54 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/07/08 03:51:20 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,7 @@ SRCS = ./src/main.c \
 	   ./src/init2.c \
 	   ./src/util.c \
 	   ./src/sleep.c \
-	   ./src/thread.c \
-	   ./src/thread2.c \
-	   ./src/mutex_lock.c \
+	   ./src/semaphore.c \
 
 OBJS 		= ${SRCS:.c=.o}
 
