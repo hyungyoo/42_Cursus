@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	if (!(ft_init(argc, argv, &all)))
 		return (0);
 	ft_semaphore(&all);
-	if (all.philo)
-		free(all.philo);
+//	if (all.philo)
+//		free(all.philo);
 	return (0);
 }

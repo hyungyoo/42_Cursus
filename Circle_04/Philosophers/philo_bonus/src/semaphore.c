@@ -75,6 +75,30 @@ void	ft_eat(t_philo *philo)
 	sem_post(all->fork);
 }
 
+void	ft_free_semaphore(t_info *all)
+{
+	sem_close(all->msg);
+	sem_close(all->fork);
+	sem_close(all->checker);
+	sem_unlink("/philo_forks");
+	sem_unlink("/philo_msg");
+	sem_unlink("/philo_checker");
+}
+
+void	ft_close_checker(t_philo *philo)
+{
+	t_info	*all;
+
+	all = philo->all;
+	ft_display(philo->id, "died", philo);
+	//ft_flag_die(philo, WRITE);
+	sem_post(all->checker);
+	ft_free_semaphore(all);
+	pthread_join(philo->loop_thread, NULL);
+	//free(all->philo);
+	exit(1);
+}
+
 void	*ft_loop_checker(void *phi)
 {
 	t_info	*all;
@@ -87,38 +111,24 @@ void	*ft_loop_checker(void *phi)
 		sem_wait(all->checker);
 		if ((ft_get_time() - philo->last_eat) > all->time_death)
 		{
-			ft_display(philo->id, "died", philo);
-			ft_flag_die(philo, WRITE);
-		//	usleep(1000);	// for die directe
-			sem_post(all->checker);
-			break ;
+			//ft_display(philo->id, "died", philo);
+			//exit(1);
+			ft_close_checker(philo);
 		}
 		sem_post(all->checker);
 		//if (ft_flag_die(philo, READ))
 		//	break ;
-		//usleep(1000);
+		usleep(1000);
 		if (all->limit_eat != -1 && ft_flag_eat_count(philo, READ) >= all->limit_eat)
 			break ;
 	}
 	return (NULL);
 }
 
-void	ft_free_semaphore(t_info *all)
-{
-	sem_close(all->fork);
-	sem_close(all->msg);
-	sem_close(all->checker);
-	sem_unlink("/philo_forks");
-	sem_unlink("/philo_msg");
-	sem_unlink("/philo_checker");
-}
-
 void	ft_monitor_philo(t_philo *philo)
 {
 	t_info	*all;
-	int		ret;
 
-	ret = 0;
 	all = philo->all;
 	if (pthread_mutex_init(&(philo->m_die), NULL))
 		return ;
@@ -127,25 +137,22 @@ void	ft_monitor_philo(t_philo *philo)
 	pthread_create(&(philo->loop_thread), NULL, ft_loop_checker, (void *)philo);
 	if (philo->id % 2)
 		usleep(15000);
-	while (!(ft_flag_die(philo, READ)))
+	while (!(ft_flag_die(philo, READ)) && !(all->limit_eat != -1 && ft_flag_eat_count(philo, READ) >= all->limit_eat))
 	{
 		ft_eat(philo);
-		if (all->limit_eat != -1 && ft_flag_eat_count(philo, READ) >= all->limit_eat)
-			break ;
 		//if (ft_flag_die(philo, READ))
 		//	break ;
 		ft_display(philo->id, "is sleeping", philo);
 		ft_sleep(all->time_sleep, all->num_philo);
 		ft_display(philo->id, "is thinking", philo);
 	}
-
 	pthread_join(philo->loop_thread, NULL);
 	if (ft_flag_die(philo, READ))
-		ret = 1;
+		ft_close_checker(philo);
 	//ft_free_all(philo);
 	ft_free_semaphore(philo->all);
 	free(all->philo);	// here
-	exit(ret);
+	exit(0) ;
 	//exit(ret);
 
 }
