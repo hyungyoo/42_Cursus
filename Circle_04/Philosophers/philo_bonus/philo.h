@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>					+#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2021/08/21 18:30:23 by hyungyoo		  #+#	#+#			 */
-/*   Updated: 2022/07/08 05:38:09 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/11 19:55:31 by hyungyoo         ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ typedef struct s_philo
 {
 	int					id;
 	int					count_eat;
-	//int					r_fork;
-	//int					l_fork;
-	//pthread_t			thread_id;
 	long long			last_eat;
 	pthread_mutex_t		m_die;
 	pthread_mutex_t		m_eat;
@@ -56,34 +53,35 @@ typedef struct s_info
 	int					time_sleep;
 	int					flag_eat;
 	long long			time_start;
-	t_philo				*philo;
+	t_philo				philo[250];
 	sem_t				*fork;
 	sem_t				*msg;
 	sem_t				*checker;
-	//pthread_mutex_t		die;
-	//pthread_mutex_t		eat;
-	//pthread_mutex_t		m_flag_eat;
 }				t_info;
 
 /*
- * semaphore.c
- */
- int			ft_flag_die(t_philo *philo, int flag);
- void			*ft_loop_checker(void *phi);
- void			ft_monitor_philo(t_philo *philo);
- void			ft_waitpid_philo(t_info *all);
- int			ft_create_process(t_info *all);
- void			ft_semaphore(t_info *all);
+* semaphore.c
+*/
+int				ft_flag_die(t_philo *philo, int flag);
+int				ft_flag_eat_count(t_philo *philo, int flag);
+void			ft_eat(t_philo *philo);
+void			ft_free_semaphore(t_info *all);
+void			ft_close_checker(t_philo *philo);
+void			*ft_loop_checker(void *phi);
+void			ft_monitor_philo(t_philo *philo);
+void			ft_waitpid_philo(t_info *all);
+int				ft_create_process(t_info *all);
+void			ft_semaphore(t_info *all);
 
- /*
- * display.c
- */
- void			ft_display(int id, char *str, t_philo *philo);
- int			ft_print_error(char *str);
+/*
+* display.c
+*/
+void			ft_display(int id, char *str, t_philo *philo);
+int				ft_print_error(char *str);
 
- /*
- * init.c init2.c
- */
+/*
+* init.c init2.c
+*/
 void			ft_init_info(t_info *all);
 int				ft_init_philo(t_info *all);
 int				ft_init_semaphore(t_info *all);

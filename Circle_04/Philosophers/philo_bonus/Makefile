@@ -6,7 +6,7 @@
 #    By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/08 00:54:48 by hyungyoo          #+#    #+#              #
-#    Updated: 2022/07/08 06:50:46 by hyungyoo         ###   ########.fr        #
+#    Updated: 2022/07/11 19:53:36 by hyungyoo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = ./src/main.c \
 	   ./src/util.c \
 	   ./src/sleep.c \
 	   ./src/semaphore.c \
+	   ./src/semaphore2.c \
 
 OBJS 		= ${SRCS:.c=.o}
 

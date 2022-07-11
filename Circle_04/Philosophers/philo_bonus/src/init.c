@@ -6,7 +6,7 @@
 /*   By: hyungyoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:46:09 by hyungyoo          #+#    #+#             */
-/*   Updated: 2022/07/08 03:30:59 by hyungyoo         ###   ########.fr       */
+/*   Updated: 2022/07/11 19:48:23 by hyungyoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_init_info(t_info *all)
 {
 	all->flag_eat = 0;
 	all->time_start = 0;
-	all->philo = NULL;
 	all->fork = NULL;
 }
 
@@ -25,9 +24,6 @@ int	ft_init_philo(t_info *all)
 	int	i;
 
 	i = 0;
-	all->philo = (t_philo *)malloc(sizeof(t_philo) * (all->num_philo));
-	if (!(all->philo))
-		return (ft_print_error("Error malloc"));
 	while (i < all->num_philo)
 	{
 		all->philo[i].id = i;
