@@ -163,6 +163,7 @@ void    Connection::processResponse()
 	returnBuffer_.clear();
 
 	// close connection  client fd
+	//
 	ep_->end_connection(clntFd_);
 	//status_ = "Close";
 	// epollout, close fd
