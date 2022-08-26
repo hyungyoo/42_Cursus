@@ -169,10 +169,11 @@ void                    Cgi::writeToCgi(void) {
     char    *buf_ = const_cast<char*>(body_.c_str());
     int     size_(body_.size());
     int     retWrite_;
+    (void)retWrite_;
 
-    do {
+    //do {
         retWrite_ = write(writeToCgi_, buf_, size_);
-    } while (retWrite_ > 0);
+    //} while (retWrite_ > 0);
 }
 
 std::string             Cgi::readFromCgi(void) {
