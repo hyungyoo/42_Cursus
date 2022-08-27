@@ -13,7 +13,7 @@ Connection::Connection(int fd, std::vector<ServerBlock> block, Epoll *ep) : clnt
 	chunked_msg_size = 0;
 	body_buf = "";
 	autoindex_flag = false;
-	//zstatus_ = "Keep-Alive";
+	status_ = "Keep-Alive";
 }
 
 Connection::Connection(const Connection &rhs)
@@ -46,7 +46,6 @@ void	Connection::clear(void) {
 	chunked_msg_size = 0;
 	body_buf.clear();
 	autoindex_flag = false;
-	//status_ = "Keep-Alive";
 }
 
 void    Connection::processRequest(void) {
@@ -188,6 +187,10 @@ void    Connection::processResponse()
 			status_ = "Close";
 			header_ += "Connection: close\r\n";
 		}
+	}
+	else if (req_status_code_ < 400) {
+		status_ = "Keep-Alive";
+		header_ += "Connection: keep-alive\r\n";
 	}
 
 	// make return buffer
