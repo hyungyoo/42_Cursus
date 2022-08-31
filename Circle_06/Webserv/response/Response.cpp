@@ -101,7 +101,12 @@ std::string		Response::makeHeaderCgi(std::string  &body, int statusCode) {
 	}
 	//// body size -> Content-Length
 	//// append "Content-Lengh" to headers_
-	setContentLengh(body.size() - 2);
+	if (request_.getMethod() == "DELETE") {
+		setContentLengh(0);
+	}
+	else {
+		setContentLengh(body.size() - 2);
+	}
 	//// make start line
 	//// append headers value!
 	header_ += appendMapHeaders(CGI, statusCode);
@@ -262,7 +267,7 @@ std::string		Response::bodyWithAutoindexOn(const std::string &uri, const std::st
 	ret += "<hr></pre>\r\n";
 	ret += "</body>\r\n";
 	ret += "</html>\r\n";
-
+	closedir(dir_ptr);
 	return (ret);
 }
 
@@ -277,18 +282,25 @@ std::string	Response::getFileDateTime(time_t sec) {
 	return (ret);
 }
 
-std::string		Response::fileTextIntoBody(const std::string &filepath) {
+std::string		Response::fileTextIntoBody(const std::string &filepath, bool isHTML) {
 	std::ifstream in(filepath.c_str());
 	std::string line;
 	std::string ret;
 
 	if (in.is_open())
 	{
+
 		while (std::getline(in, line))
 		{
-			ret += "\n";
-			ret += line + "</br>";
-			line.clear();
+			if (isHTML) {
+				ret += "\n";
+				ret += line + "</br>";
+			}
+			else
+			{
+				ret += "\n";
+				ret += line;
+			}
 		}
 	}
 	return (ret);
@@ -373,7 +385,7 @@ void		Response::initialMapStatusCode()
 	this->mapStatus_.insert(std::make_pair("303", "See Other"));
 	this->mapStatus_.insert(std::make_pair("304", "Not Modified"));
 	this->mapStatus_.insert(std::make_pair("305", "Use Proxy"));
-	this->mapStatus_.insert(std::make_pair("306", "unsued"));
+	this->mapStatus_.insert(std::make_pair("306", "unused"));
 	this->mapStatus_.insert(std::make_pair("307", "Temporary Redirect"));
 	this->mapStatus_.insert(std::make_pair("308", "Permanent Redirect"));
 	this->mapStatus_.insert(std::make_pair("400", "Bad Request"));

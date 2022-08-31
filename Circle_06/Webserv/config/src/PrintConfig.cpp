@@ -16,7 +16,13 @@ namespace ft
 			std::cout << " " << *current_string;
 		std::cout << std::endl;
 		std::cout << "Base autoindex: " << context.getAutoindex() << std::endl;
-		std::cout << "Base error page: " << context.getErrorPage() << std::endl;
+		vec_string = context.getErrorPage();
+		current_string = vec_string.begin();
+		end_string = vec_string.end();
+		std::cout << "Base error page: ";// << context.getErrorPage() << std::endl;
+		for (; current_string != end_string; ++current_string)
+			std::cout << " " << *current_string;
+		std::cout << std::endl;
 	}
 
 	void	PrintConfig::printHttpContextDirectiveParameters(ft::HttpBlock& context)
@@ -116,7 +122,10 @@ namespace ft
 		FILE* fp;
 
 		if (config_path == NULL)
-			fp = fopen(CONFIG_PATH DEFALUT_CONF, "r");
+		{
+			config_path = (char*)DEFAULT_CONF;
+			fp = fopen(config_path, "r");
+		}
 		else
 			fp = fopen(config_path, "r");
 		if (!fp)
@@ -141,7 +150,7 @@ namespace ft
 				printTokens(tokens); // to print tokenized tokens.
 
 			ft::Parser	parser;
-			http_pair = parser.parse(tokens);
+			http_pair = parser.parse(tokens, config_path);
 
 			if ((flags & P_SERVER) == P_SERVER)
 				printConfig(http_pair, P_SERVER); // to print server directives

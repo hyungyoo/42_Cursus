@@ -1,8 +1,6 @@
 #include "connection.hpp"
 
-//RequestHandle		requesthandler = RequestHandler();
-
-Connection::Connection(int fd, std::vector<ServerBlock> block, Epoll *ep) : clntFd_(fd), block_(block), ep_(ep), request_() {
+Connection::Connection(int fd, std::vector<ServerBlock> block, Epoll *ep) : clntFd_(fd), block_(block), ep_(ep), serverConfig_(), locationConfig_(), request_(), response_() {
 	memset(buffer_char, 0, BUFFER_SIZE);
 	phase_msg_ = START_LINE_INCOMPLETE;
 	req_status_code_ = NOT_DEFINE;
@@ -29,14 +27,30 @@ Connection Connection::operator=(const Connection &rhs)
 	ep_  = rhs.ep_;
 	serverConfig_ = rhs.serverConfig_;
 	locationConfig_ = rhs.locationConfig_;
+	
+	request_ = rhs.request_;
+	response_ = rhs.response_;
+	phase_msg_ = rhs.phase_msg_;
+	req_status_code_ = rhs.req_status_code_;
+	buffer_ = rhs.buffer_;
+	client_max_body_size = rhs.client_max_body_size;
+	buffer_content_length = rhs.buffer_content_length;
+	is_chunk = rhs.is_chunk;
+	chunked_msg_checker = rhs.chunked_msg_checker;
+	chunked_msg_size = rhs.chunked_msg_size;
+	body_buf = rhs.body_buf;
+	autoindex_flag = rhs.autoindex_flag;
+
 	return *this;
 }
 
-Connection::~Connection() { }
+Connection::~Connection() {}
 
 void	Connection::clear(void) {
+	memset(&buffer_char, 0, BUFFER_SIZE);
 	buffer_.clear();
 	request_.clear();
+	body_buf.clear();
 	phase_msg_ = START_LINE_INCOMPLETE;
 	req_status_code_ = NOT_DEFINE;
 	client_max_body_size = 0;
@@ -44,22 +58,32 @@ void	Connection::clear(void) {
 	is_chunk = false;
 	chunked_msg_checker = STR_SIZE;
 	chunked_msg_size = 0;
-	body_buf.clear();
 	autoindex_flag = false;
+	locationConfig_ = LocationBlock();
+	serverConfig_ = ServerBlock();
 }
 
 void    Connection::processRequest(void) {
 	RequestHandler requesthandler;
     int n = 0;
-	
+	//const char ctrl_c[CTRL_C_LIST] = {0xff, 0xf4, 0xfd, 0x06};
+
 	while((n = recv(this->clntFd_, &buffer_char, sizeof(buffer_char) - 1, 0)) > 0) //except \r
 	{
 		if (n < 0 || strchr(buffer_char, 0xff))
 		{
-			//close connection
-			this->status_ = "Close";
+			close(clntFd_);
+			ep_->epoll_Ctl_Mode(clntFd_, EPOLLOUT);
 			return ;
 		}
+ 		if (!strcmp(buffer_char, "\r\n") 
+				&& n == 2 
+				&& phase_msg_ == START_LINE_INCOMPLETE && buffer_.size() == 0) 
+		{
+			memset(&buffer_char, 0, n);
+      		return ;
+    	}
+		
 		buffer_.insert(buffer_.end(), buffer_char, buffer_char + n);
 
 		if (phase_msg_ == START_LINE_INCOMPLETE
@@ -71,12 +95,10 @@ void    Connection::processRequest(void) {
 		{
 			if (!requesthandler.checkChunkedMessage(this))
 			{
-				//close connection
 				this->status_ = "Close";
+				ep_->epoll_Ctl_Mode(clntFd_, EPOLLOUT);
 				return ;
 			}
-			//if (chunked_msg_checker == END)
-			//	ep_->epoll_Ctl_Mode(clntFd_, EPOLLOUT);
 		}
 		else if (phase_msg_ == BODY_INCOMPLETE)
 			requesthandler.checkRequestBody(this);
@@ -85,7 +107,6 @@ void    Connection::processRequest(void) {
 			if (phase_msg_ == START_LINE_ERROR) {
 				ep_->epoll_Ctl_Mode(clntFd_, EPOLLOUT);
 			}
-			//size_t pos = 0;
 			if (getRequest().getMethod() == "GET" || getRequest().getMethod() == "DELETE")
 			{
 				if (buffer_.empty())
@@ -94,13 +115,17 @@ void    Connection::processRequest(void) {
 			else
 			{
 				request_.setBody(getBodyBuf());
-				//if ((pos = buffer_.find(CRLFCRLF)) != std::string::npos
-				//	||  (size_t)buffer_content_length == body_buf.size())
 				ep_->epoll_Ctl_Mode(clntFd_, EPOLLOUT);
 			}
 
 		}
 		memset(&buffer_char, 0, n);
+	}
+	// recv (-1 case)
+	if (!(errno == EAGAIN)|| !(errno == EWOULDBLOCK))
+	{
+		std::cout << "read error" << std::endl;
+		this->status_ = "Close";
 	}
 }
 
@@ -115,7 +140,12 @@ void    Connection::processResponse()
 	bool				isGetHTML(currentMethod_ == "GET" && Ext_ != "php");
 	bool				isHTMLMimeType_(mime_.getMIMEType(Ext_) == "text/html");
 	bool				falgHeaderRedirection_(false);
+	// if (!serverConfig_)
+	serverConfig_ = 
 
+	// std::cout << "[" << request_.getUri() << std::endl;
+
+	std::cout << "file path == [" << serverConfig_.getErrorPagePath() << "]" << std::endl;
 	// intializer les valeurs de Request class
 	response_.setRequest(request_);
 	response_.setRequestValue();
@@ -140,7 +170,7 @@ void    Connection::processResponse()
 						}
 						else if (S_ISREG(fileinfo.st_mode))
 						{
-							body_ = response_.fileTextIntoBody(request_.getFilePath());
+							body_ = response_.fileTextIntoBody(request_.getFilePath(), isHTMLMimeType_);
 							req_status_code_ = 200;
 						}
 					}
@@ -177,11 +207,16 @@ void    Connection::processResponse()
 	else {
 		header_ += response_.makeHeaderCgi(body_, req_status_code_);
 	}
+
+
+	// header for redirection
 	if (!locationConfig_.getReturn().empty() && falgHeaderRedirection_) {
 		header_ += "Location: ";
 		header_ += body_buf;
 		header_ += "\r\n";
 	}
+
+	// status code
 	if (!request_.getHeaderValue("Connection").empty()) {
 		if (request_.getHeaderValue("Connection") == "close") {
 			status_ = "Close";
@@ -197,8 +232,19 @@ void    Connection::processResponse()
 	returnBuffer_ = header_ + body_ + "\r\n";
 	
 	// send return buffer
-	send(clntFd_, const_cast<char*>(returnBuffer_.c_str()), returnBuffer_.size(), 0);
-
+	int	n;	
+	int	buf_(0);
+	int	size_(returnBuffer_.size());
+	do {
+		n = send(clntFd_, const_cast<char*>(returnBuffer_.c_str() + buf_), size_, 0);
+		size_ -= n;
+		buf_ += n;
+		n = 0;
+	} while (n > 0 && size_ > 0);
+	if (n < 0) {
+		std::cerr << "Error send" << std::endl;
+		status_ = "Error";
+	}
 	// clean up buffer
 	header_.clear();
 	body_.clear();
@@ -240,13 +286,6 @@ LocationBlock	Connection::getLocationConfig(void) {
 }
 
 std::string		&Connection::getBodyBuf(void) {
-	// il faut faire protection pour content-length
-
-	//std::istringstream		contentLength(request_.getHeaderValue("Content-Length"));
-	//int						contentLength_;
-	//contentLength >> contentLength_;
-	//body_buf.resize(contentLength_);
-	
 	return (body_buf);
 }
 
@@ -310,10 +349,6 @@ void	Connection::printRequestMsg(void) {
 	printf("body:\n");
 	printf("%s\n", getBodyBuf().c_str());
 	printf("=====================\n");
-	// std::cout << "content_length_buffer: " << buffer_content_length << std::endl;
-	// // std::cout << "content_length: " << getRequest().getHeaderValue("Content-Length") << std::endl;
-	// std::cout << "client_max_body_size: " << client_max_body_size << std::endl;
-	// printf("=====================\n");
 }
 
 ServerBlock	Connection::getServerConfigByServerName(std::string server_name)
@@ -332,3 +367,18 @@ ServerBlock	Connection::getServerConfigByServerName(std::string server_name)
 	return (block_[0]);
 }
 
+ServerBlock	Connection::getServerConfigBylisten(unsigned int listen)
+{
+	int index = this->block_.size();
+	bool ret;
+
+	for (int i = 0; i < index; i++)
+	{
+		ret = block_[i].getListen();
+		if (ret == listen)
+		{
+			return (block_[i]);
+		}
+	}
+	return (block_[0]);
+}

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#define DEFAULT_CONF "./conf/sample.conf"
 
 namespace ft
 {
@@ -14,7 +15,8 @@ namespace ft
 			unsigned int			keepalive_timeout_;
 			std::vector<std::string>	index_;
 			bool				autoindex_;
-			std::string			error_page_;
+			std::vector<std::string>	error_page_;
+			std::string			config_path_;
 		public:
 			BaseDirectives();
 			// Getter
@@ -23,7 +25,11 @@ namespace ft
 			unsigned int			getKeepaliveTimeout(void) const;
 			const std::vector<std::string>	getIndex(void) const;
 			bool				getAutoindex(void) const;
-			const std::string		getErrorPage(void) const;
+			const std::vector<std::string>	getErrorPage(void) const;
+			const std::string		getErrorPage(size_t index) const;
+			const std::string		getErrorPagePath(void) const;
+			const std::vector<std::string>	getErrorPageCode(void) const;
+			const std::string		getConfigPath(void) const;
 			
 			// Setter
 			void				setRoot(const std::string x);
@@ -32,9 +38,12 @@ namespace ft
 			void				setIndex(const std::vector<std::string> x);
 			void				setIndex(const std::string x);
 			void				setAutoindex(const bool x);
+			void				setErrorPage(const std::vector<std::string> x);
 			void				setErrorPage(const std::string x);
+			void				setConfigPath(const std::string x);
 
 			void				clearIndex(void);
+			void				clearErrorPage(void);
 	};
 
 }

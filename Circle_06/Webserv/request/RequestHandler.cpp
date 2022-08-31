@@ -46,21 +46,19 @@ void	RequestHandler::parseStartLine(Connection *c) {
 	startLine_ = c->getBuffer().substr(0, pos);
 	c->getBuffer().erase(0, pos + LEN_CRLF);
 	//method check : GET/POST/DELETE -> toupper / if not Error 400
-
-	//while  (startLine_.empty()) {}
 	
 	std::vector<std::string> split_start_line = splitDelim(startLine_, " ");
 	if (split_start_line.size() != 3)
 	{
 		c->setReqStatusCode(BAD_REQUEST);
-		//c->setPhaseMsg(HEADER_COMPLETE);
 		c->setPhaseMsg(START_LINE_ERROR);
 		return ;
 	}
 	if (!checkMethod(split_start_line[0]))
 	{
 		c->setReqStatusCode(BAD_REQUEST);
-		c->setPhaseMsg(HEADER_COMPLETE);
+		c->setPhaseMsg(START_LINE_ERROR);
+		// c->setPhaseMsg(HEADER_COMPLETE);
 		return ;
 	}
 	else
@@ -73,7 +71,8 @@ void	RequestHandler::parseStartLine(Connection *c) {
 	if (parseUri(split_start_line[1], c) == PARSE_INVALID_URI)
 	{
 		c->setReqStatusCode(BAD_REQUEST);
-		c->setPhaseMsg(HEADER_COMPLETE);
+		c->setPhaseMsg(START_LINE_ERROR);
+		// c->setPhaseMsg(HEADER_COMPLETE);
 		return ;
 	}
 
@@ -84,14 +83,16 @@ void	RequestHandler::parseStartLine(Connection *c) {
 	if (!checkVersion(version) || version.length() != 3 || cmp)
 	{
 		c->setReqStatusCode(BAD_REQUEST);
-		c->setPhaseMsg(HEADER_COMPLETE);
+		c->setPhaseMsg(START_LINE_ERROR);
+		// c->setPhaseMsg(HEADER_COMPLETE);
 		return ;
 	}
 	cmp = version.compare(0, 2, "1.");
 	if (cmp)
 	{
 		c->setReqStatusCode(HTTP_VERSION_NOT_SUPPORTED);
-		c->setPhaseMsg(HEADER_COMPLETE);
+		c->setPhaseMsg(START_LINE_ERROR);
+		// c->setPhaseMsg(HEADER_COMPLETE);
 		return ;
 	}
 	c->getRequest().setVersion(http + version);
@@ -286,15 +287,15 @@ void	RequestHandler::checkHeader(Connection *c) {
 		{
 			if (c->getServerConfig().getAutoindex() == false)
 			{
-				if (isFileExist(c))
+				if (isFileExist(c) && isUriDirectory(c))
 				{
 					c->setReqStatusCode(FORBIDDEN); //403 FORBIDDEN
 					c->setPhaseMsg(BODY_COMPLETE);
 					return ;
 				}
-				else
+				else if (!isFileExist(c))
 				{
-					c->setReqStatusCode(NOT_FOUND); //403 FORBIDDEN
+					c->setReqStatusCode(NOT_FOUND); //404 FORBIDDEN
 					c->setPhaseMsg(BODY_COMPLETE);
 					return ;
 				}
@@ -526,7 +527,6 @@ bool	RequestHandler::checkChunkedMessage(Connection *c) {
 				else
 					c->setPhaseMsg(BODY_COMPLETE);
 				c->is_chunk = false;
-				// c->chunked_msg_checker = STR_SIZE;
 			}
 			else if (pos != std::string::npos)
 				c->getBuffer().erase(0, pos + LEN_CRLF);

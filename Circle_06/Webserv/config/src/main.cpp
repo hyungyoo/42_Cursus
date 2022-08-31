@@ -27,6 +27,17 @@ int main(int argc, char** argv)
 			if (location_pair.first == true)
 				std::cout << "selected uri: " << location_pair.second.getUriPath() << "\n";
 
+			// getErrorPage test
+			/*
+			std::cout << http_pair.second.getErrorPagePath() << std::endl;
+			std::vector<std::string>			code_vector = http_pair.second.getErrorPageCode();	
+			std::vector<std::string>::const_iterator	current_string = code_vector.begin();
+			std::vector<std::string>::const_iterator	    end_string = code_vector.end();
+
+			for (; current_string != end_string; ++current_string)
+				std::cout << (*current_string) << std::endl;
+				*/
+
 /*
 			// listen port, server_name duplication test
 			server_pair = http_context.getServerBlock(LISTEN_PORT, REQUEST_SERVER_NAME); // getServerBlock by listen, server_name

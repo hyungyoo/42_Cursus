@@ -8,7 +8,6 @@
 #include "../response/cgi.hpp"
 #include "../config/src/ServerBlock.hpp"
 
-
 #include <iostream>
 #include <cstdio>
 #include <sys/epoll.h>
@@ -23,6 +22,7 @@
 # define LEN_CRLFCRLF 4
 
 # define BUFFER_SIZE 512
+# define CTRL_C_LIST 4
 
 namespace ft{
 
@@ -95,8 +95,7 @@ class Connection
 		size_t			chunked_msg_size;
 		std::string		body_buf;
 		bool			autoindex_flag;
-		// res
-		// exe
+		int				recv_error;
 
 	public:
 		Connection(int fd, std::vector<ServerBlock> block, Epoll *ep);
@@ -104,9 +103,10 @@ class Connection
 		Connection operator=(const Connection &rhs);
 		~Connection();
 		//getter
+
 		std::vector<ServerBlock>	&getBlock(void);
 		Request						&getRequest(void);
-		ft::Response					&getResponse(void);
+		ft::Response				&getResponse(void);
 		int							&getPhaseMsg(void);
 		std::string 				&getBuffer(void);
 		int							&getReqStatusCode(void);
@@ -125,13 +125,14 @@ class Connection
 
 		//utils
 		ServerBlock 	getServerConfigByServerName(std::string server_name);
+		ServerBlock		getServerConfigBylisten(unsigned int listen);
 		void			clear(void);
     
 		void    		processRequest(void);
 		void    		processResponse(void);
 		
 		//tmp
-		void	printRequestMsg(void);
+		void			printRequestMsg(void);
 };
 
 }
