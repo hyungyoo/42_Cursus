@@ -50,7 +50,7 @@ void    Epoll::init_server_socket()
 	epoll_add(0);
 	for (int i = 0; i < numServerFd; i++)
 	{
-        if (OK != (epoll_add(vecBloc_[i].getSocketFd())))
+        if (OK != (epoll_server_add(vecBloc_[i].getSocketFd())))
 			std::cout << RED << "PortNumber [" << vecBloc_[i].getListen() <<
             "] Epoll_Ctl_Add failed" << FIN <<std::endl;
         else
@@ -80,12 +80,30 @@ void    Epoll::create_epoll_fd()
 	}
 }
 
-//Epoll_ctl ADD function
+/**
+ * @brief 
+ * 
+ * @param fd //with option EPOLLET: non blocking option
+ * @return int 
+ */
 int    Epoll::epoll_add(int fd)
 {
 
 	event ev;
 	ev.events = EPOLLIN | EPOLLET | EPOLLERR | EPOLLHUP;
+	ev.data.fd = fd;
+	if (epoll_ctl(this->epollFd_, EPOLL_CTL_ADD, fd, &ev) < 0)
+	{
+		close(fd);
+		return (ERROR);
+	}
+	return (OK);
+}
+
+int    Epoll::epoll_server_add(int fd)
+{
+    event ev;
+	ev.events = EPOLLIN | EPOLLERR | EPOLLHUP;
 	ev.data.fd = fd;
 	if (epoll_ctl(this->epollFd_, EPOLL_CTL_ADD, fd, &ev) < 0)
 	{
@@ -291,6 +309,6 @@ int        Epoll::check_status_connection(std::string status)
     else
     {   
         std::cout << "connection status error" << std::endl;
-        return (2);
+        return (1);
     }
 }

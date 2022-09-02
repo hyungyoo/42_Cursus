@@ -122,7 +122,7 @@ void    Connection::processRequest(void) {
 		memset(&buffer_char, 0, n);
 	}
 	// recv (-1 case)
-	if (!(errno == EAGAIN)|| !(errno == EWOULDBLOCK))
+	if (n == -1 && phase_msg_ != BODY_COMPLETE)
 	{
 		std::cout << "read error" << std::endl;
 		this->status_ = "Close";
@@ -140,12 +140,10 @@ void    Connection::processResponse()
 	bool				isGetHTML(currentMethod_ == "GET" && Ext_ != "php");
 	bool				isHTMLMimeType_(mime_.getMIMEType(Ext_) == "text/html");
 	bool				falgHeaderRedirection_(false);
-	// if (!serverConfig_)
-	serverConfig_ = 
 
-	// std::cout << "[" << request_.getUri() << std::endl;
-
-	std::cout << "file path == [" << serverConfig_.getErrorPagePath() << "]" << std::endl;
+	if (currentMethod_ == "DELETE" && req_status_code_ == 404) {
+		req_status_code_ = NOT_DEFINE;
+	}
 	// intializer les valeurs de Request class
 	response_.setRequest(request_);
 	response_.setRequestValue();
@@ -194,7 +192,14 @@ void    Connection::processResponse()
 
 	// error page
 	if (req_status_code_ >= 400) {
-		body_ += response_.makeErrorPage(req_status_code_);
+		if (isErrorPageExist(getBlock().at(0), req_status_code_)) {
+			//std::cerr << "here for " << std::endl;
+			std::string	errorFilePath_(getBlock().at(0).getRoot() + getBlock().at(0).getErrorPagePath());
+			body_ = response_.makeBodyHtml(errorFilePath_, isHTMLMimeType_);
+		}
+		else {
+			body_ += response_.makeErrorPage(req_status_code_);
+		}
 		status_ = "Close";
 	}
 	
@@ -229,8 +234,12 @@ void    Connection::processResponse()
 	}
 
 	// make return buffer
-	returnBuffer_ = header_ + body_ + "\r\n";
-	
+	if (currentMethod_ == "DELETE") {
+		returnBuffer_ = header_ + "\r\n";
+	}
+	else {
+		returnBuffer_ = header_ + body_ + "\r\n";
+	}
 	// send return buffer
 	int	n;	
 	int	buf_(0);
@@ -330,6 +339,32 @@ bool		Connection::checkLocationConfigExist(std::string path) {
 		return (false);
 }
 
+
+bool			Connection::isErrorPageExist(ServerBlock const &serverBlock, int  const &req_code)  const{
+	// typedef std::vector<std::string>::const_iterator	it_;
+	if (serverBlock.getErrorPage().empty()) {
+		return false;
+	}
+	std::string	req_code_ = TOString(req_code);
+	std::vector<std::string>	vec_(serverBlock.getErrorPageCode());
+	std::vector<std::string>::const_iterator itBegin_ = vec_.begin();
+	std::vector<std::string>::const_iterator itEnd_ = vec_.end();
+	// it_ itBegin_ = serverBlock.getErrorPageCode().begin();
+	// it_ itEnd_ = serverBlock.getErrorPageCode().end();
+	for (; itBegin_ != itEnd_; ++itBegin_) {
+		
+		if (req_code_ == *(itBegin_))
+		 return (true);
+	}
+	return false;
+}
+
+std::string 	Connection::TOString(const int& v) const {
+	std::ostringstream ss;
+	ss << v;
+	return (ss.str());
+}
+
 //tmp
 void	Connection::printRequestMsg(void) {
 	printf("====Request Parser====\n");
@@ -360,22 +395,6 @@ ServerBlock	Connection::getServerConfigByServerName(std::string server_name)
 	{
 		ret = block_[i].checkServerName(server_name);
 		if (ret == true)
-		{
-			return (block_[i]);
-		}
-	}
-	return (block_[0]);
-}
-
-ServerBlock	Connection::getServerConfigBylisten(unsigned int listen)
-{
-	int index = this->block_.size();
-	bool ret;
-
-	for (int i = 0; i < index; i++)
-	{
-		ret = block_[i].getListen();
-		if (ret == listen)
 		{
 			return (block_[i]);
 		}
