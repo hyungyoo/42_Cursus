@@ -90,6 +90,7 @@ int    Epoll::epoll_add(int fd)
 {
 
 	event ev;
+    ev.data.ptr = NULL;
 	ev.events = EPOLLIN | EPOLLET | EPOLLERR | EPOLLHUP;
 	ev.data.fd = fd;
 	if (epoll_ctl(this->epollFd_, EPOLL_CTL_ADD, fd, &ev) < 0)
@@ -103,6 +104,7 @@ int    Epoll::epoll_add(int fd)
 int    Epoll::epoll_server_add(int fd)
 {
     event ev;
+    ev.data.ptr = NULL;
 	ev.events = EPOLLIN | EPOLLERR | EPOLLHUP;
 	ev.data.fd = fd;
 	if (epoll_ctl(this->epollFd_, EPOLL_CTL_ADD, fd, &ev) < 0)
