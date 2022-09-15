@@ -298,6 +298,7 @@ void       Epoll::end_connection(int fd)
     mapConnection::iterator it = this->c_.find(fd);
     delete it->second;
     close(it->first);
+    // shutdown(it->first, SHUT_RDWR);
     c_.erase(it);
 }
 
