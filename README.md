@@ -132,7 +132,7 @@ c와 c++로 구성된 42 이너써클 과제
 </br>
 
 
-## [Webserv](./Circle_06/Webserv/READMD.md)
+## [Webserv](./Circle_06/Webserv/README.md)
 
 </br>
 
