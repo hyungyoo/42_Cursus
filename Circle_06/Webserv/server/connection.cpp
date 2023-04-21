@@ -124,6 +124,7 @@ void    Connection::processRequest(void) {
 	// recv (-1 case)
 	if (n == -1 && phase_msg_ != BODY_COMPLETE)
 	{
+		std::cout << "read error" << std::endl;
 		this->status_ = "Close";
 	}
 }
